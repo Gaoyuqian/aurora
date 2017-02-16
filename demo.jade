@@ -4,7 +4,20 @@ html
         title Aurora Design
         meta(charset="utf-8")
         link(href="index.css" rel="stylesheet")
-        script(src="index.js")
+        link(href="src/sass/main.css" rel="stylesheet")
+        link(href="lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
     body
-        h1| Aurora Design Demos
-        hr
+        div#app(v-cloak)
+            h1| Aurora Design Demos
+            hr
+            au-button(
+                size="large",
+                heading-icon="plus")| 添加
+            au-button(
+                heading-icon="plus")| 添加
+            au-button(
+                size="small"
+                heading-icon="plus")| 添加
+
+        script(src="lib/vue.js")
+        script(src="index.js")

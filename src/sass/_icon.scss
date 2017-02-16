@@ -1,0 +1,25 @@
+@keyframes circle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.au-icon {
+  margin: 0 5px;
+  font-size: $icon-fontsize-default;
+}
+
+.au-icon-large {
+  font-size: $icon-fontsize-large;
+}
+
+.au-icon-small {
+  font-size: $icon-fontsize-small;
+}
+
+.au-icon-rotate {
+  animation: circle 1.5s infinite linear;
+}

@@ -1,0 +1,47 @@
+
+// FontSize
+// -------------------------
+$fontsize-small:            12px;
+$fontsize-default:          14px;
+$fontsize-large:            18px;
+
+// Color
+// -------------------------
+$color-primary:             #20a0ff;
+$color-info:                #ccc;
+$color-success:             #ccc;
+$color-warning:             #ccc;
+
+
+// Radius
+// -------------------------
+$border-radius:             4px;
+
+
+// Button
+// -------------------------
+$button-border-color:      #ccc;
+$button-background-color:  $color-primary;
+$button-color:             #fff;
+$button-border-radius:     $border-radius;
+
+$button-fontsize-large:    $fontsize-large;
+$button-height-large:      40px;
+$button-padding-x-large:   20px;
+$button-padding-y-large:   10px;
+
+$button-fontsize-default:  $fontsize-default;
+$button-height-default:    30px;
+$button-padding-x-default: 10px;
+$button-padding-y-default: 5px;
+
+$button-fontsize-small:    $fontsize-small;
+$button-height-small:      20px;
+$button-padding-x-small:   5px;
+$button-padding-y-small:   0px;
+
+// Icon
+// -------------------------
+$icon-fontsize-small:      $fontsize-small;
+$icon-fontsize-default:    $fontsize-default;
+$icon-fontsize-large:      $fontsize-large;

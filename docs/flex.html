@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Flex</title>
+    <link rel="stylesheet" href="../src/sass/main.css">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./docs.css">
+    <style>
+      .flex-item {
+        background-color: #eee;
+        border-radius: 10px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <h1>AuFlex</h1>
+
+      <div class="docs-panel">
+        <h6>水平居中</h6>
+        <div class="docs-panel-row">
+          <au-flex justify-content="center" align-items="center" gutter="10" style="height: 200px">
+            <au-flex-item class="flex-item">
+              hello world
+            </au-flex-item>
+            <au-flex-item class="flex-item" grow="1">
+              hello world
+            </au-flex-item>
+          </au-flex>
+        </div>
+      </div>
+
+      <div class="docs-panel">
+        <h6>垂直模式</h6>
+        <div class="docs-panel-row">
+          <au-flex direction="column" gutter="10" style="height: 200px">
+            <au-flex-item class="flex-item">
+              hello world
+            </au-flex-item>
+            <au-flex-item class="flex-item">
+              hello world
+            </au-flex-item>
+          </au-flex>
+        </div>
+      </div>
+
+      <div class="docs-panel">
+        <h6>固定列</h6>
+        <div class="docs-panel-row">
+          <au-flex justify-content="flex-start" wrap="wrap" gutter="10" :column="column">
+            <au-flex-item class="flex-item" v-for="item in list">
+              {{ item }}
+            </au-flex-item>
+          </au-flex>
+        </div>
+      </div>
+
+      <div class="docs-panel">
+        <h6>栅格</h6>
+        <div class="docs-panel-row">
+          <au-flex justify-content="flex-start" wrap="wrap" gutter="10">
+            <au-flex-item class="flex-item" v-for="item in list" span="4">
+              {{ item }}
+            </au-flex-item>
+          </au-flex>
+
+          <au-flex justify-content="flex-start" wrap="wrap" gutter="10">
+            <au-flex-item class="flex-item" span="12"></au-flex-item>
+            <au-flex-item class="flex-item" span="12"></au-flex-item>
+
+            <au-flex-item class="flex-item" span="8"></au-flex-item>
+            <au-flex-item class="flex-item" span="8"></au-flex-item>
+            <au-flex-item class="flex-item" span="8"></au-flex-item>
+
+            <au-flex-item class="flex-item" span="6"></au-flex-item>
+            <au-flex-item class="flex-item" span="6"></au-flex-item>
+            <au-flex-item class="flex-item" span="6"></au-flex-item>
+            <au-flex-item class="flex-item" span="6"></au-flex-item>
+
+            <au-flex-item class="flex-item" span="5" offset="1"></au-flex-item>
+            <au-flex-item class="flex-item" span="3" offset="9"></au-flex-item>
+            <au-flex-item class="flex-item" span="2" offset="4"></au-flex-item>
+
+          </au-flex>
+        </div>
+      </div>
+
+      <h5>AuFlex属性</h5>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>direction</td>
+            <td>同flex-direction</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>wrap</td>
+            <td>同flex-wrap</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>justify-content</td>
+            <td>同justify-content</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>align-items</td>
+            <td>同align-items</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>align-content</td>
+            <td>同align-content</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>column</td>
+            <td>列数量</td>
+            <td>Number</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>gutter</td>
+            <td>列外间距(像素)</td>
+            <td>Number</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5>AuFlexItem属性</h5>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>order</td>
+            <td>同order</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>grow</td>
+            <td>同flex-grow</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>shrink</td>
+            <td>同flex-shrink</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>basis</td>
+            <td>同flex-basis</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>align-self</td>
+            <td>同align-self</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>span</td>
+            <td>栅格占格数, 每行24格</td>
+            <td>String, Number</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>offset</td>
+            <td>栅格左侧偏移占格数</td>
+            <td>String, Number</td>
+            <td>null</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script src="../src/main.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data () {
+          return {
+            column: 4,
+            list: [1, 2, 3, 4, 5, 6]
+          }
+        },
+        mounted () {
+          setTimeout(() => {
+            this.column = 3
+            this.list.push(7, 8, 9)
+          }, 1000)
+        }
+      })
+    </script>
+  </body>
+</html>

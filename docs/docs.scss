@@ -1,0 +1,58 @@
+body {
+
+}
+
+#app {
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.docs-panel {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  h6 {
+    font-size: 14px;
+    color: #000;
+    margin: 0 0 10px;
+  }
+}
+
+.docs-panel-row {
+  margin: 20px 0 10px;
+  > * {
+  vertical-align: text-bottom;
+  }
+}
+
+h5 {
+  font-size: 18px;
+  margin: 20px 10px;
+  color: #000;
+}
+
+.docs-table {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+  }
+
+  thead {
+    th {
+      background-color: #f4f4f4;
+    }
+  }
+}
