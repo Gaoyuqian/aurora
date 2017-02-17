@@ -69,7 +69,7 @@ const AuFlexItem = Vue.extend({
   },
   mounted () {
     this.updateUI()
-    window.addEventListener('resize', this.updateUI, false)
+    window.addEventListener('resize', this.updateUI)
   },
   updated () {
     this.updateUI()
@@ -99,4 +99,5 @@ const AuFlexItem = Vue.extend({
 })
 
 Vue.component('au-flex-item', AuFlexItem)
+
 export default AuFlexItem

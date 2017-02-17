@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Input</title>
+    <link rel="stylesheet" href="../src/sass/main.css">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./docs.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <h1>AuInput</h1>
+      <div class="docs-panel">
+        <h6>按尺寸分类</h6>
+        <div class="docs-panel-row">
+          <au-input
+              name="name"
+              placeholder="请输入名称"
+              @focus="onFocus"
+              @blur="onBlur" />
+        </div>
+      </div>
+
+      <h5>属性</h5>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>type</td>
+            <td>按钮的样式 (可选值: primary, info, default, link)</td>
+            <td>String</td>
+            <td>'default'</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td>按钮的大小 (可选值: large, default, small)</td>
+            <td>String</td>
+            <td>'default'</td>
+          </tr>
+          <tr>
+            <td>href</td>
+            <td>按钮是否是一个链接</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>target</td>
+            <td>如果提供了href, 可指定链接的target</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>loading</td>
+            <td>是否显示加载中的图标</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>是否禁用按钮</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>heading-icon</td>
+            <td>显示文字前方的icon</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>trailing-icon</td>
+            <td>显示文字后方的icon</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>native-type</td>
+            <td>原生type属性</td>
+            <td>String</td>
+            <td>'button'</td>
+          </tr>
+          <tr>
+            <td>autofocus</td>
+            <td>是否自动聚焦</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>block</td>
+            <td>是否显示块化按钮</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script src="../src/main.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        methods: {
+          onFocus ($event) {
+            console.log($event)
+          },
+          onBlur ($event) {
+            console.log($event)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -38,7 +38,7 @@ Vue.component('au-flex', {
     }
   },
   mounted () {
-    window.addEventListener('resize', this.updateUI, false)
+    window.addEventListener('resize', this.updateUI)
     this.updateUI()
   },
   beforeDestroy () {
