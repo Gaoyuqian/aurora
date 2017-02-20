@@ -13,13 +13,63 @@
       <div class="docs-panel">
         <h6>按尺寸分类</h6>
         <div class="docs-panel-row">
-          <au-button size="large">添加</au-button>
-          <au-button size="default">添加</au-button>
-          <au-button size="small">添加</au-button>
+          <au-button type="primary" size="large">大型按钮</au-button>
+          <au-button type="primary" size="default">中型按钮</au-button>
+          <au-button type="primary" size="small">小型按钮</au-button>
+          <au-button type="primary" size="mini">超小按钮</au-button>
         </div>
         <div class="docs-panel-row">
-          <au-button type="link">添加</au-button>
-          <au-button :disabled="true">添加</au-button>
+          <au-button type="link" size="large">添加</au-button>
+          <au-button type="link" size="default">添加</au-button>
+          <au-button type="link" size="small">添加</au-button>
+          <au-button type="link" size="mini">添加</au-button>
+        </div>
+      </div>
+
+      <div class="docs-panel">
+        <h6>颜色按钮</h6>
+        <div class="docs-panel-row">
+          <au-button type="primary">添加</au-button>
+          <au-button type="info">添加</au-button>
+          <au-button type="success">添加</au-button>
+          <au-button type="danger">添加</au-button>
+          <au-button type="warning">添加</au-button>
+          <au-button type="default">添加</au-button>
+        </div>
+
+        <div class="docs-panel-row">
+          <au-button size="large" type="primary">添加</au-button>
+          <au-button size="large" type="info">添加</au-button>
+          <au-button size="large" type="success">添加</au-button>
+          <au-button size="large" type="danger">添加</au-button>
+          <au-button size="large" type="warning">添加</au-button>
+          <au-button size="large" type="default">添加</au-button>
+        </div>
+
+        <div class="docs-panel-row">
+          <au-button size="small" type="primary">添加</au-button>
+          <au-button size="small" type="info">添加</au-button>
+          <au-button size="small" type="success">添加</au-button>
+          <au-button size="small" type="danger">添加</au-button>
+          <au-button size="small" type="warning">添加</au-button>
+          <au-button size="small" type="default">添加</au-button>
+        </div>
+
+        <div class="docs-panel-row">
+          <au-button size="mini" type="primary">添加</au-button>
+          <au-button size="mini" type="info">添加</au-button>
+          <au-button size="mini" type="success">添加</au-button>
+          <au-button size="mini" type="danger">添加</au-button>
+          <au-button size="mini" type="warning">添加</au-button>
+          <au-button size="mini" type="default">添加</au-button>
+        </div>
+        <div class="docs-panel-row">
+          <au-button type="primary" disabled>添加</au-button>
+          <au-button type="info" disabled>添加</au-button>
+          <au-button type="success" disabled>添加</au-button>
+          <au-button type="danger" disabled>添加</au-button>
+          <au-button type="warning" disabled>添加</au-button>
+          <au-button disabled>添加</au-button>
         </div>
       </div>
 
@@ -42,13 +92,16 @@
       <div class="docs-panel">
         <h6>块级按钮</h6>
         <div class="docs-panel-row">
-          <au-button block size="large">添加</au-button>
+          <au-button type="primary" block size="large">添加</au-button>
         </div>
         <div class="docs-panel-row">
-          <au-button block size="default">添加</au-button>
+          <au-button type="success" block size="default">添加</au-button>
         </div>
         <div class="docs-panel-row">
-          <au-button block size="small">添加</au-button>
+          <au-button type="warning" block size="small">添加</au-button>
+        </div>
+        <div class="docs-panel-row">
+          <au-button type="danger" block size="mini">添加</au-button>
         </div>
       </div>
 
@@ -65,13 +118,13 @@
         <tbody>
           <tr>
             <td>type</td>
-            <td>按钮的样式 (可选值: primary, info, default, link)</td>
+            <td>按钮的样式 (可选值: primary, info, success, warning, danger, default, link)</td>
             <td>String</td>
             <td>'default'</td>
           </tr>
           <tr>
             <td>size</td>
-            <td>按钮的大小 (可选值: large, default, small)</td>
+            <td>按钮的大小 (可选值: large, default, small, mini)</td>
             <td>String</td>
             <td>'default'</td>
           </tr>

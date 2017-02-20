@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Radio</title>
+    <link rel="stylesheet" href="../src/sass/main.css">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./docs.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <h1>AuRadio</h1>
+      <div class="docs-panel">
+        <h6>Radio</h6>
+        <div class="docs-panel-row">
+          <div>
+            <au-radio label="男" native-value="male" v-model="form.gender"></au-radio>
+            <au-radio label="女" native-value="female" v-model="form.gender"></au-radio>
+          </div>
+          <div>
+            <au-radio native-value="male" v-model="form.gender">男</au-radio>
+            <au-radio native-value="female" v-model="form.gender">女</au-radio>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-panel">
+        <h6>Radio Group</h6>
+        <div class="docs-panel-row">
+          <div>
+            <au-radio-group :options="options" v-model="form.class"></au-radio-group>
+          </div>
+          <div>
+            <au-radio-group v-model="form.class">
+              <au-radio :native-value="option.value" v-for="option in options">{{ option.label }}</au-radio>
+            </au-radio-group>
+          </div>
+        </div>
+      </div>
+
+      <h5>AuRadio属性</h5>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>原生的name</td>
+            <td>String</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td>显示radio的名称</td>
+            <td>String</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>checked</td>
+            <td>是否选中</td>
+            <td>Boolean</td>
+            <td>false</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5>AuRadioGroup属性</h5>
+      <table class="docs-table">
+        <thead>
+          <tr>
+            <th>参数</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th>默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>原生的name属性</td>
+            <td>String</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td></td>
+            <td>Boolean</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>options</td>
+            <td>选项列表[{ option, value }]</td>
+            <td>Array</td>
+            <td>[]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script src="../src/main.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data () {
+          return {
+            form: {
+              'class': '3',
+              gender: 'female'
+            },
+            options: [
+              {
+                value: '1',
+                label: '三年一班'
+              },
+              {
+                value: '2',
+                label: '三年二班'
+              },
+              {
+                value: '3',
+                label: '三年三班'
+              }
+            ]
+          }
+        },
+        mounted () {
+        },
+        methods: {
+          onFocus ($event) {
+            console.log($event)
+          },
+          onBlur ($event) {
+            console.log($event)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

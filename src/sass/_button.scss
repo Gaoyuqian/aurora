@@ -11,10 +11,113 @@
   margin: 0;
   border-radius: $button-border-radius;
   cursor: pointer;
+  user-select: none;
+  transition: all 0.25s;
 
   &[disabled] {
-    background-color: lighten($button-background-color, 25%);
     cursor: not-allowed;
+  }
+}
+
+.au-button-primary {
+  background-color: $color-primary;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-primary, 20%);
+  }
+
+  &[disabled] {
+    background-color: lighten($color-primary, 20%);
+  }
+}
+
+.au-button-info {
+  background-color: $color-info;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-info, 20%);
+  }
+
+  &[disabled] {
+    background-color: lighten($color-info, 20%);
+  }
+}
+
+.au-button-success {
+  background-color: $color-success;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-success, 20%);
+  }
+
+  &[disabled] {
+    background-color: lighten($color-success, 20%);
+  }
+}
+
+.au-button-warning {
+  background-color: $color-warning;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-warning, 20%);
+  }
+
+  &[disabled] {
+    background-color: lighten($color-warning, 20%);
+  }
+}
+
+.au-button-danger {
+  background-color: $color-danger;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-danger, 20%);
+  }
+
+  &[disabled] {
+    background-color: lighten($color-danger, 20%);
+  }
+}
+
+.au-button-default {
+  background-color: $color-white;
+  color: $color-grey-darker;
+  border: 1px solid $color-grey-light;
+
+  &:hover {
+    border-color: $color-grey;
+  }
+
+  &[disabled] {
+    color: $color-grey-light;
+    border-color: $color-grey-light;
+    background-color: $color-grey-lighter;
+  }
+
+  &.au-button-large {
+    padding: $button-padding-y-large - 2 $button-padding-x-large - 2;
+  }
+
+  &.au-button-small {
+    padding: $button-padding-y-small - 2 $button-padding-x-small - 2;
+  }
+
+  &.au-button-mini {
+    padding: $button-padding-y-mini - 2 $button-padding-x-mini - 2;
+  }
+}
+
+.au-button-link {
+  background: transparent;
+  border-color: transparent;
+  color: $color-primary;
+  &:hover {
+    color: darken($color-primary, 20%);
   }
 }
 
@@ -32,13 +135,14 @@
   line-height: $button-height-small - $button-padding-y-small * 2;
 }
 
+.au-button-mini {
+  font-size: $button-fontsize-mini;
+  padding: $button-padding-y-mini $button-padding-x-mini;
+  height: $button-height-mini;
+  line-height: $button-height-mini - $button-padding-y-mini * 2;
+}
+
 .au-button-block {
   display: block;
   width: 100%;
-}
-
-.au-button-link {
-  background: transparent;
-  border-color: transparent;
-  color: $button-background-color;
 }

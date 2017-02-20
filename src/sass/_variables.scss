@@ -7,21 +7,29 @@ $fontsize-large:            18px;
 
 // Color
 // -------------------------
-$color-primary:             #20a0ff;
-$color-info:                #ccc;
-$color-success:             #ccc;
-$color-warning:             #ccc;
+$color-primary:             #4777E6;
+$color-info:                #4777E6;
+$color-success:             #00D397;
+$color-warning:             #FFCC01;
+$color-danger:              #FF4E4C;
 $color-border:              #ccc;
 
+$color-black:               #000000;
+$color-grey-light:          #CCCCCC;
+$color-grey-lighter:        #EEEEEE;
+$color-grey:                #888888;
+$color-grey-dark:           #444444;
+$color-grey-darker:         #222222;
+$color-white:               #FFFFFF;
 
 // Radius
 // -------------------------
-$border-radius:             4px;
+$border-radius:             0px;
 
 
 // Button
 // -------------------------
-$button-border-color:      #ccc;
+$button-border-color:      $color-grey-light;
 $button-background-color:  $color-primary;
 $button-color:             #fff;
 $button-border-radius:     $border-radius;
@@ -32,14 +40,19 @@ $button-padding-x-large:   20px;
 $button-padding-y-large:   10px;
 
 $button-fontsize-default:  $fontsize-default;
-$button-height-default:    30px;
-$button-padding-x-default: 10px;
-$button-padding-y-default: 5px;
+$button-height-default:    36px;
+$button-padding-x-default: 16px;
+$button-padding-y-default: 10px;
 
 $button-fontsize-small:    $fontsize-small;
-$button-height-small:      20px;
-$button-padding-x-small:   5px;
-$button-padding-y-small:   0px;
+$button-height-small:      28px;
+$button-padding-x-small:   10px;
+$button-padding-y-small:   8px;
+
+$button-fontsize-mini:     $fontsize-small;
+$button-height-mini:       22px;
+$button-padding-x-mini:    5px;
+$button-padding-y-mini:    5px;
 
 // Icon
 // -------------------------

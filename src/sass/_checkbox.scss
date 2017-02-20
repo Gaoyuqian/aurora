@@ -1,0 +1,22 @@
+.au-checkbox {
+  cursor: pointer;
+  user-select: none;
+
+  [type='checkbox'] {
+    display: none;
+
+    & + i {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #ccc;
+      background-color: #eee;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    &:checked + i {
+      background-color: $color-primary;
+    }
+  }
+}
