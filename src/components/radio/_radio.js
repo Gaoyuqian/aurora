@@ -1,13 +1,16 @@
 import AuRadioGroup from '../radio-group/_radio-group.js'
 
 const AuRadio = Vue.extend({
-  // template: require('./_radio.jade'),
+  template: require('./_radio.jade'),
   props: {
     value: [String, Number],
     nativeValue: [String, Number],
     label: String
   },
   computed: {
+    checked () {
+      return this.model === this.nativeValue
+    },
     isGroup () {
       return this.$parent instanceof AuRadioGroup
     },
@@ -24,31 +27,10 @@ const AuRadio = Vue.extend({
       }
     }
   },
-  render (h) {
-    return h(
-      'label',
-      {
-        class: 'au-radio'
-      },
-      [
-        h('input', {
-          attrs: {
-            type: 'radio',
-            value: this.nativeValue
-          },
-          domProps: {
-            checked: this.model === this.nativeValue
-          }
-          on: {
-            change: ($event) => {
-              this.model = this.nativeValue
-            }
-          }
-        }),
-        h('i'),
-        (this.label ? this.label : this.$slots.default)
-      ]
-    )
+  methods: {
+    clickHandler () {
+      this.model = this.nativeValue
+    }
   }
 })
 

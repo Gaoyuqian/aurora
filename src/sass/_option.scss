@@ -1,0 +1,34 @@
+.au-option {
+  min-width: 200px;
+  padding: 10px;
+  height: 40px;
+  line-height: 20px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid $color-border;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: $fontsize-small;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .fa {
+    display: none;
+  }
+
+  &:hover {
+    background-color: #F4F4F4;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.active {
+    color: $color-primary;
+    .fa {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+transition(
+  name="fade"
+)
+  div.au-popup(
+    v-show="isShow",
+    :style="style"
+    @click="clickHandler"
+  )
+    slot

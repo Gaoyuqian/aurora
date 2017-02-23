@@ -1,6 +1,8 @@
-div
-  au-radio(
-    v-for="item in options",
-    :native-value="item.value",
-    :label="item.label"
-  )
+div.au-radio-group
+  template(v-if="options && options.length > 0", v-for="item in options")
+    au-radio(
+      :native-value="item.value",
+      :label="item.label"
+    )
+    |&nbsp;
+  slot(v-else)

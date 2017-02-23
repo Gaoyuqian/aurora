@@ -1,0 +1,51 @@
+doctype
+html.no-js
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title
+      block title
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href="../src/sass/main.css")
+    link(rel='stylesheet', href="../lib/font-awesome-4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href="./docs.css")
+
+  body
+    <!--[if lt IE 8]>
+    p.browsehappy
+      | You are using an <strong>outdated</strong> browser.
+      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
+      | to improve your experience.
+    <![endif]-->
+    #app(v-cloak)
+      block content
+
+    script(src="../lib/vue.js")
+    script(src="../src/main.js")
+    script.
+      const attrMixins = {
+        data () {
+          return {
+            attrColumns: [
+              {
+                label: '参数',
+                key: 'name'
+              },
+              {
+                label: '说明',
+                key: 'desc'
+              },
+              {
+                label: '类型',
+                key: 'type'
+              },
+              {
+                label: '默认值',
+                key: 'default'
+              }
+            ]
+          }
+        }
+      }
+    block script

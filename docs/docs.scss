@@ -1,39 +1,50 @@
 body {
-
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #333;
 }
 
 #app {
   margin: 0 auto;
   padding: 20px 40px;
+  min-width: 800px;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 30px;
+  line-height: 50px;
+}
+
+.docs-heading {
+  margin-bottom: 40px;
+}
+
+.docs-desc {
+  font-size: 14px;
+  line-height: 20px;
+  color: #888;
+  p {
+    margin: 0 0 20px;
+  }
+}
+
+.docs-section {
+  margin-bottom: 50px;
 }
 
 .docs-panel {
   border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  h6 {
-    font-size: 14px;
-    color: #000;
-    margin: 0 0 10px;
-  }
+  padding: 20px 40px;
 }
 
 .docs-panel-row {
-  margin: 20px 0 10px;
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
   > * {
     vertical-align: middle;
   }
-}
-
-h5 {
-  font-size: 18px;
-  margin: 20px 10px;
-  color: #000;
 }
 
 .docs-table {

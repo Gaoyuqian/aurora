@@ -1,0 +1,58 @@
+.au-select {
+  max-width: 300px;
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid $color-border;
+  font-size: 14px;
+  min-height: 30px;
+  line-height: 28px;
+  user-select: none;
+
+  .fa {
+    font-size: 12px;
+  }
+
+  .fa-chevron-down {
+    transition: all $transition-during;
+  }
+
+  &.active {
+    border-color: $color-primary;
+    color: $color-primary;
+    .fa-chevron-down {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.au-select-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.au-select-text {
+  margin-right: 20px;
+}
+
+
+.au-select-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.au-select-item {
+  color: #FFFFFF;
+  background-color: lighten($color-primary, 25%);
+  height: 20px;
+  line-height: 20px;
+  padding: 0 5px;
+  font-size: $fontsize-small;
+  margin: 5px;
+
+  .fa {
+    margin-left: 5px;
+  }
+}

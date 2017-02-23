@@ -1,0 +1,8 @@
+div.au-checkbox-group
+  template(v-for="o in options")
+    au-checkbox(
+      :label="o.label",
+      :native-value="o.value",
+      v-model="model"
+    )
+    |&nbsp;

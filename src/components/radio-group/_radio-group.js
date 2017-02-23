@@ -1,4 +1,5 @@
 const AuRadioGroup = Vue.extend({
+  template: require('./_radio-group.jade'),
   props: {
     options: {
       type: Array,
@@ -13,23 +14,6 @@ const AuRadioGroup = Vue.extend({
       }
     },
     value: [String, Number]
-  },
-  render (h) {
-    const child = this.options ? this.options.map((option) => {
-      return h(
-        'au-radio',
-        {
-          props: {
-            nativeValue: option.value,
-            label: option.label
-          }
-        }
-      )
-    }) : this.$slots.default
-    return h(
-      'div',
-      child
-    )
   }
 })
 

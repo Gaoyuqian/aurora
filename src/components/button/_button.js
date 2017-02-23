@@ -1,3 +1,4 @@
+
 Vue.component('au-button', {
   props: {
     type: {
@@ -24,23 +25,27 @@ Vue.component('au-button', {
       type: Boolean,
       default: false
     },
-    'heading-icon': {
+    headingIcon: {
       type: String,
       default: null
     },
-    'trailing-icon': {
+    trailingIcon: {
       type: String,
       default: null
     },
-    'native-type': {
+    nativeType: {
       type: String,
       default: 'button'
     },
-    'autofocus': {
+    autofocus: {
       type: Boolean,
       default: false
     },
     block: {
+      type: Boolean,
+      default: false
+    },
+    clickDisabled: {
       type: Boolean,
       default: false
     }
@@ -79,6 +84,7 @@ Vue.component('au-button', {
 
     if (this.headingIcon != null) {
       child.push(h('au-icon', {
+        'class': 'au-button-heading-icon',
         props: {
           size: this.size,
           icon: this.headingIcon
@@ -90,6 +96,7 @@ Vue.component('au-button', {
 
     if (this.trailingIcon != null) {
       child.push(h('au-icon', {
+        'class': 'au-button-trailing-icon',
         props: {
           size: this.size,
           icon: this.trailingIcon
@@ -105,22 +112,46 @@ Vue.component('au-button', {
           attrs: {
             href: this.href,
             target: this.target
+          },
+          on: {
+            click: this.clickHandler
           }
         },
         child
       )
     } else {
       return h(
-        'button',
-        {
-          'class': this.classObj,
-          attrs: {
-            type: this.nativeType,
-            disabled: this.disabled || this.loading
-          }
-        },
-        child
+        'au-active-transition',
+        [
+          h(
+            'button',
+            {
+              'class': this.classObj,
+              attrs: {
+                type: this.nativeType,
+                disabled: this.disabled || this.loading
+              },
+              on: {
+                click: this.clickHandler
+              }
+            },
+            child
+          )
+        ]
       )
+    }
+  },
+  methods: {
+    clickHandler () {
+      this.$el.blur();
+
+      if (this.clickDisabled) {
+        this.disabled = true
+      }
+      this.$emit('click', (this.enable))
+    },
+    enable () {
+      this.disabled = false
     }
   }
 })

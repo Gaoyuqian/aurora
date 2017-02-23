@@ -32,9 +32,9 @@ Vue.component('au-flex', {
       default: 0
     }
   },
-  created () {
-    if (this.column != null) {
-      this.wrap = this.wrap || 'wrap'
+  data () {
+    return {
+      _wrap: this.column != null ? (this.wrap || 'wrap') : this.wrap
     }
   },
   mounted () {
@@ -55,8 +55,8 @@ Vue.component('au-flex', {
         style['flex-direction'] = this.direction
       }
 
-      if (this.wrap) {
-        style['flex-wrap'] = this.wrap
+      if (this._wrap) {
+        style['flex-wrap'] = this._wrap
       }
 
       if (this.justifyContent) {

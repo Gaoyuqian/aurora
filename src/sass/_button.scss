@@ -12,7 +12,6 @@
   border-radius: $button-border-radius;
   cursor: pointer;
   user-select: none;
-  transition: all 0.25s;
 
   &[disabled] {
     cursor: not-allowed;
@@ -23,12 +22,15 @@
   background-color: $color-primary;
   color: $color-white;
 
-  &:hover {
-    background-color: darken($color-primary, 20%);
+  &:hover,
+  &:focus {
+    background-color: lighten($color-primary, 5%);
   }
 
-  &[disabled] {
-    background-color: lighten($color-primary, 20%);
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: scale(0.95);
   }
 }
 
@@ -36,12 +38,15 @@
   background-color: $color-info;
   color: $color-white;
 
-  &:hover {
-    background-color: darken($color-info, 20%);
+  &:hover,
+  &:focus {
+    background-color: lighten($color-info, 5%);
   }
 
-  &[disabled] {
-    background-color: lighten($color-info, 20%);
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: scale(0.95);
   }
 }
 
@@ -49,12 +54,15 @@
   background-color: $color-success;
   color: $color-white;
 
-  &:hover {
-    background-color: darken($color-success, 20%);
+  &:hover,
+  &:focus {
+    background-color: lighten($color-success, 5%);
   }
 
-  &[disabled] {
-    background-color: lighten($color-success, 20%);
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: scale(0.95);
   }
 }
 
@@ -62,12 +70,15 @@
   background-color: $color-warning;
   color: $color-white;
 
-  &:hover {
-    background-color: darken($color-warning, 20%);
+  &:hover,
+  &:focus {
+    background-color: lighten($color-warning, 5%);
   }
 
-  &[disabled] {
-    background-color: lighten($color-warning, 20%);
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: scale(0.95);
   }
 }
 
@@ -75,28 +86,39 @@
   background-color: $color-danger;
   color: $color-white;
 
-  &:hover {
-    background-color: darken($color-danger, 20%);
+  &:hover,
+  &:focus {
+    background-color: lighten($color-danger, 5%);
   }
 
-  &[disabled] {
-    background-color: lighten($color-danger, 20%);
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
+    transform: scale(0.95);
   }
 }
 
 .au-button-default {
   background-color: $color-white;
   color: $color-grey-darker;
-  border: 1px solid $color-grey-light;
+  border: 1px solid $color-border;
 
-  &:hover {
-    border-color: $color-grey;
+  &:hover,
+  &:focus {
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+
+  &:active,
+  &.active {
+    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) inset;
+    transform: scale(0.95);
   }
 
   &[disabled] {
-    color: $color-grey-light;
-    border-color: $color-grey-light;
-    background-color: $color-grey-lighter;
+    color: #CCCCCC;
+    border-color: $color-border;
+    background-color: #FFFFFF;
   }
 
   &.au-button-large {
@@ -112,12 +134,25 @@
   }
 }
 
+.au-button-primary,
+.au-button-info,
+.au-button-danger,
+.au-button-warning,
+.au-button-success{
+  &[disabled] {
+    border: 1px solid #DDDDDD;
+    color: #CCCCCC;
+    background-color: #EEEEEE;
+  }
+}
+
 .au-button-link {
   background: transparent;
   border-color: transparent;
   color: $color-primary;
-  &:hover {
-    color: darken($color-primary, 20%);
+  &:hover,
+  &:focus {
+    color: lighten($color-primary, 5%);
   }
 }
 
@@ -145,4 +180,30 @@
 .au-button-block {
   display: block;
   width: 100%;
+  &:active,
+  &.active {
+    transform: scale(0.99);
+  }
+}
+
+.au-button-heading-icon {
+  margin-right: 5px;
+}
+
+.au-button-trailing-icon {
+  margin-left: 5px;
+}
+
+
+// button-group
+// -------------------------
+.au-button-group {
+  display: flex;
+  .au-button {
+    margin-right: 1px;
+
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
 }

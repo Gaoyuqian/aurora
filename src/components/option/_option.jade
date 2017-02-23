@@ -1,0 +1,9 @@
+div.au-option(
+  @click="clickHandler",
+  :class="{ active: active }"
+)
+  div(v-if="label")
+    |{{label}}
+  div(v-else)
+    slot
+  au-icon(icon="check")

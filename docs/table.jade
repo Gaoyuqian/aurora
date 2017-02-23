@@ -1,0 +1,134 @@
+
+extends ./_layout
+
+block title
+  Table
+
+block content
+  .docs-heading
+    h1|AuTable
+    .docs-desc
+
+  .docs-section
+    h2|基础表格
+    .docs-desc
+      p|基础表格的用法
+    .docs-panel
+      .docs-panel-row
+        au-table(:columns="columns", :data="data")
+
+  .docs-section
+    h2|基础表格
+    .docs-desc
+      p|基础表格的用法
+    .docs-panel
+      .docs-panel-row
+        au-table(:columns="columns", :data="data")
+          au-table-column(
+            label="操作",
+            :style="{ width: '200px' }"
+          )
+            au-button(type="primary", size="small")|编辑
+            au-button(type="danger", size="small")|删除
+          au-table-column(
+            label="操作"
+          )
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'column',
+              desc: '列信息',
+              type: 'Array',
+              default: 'null'
+            },
+
+          ],
+          columns: [
+            {
+              label: '姓名',
+              key: 'name'
+            },
+            {
+              label: '性别',
+              key: 'age',
+              style: {
+                textAlign: 'right',
+                width: '100px'
+              }
+            },
+            {
+              label: (h) => {
+                return h(
+                  'div',
+                  {
+                    style:{
+                      color: 'red'
+                    },
+                  },
+                  '出生年月'
+                )
+              },
+              key: 'age',
+              style: {
+                textAlign: 'right',
+                width: '100px'
+              }
+            },
+            {
+              label: '操作',
+              style: {
+                width: '200px'
+              },
+              content: (h, row) => {
+                return [
+                  h(
+                    'au-button',
+                    {
+                      props: {
+                        type: 'primary',
+                        size: 'small'
+                      },
+                      on: {
+                        click: function () {
+                          console.log(row.id)
+                        }
+                      }
+                    },
+                    '编辑'
+                  ),
+                  ' ',
+                  h(
+                    'au-button',
+                    {
+                      props: {
+                        type: 'danger',
+                        size: 'small'
+                      },
+                      on: {
+                        click: () => {
+
+                        }
+                      }
+                    },
+                    '删除'
+                  )
+                ]
+              }
+            }
+          ],
+          data: [
+            { id: 1, name: 'kevin', age: '28' },
+            { id: 2, name: 'kevin', age: '28' },
+            { id: 3, name: 'kevin', age: '28' },
+            { id: 4, name: 'kevin', age: '28' }
+          ]
+        }
+      }
+    })

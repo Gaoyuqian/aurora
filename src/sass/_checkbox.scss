@@ -1,22 +1,45 @@
+.au-checkbox-wrap {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .au-checkbox {
   cursor: pointer;
   user-select: none;
+  display: flex;
+  align-items: center;
+  font-size: $fontsize-default;
 
-  [type='checkbox'] {
-    display: none;
-
-    & + i {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #ccc;
-      background-color: #eee;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-
-    &:checked + i {
-      background-color: $color-primary;
+  &.checked {
+    color: $color-primary;
+    .au-checkbox-mark {
+      border-color: $color-primary;
     }
   }
+}
+
+.au-checkbox-mark {
+  border: 1px solid $color-grey;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  overflow: hidden;
+  @include flex-center-center();
+
+  .au-icon {
+    font-size: $fontsize-small;
+    transition: all 0.1s;
+  }
+}
+
+.au-checkbox-text {
+  flex: 1;
+}
+
+.au-checkbox-mark-enter, .au-checkbox-mark-leave {
+  transform: scale(1);
+}
+
+.au-checkbox-mark-enter-active, .au-checkbox-mark-leave-active {
+  transform: scale(0.1);
 }

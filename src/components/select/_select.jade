@@ -1,0 +1,27 @@
+div.au-select(
+  @click="clickHandler",
+  :class="{ active: active }"
+)
+  .au-select-inner
+    .au-select-text(v-if="text")
+      |{{ text }}
+
+    .au-select-list(v-if="mutiple && selected.length > 0")
+      div.au-select-item(
+        v-for="s in selected"
+      )
+        |{{ s.label }}
+        au-icon(icon="close", @click.native="removeValueHandler($event, s.value)")
+
+    i.fa.fa-chevron-down(aria-hidden="true")
+
+  popup(
+    ref="popup"
+  )
+    au-option(
+      v-if="options != null",
+      v-for="option in options",
+      :label="option.label",
+      :value="option.value"
+    )
+    slot(v-if="options == null")

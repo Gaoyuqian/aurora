@@ -1,0 +1,17 @@
+.au-popup {
+  position: absolute;
+  border: 1px solid $color-border;
+  z-index: $zindex-popup;
+  overflow: auto;
+}
+
+.fade-enter-active, .fade-leave-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform $transition-during, opacity $transition-during;
+}
+
+.fade-enter, .fade-leave-active {
+  transform: translateY(-10px);
+  opacity: 0;
+}

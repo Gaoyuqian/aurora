@@ -1,0 +1,110 @@
+extends ./_layout
+
+block title
+  Checkbox
+
+block content
+  .docs-heading
+    h1|AuCheckbox
+    .docs-desc
+
+  .docs-section
+    h2|是否选择器
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        |-{{form.isConfirm}}-
+        br
+        au-checkbox(label="是否同意", v-model="form.isConfirm")
+        div(v-if="form.isConfirm")|yes
+        div(v-else)|no
+  .docs-section
+    h2|基础Checkbox
+    .docs-desc
+      p|基础Checkbox的用法
+    .docs-panel
+      .docs-panel-row
+        |-{{form.genders}}-
+        br
+        au-checkbox(label="男", native-value="1", v-model="form.genders")
+        au-checkbox(label="女", native-value="2", v-model="form.genders")
+
+  .docs-section
+    h2|Checkbox Group
+    .docs-desc
+    .docs-panel
+      .docs-panel-row
+        // |-{{form.cities}}-
+        au-checkbox-group(:options="cityOptions", v-model="form.cities")
+  .docs-section
+    h2|Checkbox Group
+    .docs-desc
+    .docs-panel
+      .docs-panel-row
+        // |-{{form.all}}-
+        au-checkbox(label="全选", :indeterminate="indeterminate", v-model="checkAll")
+        au-checkbox-group(:options="cityOptions", v-model="form.cities")
+
+  .docs-section
+    h2|属性
+    au-table(:columns="attrColumns", :data="attrs")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      computed: {
+        checkAll: {
+          get () {
+            return this.form.cities.length === this.cityOptions.length
+          },
+          set (value) {
+            if (value) {
+              this.form.cities = this.cityOptions.map((option) => {
+                return option.value
+              })
+            } else {
+              this.form.cities = []
+            }
+          }
+        },
+        indeterminate () {
+          const length = this.form.cities.length
+          return length > 0 && length < this.cityOptions.length
+        }
+      },
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'v-model',
+              desc: '绑定的数据',
+              type: 'String, Number',
+              default: ''
+            }
+          ],
+          form: {
+            all: false,
+            isConfirm: '',
+            cities: [],
+            genders: []
+          },
+          cityOptions: [
+            {
+              label: '北京',
+              value: '北京'
+            },
+            {
+              label: '天津',
+              value: '天津'
+            },
+            {
+              label: '上海',
+              value: '上海'
+            }
+          ]
+        }
+      }
+    })

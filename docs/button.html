@@ -9,181 +9,302 @@
   </head>
   <body>
     <div id="app" v-cloak>
-      <h1>AuButton</h1>
-      <div class="docs-panel">
-        <h6>按尺寸分类</h6>
-        <div class="docs-panel-row">
-          <au-button type="primary" size="large">大型按钮</au-button>
-          <au-button type="primary" size="default">中型按钮</au-button>
-          <au-button type="primary" size="small">小型按钮</au-button>
-          <au-button type="primary" size="mini">超小按钮</au-button>
-        </div>
-        <div class="docs-panel-row">
-          <au-button type="link" size="large">添加</au-button>
-          <au-button type="link" size="default">添加</au-button>
-          <au-button type="link" size="small">添加</au-button>
-          <au-button type="link" size="mini">添加</au-button>
+      <div class="docs-heading">
+        <h1>AuButton</h1>
+        <div class="docs-desc">
+          <p>标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑</p>
         </div>
       </div>
 
-      <div class="docs-panel">
-        <h6>颜色按钮</h6>
-        <div class="docs-panel-row">
-          <au-button type="primary">添加</au-button>
-          <au-button type="info">添加</au-button>
-          <au-button type="success">添加</au-button>
-          <au-button type="danger">添加</au-button>
-          <au-button type="warning">添加</au-button>
-          <au-button type="default">添加</au-button>
+      <div class="docs-section">
+        <h2>按钮类型</h2>
+        <div class="docs-desc">
+          <p>基础的按钮用法</p>
         </div>
-
-        <div class="docs-panel-row">
-          <au-button size="large" type="primary">添加</au-button>
-          <au-button size="large" type="info">添加</au-button>
-          <au-button size="large" type="success">添加</au-button>
-          <au-button size="large" type="danger">添加</au-button>
-          <au-button size="large" type="warning">添加</au-button>
-          <au-button size="large" type="default">添加</au-button>
-        </div>
-
-        <div class="docs-panel-row">
-          <au-button size="small" type="primary">添加</au-button>
-          <au-button size="small" type="info">添加</au-button>
-          <au-button size="small" type="success">添加</au-button>
-          <au-button size="small" type="danger">添加</au-button>
-          <au-button size="small" type="warning">添加</au-button>
-          <au-button size="small" type="default">添加</au-button>
-        </div>
-
-        <div class="docs-panel-row">
-          <au-button size="mini" type="primary">添加</au-button>
-          <au-button size="mini" type="info">添加</au-button>
-          <au-button size="mini" type="success">添加</au-button>
-          <au-button size="mini" type="danger">添加</au-button>
-          <au-button size="mini" type="warning">添加</au-button>
-          <au-button size="mini" type="default">添加</au-button>
-        </div>
-        <div class="docs-panel-row">
-          <au-button type="primary" disabled>添加</au-button>
-          <au-button type="info" disabled>添加</au-button>
-          <au-button type="success" disabled>添加</au-button>
-          <au-button type="danger" disabled>添加</au-button>
-          <au-button type="warning" disabled>添加</au-button>
-          <au-button disabled>添加</au-button>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button>默认按钮</au-button>
+            <au-button type="primary">主要按钮</au-button>
+            <au-button type="link">文字按钮</au-button>
+          </div>
         </div>
       </div>
 
-      <div class="docs-panel">
-        <h6>加载中</h6>
-        <div class="docs-panel-row">
-          <au-button :loading="true">加载中</au-button>
+      <div class="docs-section">
+        <h2>按钮尺寸</h2>
+        <div class="docs-desc">
+          <p>Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button type="primary" size="large">大型按钮</au-button>
+            <au-button type="primary" size="default">中型按钮</au-button>
+            <au-button type="primary" size="small">小型按钮</au-button>
+            <au-button type="primary" size="mini">超小按钮</au-button>
+          </div>
+          <div class="docs-panel-row">
+            <au-button type="link" size="large">添加</au-button>
+            <au-button type="link" size="default">添加</au-button>
+            <au-button type="link" size="small">添加</au-button>
+            <au-button type="link" size="mini">添加</au-button>
+          </div>
         </div>
       </div>
 
-      <div class="docs-panel">
-        <h6>图标按钮</h6>
-        <div class="docs-panel-row">
-          <au-button heading-icon="plus">添加</au-button>
-          <au-button trailing-icon="automobile">添加</au-button>
-          <au-button heading-icon="battery-three-quarters" trailing-icon="battery-three-quarters">添加</au-button>
+
+      <div class="docs-section">
+        <h2>不同颜色</h2>
+        <div class="docs-desc">
+          <p>不同的颜色倾向代表不同的提示</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button type="primary">主要按钮</au-button>
+            <au-button type="info">信息按钮</au-button>
+            <au-button type="success">审核通过</au-button>
+            <au-button type="danger">审核拒绝</au-button>
+            <au-button type="warning">警告按钮</au-button>
+            <au-button type="default">默认按钮</au-button>
+          </div>
+          <div class="docs-panel-row">
+            <au-button size="large" type="primary">主要按钮</au-button>
+            <au-button size="large" type="info">信息按钮</au-button>
+            <au-button size="large" type="success">审核通过</au-button>
+            <au-button size="large" type="danger">审核拒绝</au-button>
+            <au-button size="large" type="warning">警告按钮</au-button>
+            <au-button size="large" type="default">默认按钮</au-button>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button size="small" type="primary">主要按钮</au-button>
+            <au-button size="small" type="info">信息按钮</au-button>
+            <au-button size="small" type="success">审核通过</au-button>
+            <au-button size="small" type="danger">审核拒绝</au-button>
+            <au-button size="small" type="warning">警告按钮</au-button>
+            <au-button size="small" type="default">默认按钮</au-button>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button size="mini" type="primary">主要按钮</au-button>
+            <au-button size="mini" type="info">信息按钮</au-button>
+            <au-button size="mini" type="success">审核通过</au-button>
+            <au-button size="mini" type="danger">审核拒绝</au-button>
+            <au-button size="mini" type="warning">警告按钮</au-button>
+            <au-button size="mini" type="default">默认按钮</au-button>
+          </div>
         </div>
       </div>
 
-      <div class="docs-panel">
-        <h6>块级按钮</h6>
-        <div class="docs-panel-row">
-          <au-button type="primary" block size="large">添加</au-button>
+      <div class="docs-section">
+        <h2>不可用状态</h2>
+        <div class="docs-desc">
+          <p>按钮不可用状态</p>
         </div>
-        <div class="docs-panel-row">
-          <au-button type="success" block size="default">添加</au-button>
-        </div>
-        <div class="docs-panel-row">
-          <au-button type="warning" block size="small">添加</au-button>
-        </div>
-        <div class="docs-panel-row">
-          <au-button type="danger" block size="mini">添加</au-button>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button type="primary" disabled>添加</au-button>
+            <au-button disabled>添加</au-button>
+          </div>
         </div>
       </div>
 
-      <h5>属性</h5>
-      <table class="docs-table">
-        <thead>
-          <tr>
-            <th>参数</th>
-            <th>说明</th>
-            <th>类型</th>
-            <th>默认值</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>type</td>
-            <td>按钮的样式 (可选值: primary, info, success, warning, danger, default, link)</td>
-            <td>String</td>
-            <td>'default'</td>
-          </tr>
-          <tr>
-            <td>size</td>
-            <td>按钮的大小 (可选值: large, default, small, mini)</td>
-            <td>String</td>
-            <td>'default'</td>
-          </tr>
-          <tr>
-            <td>href</td>
-            <td>按钮是否是一个链接</td>
-            <td>String</td>
-            <td>null</td>
-          </tr>
-          <tr>
-            <td>target</td>
-            <td>如果提供了href, 可指定链接的target</td>
-            <td>String</td>
-            <td>null</td>
-          </tr>
-          <tr>
-            <td>loading</td>
-            <td>是否显示加载中的图标</td>
-            <td>Boolean</td>
-            <td>false</td>
-          </tr>
-          <tr>
-            <td>disabled</td>
-            <td>是否禁用按钮</td>
-            <td>Boolean</td>
-            <td>false</td>
-          </tr>
-          <tr>
-            <td>heading-icon</td>
-            <td>显示文字前方的icon</td>
-            <td>String</td>
-            <td>null</td>
-          </tr>
-          <tr>
-            <td>trailing-icon</td>
-            <td>显示文字后方的icon</td>
-            <td>String</td>
-            <td>null</td>
-          </tr>
-          <tr>
-            <td>native-type</td>
-            <td>原生type属性</td>
-            <td>String</td>
-            <td>'button'</td>
-          </tr>
-          <tr>
-            <td>autofocus</td>
-            <td>是否自动聚焦</td>
-            <td>Boolean</td>
-            <td>false</td>
-          </tr>
-          <tr>
-            <td>block</td>
-            <td>是否显示块化按钮</td>
-            <td>Boolean</td>
-            <td>false</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div class="docs-section">
+        <h2>加载中</h2>
+        <div class="docs-desc">
+          <p>按钮不可用状态</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button :loading="true">加载中</au-button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="docs-section">
+        <h2>图标按钮</h2>
+        <div class="docs-desc">
+          <p>带图标的按钮可增强辨识度(有文字)或节省空间(无文字)</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button heading-icon="plus">添加</au-button>
+            <au-button trailing-icon="automobile">添加</au-button>
+            <au-button heading-icon="battery-three-quarters" trailing-icon="battery-three-quarters">添加</au-button>
+            <au-button type="primary" heading-icon="plus">添加</au-button>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button heading-icon="plus"></au-button>
+            <au-button trailing-icon="automobile"></au-button>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button type="primary" size="large" heading-icon="plus"></au-button>
+            <au-button type="primary" size="large" trailing-icon="automobile"></au-button>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button type="primary" size="small" heading-icon="plus"></au-button>
+            <au-button type="primary" size="mini" trailing-icon="automobile"></au-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2>按钮组</h2>
+        <div class="docs-desc">
+          <p>以按钮组的方式出现，常用于多项类似操作</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-flex column="4">
+              <au-flex-item>
+                <au-button-group>
+                  <au-button type="primary" heading-icon="plus"></au-button>
+                  <au-button type="primary" heading-icon="remove"></au-button>
+                </au-button-group>
+              </au-flex-item>
+
+              <au-flex-item>
+                <au-button-group>
+                  <au-button type="primary">按钮1</au-button>
+                  <au-button type="primary">按钮2</au-button>
+                  <au-button type="primary">按钮3</au-button>
+                </au-button-group>
+              </au-flex-item>
+
+              <au-flex-item>
+                <au-button-group>
+                  <au-button size="small" type="primary">按钮1</au-button>
+                  <au-button size="small" type="primary">按钮2</au-button>
+                  <au-button size="small" type="primary">按钮3</au-button>
+                </au-button-group>
+              </au-flex-item>
+            </au-flex>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button-group>
+              <au-button type="primary" heading-icon="plus">添加</au-button>
+              <au-button type="danger" heading-icon="remove">删除</au-button>
+            </au-button-group>
+          </div>
+
+          <div class="docs-panel-row">
+            <au-button-group>
+              <au-button type="primary" size="large">添加</au-button>
+              <au-button type="danger" size="large">删除</au-button>
+            </au-button-group>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2>块级按钮</h2>
+        <div class="docs-desc">
+          <p>带图标的按钮可增强辨识度(有文字)或节省空间(无文字)</p>
+        </div>
+        <div class="docs-panel">
+          <div class="docs-panel-row">
+            <au-button type="primary" block size="large">添加</au-button>
+          </div>
+          <div class="docs-panel-row">
+            <au-button type="success" block size="default">添加</au-button>
+          </div>
+          <div class="docs-panel-row">
+            <au-button type="warning" block size="small">添加</au-button>
+          </div>
+          <div class="docs-panel-row">
+            <au-button type="danger" block size="mini">添加</au-button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="docs-section">
+        <h2>属性</h2>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>参数</th>
+              <th>说明</th>
+              <th>类型</th>
+              <th>默认值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type</td>
+              <td>按钮的样式 (可选值: primary, info, success, warning, danger, default, link)</td>
+              <td>String</td>
+              <td>'default'</td>
+            </tr>
+            <tr>
+              <td>size</td>
+              <td>按钮的大小 (可选值: large, default, small, mini)</td>
+              <td>String</td>
+              <td>'default'</td>
+            </tr>
+            <tr>
+              <td>href</td>
+              <td>按钮是否是一个链接</td>
+              <td>String</td>
+              <td>null</td>
+            </tr>
+            <tr>
+              <td>target</td>
+              <td>如果提供了href, 可指定链接的target</td>
+              <td>String</td>
+              <td>null</td>
+            </tr>
+            <tr>
+              <td>loading</td>
+              <td>是否显示加载中的图标</td>
+              <td>Boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td>是否禁用按钮</td>
+              <td>Boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>heading-icon</td>
+              <td>显示文字前方的icon</td>
+              <td>String</td>
+              <td>null</td>
+            </tr>
+            <tr>
+              <td>trailing-icon</td>
+              <td>显示文字后方的icon</td>
+              <td>String</td>
+              <td>null</td>
+            </tr>
+            <tr>
+              <td>native-type</td>
+              <td>原生type属性</td>
+              <td>String</td>
+              <td>'button'</td>
+            </tr>
+            <tr>
+              <td>autofocus</td>
+              <td>是否自动聚焦</td>
+              <td>Boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>block</td>
+              <td>是否显示块化按钮</td>
+              <td>Boolean</td>
+              <td>false</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
     <script src="../lib/vue.js"></script>
     <script src="../src/main.js"></script>

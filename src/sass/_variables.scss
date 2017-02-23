@@ -8,15 +8,15 @@ $fontsize-large:            18px;
 // Color
 // -------------------------
 $color-primary:             #4777E6;
-$color-info:                #4777E6;
+$color-info:                #6089ec;
 $color-success:             #00D397;
 $color-warning:             #FFCC01;
 $color-danger:              #FF4E4C;
-$color-border:              #ccc;
+$color-border:              #DDDDDD;
 
 $color-black:               #000000;
 $color-grey-light:          #CCCCCC;
-$color-grey-lighter:        #EEEEEE;
+$color-grey-lighter:        #DDDDDD;
 $color-grey:                #888888;
 $color-grey-dark:           #444444;
 $color-grey-darker:         #222222;
@@ -68,3 +68,12 @@ $input-border-radius:      $border-radius;
 $input-height:             40px;
 $input-padding-x:          10px;
 $input-padding-y:          5px;
+
+// Transition
+// -------------------------
+$transition-during:        0.25s;
+
+
+// z-index
+// -------------------------
+$zindex-popup:             5000;
