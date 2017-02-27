@@ -1,0 +1,78 @@
+extends ./_layout
+
+block title
+  Radio
+
+block content
+  .docs-heading
+    h1|AuRadio
+    .docs-desc
+
+  .docs-section
+    h2|基础选择器
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        div
+          au-radio(label="男", native-value="male", v-model="form.gender")
+          au-radio(label="女", native-value="female", v-model="form.gender")
+
+        div
+          au-radio(native-value="male", v-model="form.gender")|男
+          au-radio(native-value="female", v-model="form.gender")|女
+
+  .docs-section
+    h2|禁用状态
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        div
+          au-radio(label="男", native-value="male", v-model="form.gender", disabled)
+          au-radio(label="女", native-value="female", v-model="form.gender", disabled)
+
+  .docs-section
+    h2|Radiox组
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        div
+          au-radio-group(:options="options" v-model="form.class")
+        div
+          au-radio-group(v-model="form.class")
+            au-radio(:native-value="option.value", v-for="option in options")|{{ option.label }}
+
+  .docs-section
+    h2|属性
+    au-table(:columns="attrColumns", :data="attrs")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          form: {
+            'class': '3',
+            gender: 'female'
+          },
+          options: [
+            {
+              value: '1',
+              label: '三年一班'
+            },
+            {
+              value: '2',
+              label: '三年二班'
+            },
+            {
+              value: '3',
+              label: '三年三班'
+            }
+          ]
+        }
+      }
+    })

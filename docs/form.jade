@@ -1,0 +1,64 @@
+extends ./_layout
+
+block title
+  Form
+
+block content
+  .docs-heading
+    h1|Form
+    .docs-desc
+
+  .docs-section
+    h2
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-flex(gutter="20")
+          au-flex-item(style="width: 600px;")
+            au-form
+              au-form-group(label="姓名")
+                au-input(v-model="form.name", placeholder="请输入姓名")
+              au-form-group(label="性别")
+                au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
+              au-form-group(label="班级")
+                au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class")
+                &nbsp;
+                au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class")
+              au-form-group(label="描述")
+                au-input(type="textarea", v-model="form.desc", rows="5")
+              au-form-group()
+                au-checkbox(v-model="form.confirm", label="我同意账户协议")
+
+              au-form-group
+                au-button(type="primary")|提交
+                &nbsp;
+                au-button(type="default")|重置
+          au-flex-item
+            {{ form }}
+
+
+
+  .docs-section
+    h2|属性
+    au-table(:columns="attrColumns", :data="attrs")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          form: {
+            name: '',
+            gender: '1',
+            class: '',
+            desc: '',
+            confirm: false
+          },
+          attrs: [
+          ]
+        }
+      }
+    })

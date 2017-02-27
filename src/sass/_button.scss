@@ -15,6 +15,7 @@
 
   &[disabled] {
     cursor: not-allowed;
+    transform: scale(1) !important;
   }
 }
 
@@ -194,6 +195,30 @@
   margin-left: 5px;
 }
 
+
+.au-button-icon {
+  padding: $button-padding-y-default !important;
+  width: $button-height-default;
+  height: $button-height-default;
+
+  &.au-button-large {
+    padding: $button-padding-y-large !important;
+    width: $button-height-large;
+    height: $button-height-large;
+  }
+
+  &.au-button-small {
+    padding: $button-padding-y-small !important;
+    width: $button-height-small;
+    height: $button-height-small;
+  }
+
+  &.au-button-mini {
+    padding: $button-padding-y-mini !important;
+    width: $button-height-mini;
+    height: $button-height-mini;
+  }
+}
 
 // button-group
 // -------------------------

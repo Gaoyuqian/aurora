@@ -134,14 +134,14 @@ const AuSelect = Vue.extend({
       showingSelectOption = this
 
       this.optionsElem.show()
-      document.body.addEventListener('click', this.hideOptions)
+      window.addEventListener('click', this.hideOptions)
 
       this.active = true
     },
     hideOptions () {
       showingSelectOption = null
       this.optionsElem.hide()
-      document.body.removeEventListener('click', this.hideOptions)
+      window.removeEventListener('click', this.hideOptions)
 
       this.active = false
     },

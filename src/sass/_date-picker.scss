@@ -1,0 +1,79 @@
+.au-date-picker-panel {
+  width: 300px;
+  background-color: #fff;
+}
+
+.au-date-picker-title-bar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  font-size: $fontsize-default;
+}
+
+.au-date-picker-button {
+  width: 20px;
+  height: 20px;
+  @include flex-center-center();
+  cursor: pointer;
+  margin: 0 4px;
+
+  &:hover {
+    background-color: $color-grey-lighter;
+  }
+}
+
+.au-date-picker-text {
+  flex: 1;
+  @include flex-center-center();
+}
+
+.au-date-picker-content {
+  padding: 10px;
+}
+
+// Table
+// --------------------
+
+.au-date-picker-table {
+
+}
+
+.au-date-picker-table-heading,
+.au-date-picker-table-row {
+  display: flex;
+}
+
+.au-date-picker-table-heading .au-date-picker-table-item {
+  color: $color-black;
+  font-weight: bold;
+}
+
+.au-date-picker-table-content .au-date-picker-table-item {
+  cursor: pointer;
+  color: $color-grey-dark;
+
+  &:hover {
+    background-color: $color-grey-lighter;
+    &.au-text-grey {
+      background-color: transparent;
+    }
+  }
+}
+
+.au-date-picker-table-item {
+  flex: 1;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: $fontsize-small;
+
+  &.au-text-grey {
+    color: $color-grey-lighter;
+  }
+
+  &.au-text-today {
+    background-color: $color-primary !important;
+    color: #fff !important;
+  }
+}

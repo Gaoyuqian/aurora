@@ -1,0 +1,43 @@
+extends ./_layout
+
+block title
+  Modal
+
+block content
+  .docs-heading
+    h1|AuModal
+    .docs-desc
+
+  .docs-section
+    h2|基础Modal
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-button(type="primary", size="small", @click="isShow = true")|显示
+        au-modal(label="新页面", v-model="isShow")
+          div|哈哈
+          div(slot="footer")
+            au-button(type="primary", size="small")|提交
+            au-button(type="default", size="small", @click="isShow = false")|取消
+
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'column',
+              desc: '列信息',
+              type: 'Array',
+              default: 'null'
+            }
+          ],
+          isShow: false
+        }
+      }
+    })

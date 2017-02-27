@@ -1,0 +1,13 @@
+div.au-panel
+  .au-panel-heading
+    .au-panel-heading-left
+      .au-panel-label
+        au-icon(:icon="icon", v-if="icon")
+        |{{ label }}
+        slot(name="heading-right")
+
+  .au-panel-content
+    slot
+
+  .au-panel-footer
+    slot(name="footer")

@@ -14,35 +14,38 @@ block content
 
     .docs-panel
       .docs-panel-row
-        |-{{form.isConfirm}}-
-        br
         au-checkbox(label="是否同意", v-model="form.isConfirm")
-        div(v-if="form.isConfirm")|yes
-        div(v-else)|no
+
   .docs-section
     h2|基础Checkbox
     .docs-desc
       p|基础Checkbox的用法
     .docs-panel
       .docs-panel-row
-        |-{{form.genders}}-
-        br
         au-checkbox(label="男", native-value="1", v-model="form.genders")
         au-checkbox(label="女", native-value="2", v-model="form.genders")
+
+  .docs-section
+    h2|禁用Checkbox
+    .docs-desc
+      p|禁用Checkbox的用法
+    .docs-panel
+      .docs-panel-row
+        au-checkbox(label="男", native-value="1", v-model="form.genders", disabled)
+        au-checkbox(label="女", native-value="2", v-model="form.genders", disabled)
 
   .docs-section
     h2|Checkbox Group
     .docs-desc
     .docs-panel
       .docs-panel-row
-        // |-{{form.cities}}-
         au-checkbox-group(:options="cityOptions", v-model="form.cities")
+
   .docs-section
-    h2|Checkbox Group
+    h2|全选
     .docs-desc
     .docs-panel
       .docs-panel-row
-        // |-{{form.all}}-
         au-checkbox(label="全选", :indeterminate="indeterminate", v-model="checkAll")
         au-checkbox-group(:options="cityOptions", v-model="form.cities")
 

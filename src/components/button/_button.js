@@ -25,6 +25,10 @@ Vue.component('au-button', {
       type: Boolean,
       default: false
     },
+    icon: {
+      type: String,
+      default: null
+    },
     headingIcon: {
       type: String,
       default: null
@@ -45,7 +49,7 @@ Vue.component('au-button', {
       type: Boolean,
       default: false
     },
-    clickDisabled: {
+    disableOnClick: {
       type: Boolean,
       default: false
     }
@@ -66,6 +70,10 @@ Vue.component('au-button', {
         obj.push(`au-button-${this.type}`)
       }
 
+      if (this.icon) {
+        obj.push(`au-button-icon`)
+      }
+
       return obj
     }
   },
@@ -82,46 +90,70 @@ Vue.component('au-button', {
       }))
     }
 
-    if (this.headingIcon != null) {
+    if (this.icon != null) {
       child.push(h('au-icon', {
-        'class': 'au-button-heading-icon',
         props: {
           size: this.size,
-          icon: this.headingIcon
+          icon: this.icon
         }
       }))
-    }
+    } else {
+      if (this.headingIcon != null) {
+        child.push(h('au-icon', {
+          'class': 'au-button-heading-icon',
+          props: {
+            size: this.size,
+            icon: this.headingIcon
+          }
+        }))
+      }
 
-    child.push(this.$slots.default)
+      child.push(this.$slots.default)
 
-    if (this.trailingIcon != null) {
-      child.push(h('au-icon', {
-        'class': 'au-button-trailing-icon',
-        props: {
-          size: this.size,
-          icon: this.trailingIcon
-        }
-      }))
+      if (this.trailingIcon != null) {
+        child.push(h('au-icon', {
+          'class': 'au-button-trailing-icon',
+          props: {
+            size: this.size,
+            icon: this.trailingIcon
+          }
+        }))
+      }
     }
 
     if (this.href != null) {
       return h(
-        'a',
+        'au-active-transition',
         {
-          'class': this.classObj,
-          attrs: {
-            href: this.href,
-            target: this.target
-          },
-          on: {
-            click: this.clickHandler
+          props: {
+            disabled: this.disabled
           }
         },
-        child
+        [
+          h(
+            'a',
+            {
+              'class': this.classObj,
+              attrs: {
+                href: this.href,
+                target: this.target
+              },
+              on: {
+                click: this.clickHandler
+              }
+            },
+            child
+          )
+        ]
       )
     } else {
       return h(
         'au-active-transition',
+        {
+          props: {
+            disabled: this.disabled
+          }
+        },
         [
           h(
             'button',
@@ -145,7 +177,11 @@ Vue.component('au-button', {
     clickHandler () {
       this.$el.blur();
 
-      if (this.clickDisabled) {
+      if (this.disabled) {
+        return
+      }
+
+      if (this.disableOnClick) {
         this.disabled = true
       }
       this.$emit('click', (this.enable))

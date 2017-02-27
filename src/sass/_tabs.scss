@@ -1,0 +1,37 @@
+.au-tabs {
+
+}
+
+.au-tabs-heading {
+  display: flex;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid $color-border;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.au-tab-item {
+  padding: 10px 20px;
+  font-size: $fontsize-default;
+  transition: all $transition-during;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  &.active {
+    color: $color-primary;
+  }
+}
+
+.au-tabs-heading-active-line {
+  position: absolute;
+  bottom: -1px;
+  height: 3px;
+  background-color: $color-primary;
+  transition-property: left, width;
+  transition-duration: $transition-during;
+}
+
+.au-tabs-content {
+  padding: 10px 0;
+}

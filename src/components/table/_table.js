@@ -25,17 +25,17 @@ Vue.component('au-table', {
       }, label)
     })
 
-    const $slot = this.$slots.default
+    // const $slot = this.$slots.default
 
-    if ($slot) {
-      $slot.forEach((vnode) => {
-        if (vnode.componentOptions.Ctor === TableColumn) {
-          heads.push('th', {
+    /* if ($slot) {
+     *   $slot.forEach((vnode) => {
+     *     if (vnode.componentOptions.Ctor === TableColumn) {
+     *       heads.push('th', {
 
-          })
-        }
-      })
-    }
+     *       })
+     *     }
+     *   })
+     * } */
 
     const rows = this.data.map((row) => {
       const tds = this.columns.map((column) => {

@@ -16,6 +16,14 @@
       border-color: $color-primary;
     }
   }
+
+  &.disabled {
+    color: $color-grey-light;
+    .au-checkbox-mark {
+      border-color: $color-grey-light;
+      color: $color-grey-light;
+    }
+  }
 }
 
 .au-checkbox-mark {
@@ -36,10 +44,20 @@
   flex: 1;
 }
 
-.au-checkbox-mark-enter, .au-checkbox-mark-leave {
+.au-checkbox-mark-enter {
+  transform: scale(0.1);
+}
+
+.au-checkbox-mark-enter-to {
+  transform: scale(1);
+  transition: all 0.15s;
+}
+
+.au-checkbox-mark-leave {
   transform: scale(1);
 }
 
-.au-checkbox-mark-enter-active, .au-checkbox-mark-leave-active {
+.au-checkbox-mark-leave-to {
   transform: scale(0.1);
+  transition: all 0.15s;
 }

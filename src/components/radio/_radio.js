@@ -5,7 +5,11 @@ const AuRadio = Vue.extend({
   props: {
     value: [String, Number],
     nativeValue: [String, Number],
-    label: String
+    label: String,
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     checked () {
@@ -29,6 +33,10 @@ const AuRadio = Vue.extend({
   },
   methods: {
     clickHandler () {
+      if (this.disabled) {
+        return
+      }
+
       this.model = this.nativeValue
     }
   }

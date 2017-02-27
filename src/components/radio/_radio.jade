@@ -1,5 +1,5 @@
 .au-radio-wrap
-  .au-radio(:class="{ checked: checked }",  @click="clickHandler")
+  .au-radio(:class="{ checked: checked, disabled: disabled }",  @click="clickHandler")
     .au-radio-mark
       transition(name="au-checkbox-mark")
         .au-radio-mark-inner(v-if="checked")

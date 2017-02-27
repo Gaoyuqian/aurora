@@ -18,6 +18,11 @@ body {
 
 a {
   text-decoration: none;
+  color: $color-primary;
+
+  &:hover {
+    color: darken($color-primary, 5%);
+  }
 }
 
 a, button, input, select, textarea {

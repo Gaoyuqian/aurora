@@ -12,6 +12,10 @@ const AuCheckbox = Vue.extend({
     indeterminate: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   created () {
@@ -28,6 +32,10 @@ const AuCheckbox = Vue.extend({
   },
   methods: {
     clickHandler ($event) {
+      if (this.disabled) {
+        return
+      }
+
       if (Array.isArray(this.value)) {
         const value = this.value.slice()
         const pos = value.indexOf(this.nativeValue)

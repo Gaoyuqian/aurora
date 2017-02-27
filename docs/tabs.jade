@@ -1,0 +1,58 @@
+extends ./_layout
+
+block title
+  Tabs
+
+block content
+  .docs-heading
+    h1|AuTabs
+    .docs-desc
+
+  .docs-section
+    h2
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-tabs
+          au-tab-panel(tab="哈哈", value="1")
+            哈哈
+
+          au-tab-panel(tab="呵呵呵呵呵呵", value="2")
+            呵呵呵呵呵呵1
+
+          au-tab-panel(tab="呵呵呵呵呵呵", value="3")
+            呵呵呵呵呵呵2
+
+          au-tab-panel(tab="呵呵呵呵呵呵", value="4")
+            呵呵呵呵呵呵3
+          au-tab-panel(tab="呵呵呵呵呵呵", value="5")
+            呵呵呵呵呵呵4
+          au-tab-panel(tab="呵呵呵呵呵呵", value="6")
+            呵呵呵呵呵呵5
+          au-tab-panel(tab="呵呵呵呵呵呵", value="7")
+            呵呵呵呵呵呵6
+          au-tab-panel(tab="呵呵呵呵呵呵", value="8")
+            呵呵呵呵呵呵7
+          au-tab-panel(tab="呵呵呵呵呵呵", value="9")
+            呵呵呵呵呵呵8
+          au-tab-panel(tab="呵呵呵呵呵呵", value="10")
+            呵呵呵呵呵呵8
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: '',
+              desc: '',
+              type: '',
+              default: ''
+            }
+          ]
+        }
+      }
+    })

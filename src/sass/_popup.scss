@@ -5,13 +5,24 @@
   overflow: auto;
 }
 
-.fade-enter-active, .fade-leave-active {
-  opacity: 1;
+.fade-enter {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.fade-enter-to {
   transform: translateY(0);
+  opacity: 1;
   transition: transform $transition-during, opacity $transition-during;
 }
 
-.fade-enter, .fade-leave-active {
+.fade-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.fade-leave-to {
   transform: translateY(-10px);
   opacity: 0;
+  transition: transform $transition-during, opacity $transition-during;
 }

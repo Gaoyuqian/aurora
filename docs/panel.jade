@@ -1,0 +1,38 @@
+extends ./_layout
+
+block title
+  Panel
+
+block content
+  .docs-heading
+    h1|AuPanel
+    .docs-desc
+
+  .docs-section
+    h2|基础Panel
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-panel(label="新页面", icon="fax")
+          div|哈哈
+
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'column',
+              desc: '列信息',
+              type: 'Array',
+              default: 'null'
+            }
+          ],
+        }
+      }
+    })

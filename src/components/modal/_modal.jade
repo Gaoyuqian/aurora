@@ -1,0 +1,18 @@
+transition(name="au-modal-wrap")
+  .au-modal-mask(v-if="value")
+    .au-modal(v-if="value")
+      .au-modal-heading
+        .au-modal-heading-left
+          .au-modal-label
+            au-icon(:icon="icon", v-if="icon")
+            |{{ label }}
+
+        .au-modal-heading-right
+          div.au-modal-close(@click="closeHandler")
+            au-icon(icon="close")
+
+      .au-modal-content
+        slot
+
+      .au-modal-footer
+        slot(name="footer")
