@@ -1,4 +1,5 @@
 const PADDING = 10
+var showingPopup = null
 
 const AuPopup = Vue.extend({
   template: require('./_popup.jade'),
@@ -77,9 +78,14 @@ const AuPopup = Vue.extend({
       this.left = `${left}px`
     },
     show () {
+      if (showingPopup) {
+        showingPopup.hide()
+        showingPopup = null
+      }
       if (this.relateElem == null) {
         return
       }
+      showingPopup = this
       this.initPosition()
       this.isShow = true
       this.$nextTick(() => {
@@ -87,11 +93,15 @@ const AuPopup = Vue.extend({
       })
       window.addEventListener('resize', this.calPosition)
       window.addEventListener('scroll', this.calPosition)
+      window.addEventListener('click', this.hide)
+      this.$emit('show')
     },
     hide () {
       this.isShow = false
       window.removeEventListener('resize', this.calPosition)
       window.removeEventListener('scroll', this.calPosition)
+      window.removeEventListener('click', this.hide)
+      this.$emit('hide')
     }
   }
 })

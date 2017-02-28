@@ -1,7 +1,5 @@
 import Popup from '../popup/_popup.js'
 
-var showingSelectOption;
-
 const AuSelect = Vue.extend({
   template: require('./_select.jade'),
   components: {
@@ -125,25 +123,20 @@ const AuSelect = Vue.extend({
         this.optionsElem = this.$refs.popup
         this.optionsElem.setRelateElem(this.$el)
         document.body.appendChild(this.optionsElem.$el)
+        this.optionsElem.$on('show', () => {
+          console.log('onshow')
+          this.active = true
+        })
+        this.optionsElem.$on('hide', () => {
+          console.log('onhide')
+          this.active = false
+        })
       }
-
-      if (showingSelectOption) {
-        showingSelectOption.hideOptions()
-      }
-
-      showingSelectOption = this
 
       this.optionsElem.show()
-      window.addEventListener('click', this.hideOptions)
-
-      this.active = true
     },
     hideOptions () {
-      showingSelectOption = null
       this.optionsElem.hide()
-      window.removeEventListener('click', this.hideOptions)
-
-      this.active = false
     },
     setOptionActive () {
       var child

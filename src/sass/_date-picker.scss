@@ -32,12 +32,33 @@
   padding: 10px;
 }
 
+.au-date-picker-item {
+  cursor: pointer;
+  color: $color-grey-dark;
+  text-align: center;
+  font-size: $fontsize-small;
+
+  &:hover {
+    background-color: $color-grey-lighter;
+    &.au-text-grey {
+      background-color: transparent;
+    }
+  }
+
+  &.au-text-grey {
+    color: $color-grey-lighter;
+  }
+
+  &.au-text-current {
+    background-color: $color-primary !important;
+    color: #fff !important;
+  }
+}
+
 // Table
 // --------------------
 
-.au-date-picker-table {
-
-}
+.au-date-picker-table {}
 
 .au-date-picker-table-heading,
 .au-date-picker-table-row {
@@ -47,33 +68,71 @@
 .au-date-picker-table-heading .au-date-picker-table-item {
   color: $color-black;
   font-weight: bold;
+  text-align: center;
+  font-size: $fontsize-small;
 }
 
 .au-date-picker-table-content .au-date-picker-table-item {
-  cursor: pointer;
-  color: $color-grey-dark;
 
-  &:hover {
-    background-color: $color-grey-lighter;
-    &.au-text-grey {
-      background-color: transparent;
-    }
-  }
 }
 
 .au-date-picker-table-item {
   flex: 1;
   height: 30px;
   line-height: 30px;
+}
+
+.au-date-picker-text-button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+// Year
+.au-year-picker-panel {
+  background-color: #fff;
+}
+
+.au-year-picker-list {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.au-date-picker-item {
+  width: 25%;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
-  font-size: $fontsize-small;
+}
 
-  &.au-text-grey {
-    color: $color-grey-lighter;
-  }
+// Month
+.au-month-picker-panel {
+  background-color: #fff;
+  width: 300px;
+}
 
-  &.au-text-today {
-    background-color: $color-primary !important;
-    color: #fff !important;
+.au-month-picker-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.au-month-picker-item {
+  width: 33.33333333%;
+}
+
+.au-date-picker-range-panel {
+  display: flex;
+  width: 600px;
+
+  .au-date-picker-content {
+    flex: 1;
   }
+}
+
+.au-date-picker-range-panel {
+  background-color: #fff;
+}
+
+.au-date-picker-hidden {
+  visibility: hidden !important;
 }

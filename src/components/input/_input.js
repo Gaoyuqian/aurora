@@ -10,15 +10,26 @@ const AuInput = Vue.extend({
     name: String,
     placeholder: String,
     value: String,
+    readonly: {
+      type: Boolean,
+      default: false
+    },
     rows: [String, Number],
     cols: [String, Number],
+    active: {
+      type: Boolean,
+      default: false
+    }
   },
   render (h) {
     if (this.type === 'text') {
       return h(
         'input',
         {
-          'class': 'au-input',
+          'class': {
+            'au-input': true,
+            'active': this.active
+          },
           attrs: {
             type: 'text',
             placeholder: this.placeholder
@@ -31,7 +42,8 @@ const AuInput = Vue.extend({
             }
           },
           domProps: {
-            value: this.value
+            value: this.value,
+            readOnly: this.readonly
           }
         }
       )
@@ -39,7 +51,10 @@ const AuInput = Vue.extend({
       return h(
         'textarea',
         {
-          'class': 'au-input',
+          'class': {
+            'au-input': true,
+            'active': this.active
+          },
           attrs: {
             type: 'text',
             placeholder: this.placeholder,
@@ -54,7 +69,8 @@ const AuInput = Vue.extend({
             }
           },
           domProps: {
-            value: this.value
+            value: this.value,
+            readOnly: this.readonly
           }
         }
       )

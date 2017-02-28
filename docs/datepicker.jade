@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  DatePicker
+  |DatePicker
 
 block content
   .docs-heading
@@ -14,7 +14,15 @@ block content
 
     .docs-panel
       .docs-panel-row
-        au-date-picker(v-model="date", format="yyyy-mm-dd")
+        au-date-picker(v-model="date")
+      .docs-panel-row
+        au-date-picker(v-model="year", type="year")
+
+      .docs-panel-row
+        au-date-picker(v-model="month", type="month")
+
+      .docs-panel-row
+        au-date-picker(v-model="dateRange", type="daterange")
 
 block script
   script.
@@ -24,6 +32,9 @@ block script
       data () {
         return {
           date: '2017-02-27',
+          year: '2017-02-27',
+          month: '2017-02',
+          dateRange: ['2017-02-07', '2017-02-07'],
           attrs: [
             {
               name: '',

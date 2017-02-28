@@ -1,33 +1,4 @@
-div.au-date-picker-panel
-  div.au-date-picker-title-bar
-    .au-date-picker-button(@click="prevYear")
-      au-icon(icon="angle-double-left")
-    .au-date-picker-button(@click="prevMonth")
-      au-icon(icon="angle-left")
-
-    .au-date-picker-text
-      |{{ year }}-{{ month }}
-
-    .au-date-picker-button(@click="nextMonth")
-      au-icon(icon="angle-right")
-
-    .au-date-picker-button(@click="nextYear")
-      au-icon(icon="angle-double-right")
-
-  div.au-date-picker-content
-    .au-date-picker-table
-      .au-date-picker-table-heading
-        .au-date-picker-table-item|日
-        .au-date-picker-table-item|一
-        .au-date-picker-table-item|二
-        .au-date-picker-table-item|三
-        .au-date-picker-table-item|四
-        .au-date-picker-table-item|五
-        .au-date-picker-table-item|六
-      .au-date-picker-table-content
-        .au-date-picker-table-row(v-for="row in days")
-          .au-date-picker-table-item(
-            v-for="day in row",
-            :class="{'au-text-grey': !day.isCurrentMonth, 'au-text-today': day.isCurrentMonth && day.isCurrentDate}",
-            @click="clickItem(day.value)"
-          )|{{ day.date }}
+.au-date-picker-panel
+  au-year-picker-content(v-model="tempValue", ref="yearContent", v-show="type == 'year'")
+  au-month-picker-content(v-model="tempValue", ref="monthContent", v-show="type == 'month'")
+  au-date-picker-content(v-model="tempValue", ref="dateContent", v-show="type == 'date'")

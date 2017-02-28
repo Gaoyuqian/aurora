@@ -7,7 +7,7 @@
   transition-duration: 0.3s;
   color: #333;
 
-  &:focus {
+  &:focus, &.active {
     border-color: $color-primary;
   }
 

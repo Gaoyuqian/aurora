@@ -1,4 +1,3 @@
 div.au-date-picker
-  au-input(v-model="datetime", @focus="showPopup", @click.native="clickHandler")
+  au-input(v-model="datetime", @focus="showPopup", @click.native="clickHandler", readonly, :active="inputActive")
   popup(ref="popup")
-    au-date-picker-panel(v-model="model", ref="panel")

@@ -1,20 +1,21 @@
-const ONE_DAY = 24 * 60 * 60 * 1000
+import AuYearPickerContent from './_year-picker-content.js'
+import AuMonthPickerContent from './_month-picker-content.js'
+import AuDatePickerContent from './_date-picker-content.js'
 
-const AuDatePickerPopup = Vue.extend({
+const AuDatePickerPanel = Vue.extend({
   template: require('./_date-picker-panel.jade'),
+  components: {
+    AuYearPickerContent,
+    AuMonthPickerContent,
+    AuDatePickerContent
+  },
   props: {
-    value: Date,
-    default () {
-      return new Date()
+    value: {
+      type: Date,
+      default () {
+        return new Date()
+      }
     }
-  },
-  data () {
-    return {
-      currentDate: ''
-    }
-  },
-  created () {
-    this.reset()
   },
   computed: {
     model: {
@@ -22,89 +23,67 @@ const AuDatePickerPopup = Vue.extend({
         return this.value
       },
       set (value) {
-        if (typeof value === 'number') {
-          value = new Date(value)
-        }
         this.$emit('input', value)
       }
-    },
-    year () {
-      return this.currentDate.getFullYear()
-    },
-    month () {
-      return this.currentDate.getMonth() + 1
-    },
-    days () {
-      var value = new Date(this.currentDate)
-      var currentMonth = value.getMonth()
-      var i, j
-
-      value.setDate(1)
-
-      var week = value.getDay() // 周几 0表示周日
-      value = new Date(+value - ONE_DAY * week)
-      var days = [] // this.days对象
-
-      for (i = 0; i < 6; i++) {
-        days.push([])
-
-        for (j = 0; j < 7; j++) {
-          days[i].push(this.getDay(value, currentMonth === value.getMonth()))
-          value = new Date(+value + ONE_DAY)
-        }
-      }
-
-      return days
     }
+  },
+  data () {
+    return {
+      tempValue: new Date(this.value),
+      type: 'date'
+    }
+  },
+  mounted () {
+    this.$refs.monthContent.$on('showYearPanel', () => {
+      this.type = 'year'
+      this.$refs.yearContent.reset()
+    })
+
+    this.$refs.dateContent.$on('showYearPanel', () => {
+      this.type = 'year'
+      this.$refs.yearContent.reset()
+    })
+
+    this.$refs.dateContent.$on('showMonthPanel', () => {
+      this.type = 'month'
+      this.$refs.monthContent.reset()
+    })
+
+    this.$refs.yearContent.$on('change', (value) => {
+      this.tempValue = value
+      this.type = 'month'
+      this.$refs.monthContent.reset()
+    })
+
+    this.$refs.monthContent.$on('change', (value) => {
+      this.tempValue = value
+      this.type = 'date'
+      this.$refs.dateContent.reset()
+    })
+
+    this.$refs.monthContent.$on('change.temp', (value) => {
+      this.tempValue = value
+    })
+
+    this.$refs.dateContent.$on('change', (value) => {
+      this.model = value
+    })
+
+    this.$refs.dateContent.$on('change.temp', (value) => {
+      this.tempValue = value
+    })
+
   },
   methods: {
     reset () {
-      this.currentDate = new Date(this.value)
-    },
-    clickItem (value) {
-      this.model = value
-    },
-    prevYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() - 1)
-      this.currentDate = new Date(this.currentDate)
-    },
-    prevMonth () {
-      this.currentDate.setMonth(this.currentDate.getMonth() - 1)
-      this.currentDate = new Date(this.currentDate)
-    },
-    nextYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() + 1)
-      this.currentDate = new Date(this.currentDate)
-    },
-    nextMonth () {
-      this.currentDate.setMonth(this.currentDate.getMonth() + 1)
-      this.currentDate = new Date(this.currentDate)
-    },
-    getDay (value, isCurrentMonth) {
-      return {
-        value,
-        isCurrentMonth,
-        date: value.getDate(),
-        month: value.getMonth() + 1,
-        isToday: this.isToday(value),
-        isCurrentDate: this.isCurrentDate(value)
-      }
-    },
-    isToday (date) {
-      const today = new Date()
-      return date.getFullYear() === today.getFullYear()
-          && date.getMonth() === today.getMonth()
-          && date.getDate() === today.getDate()
-    },
-    isCurrentDate (date) {
-      const curDate = this.model
-      return date.getFullYear() === curDate.getFullYear()
-          && date.getMonth() === curDate.getMonth()
-          && date.getDate() === curDate.getDate()
+      this.tempValue = new Date(this.value),
+      this.type = 'date'
+      this.$refs.yearContent.reset()
+      this.$refs.monthContent.reset()
+      this.$refs.dateContent.reset()
     }
   }
 })
 
-Vue.component('au-date-picker-popup', AuDatePickerPopup)
 
-export default AuDatePickerPopup
+export default AuDatePickerPanel
