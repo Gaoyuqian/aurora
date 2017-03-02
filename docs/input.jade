@@ -1,0 +1,76 @@
+extends ./_layout
+
+block title
+  Input
+
+block content
+  .docs-heading
+    h1|AuInput
+    .docs-desc
+
+  .docs-section
+    h2|Text
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-input(
+          v-model="form.value",
+          name="name",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+
+        au-input(
+          disabled,
+          v-model="form.value",
+          name="name",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+
+  .docs-section
+    h2|Textarea
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-input(
+          type="textarea",
+          v-model="form.value",
+          name="name",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur",
+          rows="10",
+          cols="100"
+        )
+
+
+  .docs-section
+    h2|属性
+    au-table(:columns="attrColumns", :data="attrs")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          form: {
+            value: 'hello world'
+          }
+        }
+      },
+      methods: {
+        onFocus ($event) {
+          console.log($event)
+        },
+        onBlur ($event) {
+          console.log($event)
+        }
+      }
+    })

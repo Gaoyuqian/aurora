@@ -6,4 +6,4 @@ div.au-option(
     |{{label}}
   div(v-else)
     slot
-  au-icon(icon="check")
+  au-icon(icon="check", v-if="showCheck")

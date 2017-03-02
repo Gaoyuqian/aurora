@@ -9,30 +9,46 @@
   display: flex;
   align-items: center;
   font-size: $fontsize-default;
+  color: $color-black-light-extra;
 
-  &.checked {
-    color: $color-primary;
+  &:hover {
     .au-checkbox-mark {
       border-color: $color-primary;
     }
   }
 
-  &.disabled {
-    color: $color-grey-light;
+  &.checked {
     .au-checkbox-mark {
-      border-color: $color-grey-light;
-      color: $color-grey-light;
+      border-color: $color-primary;
+      background-color: $color-primary;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: $color-gray;
+    .au-checkbox-mark {
+      background-color: $color-white-dark;
+      border-color: $color-gray-light-extra;
+    }
+
+    &.checked {
+      .au-checkbox-mark {
+        background-color: $color-gray-light-extra;
+      }
     }
   }
 }
 
 .au-checkbox-mark {
-  border: 1px solid $color-grey;
+  border: 1px solid $color-gray-light-extra;
   width: 16px;
   height: 16px;
-  margin-right: 5px;
+  margin-right: 4px;
   overflow: hidden;
   @include flex-center-center();
+  transition: border-color $transition-during;
+  color: $color-white;
 
   .au-icon {
     font-size: $fontsize-small;

@@ -25,6 +25,10 @@ const AuYearPickerPanel = Vue.extend({
     this.$refs.yearContent.$on('change', (value) => {
       this.model = value
     })
+
+    this.$refs.yearContent.$on('change.temp', (value) => {
+      this.$emit('change.temp', value)
+    })
   },
   methods: {
     reset () {

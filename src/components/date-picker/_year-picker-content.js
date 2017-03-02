@@ -8,7 +8,7 @@ const AuYearPickerContent = Vue.extend({
   },
   data () {
     return {
-      currentDate: new Date(this.value)
+      tempValue: new Date(this.value)
     }
   },
   created () {
@@ -27,7 +27,7 @@ const AuYearPickerContent = Vue.extend({
       return this.model.getFullYear()
     },
     startYear () {
-      var value = new Date(this.currentDate)
+      var value = new Date(this.tempValue)
       return Math.floor(value.getFullYear() / 10) * 10
     },
     endYear () {
@@ -46,7 +46,7 @@ const AuYearPickerContent = Vue.extend({
   },
   methods: {
     reset () {
-      this.currentDate = new Date(this.value)
+      this.tempValue = new Date(this.value)
     },
     setYear (year) {
       const value = new Date(this.model)
@@ -54,12 +54,14 @@ const AuYearPickerContent = Vue.extend({
       this.model = value
     },
     prevTenYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() - 10)
-      this.currentDate = new Date(this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() - 10)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     nextTenYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() + 10)
-      this.currentDate = new Date(this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() + 10)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     }
   }
 })

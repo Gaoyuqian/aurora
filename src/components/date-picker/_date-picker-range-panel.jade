@@ -1,3 +1,3 @@
 .au-date-picker-range-panel
-  au-date-picker-content(v-model="leftValue", ref="leftContent", range="left")
-  au-date-picker-content(v-model="rightValue", ref="rightContent",  range="right")
+  au-date-picker-panel(v-model="leftValue", ref="leftContent", :range="tempValue", leftRange)
+  au-date-picker-panel(v-model="rightValue", ref="rightContent", :range="tempValue", rightRange)

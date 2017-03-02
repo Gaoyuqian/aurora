@@ -1,6 +1,6 @@
 div.au-select(
   @click="clickHandler",
-  :class="{ active: active }"
+  :class="{ active: active, 'disabled': disabled }"
 )
   .au-select-inner
     .au-select-text(v-if="text")
@@ -13,15 +13,17 @@ div.au-select(
         |{{ s.label }}
         au-icon(icon="close", @click.native="removeValueHandler($event, s.value)")
 
-    i.fa.fa-chevron-down(aria-hidden="true")
+    au-icon(icon="caret-down")
 
   popup(
     ref="popup"
   )
-    au-option(
-      v-if="options != null",
-      v-for="option in options",
-      :label="option.label",
-      :value="option.value"
-    )
-    slot(v-if="options == null")
+    .au-options
+      au-option(
+        v-if="options != null",
+        v-for="option in options",
+        :label="option.label",
+        :value="option.value",
+        :showCheck="mutiple"
+      )
+      slot(v-if="options == null")

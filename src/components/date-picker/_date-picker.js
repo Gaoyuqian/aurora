@@ -44,7 +44,11 @@ const AuDatePicker = Vue.extend({
         }
       },
       set (value) {
-        value = this.getFormatDatetime(value)
+        if (this.type === 'daterange') {
+          value = value.map(this.getFormatDatetime)
+        } else {
+          value = this.getFormatDatetime(value)
+        }
         this.$emit('input', value)
       }
     }
@@ -54,16 +58,22 @@ const AuDatePicker = Vue.extend({
       tempValue: new Date(this.value),
       popup: null,
       panel: null,
-      datetime: this.getFormatDatetime(this.value),
+      datetime: '',
       inputActive: false
     }
   },
+  created () {
+    this.setDatetime(this.value)
+  },
   methods: {
+    setDatetime (value) {
+      this.datetime = this.getFormatDatetime(value)
+    },
     getFormatDatetime (value) {
       if (Array.isArray(value)) {
         return value.map((item) => {
           return this.getFormatDatetime(item)
-        }).join(' ')
+        }).join('~')
       }
       return dateFormat(value, this.format)
     },
@@ -90,6 +100,11 @@ const AuDatePicker = Vue.extend({
     },
     clickHandler ($event) {
       $event.stopPropagation()
+      if (this.$refs.popup.isShow) {
+        this.hidePopup()
+      } else {
+        this.showPopup()
+      }
     },
     showPopup () {
       this.reset()
@@ -133,7 +148,7 @@ const AuDatePicker = Vue.extend({
   },
   watch: {
     value (value) {
-      this.datetime = value
+      this.setDatetime(value)
     }
   }
 })

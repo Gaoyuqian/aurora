@@ -1,8 +1,8 @@
 div.au-date-picker-content
   div.au-date-picker-title-bar
-    .au-date-picker-button(:class="{'au-date-picker-hidden': range == 'right'}", @click="prevYear")
+    .au-date-picker-button(:class="{'au-date-picker-hidden': rightRange}", @click="prevYear")
       au-icon(icon="angle-double-left")
-    .au-date-picker-button(:class="{'au-date-picker-hidden': range == 'right'}", @click="prevMonth")
+    .au-date-picker-button(:class="{'au-date-picker-hidden': rightRange}", @click="prevMonth")
       au-icon(icon="angle-left")
 
     .au-date-picker-text
@@ -10,10 +10,10 @@ div.au-date-picker-content
       |&nbsp;-&nbsp;
       span(:class="{'au-date-picker-text-button': range == null}", @click="showMonthPanel")|{{ month }}月
 
-    .au-date-picker-button(:class="{'au-date-picker-hidden': range == 'left'}", @click="nextMonth")
+    .au-date-picker-button(:class="{'au-date-picker-hidden': leftRange}", @click="nextMonth")
       au-icon(icon="angle-right")
 
-    .au-date-picker-button(:class="{'au-date-picker-hidden': range == 'left'}", @click="nextYear")
+    .au-date-picker-button(:class="{'au-date-picker-hidden': leftRange}", @click="nextYear")
       au-icon(icon="angle-double-right")
 
   div.au-date-picker-content
@@ -30,6 +30,8 @@ div.au-date-picker-content
         .au-date-picker-table-row(v-for="row in days")
           .au-date-picker-table-item.au-date-picker-item(
             v-for="day in row",
-            :class="{'au-text-grey': !day.isCurrentMonth, 'au-text-current': day.isCurrentMonth && day.isCurrentDate}",
-            @click="clickItem(day.value)"
-          )|{{ day.date }}
+            @click="clickItem(day.value)",
+            @mouseover="mouseoverItem(day.value)",
+            :class="{'au-text-grey': !day.isCurrentMonth, 'au-text-current': isActiveDay(day), 'au-date-picker-range-item': isRangeDay(day) }"
+          )
+            |{{ day.date }}

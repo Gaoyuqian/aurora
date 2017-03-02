@@ -1,0 +1,117 @@
+extends ./_layout
+
+block title
+  Select
+
+block content
+  .docs-heading
+    h1|AuSelect
+    .docs-desc
+
+  .docs-section
+    h2|基础选择器
+    .docs-desc
+      p|基础选择器的用法
+    .docs-panel
+      .docs-panel-row
+        au-flex
+          au-flex-item(grow="1")
+            au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+
+          au-flex-item
+            au-select(v-model="form.class", placeholder="请选择班级")
+              au-option(
+                v-for="option in options",
+                :label="option.label",
+                :value="option.value"
+              )
+         au-flex(justify-content="center")
+           au-flex-item
+             au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+
+  .docs-section
+    h2|多选选择器
+    .docs-desc
+      p|多选选择器的用法
+    .docs-panel
+      .docs-panel-row
+        au-flex
+          au-flex-item(grow="1")
+            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+
+  .docs-section
+    h2|禁用选择器
+    .docs-desc
+      p|禁用选择器的用法
+    .docs-panel
+      .docs-panel-row
+        au-flex
+          au-flex-item(grow="1")
+            au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+          au-flex-item(grow="1")
+            au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
+
+  .docs-section
+    h2|属性
+    au-table(:columns="attrColumns", :data="attrs")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'v-model',
+              desc: '绑定的数据',
+              type: 'String, Number',
+              default: ''
+            },
+            {
+              name: 'options',
+              desc: 'select的option数组, 格式为{ label, value } (可以不传此值, 通过使用AuOption来手动指定)',
+              type: 'Array',
+              default: 'null'
+            },
+            {
+              name: 'placeholder',
+              desc: '同原生的placeholder',
+              type: 'String',
+              default: '请选择'
+            }
+          ],
+          form: {
+              'class': '2',
+              classes: []
+            },
+            options: [
+              {
+                label: '三年一班',
+                value: '1'
+              },
+              {
+                label: '三年二班',
+                value: '2'
+              },
+              {
+                label: '三年三班',
+                value: '3'
+              },
+              {
+                label: '三年四班',
+                value: '4'
+              },
+              {
+                label: '三年五班',
+                value: '5'
+              },
+              {
+                label: '三年六班',
+                value: '6'
+              }
+            ]
+        }
+      }
+    })

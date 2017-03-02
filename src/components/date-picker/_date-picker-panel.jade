@@ -1,4 +1,4 @@
 .au-date-picker-panel
-  au-year-picker-content(v-model="tempValue", ref="yearContent", v-show="type == 'year'")
-  au-month-picker-content(v-model="tempValue", ref="monthContent", v-show="type == 'month'")
-  au-date-picker-content(v-model="tempValue", ref="dateContent", v-show="type == 'date'")
+  au-year-picker-content(v-model="value", ref="yearContent", v-show="type == 'year'")
+  au-month-picker-content(v-model="value", ref="monthContent", v-show="type == 'month'")
+  au-date-picker-content(v-model="value", ref="dateContent", v-show="type == 'date'", :range="range", :leftRange="leftRange", :rightRange="rightRange")

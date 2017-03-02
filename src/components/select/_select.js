@@ -1,4 +1,5 @@
 import Popup from '../popup/_popup.js'
+import Option from '../option/_option.js'
 
 const AuSelect = Vue.extend({
   template: require('./_select.jade'),
@@ -20,15 +21,36 @@ const AuSelect = Vue.extend({
       type: String,
       default: '请选择'
     },
-    mutiple: Boolean
+    mutiple: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
       text: '',
       optionsElem: null,
       registeredChild: {},
-      active: false,
-      selected: []
+      active: false
+      //selected: []
+    }
+  },
+  computed: {
+    selected () {
+      this.value
+
+      if (this.mutiple) {
+        return this.value.map((value) => {
+          var label = this.getLabel(value)
+          return { label, value }
+        })
+      } else {
+        return []
+      }
     }
   },
   created () {
@@ -62,8 +84,26 @@ const AuSelect = Vue.extend({
       this.setOptionActive()
       this.calcText()
     })
+
+    this.$on('unregister.option', (child) => {
+      delete this.registeredChild[child._uid]
+      this.setOptionActive()
+      this.calcText()
+    })
   },
   methods: {
+    getLabel (value) {
+      var cid, child
+
+      for (cid in this.registeredChild) {
+        child = this.registeredChild[cid]
+        if (child.value === value) {
+          return child.label
+        }
+      }
+
+      return ''
+    },
     calcText () {
       var label = '', child
 
@@ -85,32 +125,40 @@ const AuSelect = Vue.extend({
       return this.mutiple ? this.value.length === 0 : !this.value
     },
     addValue (value, child) {
+      if (this.disabled) {
+        return
+      }
       if (this.mutiple) {
-        this.selected.push({
-          label: child.label,
-          value
-        })
-
         this.$emit('input', this.value.concat(value))
       } else {
         this.$emit('input', value)
       }
     },
     removeValue (value) {
-      this.selected = this.selected.filter((selected) => {
-        return selected.value !== value
-      })
+      if (this.disabled) {
+        return
+      }
 
-      this.$emit('input', this.selected.map((select) => {
-        return select.value
-      }))
+      const pos = this.value.indexOf(value)
+
+      console.log(this.value, value, pos)
+      if (pos > -1) {
+        this.value.splice(pos, 1)
+      }
+      console.log(this.value)
+
+      this.$emit('input', this.value.slice())
     },
     removeValueHandler ($event, value) {
       $event.stopPropagation()
       this.removeValue(value)
+      this.$nextTick(this.$refs.popup.calPosition)
     },
     clickHandler ($event) {
       $event.stopPropagation()
+      if (this.disabled) {
+        return
+      }
       this.showOptions();
     },
     showOptions () {

@@ -1,3 +1,9 @@
+@mixin text-overflowing() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @mixin flex-center-center() {
   display: flex;
   align-items: center;

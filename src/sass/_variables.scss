@@ -12,15 +12,36 @@ $color-info:                #6089ec;
 $color-success:             #00D397;
 $color-warning:             #FFCC01;
 $color-danger:              #FF4E4C;
-$color-border:              #DDDDDD;
+
 
 $color-black:               #000000;
+$color-black-light:         #222222;
+$color-black-light-extra:   #333333;
+$color-silver:              #666666;
+$color-silver-light:        #888888;
+$color-silver-light-extra:  #AAAAAA;
+$color-gray:                #BBBBBB;
+$color-gray-light:          #CCCCCC;
+$color-gray-light-extra:    #DDDDDD;
+$color-white-dark:          #EEEEEE;
+$color-white-light:         #F2F2F2;
+$color-white:               #FFFFFF;
+
+
+// Border
+// -------------------------
+$color-border:              $color-gray-light-extra;
+$color-border-hover:        $color-gray;
+
+
+// Deprecated
+// -------------------------
 $color-grey-light:          #CCCCCC;
 $color-grey-lighter:        #DDDDDD;
 $color-grey:                #888888;
 $color-grey-dark:           #444444;
 $color-grey-darker:         #222222;
-$color-white:               #FFFFFF;
+
 
 // Radius
 // -------------------------
@@ -63,7 +84,6 @@ $icon-fontsize-large:      $fontsize-large;
 
 // Input
 // -------------------------
-$input-border-color:       $color-border;
 $input-border-radius:      $border-radius;
 $input-height:             40px;
 $input-padding-x:          10px;

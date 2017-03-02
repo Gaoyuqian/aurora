@@ -19,6 +19,10 @@ const AuInput = Vue.extend({
     active: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   render (h) {
@@ -28,7 +32,8 @@ const AuInput = Vue.extend({
         {
           'class': {
             'au-input': true,
-            'active': this.active
+            'active': this.active,
+            'disabled': this.disabled
           },
           attrs: {
             type: 'text',
@@ -43,7 +48,8 @@ const AuInput = Vue.extend({
           },
           domProps: {
             value: this.value,
-            readOnly: this.readonly
+            readOnly: this.readonly,
+            disabled: this.disabled
           }
         }
       )
@@ -53,7 +59,8 @@ const AuInput = Vue.extend({
         {
           'class': {
             'au-input': true,
-            'active': this.active
+            'active': this.active,
+            'disabled': this.disabled
           },
           attrs: {
             type: 'text',
@@ -70,7 +77,8 @@ const AuInput = Vue.extend({
           },
           domProps: {
             value: this.value,
-            readOnly: this.readonly
+            readOnly: this.readonly,
+            disabled: this.disabled
           }
         }
       )

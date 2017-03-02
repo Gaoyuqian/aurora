@@ -32,13 +32,12 @@ const AuMonthPickerPanel = Vue.extend({
   mounted () {
     this.$refs.monthContent.$on('showYearPanel', () => {
       this.type = 'year'
-      this.$refs.yearContent.reset()
+      this.$refs.yearContent.tempValue = this.$refs.monthContent.tempValue
     })
 
     this.$refs.yearContent.$on('change', (value) => {
+      this.$refs.monthContent.tempValue = value
       this.type = 'month'
-      this.tempValue = value
-      this.$refs.monthContent.reset()
     })
 
     this.$refs.monthContent.$on('change', (value) => {

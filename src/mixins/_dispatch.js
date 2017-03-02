@@ -1,3 +1,12 @@
+function broadcast (...args) {
+  this.$children.forEach((child) => {
+    if (child && child.$emit) {
+      child.$emit.apply(child, args)
+      broadcast.apply(child, args)
+    }
+  })
+}
+
 export default {
   methods: {
     dispatch (...args) {
@@ -8,13 +17,6 @@ export default {
         }
       }
     },
-    broadcast (...args) {
-      this.$children.forEach((child) => {
-        if (child != null) {
-          child.$emit(event, params)
-          this.broadcast.apply(child, args)
-        }
-      })
-    }
+    broadcast
   }
 }

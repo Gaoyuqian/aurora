@@ -8,7 +8,7 @@ const AuMonthPickerContent = Vue.extend({
   },
   data () {
     return {
-      currentDate: new Date(this.value),
+      tempValue: new Date(this.value),
       months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
   },
@@ -16,6 +16,9 @@ const AuMonthPickerContent = Vue.extend({
     this.reset()
   },
   computed: {
+    isCurrentYear () {
+      return this.model.getFullYear() === this.tempValue.getFullYear()
+    },
     currentMonth () {
       return this.model.getMonth() + 1
     },
@@ -31,28 +34,28 @@ const AuMonthPickerContent = Vue.extend({
       }
     },
     year () {
-      var value = new Date(this.currentDate)
+      var value = new Date(this.tempValue)
       return value.getFullYear()
     }
   },
   methods: {
     reset () {
-      this.currentDate = new Date(this.value)
+      this.tempValue = new Date(this.value)
     },
     setMonth (month) {
-      const value = new Date(this.model)
+      const value = new Date(this.tempValue)
       value.setMonth(month - 1)
       this.model = value
     },
     prevYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() - 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() - 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     nextYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() + 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() + 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     showYearPanel () {
       this.$emit('showYearPanel')
@@ -60,7 +63,7 @@ const AuMonthPickerContent = Vue.extend({
   },
   watch: {
     value (value) {
-      this.currentDate = value
+      this.tempValue = value
     }
   }
 })

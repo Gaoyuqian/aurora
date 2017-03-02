@@ -4,7 +4,11 @@ const AuOption = Vue.extend({
   template: require('./_option.jade'),
   props: {
     label: String,
-    value: [String, Number]
+    value: [String, Number],
+    showCheck: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -13,6 +17,9 @@ const AuOption = Vue.extend({
   },
   created () {
     this.dispatch('register.option', this)
+  },
+  beforeDestroy () {
+    this.dispatch('unregister.option', this)
   },
   methods: {
     clickHandler () {

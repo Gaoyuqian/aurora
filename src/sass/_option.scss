@@ -1,24 +1,29 @@
+.au-options {
+  padding: 6px 0;
+  background-color: $color-white;
+}
+
 .au-option {
   min-width: 200px;
   padding: 10px;
-  height: 40px;
-  line-height: 20px;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid $color-border;
+  height: 36px;
+  line-height: 16px;
+  background-color: $color-white;
   cursor: pointer;
   transition: all 0.15s;
-  font-size: $fontsize-small;
+  font-size: $fontsize-default;
   user-select: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include text-overflowing();
 
-  .fa {
+  .au-icon {
     display: none;
   }
 
   &:hover {
-    background-color: #F4F4F4;
+    background-color: $color-white-dark;
   }
 
   &:last-child {
@@ -26,8 +31,9 @@
   }
 
   &.active {
-    color: $color-primary;
-    .fa {
+    background-color: $color-primary;
+    color: $color-white;
+    .au-icon {
       display: block;
     }
   }

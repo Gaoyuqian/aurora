@@ -11,4 +11,4 @@ div.au-month-picker-content
 
   div.au-date-picker-content
     .au-month-picker-list
-      .au-month-picker-item.au-date-picker-item(:class="{ 'au-text-current': currentMonth == month }", v-for="month in months", @click="setMonth(month)")|{{month}}
+      .au-month-picker-item.au-date-picker-item(:class="{ 'au-text-current': isCurrentYear && currentMonth == month }", v-for="month in months", @click="setMonth(month)")|{{month}}

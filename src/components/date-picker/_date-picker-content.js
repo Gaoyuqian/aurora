@@ -1,8 +1,10 @@
 import dateFormat from '../../libs/dateformat.js'
 const ONE_DAY = 24 * 60 * 60 * 1000
+import dispatch from '../../mixins/_dispatch.js'
 
 const AuDatePickerContent = Vue.extend({
   template: require('./_date-picker-content.jade'),
+  mixins: [dispatch],
   props: {
     value: {
       type: Date,
@@ -11,13 +13,18 @@ const AuDatePickerContent = Vue.extend({
       }
     },
     range: {
-      type: String,
-      default: null
-    }
+      type: Array,
+      default () {
+        return null
+      }
+    },
+    leftRange: Boolean,
+    rightRange: Boolean
   },
   data () {
     return {
-      currentDate: new Date(this.value)
+      tempValue: new Date(this.value),
+      mouseoverValue: null
     }
   },
   computed: {
@@ -30,13 +37,16 @@ const AuDatePickerContent = Vue.extend({
       }
     },
     year () {
-      return dateFormat(this.currentDate, 'yyyy')
+      return dateFormat(this.tempValue, 'yyyy')
     },
     month () {
-      return dateFormat(this.currentDate, 'mm')
+      return dateFormat(this.tempValue, 'mm')
     },
     days () {
-      var value = new Date(this.currentDate)
+      this.tempValue
+      this.mouseoverValue
+
+      var value = new Date(this.tempValue)
       var currentMonth = value.getMonth()
       var i, j
 
@@ -58,35 +68,50 @@ const AuDatePickerContent = Vue.extend({
       return days
     }
   },
+  created () {
+    this.$on('mouseover.item.datePickerContent', (value) => {
+      this.mouseoverValue = value
+    })
+  },
   methods: {
     reset () {
-      this.currentDate = new Date(this.value)
+      this.mouseoverValue = null
+      this.tempValue = new Date(this.value)
     },
     clickItem (value) {
+      this.mouseoverValue = null
       this.model = value
+
+      if (this.range) {
+        this.$emit('click.range', value)
+      }
+    },
+    mouseoverItem (value) {
+      this.dispatch('mouseover.item.datePickerContent', value)
+
     },
     prevYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() - 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() - 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     prevMonth () {
-      this.currentDate.setMonth(this.currentDate.getMonth() - 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setMonth(this.tempValue.getMonth() - 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     nextYear () {
-      this.currentDate.setFullYear(this.currentDate.getFullYear() + 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setFullYear(this.tempValue.getFullYear() + 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     nextMonth () {
-      this.currentDate.setMonth(this.currentDate.getMonth() + 1)
-      this.currentDate = new Date(this.currentDate)
-      this.$emit('change.temp', this.currentDate)
+      this.tempValue.setMonth(this.tempValue.getMonth() + 1)
+      this.tempValue = new Date(this.tempValue)
+      this.$emit('change.temp', this.tempValue)
     },
     getDay (value, isCurrentMonth) {
-      return {
+      const result = {
         value,
         isCurrentMonth,
         date: value.getDate(),
@@ -94,29 +119,68 @@ const AuDatePickerContent = Vue.extend({
         isToday: this.isToday(value),
         isCurrentDate: this.isCurrentDate(value)
       }
+
+      if (this.range) {
+        const start = this.range[0]
+        const end = this.range[1]
+
+        if (start && this.isEqualDate(value, start)) {
+          result.isRangeStart = true
+        }
+
+        if (end && this.isEqualDate(value, end)) {
+          result.isRangeEnd = true
+        }
+
+        if (start && end && +start < +value && +value < +end && !this.isEqualDate(value, start) && !this.isEqualDate(value, end)) {
+          result.isRange = true
+        }
+      }
+
+      return result
+    },
+    isEqualDate (date1, date2) {
+      return date1.getFullYear() === date2.getFullYear()
+          && date1.getMonth() === date2.getMonth()
+          && date1.getDate() === date2.getDate()
     },
     isToday (date) {
       const today = new Date()
-      return date.getFullYear() === today.getFullYear()
-          && date.getMonth() === today.getMonth()
-          && date.getDate() === today.getDate()
+      return this.isEqualDate(date, today)
     },
     isCurrentDate (date) {
       const curDate = this.model
-      return date.getFullYear() === curDate.getFullYear()
-          && date.getMonth() === curDate.getMonth()
-          && date.getDate() === curDate.getDate()
+      return this.isEqualDate(date, curDate)
     },
     showYearPanel () {
       this.$emit('showYearPanel')
     },
     showMonthPanel () {
       this.$emit('showMonthPanel')
+    },
+    isActiveDay (day) {
+      return day.isCurrentMonth && (this.range == null && day.isCurrentDate || day.isRangeStart || day.isRangeEnd)
+    },
+    isRangeDay (day) {
+      if (this.range) {
+        const start = this.range[0]
+        const end = this.range[1]
+        var isMouseOverRange = false
+
+        if (start != null && end == null) {
+          if (start < day.value && !this.isEqualDate(start, day.value)
+              && day.value < this.mouseoverValue && !this.isEqualDate(day.value, this.mouseoverValue)) {
+            isMouseOverRange = true
+          }
+        }
+      }
+
+      return day.isCurrentMonth && (day.isRange || isMouseOverRange)
     }
   },
   watch: {
     value (value) {
-      this.currentDate = new Date(value)
+      this.tempValue = new Date(value)
     }
   }
 })
