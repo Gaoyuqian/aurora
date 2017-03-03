@@ -80,10 +80,16 @@ const AuDatePickerRangePanel = Vue.extend({
         }
         this.tempValue = [leftValue, value]
         this.$emit('input', this.tempValue)
+        this.$emit('close')
         this.status = 'free'
       }
     },
     reset () {
+      this.status = 'free'
+      this.tempValue = [
+        new Date(this.value[0]),
+        new Date(this.value[1])
+      ]
       this.$refs.leftContent.reset()
       this.$refs.rightContent.reset()
       this.$refs.leftContent.tempValue = this.leftValue

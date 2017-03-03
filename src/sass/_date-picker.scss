@@ -140,3 +140,42 @@
 .au-date-picker-range-item {
   background-color: #e3eafc;
 }
+
+
+// time
+// -------------------------
+.au-time-picker-panel {
+  width: 198px;
+  height: $time-picker-item-height * 5;
+  display: flex;
+  align-items: stretch;
+  background-color: $color-white;
+}
+
+.au-time-picker-selector {
+  flex: 1;
+  overflow: hidden;
+  border-right: 1px solid $color-white-dark;
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.au-time-picker-selector-inner {
+}
+
+.au-time-picker-item {
+  height: $time-picker-item-height;
+  line-height: $time-picker-item-height;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-grey-lighter;
+  }
+
+  &.active {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+}

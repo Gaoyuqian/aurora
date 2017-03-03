@@ -32,6 +32,7 @@ const AuDatePickerPanel = Vue.extend({
       },
       set (value) {
         this.$emit('input', value)
+        this.$emit('close')
       }
     }
   },

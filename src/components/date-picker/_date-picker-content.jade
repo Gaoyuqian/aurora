@@ -6,9 +6,9 @@ div.au-date-picker-content
       au-icon(icon="angle-left")
 
     .au-date-picker-text
-      span(:class="{'au-date-picker-text-button': range == null}", @click="showYearPanel")|{{ year }}年
+      span(:class="{'au-date-picker-text-button': true}", @click="showYearPanel")|{{ year }}年
       |&nbsp;-&nbsp;
-      span(:class="{'au-date-picker-text-button': range == null}", @click="showMonthPanel")|{{ month }}月
+      span(:class="{'au-date-picker-text-button': true}", @click="showMonthPanel")|{{ month }}月
 
     .au-date-picker-button(:class="{'au-date-picker-hidden': leftRange}", @click="nextMonth")
       au-icon(icon="angle-right")

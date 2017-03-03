@@ -3,6 +3,7 @@ import AuDatePickerPanel from './_date-picker-panel.js'
 import AuYearPickerPanel from './_year-picker-panel.js'
 import AuMonthPickerPanel from './_month-picker-panel.js'
 import AuDatePickerRangePanel from './_date-picker-range-panel.js'
+import AuTimePickerPanel from './_time-picker-panel.js'
 
 import dateFormat from '../../libs/dateformat.js'
 
@@ -14,7 +15,7 @@ const AuDatePicker = Vue.extend({
   props: {
     value: [String, Date, Array],
     type: {
-      type: String, // year, month, date, datetime, daterange, datetimerange
+      type: String, // year, month, date, datetime, daterange, datetimerange, time
       default: 'date'
     },
     format: {
@@ -27,6 +28,8 @@ const AuDatePicker = Vue.extend({
             return 'yyyy-mm'
           case 'date': case 'daterange':
             return 'yyyy-mm-dd'
+          case 'time':
+            return 'HH:MM:ss'
           default:
             return ''
         }
@@ -39,6 +42,15 @@ const AuDatePicker = Vue.extend({
         this.value
         if (this.type === 'daterange') {
           return this.value ? this.value.map(item => new Date(item)) : [new Date(), new Date()]
+        } else if (this.type === 'time') {
+          const date = new Date()
+          const arr = this.value.split(':')
+
+          arr[0] && date.setHours(arr[0])
+          arr[1] && date.setMinutes(arr[1])
+          arr[2] && date.setSeconds(arr[2])
+
+          return date
         } else {
           return this.value ? new Date(this.value) : new Date()
         }
@@ -63,7 +75,7 @@ const AuDatePicker = Vue.extend({
     }
   },
   created () {
-    this.setDatetime(this.value)
+    this.setDatetime(this.model)
   },
   methods: {
     setDatetime (value) {
@@ -94,6 +106,8 @@ const AuDatePicker = Vue.extend({
           return AuDatePickerPanel
         case 'daterange':
           return AuDatePickerRangePanel
+        case 'time':
+          return AuTimePickerPanel
         default:
           return null
       }
@@ -121,6 +135,12 @@ const AuDatePicker = Vue.extend({
 
         this.panel.$on('input', (value) => {
           this.model = value
+          this.$nextTick(() => {
+            this.panel.value = this.model
+          })
+        })
+
+        this.panel.$on('close', () => {
           this.hidePopup()
         })
 
@@ -148,7 +168,7 @@ const AuDatePicker = Vue.extend({
   },
   watch: {
     value (value) {
-      this.setDatetime(value)
+      this.setDatetime(this.model)
     }
   }
 })
