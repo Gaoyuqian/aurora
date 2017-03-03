@@ -23,30 +23,21 @@ const AuTimePickerPanel = Vue.extend({
       tempValue: new Date(this.value)
     }
   },
-  created () {
-    setInterval(() => {
-      console.log(this.value)
-    }, 1000)
-  },
   computed: {
     model: {
       get () {
         this.value
-        console.log('get model')
         return new Date(this.value)
       },
       set (value) {
-        console.log('set model')
         this.$emit('input', value)
       }
     },
     hour: {
       get () {
-        console.log('get hour', this.model.getHours())
         return this.model.getHours()
       },
       set (value) {
-        console.log('set hour', value)
         const model = new Date(this.model)
         model.setHours(value)
         this.model = model
@@ -69,15 +60,15 @@ const AuTimePickerPanel = Vue.extend({
       set (value) {
         const model = new Date(this.model)
         model.setSeconds(value)
-        //this.model = model
-        console.log(value, model, model.getSeconds())
         this.$emit('input', model)
       }
     },
   },
   methods: {
     reset () {
-      console.log(this.value)
+      this.$children.forEach((child) => {
+        child.reset && child.reset()
+      })
     },
     getRange (start, end) {
       const arr = []
@@ -92,11 +83,6 @@ const AuTimePickerPanel = Vue.extend({
         return '0' + value
       }
       return value
-    }
-  },
-  watch: {
-    value (value) {
-      console.log('value change', value)
     }
   }
 })

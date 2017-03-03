@@ -93,6 +93,7 @@ const AuDatePicker = Vue.extend({
       this.tempValue = new Date(this.value)
       if (this.panel) {
         this.panel.value = this.model
+        console.log('call reset')
         this.panel.reset()
       }
     },

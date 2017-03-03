@@ -39,6 +39,11 @@ const AuTimePickerItem = Vue.extend({
     }, 100)
   },
   methods: {
+    reset () {
+      setTimeout(() => {
+        this.resetPosition(true)
+      }, 64)
+    },
     resetPosition (noAnimate) {
       this.isAnimate = !noAnimate
       const active = this.$el.querySelector('.active')
