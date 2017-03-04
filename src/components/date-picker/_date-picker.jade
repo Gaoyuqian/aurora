@@ -1,3 +1,9 @@
 div.au-date-picker
-  au-input(v-model="datetime", @click.native="clickHandler", readonly, :active="inputActive")
+  au-input(
+    v-model="datetime",
+    @click.native="clickHandler",
+    readonly,
+    :active="inputActive",
+    :tailing-icon="tailingIcon"
+  )
   popup(ref="popup")

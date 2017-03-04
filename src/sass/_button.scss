@@ -1,7 +1,7 @@
 .au-button {
   font-size: $button-fontsize-default;
   display: inline-block;
-  border: none;
+  border: 1px solid $button-background-color;
   height: $button-height-default;
   line-height: $button-height-default - $button-padding-y-default * 2;
   text-align: center;
@@ -21,11 +21,13 @@
 
 .au-button-primary {
   background-color: $color-primary;
+  border-color: $color-primary;
   color: $color-white;
 
   &:hover,
   &:focus {
     background-color: lighten($color-primary, 5%);
+    border-color: lighten($color-primary, 5%);
   }
 
   &:active,
@@ -37,43 +39,47 @@
 
 .au-button-info {
   background-color: $color-info;
+  border-color: $color-info;
   color: $color-white;
 
   &:hover,
   &:focus {
     background-color: lighten($color-info, 5%);
+    border-color: lighten($color-info, 5%);
   }
 
   &:active,
   &.active {
-    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
     transform: scale(0.95);
   }
 }
 
 .au-button-success {
   background-color: $color-success;
+  border-color: $color-success;
   color: $color-white;
 
   &:hover,
   &:focus {
     background-color: lighten($color-success, 5%);
+    border-color: lighten($color-success, 5%);
   }
 
   &:active,
   &.active {
-    // box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5) inset;
     transform: scale(0.95);
   }
 }
 
 .au-button-warning {
   background-color: $color-warning;
+  border-color: $color-warning;
   color: $color-white;
 
   &:hover,
   &:focus {
     background-color: lighten($color-warning, 5%);
+    border-color: lighten($color-warning, 5%);
   }
 
   &:active,
@@ -85,11 +91,13 @@
 
 .au-button-danger {
   background-color: $color-danger;
+  border-color: $color-danger;
   color: $color-white;
 
   &:hover,
   &:focus {
     background-color: lighten($color-danger, 5%);
+    border-color: lighten($color-danger, 5%);
   }
 
   &:active,
@@ -101,7 +109,7 @@
 
 .au-button-default {
   background-color: $color-white;
-  color: $color-grey-darker;
+  color: $color-black-light;
   border: 1px solid $color-border;
 
   &:hover,
@@ -117,9 +125,9 @@
   }
 
   &[disabled] {
-    color: #CCCCCC;
+    color: $color-gray-light;
     border-color: $color-border;
-    background-color: #FFFFFF;
+    background-color: $color-white;
   }
 
   &.au-button-large {
@@ -141,9 +149,9 @@
 .au-button-warning,
 .au-button-success{
   &[disabled] {
-    border: 1px solid #DDDDDD;
-    color: #CCCCCC;
-    background-color: #EEEEEE;
+    border: 1px solid $color-gray-light-extra;
+    color: $color-gray-light;
+    background-color: $color-white-dark;
   }
 }
 

@@ -63,6 +63,12 @@ const AuDatePicker = Vue.extend({
         }
         this.$emit('input', value)
       }
+    },
+    datetime () {
+      return this.getFormatDatetime(this.model)
+    },
+    tailingIcon () {
+      return this.type === 'time' ? 'clock-o' : 'calendar-o'
     }
   },
   data () {
@@ -70,17 +76,10 @@ const AuDatePicker = Vue.extend({
       tempValue: new Date(this.value),
       popup: null,
       panel: null,
-      datetime: '',
       inputActive: false
     }
   },
-  created () {
-    this.setDatetime(this.model)
-  },
   methods: {
-    setDatetime (value) {
-      this.datetime = this.getFormatDatetime(value)
-    },
     getFormatDatetime (value) {
       if (Array.isArray(value)) {
         return value.map((item) => {
@@ -165,11 +164,6 @@ const AuDatePicker = Vue.extend({
     },
     hidePopup () {
       this.popup.hide()
-    }
-  },
-  watch: {
-    value (value) {
-      this.setDatetime(this.model)
     }
   }
 })

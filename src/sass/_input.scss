@@ -1,5 +1,14 @@
 .au-input {
   width: 100%;
+  position: relative;
+  .au-icon {
+    color: $color-gray-light-extra;
+    font-size: $fontsize-large;
+  }
+}
+
+.au-input-control {
+  width: 100%;
   border: 1px solid $color-border;
   border-radius: $input-border-radius;
   padding: $input-padding-y $input-padding-x;
@@ -29,8 +38,31 @@
     background-color: $color-white-dark;
     border-color: $color-border;
   }
+
+  &[type=text] {
+    height: $input-height;
+  }
 }
 
-input[type=text].au-input {
+.au-input-has-heading-icon .au-input-control,
+.au-input-has-tailing-icon .au-input-control {
+  padding-right: $input-height
+}
+
+.au-input-heading-icon-wrapper {
+  width: $input-height;
   height: $input-height;
+  position: absolute;
+  left: 0;
+  top: 0;
+  @include flex-center-center();
+}
+
+.au-input-tailing-icon-wrapper {
+  width: $input-height;
+  height: $input-height;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  @include flex-center-center();
 }

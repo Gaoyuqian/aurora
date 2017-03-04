@@ -34,15 +34,6 @@ $color-border:              $color-gray-light-extra;
 $color-border-hover:        $color-gray;
 
 
-// Deprecated
-// -------------------------
-$color-grey-light:          #CCCCCC;
-$color-grey-lighter:        #DDDDDD;
-$color-grey:                #888888;
-$color-grey-dark:           #444444;
-$color-grey-darker:         #222222;
-
-
 // Radius
 // -------------------------
 $border-radius:             0px;
@@ -50,7 +41,7 @@ $border-radius:             0px;
 
 // Button
 // -------------------------
-$button-border-color:      $color-grey-light;
+$button-border-color:      $color-gray-light;
 $button-background-color:  $color-primary;
 $button-color:             #fff;
 $button-border-radius:     $border-radius;

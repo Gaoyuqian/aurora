@@ -1,0 +1,28 @@
+.au-input(:class="{ 'au-input-has-heading-icon': this.headingIcon, 'au-input-has-tailing-icon': this.tailingIcon }")
+  .au-input-heading-icon-wrapper(v-if="headingIcon")
+    au-icon(:icon="headingIcon")
+  input.au-input-control(
+    v-if="type === 'text'",
+    :class="classObject",
+    type="text",
+    :placeholder="placeholder",
+    @blur="onBlur",
+    @focus="onFocus",
+    v-model="model",
+    :readonly="readonly",
+    :disabled="disabled"
+  )
+  textarea.au-input-control(
+    v-if="type === 'textarea'",
+    :class="classObject",
+    :placeholder="placeholder",
+    @blur="onBlur",
+    @focus="onFocus",
+    v-model="model",
+    :readonly="readonly",
+    :disabled="disabled",
+    :rows="rows",
+    :cols="cols"
+  )
+  .au-input-tailing-icon-wrapper(v-if="tailingIcon")
+    au-icon(:icon="tailingIcon")

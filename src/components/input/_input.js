@@ -1,4 +1,5 @@
 const AuInput = Vue.extend({
+  template: require('./_input.jade'),
   props: {
     type: {
       type: String,
@@ -7,81 +8,30 @@ const AuInput = Vue.extend({
         return value === 'text' || value === 'textarea'
       }
     },
-    name: String,
     placeholder: String,
     value: String,
-    readonly: {
-      type: Boolean,
-      default: false
-    },
     rows: [String, Number],
     cols: [String, Number],
-    active: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+    readonly: Boolean,
+    disabled: Boolean,
+    active: Boolean,
+    headingIcon: String,
+    tailingIcon: String
   },
-  render (h) {
-    if (this.type === 'text') {
-      return h(
-        'input',
-        {
-          'class': {
-            'au-input': true,
-            'active': this.active,
-            'disabled': this.disabled
-          },
-          attrs: {
-            type: 'text',
-            placeholder: this.placeholder
-          },
-          on: {
-            blur: this.onBlur,
-            focus: this.onFocus,
-            keyup: ($event) => {
-              this.$emit('input', $event.target.value)
-            }
-          },
-          domProps: {
-            value: this.value,
-            readOnly: this.readonly,
-            disabled: this.disabled
-          }
-        }
-      )
-    } else {
-      return h(
-        'textarea',
-        {
-          'class': {
-            'au-input': true,
-            'active': this.active,
-            'disabled': this.disabled
-          },
-          attrs: {
-            type: 'text',
-            placeholder: this.placeholder,
-            rows: this.rows,
-            cols: this.cols
-          },
-          on: {
-            blur: this.onBlur,
-            focus: this.onFocus,
-            keyup: ($event) => {
-              this.$emit('input', $event.target.value)
-            }
-          },
-          domProps: {
-            value: this.value,
-            readOnly: this.readonly,
-            disabled: this.disabled
-          }
-        }
-      )
+  computed: {
+    model: {
+      get () {
+        return this.value
+      },
+      set (value) {
+        this.value = value
+      }
+    },
+    classObject () {
+      return {
+        active: this.active,
+        disabled: this.disabled
+      }
     }
   },
   methods: {
@@ -90,6 +40,9 @@ const AuInput = Vue.extend({
     },
     onBlur ($event) {
       this.$emit('blur', $event)
+    },
+    onKeyup ($event) {
+      this.$emit('input', $event.target.value)
     }
   }
 })

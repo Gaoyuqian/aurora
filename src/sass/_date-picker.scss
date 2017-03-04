@@ -1,14 +1,17 @@
-.au-date-picker-panel {
-  width: 300px;
+.au-date-picker-panel,
+.au-year-picker-panel,
+.au-month-picker-panel {
+  width: 253px;
   background-color: #fff;
 }
 
 .au-date-picker-title-bar {
   display: flex;
   align-items: center;
-  height: 40px;
+  height: 36px;
   padding: 0 10px;
   font-size: $fontsize-default;
+  border-bottom: 1px solid $color-border;
 }
 
 .au-date-picker-button {
@@ -17,9 +20,14 @@
   @include flex-center-center();
   cursor: pointer;
   margin: 0 4px;
+  color: $color-gray-light-extra;
+
+  .au-icon {
+    font-size: $fontsize-large;
+  }
 
   &:hover {
-    background-color: $color-grey-lighter;
+    color: $color-primary;
   }
 }
 
@@ -33,20 +41,34 @@
 }
 
 .au-date-picker-item {
+  position: relative;
   cursor: pointer;
-  color: $color-grey-dark;
+  color: $color-silver;
   text-align: center;
   font-size: $fontsize-small;
 
+  &.au-text-today {
+    color: $color-primary;
+
+    .au-arrow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 4px solid transparent;
+      border-top: 4px solid $color-primary;
+      border-right: 4px solid $color-primary;
+    }
+  }
+
   &:hover {
-    background-color: $color-grey-lighter;
+    background-color: $color-gray-light-extra;
     &.au-text-grey {
       background-color: transparent;
     }
   }
 
   &.au-text-grey {
-    color: $color-grey-lighter;
+    color: $color-gray;
   }
 
   &.au-text-current {
@@ -78,13 +100,17 @@
 
 .au-date-picker-table-item {
   flex: 1;
-  height: 30px;
-  line-height: 30px;
+  height: 32px;
+  line-height: 32px;
 }
 
 .au-date-picker-text-button {
   cursor: pointer;
   white-space: nowrap;
+  color: $color-silver;
+  &:hover {
+    color: $color-primary;
+  }
 }
 
 // Year
@@ -93,22 +119,21 @@
 }
 
 .au-year-picker-list {
-  padding: 10px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.au-date-picker-item {
+.au-year-picker-item {
   width: 25%;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+  height: 32px;
+  line-height: 32px;
+  margin: 20px 0;
 }
 
 // Month
 .au-month-picker-panel {
   background-color: #fff;
-  width: 300px;
+  width: 253px;
 }
 
 .au-month-picker-list {
@@ -116,14 +141,13 @@
   flex-wrap: wrap;
 }
 
-.au-month-picker-item {
-  width: 33.33333333%;
-}
-
 .au-date-picker-range-panel {
   display: flex;
-  width: 600px;
+  width: 253px * 2;
 
+  .au-date-picker-panel:first-child {
+    border-right: 1px solid $color-border;
+  }
   .au-date-picker-content {
     flex: 1;
   }
@@ -172,7 +196,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $color-grey-lighter;
+    background-color: $color-gray-light-extra;
   }
 
   &.active {
