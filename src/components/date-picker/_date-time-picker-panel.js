@@ -26,7 +26,11 @@ const AuDateTimePickerPanel = Vue.extend({
       }
     },
     leftRange: Boolean,
-    rightRange: Boolean
+    rightRange: Boolean,
+    isShowBottomBar: {
+      type: Boolean,
+      default: true
+    }
   },
   computed: {
     model: {

@@ -1,3 +1,7 @@
 .au-date-time-picker-range-panel
-  au-date-time-picker-panel(v-model="leftValue", ref="leftContent", :range="tempValue", leftRange)
-  au-date-time-picker-panel(v-model="rightValue", ref="rightContent", :range="tempValue", rightRange)
+  .au-date-time-picker-range-panel-inner
+    au-date-time-picker-panel(v-model="leftValue", ref="leftContent", :range="tempValue", leftRange, :isShowBottomBar="false")
+    au-date-time-picker-panel(v-model="rightValue", ref="rightContent", :range="tempValue", rightRange, :isShowBottomBar="false")
+
+  .au-date-picker-bottom
+    .au-date-picker-bottom-btn(@click="closeHandler")|关闭

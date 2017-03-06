@@ -122,6 +122,9 @@ const AuDateTimePickerRangePanel = Vue.extend({
       this.$nextTick(() => {
         this.updateRightContent(this.leftValue)
       })
+    },
+    closeHandler () {
+      this.$emit('close')
     }
   }
 })

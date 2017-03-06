@@ -11,7 +11,7 @@
     :rightRange="rightRange"
   )
 
-  .au-date-picker-bottom
+  .au-date-picker-bottom(v-if="isShowBottomBar")
     .au-date-picker-bottom-btn(@click="closeHandler")|关闭
 
   popup(ref="popup", selfControl)

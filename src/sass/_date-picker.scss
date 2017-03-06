@@ -198,6 +198,7 @@
 .au-time-picker-panel {
   width: 146px;
   background-color: $color-white;
+  overflow: hidden;
 }
 
 .au-time-picker-panel-items {
@@ -241,7 +242,6 @@
 // date time picker
 // -------------------------
 .au-date-time-picker-panel {
-  height: 365px;
   user-select: none;
   background-color: $color-white;
   &, .au-date-picker-panel {
@@ -262,8 +262,6 @@
 
 .au-date-time-picker-range-panel {
   width: 648px;
-  height: 365px;
-  display: flex;
   overflow: hidden;
   .au-date-picker-panel, .au-year-picker-panel, .au-month-picker-panel {
     background-color: transparent;
@@ -272,4 +270,8 @@
   .au-date-time-picker-panel:first-child {
     border-right: 1px solid $color-border;
   }
+}
+
+.au-date-time-picker-range-panel-inner {
+  display: flex;
 }
