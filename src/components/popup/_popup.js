@@ -1,10 +1,13 @@
+import dispatch from '../../mixins/_dispatch'
+
 const PADDING = 10
 var showingPopup = null
 
 const AuPopup = Vue.extend({
   template: require('./_popup.jade'),
+  mixins: [dispatch],
   props: {
-
+    selfControl: Boolean
   },
   data () {
     return {
@@ -78,14 +81,16 @@ const AuPopup = Vue.extend({
       this.left = `${left}px`
     },
     show () {
-      if (showingPopup) {
+      if (!this.selfControl && showingPopup) {
         showingPopup.hide()
         showingPopup = null
       }
       if (this.relateElem == null) {
         return
       }
-      showingPopup = this
+      if (!this.selfControl) {
+        showingPopup = this
+      }
       this.initPosition()
       this.isShow = true
       this.$nextTick(() => {

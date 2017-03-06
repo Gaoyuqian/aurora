@@ -4,11 +4,15 @@ import AuYearPickerPanel from './_year-picker-panel.js'
 import AuMonthPickerPanel from './_month-picker-panel.js'
 import AuDatePickerRangePanel from './_date-picker-range-panel.js'
 import AuTimePickerPanel from './_time-picker-panel.js'
+import AuDateTimePickerPanel from './_date-time-picker-panel.js'
+import AuDateTimePickerRangePanel from './_date-time-picker-range-panel.js'
+import dispatch from '../../mixins/_dispatch'
 
 import dateFormat from '../../libs/dateformat.js'
 
 const AuDatePicker = Vue.extend({
   template: require('./_date-picker.jade'),
+  mixins: [dispatch],
   components: {
     Popup
   },
@@ -30,8 +34,8 @@ const AuDatePicker = Vue.extend({
             return 'yyyy-mm-dd'
           case 'time':
             return 'HH:MM:ss'
-          default:
-            return ''
+          case 'datetime': default:
+            return 'yyyy-mm-dd HH:MM:ss'
         }
       }
     }
@@ -40,7 +44,8 @@ const AuDatePicker = Vue.extend({
     model: {
       get () {
         this.value
-        if (this.type === 'daterange') {
+        if (this.type === 'daterange' || this.type === 'datetimerange') {
+          console.log(this.type, this.value, this.value.map)
           return this.value ? this.value.map(item => new Date(item)) : [new Date(), new Date()]
         } else if (this.type === 'time') {
           const date = new Date()
@@ -56,7 +61,7 @@ const AuDatePicker = Vue.extend({
         }
       },
       set (value) {
-        if (this.type === 'daterange') {
+        if (this.type === 'daterange' || this.type === 'datetimerange') {
           value = value.map(this.getFormatDatetime)
         } else {
           value = this.getFormatDatetime(value)
@@ -79,12 +84,18 @@ const AuDatePicker = Vue.extend({
       inputActive: false
     }
   },
+  created () {
+    this.$on('close.panel', () => {
+      this.hidePopup()
+      return false
+    })
+  },
   methods: {
     getFormatDatetime (value) {
       if (Array.isArray(value)) {
         return value.map((item) => {
           return this.getFormatDatetime(item)
-        }).join('~')
+        }).join(' ~ ')
       }
       return dateFormat(value, this.format)
     },
@@ -104,10 +115,14 @@ const AuDatePicker = Vue.extend({
           return AuMonthPickerPanel
         case 'date':
           return AuDatePickerPanel
+        case 'datetime':
+          return AuDateTimePickerPanel
         case 'daterange':
           return AuDatePickerRangePanel
         case 'time':
           return AuTimePickerPanel
+        case 'datetimerange':
+          return AuDateTimePickerRangePanel
         default:
           return null
       }
@@ -132,6 +147,8 @@ const AuDatePicker = Vue.extend({
             value: this.model
           }
         })
+
+        this.panel.$parent = this.popup
 
         this.panel.$on('input', (value) => {
           this.model = value
@@ -161,9 +178,15 @@ const AuDatePicker = Vue.extend({
       }
 
       this.popup.show()
+      this.$nextTick(() => {
+        this.panel.broadcast && this.panel.broadcast('show.popup')
+      })
     },
     hidePopup () {
       this.popup.hide()
+      this.$nextTick(() => {
+        this.panel.broadcast && this.panel.broadcast('hide.popup')
+      })
     }
   }
 })

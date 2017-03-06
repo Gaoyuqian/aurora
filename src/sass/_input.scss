@@ -39,7 +39,7 @@
     border-color: $color-border;
   }
 
-  &[type=text] {
+  &[type="text"] {
     height: $input-height;
   }
 }
@@ -65,4 +65,15 @@
   right: 0;
   bottom: 0;
   @include flex-center-center();
+}
+
+.au-input-small {
+  .au-input-control {
+    padding: $input-padding-y-small $input-padding-x-small;
+    line-height: ($input-height-small - $input-padding-y-small * 2);
+    font-size: 13px;
+    &[type="text"] {
+      height: $input-height-small;
+    }
+  }
 }

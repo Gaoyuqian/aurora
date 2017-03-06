@@ -16,7 +16,11 @@ const AuInput = Vue.extend({
     disabled: Boolean,
     active: Boolean,
     headingIcon: String,
-    tailingIcon: String
+    tailingIcon: String,
+    size: {
+      type: String,
+      default: 'default'
+    }
   },
   computed: {
     model: {
@@ -27,11 +31,24 @@ const AuInput = Vue.extend({
         this.value = value
       }
     },
-    classObject () {
+    controlClass () {
       return {
         active: this.active,
         disabled: this.disabled
       }
+    },
+    inputClass () {
+      const classObject = []
+
+      if (this.headingIcon) {
+        classObject.push('au-input-has-heading-icon')
+      }
+      if (this.tailingIcon) {
+        classObject.push('au-input-has-tailing-icon')
+      }
+
+      classObject.push(`au-input-${this.size}`)
+      return classObject
     }
   },
   methods: {

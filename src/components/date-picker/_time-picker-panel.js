@@ -1,8 +1,10 @@
 import dateFormat from '../../libs/dateformat.js'
 import TimePickerItem from './_time-picker-item.js'
+import dispatch from '../../mixins/_dispatch'
 
 const AuTimePickerPanel = Vue.extend({
   template: require('./_time-picker-panel.jade'),
+  mixins: [dispatch],
   components: {
     TimePickerItem
   },
@@ -83,6 +85,9 @@ const AuTimePickerPanel = Vue.extend({
         return '0' + value
       }
       return value
+    },
+    closeHandler () {
+      this.dispatch(true, 'close.panel')
     }
   }
 })

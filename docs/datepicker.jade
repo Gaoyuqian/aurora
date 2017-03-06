@@ -14,15 +14,33 @@ block content
 
     .docs-panel
       .docs-panel-row
-        au-date-picker(v-model="date")
-      .docs-panel-row
-        au-date-picker(v-model="year", type="year")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|按日期选择
+            au-date-picker(v-model="date")
 
-      .docs-panel-row
-        au-date-picker(v-model="month", type="month")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|按年选择
+            au-date-picker(v-model="year", type="year")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|按月选择
+            au-date-picker(v-model="month", type="month")
 
-      .docs-panel-row
-        au-date-picker(v-model="dateRange", type="daterange")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|选择日期范围
+            au-date-picker(v-model="daterange", type="daterange")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|选择日期时间
+            au-date-picker(v-model="datetime", type="datetime")
+
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|选择日期时间范围
+            au-date-picker(v-model="datetimerange", type="datetimerange")
 
   .docs-section
     h2|时间选择器
@@ -30,7 +48,11 @@ block content
 
     .docs-panel
       .docs-panel-row
-        au-date-picker(v-model="time", type="time")
+        au-flex(gutter="20", wrap="wrap")
+          au-flex-item(span="8")
+            h4|选择时间
+            au-date-picker(v-model="time", type="time")
+
 
 block script
   script.
@@ -42,7 +64,9 @@ block script
           date: '2017-02-27',
           year: '2017-02-27',
           month: '2017-02',
-          dateRange: ['2017-02-07', '2017-06-11'],
+          daterange: ['2017-02-07', '2017-06-11'],
+          datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+          datetime: '2017-02-27 08:11:12',
           time: '11:11:11',
           attrs: [
             {

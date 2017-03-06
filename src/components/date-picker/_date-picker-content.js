@@ -88,7 +88,6 @@ const AuDatePickerContent = Vue.extend({
     },
     mouseoverItem (value) {
       this.dispatch('mouseover.item.datePickerContent', value)
-
     },
     prevYear () {
       this.tempValue.setFullYear(this.tempValue.getFullYear() - 1)
@@ -180,6 +179,9 @@ const AuDatePickerContent = Vue.extend({
   },
   watch: {
     value (value) {
+      if (this.range) {
+        return
+      }
       this.tempValue = new Date(value)
     }
   }

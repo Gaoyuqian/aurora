@@ -32,11 +32,11 @@ const AuTimePickerItem = Vue.extend({
       return style
     }
   },
-  mounted () {
-    setTimeout(() => {
+  created () {
+    this.$on('show.popup', () => {
       this.clientHeight = this.$el.querySelector('.au-time-picker-selector-inner').clientHeight - this.$el.clientHeight
       this.resetPosition(true)
-    }, 100)
+    })
   },
   methods: {
     reset () {

@@ -1,4 +1,7 @@
 .au-time-picker-panel
-  TimePickerItem(:range="hours", v-model="hour")
-  TimePickerItem(:range="minutes", v-model="minute")
-  TimePickerItem(:range="seconds", v-model="second")
+  .au-time-picker-panel-items
+    TimePickerItem(:range="hours", v-model="hour")
+    TimePickerItem(:range="minutes", v-model="minute")
+    TimePickerItem(:range="seconds", v-model="second")
+  .au-date-picker-bottom
+    .au-date-picker-bottom-btn(@click="closeHandler")|关闭

@@ -1,8 +1,17 @@
+.au-date-picker {
+  user-select: none;
+  .au-input, .au-input-control {
+    cursor: pointer;
+  }
+}
+
 .au-date-picker-panel,
 .au-year-picker-panel,
 .au-month-picker-panel {
   width: 253px;
   background-color: #fff;
+  user-select: none;
+  overflow: hidden;
 }
 
 .au-date-picker-title-bar {
@@ -142,6 +151,8 @@
 }
 
 .au-date-picker-range-panel {
+  background-color: #fff;
+  user-select: none;
   display: flex;
   width: 253px * 2;
 
@@ -153,10 +164,6 @@
   }
 }
 
-.au-date-picker-range-panel {
-  background-color: #fff;
-}
-
 .au-date-picker-hidden {
   visibility: hidden !important;
 }
@@ -165,15 +172,39 @@
   background-color: #e3eafc;
 }
 
+.au-date-picker-bottom {
+  padding: 0 4px;
+  height: 35px;
+  line-height: 35px;
+  font-size: $fontsize-default;
+  text-align: right;
+  border-top: 1px solid $color-border;
+}
+
+.au-date-picker-bottom-btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 10px;
+
+  &.primary {
+    color: $color-primary;
+  }
+
+}
+
 
 // time
 // -------------------------
 .au-time-picker-panel {
-  width: 198px;
-  height: $time-picker-item-height * 5;
+  width: 146px;
+  background-color: $color-white;
+}
+
+.au-time-picker-panel-items {
+  width: 100%;
   display: flex;
   align-items: stretch;
-  background-color: $color-white;
+  height: $time-picker-item-height * 5;
 }
 
 .au-time-picker-selector {
@@ -190,6 +221,7 @@
 }
 
 .au-time-picker-item {
+  font-size: $fontsize-default;
   height: $time-picker-item-height;
   line-height: $time-picker-item-height;
   text-align: center;
@@ -202,5 +234,42 @@
   &.active {
     background-color: $color-primary;
     color: $color-white;
+  }
+}
+
+
+// date time picker
+// -------------------------
+.au-date-time-picker-panel {
+  height: 365px;
+  user-select: none;
+  background-color: $color-white;
+  &, .au-date-picker-panel {
+    width: 324px;
+  }
+
+  .au-date-picker-content {
+    padding: 10px 22px;
+  }
+}
+.au-date-time-picker-input-wrapper {
+  display: flex;
+  padding: 10px;
+  .au-input:first-child {
+    margin-right: 8px;
+  }
+}
+
+.au-date-time-picker-range-panel {
+  width: 648px;
+  height: 365px;
+  display: flex;
+  overflow: hidden;
+  .au-date-picker-panel, .au-year-picker-panel, .au-month-picker-panel {
+    background-color: transparent;
+  }
+
+  .au-date-time-picker-panel:first-child {
+    border-right: 1px solid $color-border;
   }
 }
