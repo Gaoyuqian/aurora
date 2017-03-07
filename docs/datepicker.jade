@@ -17,7 +17,7 @@ block content
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|按日期选择
-            au-date-picker(v-model="date")
+            au-date-picker(v-model="date", :disabled-date="disabledWeek")
           au-flex-item(span="8")
             h4|按日期选择
             au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07")
@@ -103,6 +103,12 @@ block script
               default: ''
             }
           ]
+        }
+      },
+      methods: {
+        disabledWeek (date) {
+          const day = date.getDay()
+          return day === 0 || day === 6
         }
       }
     })

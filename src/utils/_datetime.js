@@ -11,7 +11,6 @@ export default {
         value.setHours(parseInt(arr[0], 10))
         value.setMinutes(parseInt(arr[1], 10))
         value.setSeconds(parseInt(arr[2], 10))
-        console.log(value)
       } else {
         value = new Date(value)
       }

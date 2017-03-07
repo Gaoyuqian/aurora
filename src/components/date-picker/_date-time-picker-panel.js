@@ -95,7 +95,9 @@ const AuDateTimePickerPanel = Vue.extend({
   },
   methods: {
     reset () {
-
+      this.tempValue = new Date(this.value)
+      this.$refs.datePicker && this.$refs.datePicker.reset()
+      this.$refs.timeModel && this.$refs.timeModel.reset()
     },
     showTimePicker () {
       if (!this.popup) {
