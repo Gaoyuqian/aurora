@@ -30,9 +30,9 @@ div
         .au-date-picker-table-row(v-for="row in days")
           .au-date-picker-table-item.au-date-picker-item(
             v-for="day in row",
-            @click="clickItem(day.value)",
-            @mouseover="mouseoverItem(day.value)",
-            :class="{'au-text-grey': !day.isCurrentMonth, 'au-text-current': isActiveDay(day), 'au-date-picker-range-item': isRangeDay(day), 'au-text-today': day.isToday }"
+            @click="clickItem(day)",
+            @mouseover="mouseoverItem(day)",
+            :class="{'au-text-grey': !day.isCurrentMonth, 'au-text-current': isActiveDay(day), 'au-date-picker-range-item': isRangeDay(day), 'au-text-today': day.isToday, 'au-disabled': day.isDisabled }"
           )
             |{{ day.date }}
             .au-arrow(v-if="day.isToday")

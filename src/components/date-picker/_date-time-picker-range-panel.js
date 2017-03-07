@@ -34,12 +34,11 @@ const AuDateTimePickerRangePanel = Vue.extend({
         return this.value
       },
       set (value) {
-        console.log('setting value', value)
+
       }
     },
     leftValue: {
       get () {
-        console.log('get left value')
         this.displayValue
         return new Date(this.displayValue[0])
       },
@@ -73,9 +72,13 @@ const AuDateTimePickerRangePanel = Vue.extend({
     $refs.leftContent.$on('click.range', this.clickItem)
     $refs.rightContent.$on('click.range', this.clickItem)
 
-    /* $refs.leftContent.$emit('change.time', (value) => {
-     *   this.leftValue.set
-     * })*/
+    $refs.leftContent.$on('change.time', (value) => {
+      this.$emit('input', [value, this.value[1]])
+    })
+
+    $refs.rightContent.$on('change.time', (value) => {
+      this.$emit('input', [this.value[0], value])
+    })
 
     this.updateRightContent(this.leftValue)
   },
@@ -86,7 +89,6 @@ const AuDateTimePickerRangePanel = Vue.extend({
       this.$refs.leftContent.tempValue = value
     },
     updateRightContent (value) {
-      console.log('updateRightContent', value)
       value = new Date(value)
       value.setMonth(value.getMonth() + 1)
       this.$refs.rightContent.tempValue = value

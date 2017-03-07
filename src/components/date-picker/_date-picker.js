@@ -14,7 +14,14 @@ const AuDatePicker = Vue.extend({
   template: require('./_date-picker.jade'),
   mixins: [dispatch],
   components: {
-    Popup
+    Popup,
+    AuYearPickerPanel,
+    AuMonthPickerPanel,
+    AuDatePickerPanel,
+    AuDateTimePickerPanel,
+    AuDatePickerRangePanel,
+    AuTimePickerPanel,
+    AuDateTimePickerRangePanel
   },
   props: {
     value: [String, Date, Array],
@@ -38,14 +45,16 @@ const AuDatePicker = Vue.extend({
             return 'yyyy-mm-dd HH:MM:ss'
         }
       }
-    }
+    },
+    startDate: [String, Date],
+    endDate: [String, Date],
+    disabledDate: Function
   },
   computed: {
     model: {
       get () {
         this.value
         if (this.type === 'daterange' || this.type === 'datetimerange') {
-          console.log(this.type, this.value, this.value.map)
           return this.value ? this.value.map(item => new Date(item)) : [new Date(), new Date()]
         } else if (this.type === 'time') {
           const date = new Date()
@@ -102,29 +111,7 @@ const AuDatePicker = Vue.extend({
     reset () {
       this.tempValue = new Date(this.value)
       if (this.panel) {
-        this.panel.value = this.model
-        console.log('call reset')
         this.panel.reset()
-      }
-    },
-    getPanelClass () {
-      switch (this.type) {
-        case 'year':
-          return AuYearPickerPanel
-        case 'month':
-          return AuMonthPickerPanel
-        case 'date':
-          return AuDatePickerPanel
-        case 'datetime':
-          return AuDateTimePickerPanel
-        case 'daterange':
-          return AuDatePickerRangePanel
-        case 'time':
-          return AuTimePickerPanel
-        case 'datetimerange':
-          return AuDateTimePickerRangePanel
-        default:
-          return null
       }
     },
     clickHandler ($event) {
@@ -140,31 +127,14 @@ const AuDatePicker = Vue.extend({
 
       if (!this.popup) {
         this.popup = this.$refs.popup
-        const Panel = this.getPanelClass()
-
-        this.panel = new Panel({
-          propsData: {
-            value: this.model
-          }
-        })
-
-        this.panel.$parent = this.popup
-
-        this.panel.$on('input', (value) => {
-          this.model = value
-          this.$nextTick(() => {
-            this.panel.value = this.model
-          })
-        })
+        this.panel = this.popup.$children[0]
 
         this.panel.$on('close', () => {
           this.hidePopup()
         })
 
-        this.panel.$mount(document.createElement('div'))
         this.panel.reset()
 
-        this.popup.$el.appendChild(this.panel.$el)
         this.popup.setRelateElem(this.$el)
         document.body.appendChild(this.popup.$el)
 

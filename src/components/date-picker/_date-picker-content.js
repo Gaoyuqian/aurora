@@ -1,6 +1,8 @@
+import datetime from '../../utils/_datetime.js'
 import dateFormat from '../../libs/dateformat.js'
-const ONE_DAY = 24 * 60 * 60 * 1000
 import dispatch from '../../mixins/_dispatch.js'
+
+const ONE_DAY = 24 * 60 * 60 * 1000
 
 const AuDatePickerContent = Vue.extend({
   template: require('./_date-picker-content.jade'),
@@ -19,12 +21,16 @@ const AuDatePickerContent = Vue.extend({
       }
     },
     leftRange: Boolean,
-    rightRange: Boolean
+    rightRange: Boolean,
+    startDate: [String, Date],
+    endDate: [String, Date],
+    disabledDate: Function
   },
   data () {
     return {
       tempValue: new Date(this.value),
-      mouseoverValue: null
+      mouseoverValue: null,
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this)
     }
   },
   computed: {
@@ -78,16 +84,22 @@ const AuDatePickerContent = Vue.extend({
       this.mouseoverValue = null
       this.tempValue = new Date(this.value)
     },
-    clickItem (value) {
+    clickItem (day) {
+      if (day.isDisabled) {
+        return
+      }
       this.mouseoverValue = null
-      this.model = value
+      this.model = day.value
 
       if (this.range) {
-        this.$emit('click.range', value)
+        this.$emit('click.range', day.value)
       }
     },
-    mouseoverItem (value) {
-      this.dispatch('mouseover.item.datePickerContent', value)
+    mouseoverItem (day) {
+      if (day.isDisabled) {
+        return
+      }
+      this.dispatch('mouseover.item.datePickerContent', day.value)
     },
     prevYear () {
       this.tempValue.setFullYear(this.tempValue.getFullYear() - 1)
@@ -116,7 +128,8 @@ const AuDatePickerContent = Vue.extend({
         date: value.getDate(),
         month: value.getMonth() + 1,
         isToday: this.isToday(value),
-        isCurrentDate: this.isCurrentDate(value)
+        isCurrentDate: this.isCurrentDate(value),
+        isDisabled: this.isDisabledFunc(value)
       }
 
       if (this.range) {
@@ -139,9 +152,7 @@ const AuDatePickerContent = Vue.extend({
       return result
     },
     isEqualDate (date1, date2) {
-      return date1.getFullYear() === date2.getFullYear()
-          && date1.getMonth() === date2.getMonth()
-          && date1.getDate() === date2.getDate()
+      return datetime.compareDate(date1, date2) === 0
     },
     isToday (date) {
       const today = new Date()

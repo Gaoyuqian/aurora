@@ -1,13 +1,21 @@
+import datetime from '../../utils/_datetime.js'
+
 const AuYearPickerContent = Vue.extend({
   template: require('./_year-picker-content.jade'),
   props: {
-    value: Date,
-    default () {
-      return new Date()
-    }
+    value: {
+      type: Date,
+      default () {
+        return new Date()
+      }
+    },
+    startDate: [String, Date],
+    endDate: [String, Date],
+    disabledDate: Function
   },
   data () {
     return {
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this),
       tempValue: new Date(this.value)
     }
   },
@@ -34,12 +42,18 @@ const AuYearPickerContent = Vue.extend({
       return this.startYear + 9
     },
     years () {
-      const value = this.startYear
+      const year = this.startYear
       const arr = []
+      var value
 
-      while (value <= this.endYear) {
-        arr.push(value)
-        value++
+      while (year <= this.endYear) {
+        value = new Date(`${year}-12-31`)
+        arr.push({
+          year,
+          value,
+          isDisabled: this.isDisabledFunc(value)
+        })
+        year++
       }
       return arr
     }
@@ -49,8 +63,11 @@ const AuYearPickerContent = Vue.extend({
       this.tempValue = new Date(this.value)
     },
     setYear (year) {
+      if (year.isDisabled) {
+        return
+      }
       const value = new Date(this.model)
-      value.setFullYear(year)
+      value.setFullYear(year.year)
       this.model = value
     },
     prevTenYear () {

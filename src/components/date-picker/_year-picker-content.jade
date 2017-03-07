@@ -11,4 +11,8 @@ div.au-year-picker-content
 
   div.au-date-picker-content
     .au-year-picker-list
-      .au-year-picker-item.au-date-picker-item(:class="{ 'au-text-current': currentYear == year }", v-for="year in years", @click="setYear(year)")|{{year}}
+      .au-year-picker-item.au-date-picker-item(
+        :class="{ 'au-text-current': currentYear == year.year, 'au-disabled': year.isDisabled }",
+        v-for="year in years",
+        @click="setYear(year)"
+      )|{{year.year}}

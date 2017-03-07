@@ -1,64 +1,37 @@
+import datetime from '../../utils/_datetime.js'
+
+const monthsMap = {
+  1: '一月',
+  2: '二月',
+  3: '三月',
+  4: '四月',
+  5: '五月',
+  6: '六月',
+  7: '七月',
+  8: '八月',
+  9: '九月',
+  10: '十月',
+  11: '十一月',
+  12: '十二月'
+}
+
 const AuMonthPickerContent = Vue.extend({
   template: require('./_month-picker-content.jade'),
   props: {
-    value: Date,
-    default () {
-      return new Date()
-    }
+    value: {
+      type: Date,
+      default () {
+        return new Date()
+      }
+    },
+    startDate: [String, Date],
+    endDate: [String, Date],
+    disabledDate: Function
   },
   data () {
     return {
       tempValue: new Date(this.value),
-      months: [
-        {
-          label: '一月',
-          value: 1
-        },
-        {
-          label: '二月',
-          value: 2
-        },
-        {
-          label: '三月',
-          value: 3
-        },
-        {
-          label: '四月',
-          value: 4
-        },
-        {
-          label: '五月',
-          value: 5
-        },
-        {
-          label: '六月',
-          value: 6
-        },
-        {
-          label: '七月',
-          value: 7
-        },
-        {
-          label: '八月',
-          value: 8
-        },
-        {
-          label: '九月',
-          value: 9
-        },
-        {
-          label: '十月',
-          value: 10
-        },
-        {
-          label: '十一月',
-          value: 11
-        },
-        {
-          label: '十二月',
-          value: 12
-        }
-      ]
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this)
     }
   },
   created () {
@@ -85,15 +58,42 @@ const AuMonthPickerContent = Vue.extend({
     year () {
       var value = new Date(this.tempValue)
       return value.getFullYear()
+    },
+    months () {
+      const months = []
+      var month
+      var value
+
+      for (month = 1; month <= 12; month++) {
+        value = new Date(`${this.year}-${month}-1 00:00:00`)
+        value.setMonth(month)
+        value = new Date(value - 1)
+
+        months.push({
+          value,
+          month,
+          label: this.getLabel(month),
+          isDisabled: this.isDisabledFunc(value)
+        })
+      }
+
+      new Date()
+      return months
     }
   },
   methods: {
+    getLabel (month) {
+      return monthsMap[month] || ''
+    },
     reset () {
       this.tempValue = new Date(this.value)
     },
     setMonth (month) {
+      if (month.isDisabled) {
+        return
+      }
       const value = new Date(this.tempValue)
-      value.setMonth(month - 1)
+      value.setMonth(month.month - 1)
       this.model = value
     },
     prevYear () {

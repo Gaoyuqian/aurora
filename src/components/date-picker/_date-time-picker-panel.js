@@ -39,6 +39,16 @@ const AuDateTimePickerPanel = Vue.extend({
       },
       set (value) {
         this.$emit('input', value)
+        this.$emit('close')
+      }
+    },
+
+    timeModel: {
+      get () {
+        return this.value
+      },
+      set (value) {
+        this.$emit('input', value)
       }
     },
     date () {
@@ -118,9 +128,6 @@ const AuDateTimePickerPanel = Vue.extend({
   watch: {
     tempValue (value) {
       this.$refs.datePicker.tempValue = value
-    },
-    value (value) {
-      console.log(value, this.tempValue, this.$refs.datePicker.tempValue)
     }
   }
 })

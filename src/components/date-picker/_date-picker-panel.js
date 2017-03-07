@@ -23,7 +23,10 @@ const AuDatePickerPanel = Vue.extend({
       }
     },
     leftRange: Boolean,
-    rightRange: Boolean
+    rightRange: Boolean,
+    startDate: [String, Date],
+    endDate: [String, Date],
+    disabledDate: Function
   },
   computed: {
     model: {

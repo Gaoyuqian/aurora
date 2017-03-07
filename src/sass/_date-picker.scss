@@ -20,7 +20,7 @@
   height: 36px;
   padding: 0 10px;
   font-size: $fontsize-default;
-  border-bottom: 1px solid $color-border;
+  border-bottom: 1px solid $color-white-dark;
 }
 
 .au-date-picker-button {
@@ -70,14 +70,24 @@
   }
 
   &:hover {
-    background-color: $color-gray-light-extra;
+    background-color: $color-white-dark;
     &.au-text-grey {
       background-color: transparent;
+    }
+    &.au-disabled {
+      background-color: $color-white-dark;
+      color: $color-silver-light-extra;
     }
   }
 
   &.au-text-grey {
     color: $color-gray;
+  }
+
+  &.au-disabled {
+    cursor: not-allowed;
+    background-color: $color-white-dark;
+    color: $color-silver-light-extra;
   }
 
   &.au-text-current {
@@ -178,7 +188,7 @@
   line-height: 35px;
   font-size: $fontsize-default;
   text-align: right;
-  border-top: 1px solid $color-border;
+  border-top: 1px solid $color-white-dark;
 }
 
 .au-date-picker-bottom-btn {
