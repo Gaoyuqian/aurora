@@ -26,45 +26,24 @@ const AuTimePickerPanel = Vue.extend({
       isDisabledSecond: datetime.getIsDisabledFuncByComponent(this, 'second')
     }
   },
+  created () {
+    this.$on('check.isDisabled', () => {
+      this.checkIsDisabled(this.value, (model) => {
+        if (+this.value !== +model) {
+          this.$emit('input', model)
+        }
+      })
+    })
+  },
   computed: {
     hours () {
-      const hours = this.getRange(0, 23)
-      const value = new Date(this.model)
-
-      return hours.map((hour) => {
-        value.setHours(hour)
-        return {
-          label: hour,
-          isDisabled: this.isDisabledHour(value)
-        }
-      })
+      return this.getHours(this.model)
     },
     minutes () {
-      const minutes = this.getRange(0, 59)
-      const value = new Date(this.model)
-      value.setHours(this.hour)
-
-      return minutes.map((minute) => {
-        value.setMinutes(minute)
-        return {
-          label: minute,
-          isDisabled: this.isDisabledMinute(value)
-        }
-      })
+      return this.getMinutes(this.model, this.hour)
     },
     seconds () {
-      const seconds = this.getRange(0, 59)
-      const value = new Date(this.model)
-      value.setHours(this.hour)
-      value.setMinutes(this.minute)
-
-      return seconds.map((second) => {
-        value.setSeconds(second)
-        return {
-          label: second,
-          isDisabled: this.isDisabledSecond(value)
-        }
-      })
+      return this.getSeconds(this.model, this.hour, this.minute)
     },
     model: {
       get () {
@@ -72,9 +51,8 @@ const AuTimePickerPanel = Vue.extend({
         return new Date(this.value)
       },
       set (value) {
-        this.$emit('input', value)
-        this.$nextTick(() => {
-          this.broadcast('check.isDisabled')
+        this.checkIsDisabled(value, (model) => {
+          this.$emit('input', model)
         })
       }
     },
@@ -110,6 +88,84 @@ const AuTimePickerPanel = Vue.extend({
     },
   },
   methods: {
+    getHours () {
+      const hours = this.getRange(0, 23)
+      const value = new Date(this.model)
+
+      return hours.map((hour) => {
+        value.setHours(hour)
+        return {
+          label: hour,
+          isDisabled: this.isDisabledHour(value)
+        }
+      })
+    },
+    getMinutes (hour) {
+      const minutes = this.getRange(0, 59)
+      const value = new Date(this.model)
+      value.setHours(hour)
+
+      return minutes.map((minute) => {
+        value.setMinutes(minute)
+        return {
+          label: minute,
+          isDisabled: this.isDisabledMinute(value)
+        }
+      })
+    },
+    getSeconds (hour, minute) {
+      const seconds = this.getRange(0, 59)
+      const value = new Date(this.model)
+      value.setHours(hour)
+      value.setMinutes(minute)
+
+      return seconds.map((second) => {
+        value.setSeconds(second)
+        return {
+          label: second,
+          isDisabled: this.isDisabledSecond(value)
+        }
+      })
+    },
+    checkIsDisabled (value, callback) {
+      const hours = this.getHours()
+      const hour = this.getAvaiableValue(hours, value.getHours())
+      const minutes = this.getMinutes(hour)
+      const minute = this.getAvaiableValue(minutes, value.getMinutes())
+      const seconds = this.getSeconds(hour, minute)
+      const second = this.getAvaiableValue(seconds, value.getSeconds())
+
+      const model = new Date(this.model)
+      model.setHours(hour)
+      model.setMinutes(minute)
+      model.setSeconds(second)
+
+      callback(model)
+    },
+    getAvaiableValue (range, value) {
+      var firstAvailable, isDisabled = false
+      range.some((item) => {
+        if (!item.isDisabled && !firstAvailable) {
+          firstAvailable = item
+        }
+
+        if (item.label == value) {
+          if (item.isDisabled) {
+            isDisabled = true
+          } else {
+            result = item.label
+            return true
+          }
+        }
+
+        if (isDisabled && firstAvailable) {
+          result = firstAvailable.label
+          return true
+        }
+      })
+
+      return result
+    },
     reset () {
       this.$children.forEach((child) => {
         child.reset && child.reset()

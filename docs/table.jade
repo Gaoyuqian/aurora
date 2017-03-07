@@ -28,8 +28,9 @@ block content
             label="操作",
             :style="{ width: '200px' }"
           )
-            au-button(type="primary", size="small")|编辑
-            au-button(type="danger", size="small")|删除
+            template(scope="scope")
+              au-button(type="primary", size="small")|编辑
+              au-button(type="danger", size="small")|删除
           au-table-column(
             label="操作"
           )

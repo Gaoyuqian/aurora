@@ -16,6 +16,9 @@ Vue.component('au-table', {
     }
   },
   render (h) {
+
+    const $children = this.$children
+
     const heads = this.columns.map((column) => {
       const label = typeof column.label === 'function' ? column.label.call(column, h) : column.label
       label = Array.isArray(label) ? label : [label]
@@ -24,18 +27,6 @@ Vue.component('au-table', {
         style: column.style || null
       }, label)
     })
-
-    // const $slot = this.$slots.default
-
-    /* if ($slot) {
-     *   $slot.forEach((vnode) => {
-     *     if (vnode.componentOptions.Ctor === TableColumn) {
-     *       heads.push('th', {
-
-     *       })
-     *     }
-     *   })
-     * } */
 
     const rows = this.data.map((row) => {
       const tds = this.columns.map((column) => {
