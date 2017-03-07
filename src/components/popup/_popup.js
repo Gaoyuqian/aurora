@@ -43,40 +43,25 @@ const AuPopup = Vue.extend({
       var top = relateElem.offsetTop + relateElem.offsetHeight
       var left = relateElem.offsetLeft
 
-      if (elemHeight > windowHeight) {
-        this.$el.style.height = (windowHeight - PADDING * 2) + 'px'
-      } else {
-        this.$el.style.height = 'auto'
-      }
-
       if ((top + elemHeight) > (windowY + windowHeight)) {
-        top = Math.max(
-          (windowY + windowHeight) - elemHeight - PADDING,
-          relateElem.offsetTop - elemHeight
-        )
+        top = relateElem.offsetTop - elemHeight - 2
+        if (top < windowY) {
+          top = windowY + (windowHeight - elemHeight)
+        }
       }
 
       if ((left + elemWidth) > (windowX + windowWidth)) {
-        if (elemWidth < windowWidth) {
-          left = relateElem.clientWidth + relateElem.offsetLeft - elemWidth
-        } else {
-          left = Math.max(
-            (windowX + windowWidth) - elemWidth,
-            relateElem.offsetLeft + relateElem.clientWidth - Math.max(relateElem.clientWidth, elemWidth)
-          )
-        }
+        left = windowWidth - elemWidth + windowX
       }
 
       this.top = `${top}px`
       this.left = `${left}px`
-
     },
     initPosition () {
       const relateElem = this.relateElem
       var top = relateElem.offsetTop + relateElem.offsetHeight
       var left = relateElem.offsetLeft
 
-      this.$el.style.height = 'auto'
       this.top = `${top}px`
       this.left = `${left}px`
     },
