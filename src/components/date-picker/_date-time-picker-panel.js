@@ -3,10 +3,11 @@ import AuDatePickerPanel from './_date-picker-panel.js'
 import AuTimePickerPanel from './_time-picker-panel.js'
 import dateFormat from '../../libs/dateformat.js'
 import dispatch from '../../mixins/_dispatch'
+import datePicker from '../../mixins/_date-picker.js'
 
 const AuDateTimePickerPanel = Vue.extend({
   template: require('./_date-time-picker-panel.jade'),
-  mixins: [dispatch],
+  mixins: [dispatch, datePicker],
   components: {
     Popup,
     AuDatePickerPanel,
@@ -39,7 +40,9 @@ const AuDateTimePickerPanel = Vue.extend({
       },
       set (value) {
         this.$emit('input', value)
-        this.$emit('close')
+        this.$nextTick(() => {
+          this.broadcast('check.isDisabled')
+        })
       }
     },
 

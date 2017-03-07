@@ -37,6 +37,8 @@ const AuTimePickerItem = Vue.extend({
       this.clientHeight = this.$el.querySelector('.au-time-picker-selector-inner').clientHeight - this.$el.clientHeight
       this.resetPosition(true)
     })
+
+    this.$on('check.isDisabled', this.checkIsDisable)
   },
   methods: {
     reset () {
@@ -51,8 +53,27 @@ const AuTimePickerItem = Vue.extend({
         this.offsetY = -1 * active.offsetTop
       }
     },
+    checkIsDisable () {
+      var firstAvailable, isDisabled = false
+      this.range.some((item) => {
+        if (!item.isDisabled && !firstAvailable) {
+          firstAvailable = item
+        }
+
+        if (item.label == this.value && item.isDisabled) {
+          isDisabled = true
+        }
+
+        if (isDisabled && firstAvailable) {
+          this.clickHandler(firstAvailable)
+        }
+      })
+    },
     clickHandler (value) {
-      this.$emit('input', value)
+      if (value.isDisabled) {
+        return
+      }
+      this.$emit('input', value.label)
     },
     scrollHandler ($event) {
       $event.preventDefault()

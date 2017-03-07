@@ -1,4 +1,5 @@
 import datetime from '../../utils/_datetime.js'
+import datePicker from '../../mixins/_date-picker.js'
 
 const monthsMap = {
   1: '一月',
@@ -17,21 +18,19 @@ const monthsMap = {
 
 const AuMonthPickerContent = Vue.extend({
   template: require('./_month-picker-content.jade'),
+  mixins: [datePicker],
   props: {
     value: {
       type: Date,
       default () {
         return new Date()
       }
-    },
-    startDate: [String, Date],
-    endDate: [String, Date],
-    disabledDate: Function
+    }
   },
   data () {
     return {
       tempValue: new Date(this.value),
-      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this)
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'month')
     }
   },
   created () {
@@ -65,9 +64,7 @@ const AuMonthPickerContent = Vue.extend({
       var value
 
       for (month = 1; month <= 12; month++) {
-        value = new Date(`${this.year}-${month}-1 00:00:00`)
-        value.setMonth(month)
-        value = new Date(value - 1)
+        value = new Date(`${this.year}-${month}`)
 
         months.push({
           value,

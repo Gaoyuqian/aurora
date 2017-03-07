@@ -1,7 +1,9 @@
 import AuYearPickerContent from './_year-picker-content.js'
+import datePicker from '../../mixins/_date-picker.js'
 
 const AuYearPickerPanel = Vue.extend({
   template: require('./_year-picker-panel.jade'),
+  mixins: [datePicker],
   components: {
     AuYearPickerContent
   },

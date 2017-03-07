@@ -1,10 +1,12 @@
 import dateFormat from '../../libs/dateformat.js'
 import TimePickerItem from './_time-picker-item.js'
 import dispatch from '../../mixins/_dispatch'
+import datePicker from '../../mixins/_date-picker.js'
+import datetime from '../../utils/_datetime.js'
 
 const AuTimePickerPanel = Vue.extend({
   template: require('./_time-picker-panel.jade'),
-  mixins: [dispatch],
+  mixins: [dispatch, datePicker],
   components: {
     TimePickerItem
   },
@@ -17,15 +19,53 @@ const AuTimePickerPanel = Vue.extend({
     }
   },
   data () {
-    const minutes = this.getRange(0, 59)
     return {
-      hours: this.getRange(0, 23),
-      minutes: minutes,
-      seconds: minutes,
-      tempValue: new Date(this.value)
+      tempValue: new Date(this.value),
+      isDisabledHour: datetime.getIsDisabledFuncByComponent(this, 'hour'),
+      isDisabledMinute: datetime.getIsDisabledFuncByComponent(this, 'minute'),
+      isDisabledSecond: datetime.getIsDisabledFuncByComponent(this, 'second')
     }
   },
   computed: {
+    hours () {
+      const hours = this.getRange(0, 23)
+      const value = new Date(this.model)
+
+      return hours.map((hour) => {
+        value.setHours(hour)
+        return {
+          label: hour,
+          isDisabled: this.isDisabledHour(value)
+        }
+      })
+    },
+    minutes () {
+      const minutes = this.getRange(0, 59)
+      const value = new Date(this.model)
+      value.setHours(this.hour)
+
+      return minutes.map((minute) => {
+        value.setMinutes(minute)
+        return {
+          label: minute,
+          isDisabled: this.isDisabledMinute(value)
+        }
+      })
+    },
+    seconds () {
+      const seconds = this.getRange(0, 59)
+      const value = new Date(this.model)
+      value.setHours(this.hour)
+      value.setMinutes(this.minute)
+
+      return seconds.map((second) => {
+        value.setSeconds(second)
+        return {
+          label: second,
+          isDisabled: this.isDisabledSecond(value)
+        }
+      })
+    },
     model: {
       get () {
         this.value
@@ -33,6 +73,9 @@ const AuTimePickerPanel = Vue.extend({
       },
       set (value) {
         this.$emit('input', value)
+        this.$nextTick(() => {
+          this.broadcast('check.isDisabled')
+        })
       }
     },
     hour: {

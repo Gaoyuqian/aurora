@@ -7,12 +7,13 @@ import AuTimePickerPanel from './_time-picker-panel.js'
 import AuDateTimePickerPanel from './_date-time-picker-panel.js'
 import AuDateTimePickerRangePanel from './_date-time-picker-range-panel.js'
 import dispatch from '../../mixins/_dispatch'
+import datePicker from '../../mixins/_date-picker.js'
 
 import dateFormat from '../../libs/dateformat.js'
 
 const AuDatePicker = Vue.extend({
   template: require('./_date-picker.jade'),
-  mixins: [dispatch],
+  mixins: [dispatch, datePicker],
   components: {
     Popup,
     AuYearPickerPanel,
@@ -45,10 +46,7 @@ const AuDatePicker = Vue.extend({
             return 'yyyy-mm-dd HH:MM:ss'
         }
       }
-    },
-    startDate: [String, Date],
-    endDate: [String, Date],
-    disabledDate: Function
+    }
   },
   computed: {
     model: {

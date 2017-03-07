@@ -8,11 +8,20 @@
     ref="datePicker",
     :range="range",
     :leftRange="leftRange",
-    :rightRange="rightRange"
+    :rightRange="rightRange",
+    :startDate="startDate",
+      :endDate="endDate",
+      :disabledDate="disabledDate"
   )
 
   .au-date-picker-bottom(v-if="isShowBottomBar")
     .au-date-picker-bottom-btn(@click="closeHandler")|关闭
 
   popup(ref="popup", selfControl)
-    AuTimePickerPanel(v-model="timeModel", ref="timePicker")
+    AuTimePickerPanel(
+      v-model="timeModel",
+      ref="timePicker",
+      :startDate="startDate",
+      :endDate="endDate",
+      :disabledDate="disabledDate"
+    )

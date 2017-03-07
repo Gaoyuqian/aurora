@@ -1,12 +1,13 @@
 import datetime from '../../utils/_datetime.js'
 import dateFormat from '../../libs/dateformat.js'
 import dispatch from '../../mixins/_dispatch.js'
+import datePicker from '../../mixins/_date-picker.js'
 
 const ONE_DAY = 24 * 60 * 60 * 1000
 
 const AuDatePickerContent = Vue.extend({
   template: require('./_date-picker-content.jade'),
-  mixins: [dispatch],
+  mixins: [dispatch, datePicker],
   props: {
     value: {
       type: Date,
@@ -21,16 +22,13 @@ const AuDatePickerContent = Vue.extend({
       }
     },
     leftRange: Boolean,
-    rightRange: Boolean,
-    startDate: [String, Date],
-    endDate: [String, Date],
-    disabledDate: Function
+    rightRange: Boolean
   },
   data () {
     return {
       tempValue: new Date(this.value),
       mouseoverValue: null,
-      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this)
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'date')
     }
   },
   computed: {
@@ -152,7 +150,7 @@ const AuDatePickerContent = Vue.extend({
       return result
     },
     isEqualDate (date1, date2) {
-      return datetime.compareDate(date1, date2) === 0
+      return datetime.compareDate('date', date1, date2) === 0
     },
     isToday (date) {
       const today = new Date()

@@ -1,30 +1,17 @@
 export default {
-  getDateDisabledFunc (type, value) {
+  getDateDisabledFunc (type, value, compareType) {
     if (!value) {
       return function () { return true }
     }
+
     if (typeof value === 'string') {
       if (value.match(/^\d{2}:\d{2}:\d{2}$/) != null) {
         const arr = value.split(':')
-        const timeNumber = this.getTimeNumber(
-          parseInt(arr[0], 10),
-          parseInt(arr[1], 10),
-          parseInt(arr[2], 10)
-        )
-        return function (date) {
-          const result
-          const dateTimeCount = this.getTimeNumber(
-            value.getHours(),
-            value.getMinutes(),
-            value.getSeconds()
-          )
-
-          if (type === 'startDate') {
-            return timeCount > dateTimeCount
-          } else {
-            return timeCount < dateTimeCount
-          }
-        }
+        value = new Date()
+        value.setHours(parseInt(arr[0], 10))
+        value.setMinutes(parseInt(arr[1], 10))
+        value.setSeconds(parseInt(arr[2], 10))
+        console.log(value)
       } else {
         value = new Date(value)
       }
@@ -32,9 +19,9 @@ export default {
 
     return (date) => {
       if (type === 'startDate') {
-        return this.compareDate(value, date) < 0
+        return this.compareDate(compareType, value, date) < 0
       } else {
-        return this.compareDate(value, date) > 0
+        return this.compareDate(compareType, value, date) > 0
       }
     }
   },
@@ -43,9 +30,35 @@ export default {
   // if date1 > date2 return negetive number
   // if date1 == date2 return 0
   // if date1 < date2 return positive number
-  compareDate (date1, date2) {
-    const value1 = this.formatDateUnit(date1.getFullYear()) + this.formatDateUnit(date1.getMonth() + 1) + this.formatDateUnit(date1.getDate())
-    const value2 = this.formatDateUnit(date2.getFullYear()) + this.formatDateUnit(date2.getMonth() + 1) + this.formatDateUnit(date2.getDate())
+  compareDate (compareType, date1, date2) {
+    const value1 = date1.getFullYear()
+    const value2 = date2.getFullYear()
+    const compareTime = compareType in { hour: true, minute: true, second: true}
+
+    if (compareType === 'month' || compareType === 'date' || compareTime) {
+      value1 += this.formatDateUnit(date1.getMonth() + 1)
+      value2 += this.formatDateUnit(date2.getMonth() + 1)
+    }
+
+    if (compareType === 'date' || compareTime) {
+      value1 += this.formatDateUnit(date1.getDate())
+      value2 += this.formatDateUnit(date2.getDate())
+    }
+
+    if (compareType === 'hour' || compareType === 'minute' || compareType === 'second') {
+      value1 += this.formatDateUnit(date1.getHours())
+      value2 += this.formatDateUnit(date2.getHours())
+    }
+
+    if (compareType === 'minute' || compareType === 'second') {
+      value1 += this.formatDateUnit(date1.getMinutes())
+      value2 += this.formatDateUnit(date2.getMinutes())
+    }
+
+    if (compareType === 'second') {
+      value1 += this.formatDateUnit(date1.getSeconds())
+      value2 += this.formatDateUnit(date2.getSeconds())
+    }
 
     value1 = parseInt(value1, 10)
     value2 = parseInt(value2, 10)
@@ -74,7 +87,7 @@ export default {
     return result
   },
 
-  getIsDisabledFuncByComponent (component) {
+  getIsDisabledFuncByComponent (component, compareType = 'date') {
     const funcs = []
 
     if (component.disabledDate) {
@@ -82,11 +95,11 @@ export default {
     }
 
     if (component.startDate) {
-      funcs.push(this.getDateDisabledFunc('startDate', component.startDate))
+      funcs.push(this.getDateDisabledFunc('startDate', component.startDate, compareType))
     }
 
     if (component.endDate) {
-      funcs.push(this.getDateDisabledFunc('endDate', component.endDate))
+      funcs.push(this.getDateDisabledFunc('endDate', component.endDate, compareType))
     }
 
     if (funcs.length === 0) {

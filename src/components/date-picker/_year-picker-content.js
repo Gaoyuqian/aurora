@@ -1,22 +1,21 @@
 import datetime from '../../utils/_datetime.js'
+import datePicker from '../../mixins/_date-picker.js'
 
 const AuYearPickerContent = Vue.extend({
   template: require('./_year-picker-content.jade'),
+  mixins: [datePicker],
   props: {
     value: {
       type: Date,
       default () {
         return new Date()
       }
-    },
-    startDate: [String, Date],
-    endDate: [String, Date],
-    disabledDate: Function
+    }
   },
   data () {
     return {
-      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this),
-      tempValue: new Date(this.value)
+      tempValue: new Date(this.value),
+      isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'year')
     }
   },
   created () {
@@ -47,7 +46,7 @@ const AuYearPickerContent = Vue.extend({
       var value
 
       while (year <= this.endYear) {
-        value = new Date(`${year}-12-31`)
+        value = new Date(String(year))
         arr.push({
           year,
           value,

@@ -1,9 +1,10 @@
 import AuDateTimePickerPanel from './_date-time-picker-panel.js'
+import datePicker from '../../mixins/_date-picker.js'
 import dispatch from '../../mixins/_dispatch.js'
 
 const AuDateTimePickerRangePanel = Vue.extend({
   template: require('./_date-time-picker-range-panel.jade'),
-  mixins: [dispatch],
+  mixins: [dispatch, datePicker],
   components: {
     AuDateTimePickerPanel
   },

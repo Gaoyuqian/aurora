@@ -242,6 +242,12 @@
     background-color: $color-gray-light-extra;
   }
 
+  &.au-disabled {
+    cursor: not-allowed;
+    background-color: $color-white-dark;
+    color: $color-silver-light-extra;
+  }
+
   &.active {
     background-color: $color-primary;
     color: $color-white;

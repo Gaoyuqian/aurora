@@ -20,30 +20,51 @@ block content
             au-date-picker(v-model="date")
           au-flex-item(span="8")
             h4|按日期选择
-            au-date-picker(v-model="date", type="date", start-date="2017-03-07")
+            au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07")
 
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|按年选择
             au-date-picker(v-model="year", type="year")
+          au-flex-item(span="8")
+            h4|按年选择
+            au-date-picker(v-model="year", type="year", start-date="2017", end-date="2018")
+
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|按月选择
             au-date-picker(v-model="month", type="month")
 
+          au-flex-item(span="8")
+            h4|按月选择
+            au-date-picker(v-model="month", type="month", start-date="2017-2", end-date="2017-10")
+
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|选择日期范围
             au-date-picker(v-model="daterange", type="daterange")
+
+          au-flex-item(span="8")
+            h4|选择日期范围
+            au-date-picker(v-model="daterange", type="daterange", start-date="2017-2-7", end-date="2017-10-1")
+
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|选择日期时间
             au-date-picker(v-model="datetime", type="datetime")
 
+          au-flex-item(span="8")
+            h4|选择日期时间
+            au-date-picker(v-model="datetime", type="datetime", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
+
         au-flex(gutter="20", wrap="wrap")
           au-flex-item(span="8")
             h4|选择日期时间范围
             au-date-picker(v-model="datetimerange", type="datetimerange")
+
+          au-flex-item(span="8")
+            h4|选择日期时间范围
+            au-date-picker(v-model="datetimerange", type="datetimerange", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
 
   .docs-section
     h2|时间选择器
@@ -55,6 +76,9 @@ block content
           au-flex-item(span="8")
             h4|选择时间
             au-date-picker(v-model="time", type="time")
+          au-flex-item(span="8")
+            h4|选择时间
+            au-date-picker(v-model="time", type="time", start-date="08:08:08")
 
 
 block script
