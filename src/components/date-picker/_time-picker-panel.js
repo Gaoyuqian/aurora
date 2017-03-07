@@ -37,13 +37,13 @@ const AuTimePickerPanel = Vue.extend({
   },
   computed: {
     hours () {
-      return this.getHours(this.model)
+      return this.getHours()
     },
     minutes () {
-      return this.getMinutes(this.model, this.hour)
+      return this.getMinutes(this.hour)
     },
     seconds () {
-      return this.getSeconds(this.model, this.hour, this.minute)
+      return this.getSeconds(this.hour, this.minute)
     },
     model: {
       get () {
@@ -139,7 +139,6 @@ const AuTimePickerPanel = Vue.extend({
       model.setHours(hour)
       model.setMinutes(minute)
       model.setSeconds(second)
-
       callback(model)
     },
     getAvaiableValue (range, value) {
