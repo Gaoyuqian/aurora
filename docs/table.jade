@@ -53,7 +53,7 @@ block content
       p|checkbox表格的用法
     .docs-panel
       .docs-panel-row
-        au-table(:data="data")
+        au-table(ref="table", :data="data")
           au-table-column(
             type="checkbox",
             v-model="checkeds"
@@ -190,6 +190,11 @@ block script
             data[2]
           ]
         }
+      },
+      mounted () {
+        this.$refs.table.$on('select', (data) => {
+          console.log(data)
+        })
       },
       methods: {
         editHandler (...args) {

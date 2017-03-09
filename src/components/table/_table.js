@@ -42,7 +42,10 @@ Vue.component('au-table', {
             on: {
               input: (value) => {
                 column.toggleCheckedRow(row, value)
-                this.$nextTick(this.$forceUpdate)
+                this.$nextTick(() => {
+                  this.$forceUpdate()
+                  this.$emit('select', column.model)
+                })
               }
             }
           })]
@@ -63,8 +66,6 @@ Vue.component('au-table', {
               td = tds[columnIndex]
               width = Math.max(width, td.querySelector('.au-table-cell').offsetWidth + TD_PADDING * 2 + 5)
             }
-            console.log(width)
-
             if (width > 0) {
               for (let i = 0; i < trs.length; i++) {
                 tr = trs[i]
@@ -147,7 +148,11 @@ Vue.component('au-table', {
       } else {
         column.model = []
       }
-      this.$forceUpdate()
+      this.$nextTick(() => {
+        this.$forceUpdate()
+        this.$emit('select', column.model)
+        this.$emit('select.all', column.model)
+      })
     }
   }
 })
