@@ -22,3 +22,23 @@
 .au-icon-rotate {
   animation: circle 1.5s infinite linear;
 }
+
+.au-icon-primary {
+  color: $color-primary;
+}
+
+.au-icon-info {
+  color: $color-info;
+}
+
+.au-icon-success {
+  color: $color-success;
+}
+
+.au-icon-warning {
+  color: $color-warning;
+}
+
+.au-icon-danger {
+  color: $color-danger;
+}

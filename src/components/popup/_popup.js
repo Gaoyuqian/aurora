@@ -7,7 +7,11 @@ const AuPopup = Vue.extend({
   template: require('./_popup.jade'),
   mixins: [dispatch],
   props: {
-    selfControl: Boolean
+    selfControl: Boolean,
+    position: {
+      type: String,
+      default: 'bottomLeft' // top, left, right, bottom, topLeft, topRight, leftTop, leftBottom, bottomLeft, bottomRight, rightTop, rightBottom
+    }
   },
   data () {
     return {
@@ -32,30 +36,156 @@ const AuPopup = Vue.extend({
       $event.stopPropagation()
     },
     calPosition () {
-      const relateElem = this.relateElem
-      const html = document.documentElement
-      const elemWidth = this.$el.scrollWidth
-      const elemHeight = this.$el.scrollHeight
-      const windowHeight = html.clientHeight
-      const windowWidth = html.clientWidth
-      const windowX = window.scrollX
-      const windowY = window.scrollY
-      var top = relateElem.offsetTop + relateElem.offsetHeight
-      var left = relateElem.offsetLeft
-
-      if ((top + elemHeight) > (windowY + windowHeight)) {
-        top = relateElem.offsetTop - elemHeight - 2
-        if (top < windowY) {
-          top = windowY + (windowHeight - elemHeight)
-        }
-      }
-
-      if ((left + elemWidth) > (windowX + windowWidth)) {
-        left = windowWidth - elemWidth + windowX
-      }
+      const top = this.getTop()
+      const left = this.getLeft()
 
       this.top = `${top}px`
       this.left = `${left}px`
+    },
+    getTop () {
+      const position = this.position
+      const relateElem = this.relateElem
+      const relateTop = relateElem.offsetTop
+      const relateHeight = relateElem.offsetHeight
+      const elemHeight = this.$el.offsetHeight
+      const minTop = relateTop - elemHeight
+      const maxTop = relateTop + relateHeight
+      const topBorder = window.scrollY
+      const bottomBorder = (window.scrollY + document.documentElement.clientHeight - elemHeight)
+
+      var top = 0
+
+      switch (position) {
+        case 'top': case 'topLeft': case 'topRight':
+          top = minTop
+
+          if (top < topBorder) {
+            top = maxTop
+
+            if (top > bottomBorder) {
+              top = topBorder
+            }
+          }
+          break
+
+        case 'leftTop': case 'rightTop':
+          top = minTop + elemHeight
+
+          if (top > bottomBorder) {
+            top = minTop + relateHeight
+            if (top < topBorder) {
+              top = bottomBorder
+            }
+          }
+          break
+
+        case 'left': case 'right':
+          top = minTop + (maxTop - minTop) / 2
+          if (top < topBorder) {
+            top = Math.min(topBorder, maxTop)
+          } else if (top > bottomBorder) {
+            top = Math.max(bottomBorder, minTop)
+          }
+          break
+
+        case 'leftBottom': case 'rightBottom':
+          top = minTop + relateHeight
+          if (top < topBorder) {
+            top = minTop + elemHeight
+
+            if (top > bottomBorder) {
+              top = topBorder
+            }
+          }
+          break
+
+        default: // bottomLeft, bottom, bottomRight
+          top = maxTop
+
+          if (top > bottomBorder) {
+            top = minTop
+
+            if (top < topBorder) {
+              top = bottomBorder
+            }
+          }
+          break
+      }
+
+      return top
+    },
+
+    getLeft () {
+      const position = this.position
+      const relateElem = this.relateElem
+      const relateLeft = relateElem.offsetLeft
+      const relateWidth = relateElem.offsetWidth
+      const elemWidth = this.$el.offsetWidth
+      const minLeft = relateLeft - elemWidth
+      const maxLeft = relateLeft + relateWidth
+      const leftBorder = window.scrollX
+      const rightBorder = (window.scrollX + document.documentElement.clientWidth - elemWidth)
+
+      var left = 0
+
+      switch (position) {
+        case 'left': case 'leftTop': case 'leftBottom':
+          left = minLeft
+
+          if (left < leftBorder) {
+            left = maxLeft
+
+            if (left > rightBorder) {
+              left = leftBorder
+            }
+          }
+          break
+
+        case 'topLeft': case 'bottomLeft':
+          left = minLeft + elemWidth
+
+          if (left > rightBorder) {
+            left = minLeft + relateWidth
+            if (left < leftBorder) {
+              left = rightBorder
+            }
+          }
+          break
+
+        case 'top': case 'bottom':
+          left = minLeft + (maxLeft - minLeft) / 2
+          if (left < leftBorder) {
+            left = Math.min(leftBorder, maxLeft)
+          } else if (left > rightBorder) {
+            left = Math.max(rightBorder, minLeft)
+          }
+          break
+
+        case 'topRight': case 'bottomRight':
+          left = minLeft + relateWidth
+          if (left < leftBorder) {
+            left = minLeft + elemWidth
+
+            if (left > rightBorder) {
+              left = leftBorder
+            }
+          }
+          break
+
+        default: // rightTop, right, rightBottom
+          left = maxLeft
+
+          if (left > rightBorder) {
+            left = minLeft
+
+            if (left < leftBorder) {
+              left = rightBorder
+            }
+          }
+          break
+      }
+
+      return left
     },
     initPosition () {
       const relateElem = this.relateElem

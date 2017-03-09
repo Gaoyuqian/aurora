@@ -7,6 +7,16 @@
   bottom: 0;
 }
 
+.au-modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .au-modal {
   border: 1px solid $color-border;
   margin: 40px auto;
@@ -20,32 +30,38 @@
   line-height: 40px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid $color-border;
+  padding: 30px 30px 0;
 }
 
 .au-modal-heading-left {
-  padding-left: 20px;
   flex: 1;
+  color: $color-black-light-extra;
+  font-size: $fontsize-medium;
+  font-weight: bold;
   .au-icon {
     margin-right: 10px;
   }
 }
 
 .au-modal-close {
-  width: 40px;
-  height: 40px;
+  font-size: $fontsize-medium;
+  color: $color-silver-light-extra;
   @include flex-center-center();
   cursor: pointer;
+  @include expand-link();
+  &:hover {
+    color: $color-primary;
+  }
 }
 
 .au-modal-content {
-  padding: 20px;
+  padding: 30px;
+  font-size: $fontsize-default;
 }
 
 .au-modal-footer {
   text-align: right;
-  border-top: 1px solid $color-border;
-  padding: 10px 20px;
+  padding: 16px 30px;
 }
 
 

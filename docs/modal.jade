@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Modal
+  |Modal
 
 block content
   .docs-heading
@@ -15,11 +15,19 @@ block content
     .docs-panel
       .docs-panel-row
         au-button(type="primary", size="small", @click="isShow = true")|显示
-        au-modal(label="新页面", v-model="isShow")
-          div|哈哈
+        au-modal(title="新页面", v-model="isShow")
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div(slot="footer")
+            au-button(type="primary", size="small", @click="step2 = true")|提交
+            au-button(type="default", size="small", @click="isShow = false")|取消
+
+        au-modal(title="第二步", v-model="step2")
+          div|这里是第二步
           div(slot="footer")
             au-button(type="primary", size="small")|提交
-            au-button(type="default", size="small", @click="isShow = false")|取消
+            au-button(type="default", size="small", @click="step2 = false")|取消
 
 
 block script
@@ -37,7 +45,8 @@ block script
               default: 'null'
             }
           ],
-          isShow: false
+          isShow: false,
+          step2: false
         }
       }
     })

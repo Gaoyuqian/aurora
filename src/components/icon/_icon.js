@@ -1,6 +1,7 @@
 Vue.component('au-icon', {
   template: '<i class="au-icon fa" :class="iconObj"></i>',
   props: {
+    type: String,
     icon: {
       type: String,
       default: null
@@ -21,6 +22,10 @@ Vue.component('au-icon', {
 
       if (this.size !== 'default') {
         obj.push('au-icon-' + this.size)
+      }
+
+      if (this.type) {
+        obj.push('au-icon-' + this.type)
       }
 
       if (this.autorotate) {

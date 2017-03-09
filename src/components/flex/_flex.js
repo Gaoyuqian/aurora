@@ -1,7 +1,9 @@
+import dispatch from '../../mixins/_dispatch'
 import AuFlexItem from './_flex-item.js'
 
 Vue.component('au-flex', {
   template: require('./_flex.tpl'),
+  mixins: [dispatch],
   props: {
     direction: {
       type: String,
@@ -32,11 +34,6 @@ Vue.component('au-flex', {
       default: 0
     }
   },
-  data () {
-    return {
-      _wrap: this.column != null ? (this.wrap || 'wrap') : this.wrap
-    }
-  },
   mounted () {
     window.addEventListener('resize', this.updateUI)
     this.updateUI()
@@ -48,6 +45,9 @@ Vue.component('au-flex', {
     this.updateUI()
   },
   computed: {
+    _wrap () {
+      return this.column != null ? (this.wrap || 'wrap') : this.wrap
+    },
     styleObj () {
       const style = {}
 
@@ -75,8 +75,7 @@ Vue.component('au-flex', {
     }
   },
   methods: {
-
-    // can call by child
+    // call by child
     getOuterWidth () {
       const container = this.$refs.container
       const margin = (parseFloat(container.style.marginLeft) || 0) + (parseFloat(container.style.marginRight) || 0)
@@ -85,37 +84,42 @@ Vue.component('au-flex', {
         margin = 0
       }
 
-      return (container.offsetWidth + margin) + Number(this.gutter)
+      const rect = container.getBoundingClientRect()
+      return (rect.width + margin) + Number(this.gutter)
     },
     updateUI () {
-      const elemStyle = this.$refs.container.style
-      const gutter = this.gutter / 2
+      this.$nextTick(() => {
+        const elemStyle = this.$refs.container.style
+        const gutter = this.gutter / 2
+        const itemWidth
 
-      if (this.column != null) {
-        const containerOuterWidth = this.getOuterWidth()
-        const itemWidth = (containerOuterWidth / this.column) - gutter * 2
-      }
-
-      elemStyle.margin = `-${gutter}px`
-
-      this.$children.forEach((instance) => {
-        if (instance instanceof AuFlexItem) {
-          const itemStyle = instance.$el.style
-
-          if (itemWidth != null) {
-            itemStyle.width = `${itemWidth}px`
-            itemStyle.margin = `${gutter}px`
-            instance.columnMode = true
-          } else {
-
-            // cancel column-mode, if set before
-            instance.columnMode = false
-            itemStyle.marginLeft = itemStyle.marginLeft || `${gutter}px`
-            itemStyle.marginRight = itemStyle.marginRight || `${gutter}px`
-            itemStyle.marginTop = itemStyle.marginTop || `${gutter}px`
-            itemStyle.marginBottom = itemStyle.marginBottom || `${gutter}px`
-          }
+        if (this.column != null) {
+          const containerOuterWidth = this.getOuterWidth()
+          itemWidth = (containerOuterWidth / this.column) - gutter * 2
+          console.log(containerOuterWidth, itemWidth)
         }
+
+        elemStyle.margin = `-${gutter}px`
+
+        this.$children.forEach((instance) => {
+          if (instance instanceof AuFlexItem) {
+            const itemStyle = instance.$el.style
+
+            if (itemWidth != null) {
+              itemStyle.width = `${itemWidth}px`
+              itemStyle.margin = `${gutter}px`
+              instance.columnMode = true
+            } else {
+
+              // cancel column-mode, if set before
+              instance.columnMode = false
+              itemStyle.marginLeft = itemStyle.marginLeft || `${gutter}px`
+              itemStyle.marginRight = itemStyle.marginRight || `${gutter}px`
+              itemStyle.marginTop = itemStyle.marginTop || `${gutter}px`
+              itemStyle.marginBottom = itemStyle.marginBottom || `${gutter}px`
+            }
+          }
+        })
       })
     }
   }

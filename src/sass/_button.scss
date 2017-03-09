@@ -12,6 +12,7 @@
   border-radius: $button-border-radius;
   cursor: pointer;
   user-select: none;
+  vertical-align: middle;
 
   &[disabled] {
     cursor: not-allowed;

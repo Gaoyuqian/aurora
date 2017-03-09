@@ -1,0 +1,79 @@
+extends ./_layout
+
+block title
+  |PopConfrim
+
+block content
+  .docs-heading
+    h1|AuPopConfrim
+    .docs-desc
+
+  .docs-section(style="height:2000px;")
+    h2|基础选择器
+    .docs-desc
+      p|基础选择器的用法
+    .docs-panel
+      .docs-panel-row
+        au-flex(wrap="wrap")
+          au-flex-item(offset="4", span="16")
+            au-flex(gutter="20", column="3")
+              au-flex-item
+              au-flex-item(style="text-align: center")
+                au-pop-confirm(position="topLeft", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                au-pop-confirm(position="top", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                au-pop-confirm(position="topRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+              au-flex-item
+              au-flex-item(style="text-align: right")
+                au-pop-confirm(position="leftTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                br
+                au-pop-confirm(position="left", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                br
+                au-pop-confirm(position="leftBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+              au-flex-item
+              au-flex-item(style="text-align: left")
+                au-pop-confirm(position="rightTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                br
+                au-pop-confirm(position="right", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                br
+                au-pop-confirm(position="rightBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+              au-flex-item
+              au-flex-item(style="text-align: center")
+                au-pop-confirm(position="bottomLeft", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                au-pop-confirm(position="bottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+                au-pop-confirm(position="bottomRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                  au-button|提交
+              au-flex-item
+
+  .docs-section
+    h2|属性
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+
+        }
+      },
+      methods: {
+        confirmHandler () {
+          console.log('confirm')
+        },
+        cancelHandler () {
+          console.log('cancel')
+        }
+      }
+    })

@@ -20,5 +20,5 @@ import './components/modal/_modal.js'
 import './components/tabs/_tabs.js'
 import './components/tabs/_tab-panel.js'
 import './components/active-transition/_active-transition.js'
-
 import './components/date-picker/_date-picker.js'
+import './components/pop-confirm/_pop-confirm.js'

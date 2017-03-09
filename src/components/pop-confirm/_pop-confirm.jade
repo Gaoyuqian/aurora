@@ -1,0 +1,14 @@
+.au-pop-confirm-wrapper(@click="clickHandler")
+  slot
+  popup(
+    ref="popup",
+    :position="position"
+  )
+    .au-pop-confirm
+      .au-pop-confirm-content
+        au-icon(type="warning", icon="exclamation-circle")
+        |{{ message }}
+      .au-pop-confirm-bottom
+        au-button(type="default", size="mini", @click="cancelHandler")|{{ cancelmMessage }}
+        |&nbsp;
+        au-button(type="primary", size="mini", @click="confirmHandler")|{{ confirmMessage }}

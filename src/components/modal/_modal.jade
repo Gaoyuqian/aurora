@@ -1,11 +1,11 @@
 transition(name="au-modal-wrap")
-  .au-modal-mask(v-if="value")
+  .au-modal-wrapper(v-if="value", :style="style")
     .au-modal(v-if="value")
       .au-modal-heading
         .au-modal-heading-left
           .au-modal-label
             au-icon(:icon="icon", v-if="icon")
-            |{{ label }}
+            |{{ title }}
 
         .au-modal-heading-right
           div.au-modal-close(@click="closeHandler")
