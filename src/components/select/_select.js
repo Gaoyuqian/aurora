@@ -138,15 +138,10 @@ const AuSelect = Vue.extend({
       if (this.disabled) {
         return
       }
-
       const pos = this.value.indexOf(value)
-
-      console.log(this.value, value, pos)
       if (pos > -1) {
         this.value.splice(pos, 1)
       }
-      console.log(this.value)
-
       this.$emit('input', this.value.slice())
     },
     removeValueHandler ($event, value) {
@@ -172,11 +167,9 @@ const AuSelect = Vue.extend({
         this.optionsElem.setRelateElem(this.$el)
         document.body.appendChild(this.optionsElem.$el)
         this.optionsElem.$on('show', () => {
-          console.log('onshow')
           this.active = true
         })
         this.optionsElem.$on('hide', () => {
-          console.log('onhide')
           this.active = false
         })
       }

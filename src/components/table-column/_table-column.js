@@ -1,4 +1,7 @@
-const tableColumn = Vue.extend({
+import dispatch from '../../mixins/_dispatch'
+
+const AuTableColumn = Vue.extend({
+  mixins: [dispatch],
   props: {
     label: String,
     attrName: String,
@@ -29,6 +32,12 @@ const tableColumn = Vue.extend({
     return {
       fakeValue: []
     }
+  },
+  mounted () {
+    this.dispatch('reset.column')
+  },
+  destroy () {
+    this.dispatch('reset.column')
   },
   render (h) {
     return h('div')
@@ -72,6 +81,6 @@ const tableColumn = Vue.extend({
 })
 
 
-Vue.component('au-table-column', tableColumn)
+Vue.component('au-table-column', AuTableColumn)
 
-export default tableColumn
+export default AuTableColumn

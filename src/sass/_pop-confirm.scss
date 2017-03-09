@@ -9,9 +9,11 @@
 
 .au-pop-confirm-content {
   font-size: $fontsize-small;
-  padding: 10px 20px;
+  padding: 10px 10px;
   display: flex;
   align-items: center;
+  max-width: 150px;
+  min-width: 100px;
 
   .au-icon {
     margin-right: 10px;
@@ -20,6 +22,6 @@
 }
 
 .au-pop-confirm-bottom {
-  padding: 0 20px 10px;
+  padding: 0 10px 10px;
   text-align: right;
 }

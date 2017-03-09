@@ -11,13 +11,15 @@ const AuPopup = Vue.extend({
     position: {
       type: String,
       default: 'bottomLeft' // top, left, right, bottom, topLeft, topRight, leftTop, leftBottom, bottomLeft, bottomRight, rightTop, rightBottom
-    }
+    },
+    showArrow: Boolean
   },
   data () {
     return {
       top: 0,
       left: 0,
-      isShow: false
+      isShow: false,
+      direction: 'bottom'
     }
   },
   computed: {
@@ -26,6 +28,12 @@ const AuPopup = Vue.extend({
         top: this.top,
         left: this.left
       }
+    },
+    classObject () {
+      const position = this.position.replace(/([A-Z])/g, (_, match) => {
+        return '-' + match.toLowerCase()
+      })
+      return [`au-popup-direction-${this.direction}`, `au-popup-${position}`]
     }
   },
   methods: {
@@ -58,12 +66,15 @@ const AuPopup = Vue.extend({
       switch (position) {
         case 'top': case 'topLeft': case 'topRight':
           top = minTop
+          this.direction = 'top'
 
           if (top < topBorder) {
             top = maxTop
+            this.direction = 'bottom'
 
             if (top > bottomBorder) {
               top = topBorder
+              this.direction = 'top'
             }
           }
           break
@@ -101,12 +112,14 @@ const AuPopup = Vue.extend({
 
         default: // bottomLeft, bottom, bottomRight
           top = maxTop
-
+          this.direction = 'bottom'
           if (top > bottomBorder) {
             top = minTop
+            this.direction = 'top'
 
             if (top < topBorder) {
               top = bottomBorder
+              this.direction = 'bottom'
             }
           }
           break
@@ -131,19 +144,19 @@ const AuPopup = Vue.extend({
       switch (position) {
         case 'left': case 'leftTop': case 'leftBottom':
           left = minLeft
-
+          this.direction = 'left'
           if (left < leftBorder) {
             left = maxLeft
-
+            this.direction = 'right'
             if (left > rightBorder) {
               left = leftBorder
+              this.direction = 'left'
             }
           }
           break
 
         case 'topLeft': case 'bottomLeft':
           left = minLeft + elemWidth
-
           if (left > rightBorder) {
             left = minLeft + relateWidth
             if (left < leftBorder) {
@@ -165,7 +178,6 @@ const AuPopup = Vue.extend({
           left = minLeft + relateWidth
           if (left < leftBorder) {
             left = minLeft + elemWidth
-
             if (left > rightBorder) {
               left = leftBorder
             }
@@ -174,12 +186,13 @@ const AuPopup = Vue.extend({
 
         default: // rightTop, right, rightBottom
           left = maxLeft
-
+          this.direction = 'right'
           if (left > rightBorder) {
             left = minLeft
-
+            this.direction = 'left'
             if (left < leftBorder) {
               left = rightBorder
+              this.direction = 'right'
             }
           }
           break

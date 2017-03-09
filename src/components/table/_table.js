@@ -17,9 +17,8 @@ Vue.component('au-table', {
     }
   },
   mounted () {
-    this.columns = this.$slots.default.filter((slot) => { return slot.tag }).map((slot) => {
-      return slot.componentInstance
-    })
+    this.$on('reset.column', this.resetColumns)
+    this.resetColumns()
   },
   render (h) {
     const rows = this.data.map((row, index) => {
@@ -141,6 +140,13 @@ Vue.component('au-table', {
     )
   },
   methods: {
+    resetColumns () {
+      console.log('--------------------')
+      console.log(this.$slots.default)
+      this.columns = (this.$slots.default || []).filter((slot) => { return slot.tag }).map((slot) => {
+        return slot.componentInstance
+      })
+    },
     setAllChecked (column, isChecked) {
       const length = this.data.length
       if (isChecked) {

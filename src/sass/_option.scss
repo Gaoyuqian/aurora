@@ -1,6 +1,8 @@
 .au-options {
   padding: 6px 0;
   background-color: $color-white;
+  max-height: (36px * 6) + (6px * 2);
+  overflow-y: auto;
 }
 
 .au-option {

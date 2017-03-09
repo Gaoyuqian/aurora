@@ -1,9 +1,13 @@
 transition(
   name="fade"
 )
-  div.au-popup(
+  .au-popup(
+    :class="classObject",
     v-show="isShow",
     :style="style"
     @click="clickHandler"
   )
-    slot
+    .au-popup-inner
+      .au-popup-arrow(v-if="showArrow")
+      .au-popup-content
+        slot

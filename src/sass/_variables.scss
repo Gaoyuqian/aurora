@@ -43,58 +43,67 @@ $border-radius:             0px;
 
 // Button
 // -------------------------
-$button-border-color:      $color-gray-light;
-$button-background-color:  $color-primary;
-$button-color:             #fff;
-$button-border-radius:     $border-radius;
+$button-border-color:       $color-gray-light;
+$button-background-color:   $color-primary;
+$button-color:              #fff;
+$button-border-radius:      $border-radius;
 
-$button-fontsize-large:    $fontsize-large;
-$button-height-large:      40px;
-$button-padding-x-large:   20px;
-$button-padding-y-large:   10px;
+$button-fontsize-large:     $fontsize-large;
+$button-height-large:       40px;
+$button-padding-x-large:    20px;
+$button-padding-y-large:    10px;
 
-$button-fontsize-default:  $fontsize-default;
-$button-height-default:    36px;
-$button-padding-x-default: 16px;
-$button-padding-y-default: 10px;
+$button-fontsize-default:   $fontsize-default;
+$button-height-default:     36px;
+$button-padding-x-default:  16px;
+$button-padding-y-default:  10px;
 
-$button-fontsize-small:    $fontsize-small;
-$button-height-small:      28px;
-$button-padding-x-small:   10px;
-$button-padding-y-small:   8px;
+$button-fontsize-small:     $fontsize-small;
+$button-height-small:       28px;
+$button-padding-x-small:    10px;
+$button-padding-y-small:    8px;
 
-$button-fontsize-mini:     $fontsize-small;
-$button-height-mini:       22px;
-$button-padding-x-mini:    5px;
-$button-padding-y-mini:    5px;
+$button-fontsize-mini:      $fontsize-small;
+$button-height-mini:        22px;
+$button-padding-x-mini:     5px;
+$button-padding-y-mini:     5px;
 
 // Icon
 // -------------------------
-$icon-fontsize-small:      $fontsize-small;
-$icon-fontsize-default:    $fontsize-default;
-$icon-fontsize-large:      $fontsize-large;
+$icon-fontsize-small:       $fontsize-small;
+$icon-fontsize-default:     $fontsize-default;
+$icon-fontsize-large:       $fontsize-large;
 
 
 // Input
 // -------------------------
-$input-border-radius:      $border-radius;
-$input-height:             40px;
-$input-padding-x:          10px;
-$input-padding-y:          5px;
+$input-border-radius:       $border-radius;
+$input-height:              40px;
+$input-padding-x:           10px;
+$input-padding-y:           5px;
 
-$input-height-small:       30px;
-$input-padding-x-small:    10px;
-$input-padding-y-small:    5px;
+$input-height-small:        30px;
+$input-padding-x-small:     10px;
+$input-padding-y-small:     5px;
 
 // Transition
 // -------------------------
-$transition-during:        0.25s;
+$transition-during:         0.25s;
 
 
 // z-index
 // -------------------------
-$zindex-popup:             5000;
+$zindex-popup:              5000;
 
 // Datetime
 // -------------------------
-$time-picker-item-height: 36px;
+$time-picker-item-height:   36px;
+
+// Popup
+// -------------------------
+$popup-arrow-margin:        10px;
+$popup-arrow-width:         10px;
+$popup-arrow-offset:        -5px;
+$popup-arrow-rotate:        rotate(45deg);
+$popup-offset:              10px;
+$popup-shadow:              0 1px 5px rgba($color-black-light, 0.2);

@@ -1,30 +1,296 @@
+@mixin popup-start() {
+  &.au-popup-direction-top {
+    transform: translateY(10px);
+  }
+
+  &.au-popup-direction-left {
+    transform: translateX(10px);
+  }
+
+  &.au-popup-direction-bottom {
+    transform: translateY(-10px);
+  }
+
+  &.au-popup-direction-right {
+    transform: translateX(-10px);
+  }
+}
+
 .au-popup {
-  background-color: $color-white;
   position: absolute;
-  border: 1px solid $color-border;
   z-index: $zindex-popup;
-  box-shadow: 0 1px 5px rgba($color-black-light, 0.2);
+
+  .au-popup-arrow {
+    width: 10px;
+    height: 10px;
+    transform: $popup-arrow-rotate;
+    position: absolute;
+    box-shadow: $popup-shadow;
+    z-index: 9999;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+  }
+
+  &.au-popup-top-left {
+    .au-popup-inner {
+      top: (-$popup-offset);
+    }
+
+    .au-popup-arrow {
+      left: $popup-arrow-margin;
+      bottom: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-bottom .au-popup-inner {
+      top: $popup-offset;
+      .au-popup-arrow {
+        bottom: auto;
+        top: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-top {
+    .au-popup-inner {
+      top: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      left: 50%;
+      transform: $popup-arrow-rotate, translateX(-50%);
+      bottom: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-bottom .au-popup-inner {
+      top: $popup-offset;
+      .au-popup-arrow {
+        bottom: auto;
+        top: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-top-right {
+    .au-popup-inner {
+      top: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      right: $popup-arrow-margin;
+      bottom: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-bottom .au-popup-inner {
+      top: $popup-offset;
+      .au-popup-arrow {
+        bottom: auto;
+        top: $popup-arrow-offset;
+      }
+    }
+  }
+
+
+  &.au-popup-left-top {
+    .au-popup-inner {
+      left: (-$popup-offset);
+    }
+
+    .au-popup-arrow {
+      top: $popup-arrow-margin;
+      right: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-right .au-popup-inner {
+      left: $popup-offset;
+      .au-popup-arrow {
+        right: auto;
+        left: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-left {
+    .au-popup-inner {
+      left: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      top: 50%;
+      transform: $popup-arrow-rotate, translateY(-50%);
+      right: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-right .au-popup-inner {
+      left: $popup-offset;
+      .au-popup-arrow {
+        right: auto;
+        left: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-left-bottom {
+    .au-popup-inner {
+      left: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      bottom: $popup-arrow-margin;
+      right: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-right .au-popup-inner {
+      left: $popup-offset;
+      .au-popup-arrow {
+        right: auto;
+        left: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-right-top {
+    .au-popup-inner {
+      right: (-$popup-offset);
+    }
+
+    .au-popup-arrow {
+      top: $popup-arrow-margin;
+      left: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-left .au-popup-inner {
+      right: $popup-offset;
+      .au-popup-arrow {
+        left: auto;
+        right: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-right {
+    .au-popup-inner {
+      right: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      top: 50%;
+      transform: $popup-arrow-rotate, translateY(-50%);
+      left: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-left .au-popup-inner {
+      right: $popup-offset;
+      .au-popup-arrow {
+        left: auto;
+        right: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-right-bottom {
+    .au-popup-inner {
+      right: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      bottom: $popup-arrow-margin;
+      left: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-left .au-popup-inner {
+      right: $popup-offset;
+      .au-popup-arrow {
+        left: auto;
+        right: $popup-arrow-offset;
+      }
+    }
+  }
+
+
+
+  &.au-popup-bottom-left {
+    .au-popup-inner {
+      bottom: (-$popup-offset);
+    }
+
+    .au-popup-arrow {
+      left: $popup-arrow-margin;
+      top: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-top .au-popup-inner {
+      bottom: $popup-offset;
+      .au-popup-arrow {
+        top: auto;
+        bottom: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-bottom {
+    .au-popup-inner {
+      bottom: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      left: 50%;
+      transform: $popup-arrow-rotate, translateX(-50%);
+      top: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-top .au-popup-inner {
+      bottom: $popup-offset;
+      .au-popup-arrow {
+        top: auto;
+        bottom: $popup-arrow-offset;
+      }
+    }
+  }
+
+  &.au-popup-bottom-right {
+    .au-popup-inner {
+      bottom: (-$popup-offset);
+    }
+    .au-popup-arrow {
+      right: $popup-arrow-margin;
+      top: $popup-arrow-offset;
+    }
+
+    &.au-popup-direction-top .au-popup-inner {
+      bottom: $popup-offset;
+      .au-popup-arrow {
+        top: auto;
+        bottom: $popup-arrow-offset;
+      }
+    }
+  }
+}
+
+.au-popup-inner {
+  position: relative;
+  background-color: $color-white;
+  border: 1px solid $color-border;
+  box-shadow: $popup-shadow;
+}
+
+.au-popup-content {
+  position: relative;
+  z-index: 10000;
   overflow: hidden;
+  background-color: $color-white;
 }
 
 .fade-enter {
-  transform: translateY(-10px);
+  @include popup-start();
   opacity: 0;
 }
 
 .fade-enter-to {
-  transform: translateY(0);
+  transform: translateX(0) translateY(0);
   opacity: 1;
   transition: transform $transition-during, opacity $transition-during;
 }
 
 .fade-leave {
-  transform: translateY(0);
+  transform: translateX(0) translateY(0);
   opacity: 1;
 }
 
 .fade-leave-to {
-  transform: translateY(-10px);
+  @include popup-start();
   opacity: 0;
   transition: transform $transition-during, opacity $transition-during;
 }

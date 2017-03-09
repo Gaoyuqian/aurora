@@ -25,6 +25,11 @@ block content
             attr-name="name"
           )
           au-table-column(
+            label="Age",
+            attr-name="age",
+            v-if="showAge"
+          )
+          au-table-column(
             label="操作",
             auto-width
           )
@@ -88,6 +93,7 @@ block script
       mixins: [ attrMixins ],
       data () {
         return {
+          showAge: false,
           attrs: [
             {
               name: 'column',
@@ -195,6 +201,10 @@ block script
         this.$refs.table.$on('select', (data) => {
           console.log(data)
         })
+
+        setTimeout(() => {
+          this.showAge = true
+        }, 1000)
       },
       methods: {
         editHandler (...args) {

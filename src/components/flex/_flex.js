@@ -1,7 +1,7 @@
 import dispatch from '../../mixins/_dispatch'
 import AuFlexItem from './_flex-item.js'
 
-Vue.component('au-flex', {
+const AuFlex = Vue.extend({
   template: require('./_flex.tpl'),
   mixins: [dispatch],
   props: {
@@ -35,11 +35,12 @@ Vue.component('au-flex', {
     }
   },
   mounted () {
-    window.addEventListener('resize', this.updateUI)
+    this.$on('update.ui', this.updateUI)
+    window.addEventListener('resize', this.resizeHandler)
     this.updateUI()
   },
   beforeDestroy () {
-    window.removeEventListener('resize', this.updateUI)
+    window.removeEventListener('resize', this.resizeHandler)
   },
   updated () {
     this.updateUI()
@@ -87,6 +88,17 @@ Vue.component('au-flex', {
       const rect = container.getBoundingClientRect()
       return (rect.width + margin) + Number(this.gutter)
     },
+    resizeHandler () {
+      const $parent = this.$parent
+
+      while ($parent != null) {
+        if ($parent instanceof AuFlex) {
+          return
+        }
+        $parent = $parent.$parent
+      }
+      this.updateUI()
+    },
     updateUI () {
       this.$nextTick(() => {
         const elemStyle = this.$refs.container.style
@@ -95,8 +107,7 @@ Vue.component('au-flex', {
 
         if (this.column != null) {
           const containerOuterWidth = this.getOuterWidth()
-          itemWidth = (containerOuterWidth / this.column) - gutter * 2
-          console.log(containerOuterWidth, itemWidth)
+          itemWidth = Math.floor((containerOuterWidth / this.column) - gutter * 2)
         }
 
         elemStyle.margin = `-${gutter}px`
@@ -120,7 +131,15 @@ Vue.component('au-flex', {
             }
           }
         })
+
+        this.$nextTick(() => {
+          this.broadcast('update.ui')
+        })
       })
     }
   }
 })
+
+Vue.component('au-flex', AuFlex)
+
+export default AuFlex
