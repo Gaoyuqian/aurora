@@ -1,0 +1,43 @@
+extends ./_layout
+
+block title
+  |Demo
+
+block content
+  .docs-heading
+    h1|Demo
+    .docs-desc
+
+  .docs-section
+    h2|日期选择器
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-date-picker(v-model="date", type="date", start-date="2017-02-28", end-date="2017-03-02")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          date: '2017-02-27',
+          year: '2017-02-27',
+          month: '2017-02',
+          daterange: ['2017-02-07', '2017-06-11'],
+          datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+          datetime: '2017-02-27 08:11:12',
+          time: '11:11:11',
+          attrs: [
+            {
+              name: '',
+              desc: '',
+              type: '',
+              default: ''
+            }
+          ]
+        }
+      }
+    })

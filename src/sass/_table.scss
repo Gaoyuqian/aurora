@@ -1,9 +1,30 @@
-.au-table {
+.au-table table {
   width: 100%;
   border-collapse: collapse;
-  th, td {
-    border: 1px solid $color-border;
-    padding: 5px 10px;
-    text-align: left;
+  th, .au-table-head {
+    background-color: $color-white-light;
+    color: $color-black-light;
+    font-weight: 800;
   }
+
+  td {
+    color: $color-black-light-extra;
+  }
+
+  th, td {
+    font-size: $fontsize-default;
+    border: 1px solid $color-border;
+    padding: 10px 20px;
+    text-align: left;
+    min-height: 40px;
+    line-height: 20px;
+  }
+}
+
+.au-table-hidden {
+  display: none;
+}
+
+.au-table-cell {
+  display: inline-block;
 }

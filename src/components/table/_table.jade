@@ -1,0 +1,12 @@
+.au-table
+  .au-table-hidden(ref="hidden")
+    slot
+
+  table
+    thead
+      tr
+        th(v-for="column in columns")|{{ column.label }}
+    tbody
+      tr(v-for="row in data")
+        td(v-for="column in columns")
+          |11

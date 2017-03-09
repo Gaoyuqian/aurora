@@ -16,6 +16,10 @@ const AuTimePickerPanel = Vue.extend({
       default () {
         return new Date()
       }
+    },
+    timeType: {
+      type: String,
+      default: 'hour-minute' // all, hour, minute, second
     }
   },
   data () {

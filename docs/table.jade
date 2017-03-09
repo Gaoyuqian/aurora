@@ -2,7 +2,7 @@
 extends ./_layout
 
 block title
-  Table
+  |Table
 
 block content
   .docs-heading
@@ -15,28 +15,74 @@ block content
       p|基础表格的用法
     .docs-panel
       .docs-panel-row
-        au-table(:columns="columns", :data="data")
-
+        au-table(:data="data")
+          au-table-column(
+            label="ID",
+            attr-name="id"
+          )
+          au-table-column(
+            label="Name",
+            attr-name="name"
+          )
+          au-table-column(
+            label="操作",
+            auto-width
+          )
+            template(scope="scope")
+              au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
+              au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
+              au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
   .docs-section
-    h2|基础表格
+    h2|列表格
     .docs-desc
       p|基础表格的用法
     .docs-panel
       .docs-panel-row
-        au-table(:columns="columns", :data="data")
+        au-table(:data="keyValues", :no-header="true")
+          au-table-column(
+            attr-name="key",
+            :is-head="true"
+          )
+          au-table-column(
+            attr-name="value"
+          )
+
+  .docs-section
+    h2|checkbox表格
+    .docs-desc
+      p|checkbox表格的用法
+    .docs-panel
+      .docs-panel-row
+        au-table(:data="data")
+          au-table-column(
+            type="checkbox",
+            v-model="checkeds"
+          )
+          au-table-column(
+            label="ID",
+            attr-name="id"
+          )
+          au-table-column(
+            label="Name",
+            attr-name="name"
+          )
           au-table-column(
             label="操作",
             :style="{ width: '200px' }"
           )
             template(scope="scope")
-              au-button(type="primary", size="small")|编辑
-              au-button(type="danger", size="small")|删除
-          au-table-column(
-            label="操作"
-          )
+              au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
+              au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
+
 
 block script
   script.
+    const data = [
+      { id: 1, name: 'kevin', age: '28' },
+      { id: 2, name: 'kevin', age: '27' },
+      { id: 3, name: 'kevin', age: '26' },
+      { id: 4, name: 'kevin', age: '25' }
+    ]
     new Vue({
       el: '#app',
       mixins: [ attrMixins ],
@@ -124,12 +170,33 @@ block script
               }
             }
           ],
-          data: [
-            { id: 1, name: 'kevin', age: '28' },
-            { id: 2, name: 'kevin', age: '27' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' }
+          data,
+          keyValues: [
+            {
+              key: '注册手机',
+              value: '18300001511'
+            },
+            {
+              key: '客户姓名',
+              value: '叶一'
+            },
+            {
+              key: '身份证号',
+              value: '420502199001010016'
+            }
+          ],
+          checkeds: [
+            data[1],
+            data[2]
           ]
+        }
+      },
+      methods: {
+        editHandler (...args) {
+          console.log(args)
+        },
+        deleteHandler (...args) {
+          console.log(args)
         }
       }
     })

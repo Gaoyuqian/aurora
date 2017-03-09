@@ -4,5 +4,5 @@
       transition(name="au-checkbox-mark")
         au-icon(icon="check", v-if="checked")
         au-icon(icon="minus", v-if="!checked && indeterminate")
-    .au-checkbox-text
+    .au-checkbox-text(v-if="label")
       |{{label}}
