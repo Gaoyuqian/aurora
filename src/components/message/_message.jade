@@ -3,10 +3,11 @@ transition(name="message-fade")
     :class="classObject",
     v-if="isShow"
   )
-    au-icon(icon="check-circle", v-if="type == 'success'")
-    au-icon(icon="info-circle", v-if="type == 'info'")
-    au-icon(icon="exclamation-circle", v-if="type == 'warning'")
-    au-icon(icon="times-circle", v-if="type == 'danger'")
-    au-icon(icon="circle-o-notch", v-if="type == 'loading'", autorotate)
-    .au-message-content
-      |{{ message }}
+    .au-message-inner
+      au-icon(icon="check-circle", v-if="type == 'success'")
+      au-icon(icon="info-circle", v-if="type == 'info'")
+      au-icon(icon="exclamation-circle", v-if="type == 'warning'")
+      au-icon(icon="times-circle", v-if="type == 'danger'")
+      au-icon(icon="circle-o-notch", v-if="type == 'loading'", autorotate)
+      .au-message-content
+        |{{ message }}
