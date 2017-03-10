@@ -292,3 +292,17 @@
   opacity: 0;
   transition: transform $transition-during, opacity $transition-during;
 }
+
+
+.au-popup-darker {
+  color: $color-white;
+  .au-popup-inner,
+  .au-popup-arrow,
+  .au-popup-content {
+    background-color: $color-black-light;
+  }
+  .au-popup-inner,
+  .au-popup-arrow {
+    border-color: $color-black-light;
+  }
+}

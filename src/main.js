@@ -22,6 +22,7 @@ import './components/tabs/_tab-panel.js'
 import './components/active-transition/_active-transition.js'
 import './components/date-picker/_date-picker.js'
 import './components/pop-confirm/_pop-confirm.js'
+import './components/tooltip/_tooltip.js'
 import { push } from './components/message/_message-center.js'
 
 

@@ -3,7 +3,7 @@ transition(
 )
   .au-popup(
     :class="classObject",
-    v-show="isShow",
+    v-if="isShow",
     :style="style"
     @click="clickHandler"
   )

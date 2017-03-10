@@ -12,7 +12,11 @@ const AuPopup = Vue.extend({
       type: String,
       default: 'bottomLeft' // top, left, right, bottom, topLeft, topRight, leftTop, leftBottom, bottomLeft, bottomRight, rightTop, rightBottom
     },
-    showArrow: Boolean
+    showArrow: Boolean,
+    type: {
+      type: String,
+      default: ''
+    }
   },
   data () {
     return {
@@ -33,7 +37,13 @@ const AuPopup = Vue.extend({
       const position = this.position.replace(/([A-Z])/g, (_, match) => {
         return '-' + match.toLowerCase()
       })
-      return [`au-popup-direction-${this.direction}`, `au-popup-${position}`]
+      const result = [`au-popup-direction-${this.direction}`, `au-popup-${position}`]
+
+      if (this.type) {
+        result.push(`au-popup-${this.type}`)
+      }
+
+      return result
     }
   },
   methods: {

@@ -59,14 +59,7 @@ block content
     h2|属性
 
 block script
-
-
   script.
-    Aurora.info('hello')
-    setTimeout(() => {
-      Aurora.info('world')
-    }, 500)
-
     new Vue({
       el: '#app',
       mixins: [ attrMixins ],
