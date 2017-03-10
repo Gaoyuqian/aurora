@@ -56,7 +56,7 @@
     }
     .au-popup-arrow {
       left: 50%;
-      transform: $popup-arrow-rotate, translateX(-50%);
+      transform: translateX(-50%) $popup-arrow-rotate;
       bottom: $popup-arrow-offset;
     }
 
@@ -113,7 +113,7 @@
     }
     .au-popup-arrow {
       top: 50%;
-      transform: $popup-arrow-rotate, translateY(-50%);
+      transform: translateY(-50%) $popup-arrow-rotate;
       right: $popup-arrow-offset;
     }
 
@@ -169,7 +169,7 @@
     }
     .au-popup-arrow {
       top: 50%;
-      transform: $popup-arrow-rotate, translateY(-50%);
+      transform: translateY(-50%) $popup-arrow-rotate;
       left: $popup-arrow-offset;
     }
 
@@ -200,8 +200,6 @@
     }
   }
 
-
-
   &.au-popup-bottom-left {
     .au-popup-inner {
       bottom: (-$popup-offset);
@@ -227,7 +225,7 @@
     }
     .au-popup-arrow {
       left: 50%;
-      transform: $popup-arrow-rotate, translateX(-50%);
+      transform: translateX(-50%) $popup-arrow-rotate;
       top: $popup-arrow-offset;
     }
 
@@ -273,23 +271,23 @@
   background-color: $color-white;
 }
 
-.fade-enter {
+.popup-fade-enter {
   @include popup-start();
   opacity: 0;
 }
 
-.fade-enter-to {
+.popup-fade-enter-to {
   transform: translateX(0) translateY(0);
   opacity: 1;
   transition: transform $transition-during, opacity $transition-during;
 }
 
-.fade-leave {
+.popup-fade-leave {
   transform: translateX(0) translateY(0);
   opacity: 1;
 }
 
-.fade-leave-to {
+.popup-fade-leave-to {
   @include popup-start();
   opacity: 0;
   transition: transform $transition-during, opacity $transition-during;

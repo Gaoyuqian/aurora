@@ -22,3 +22,20 @@ import './components/tabs/_tab-panel.js'
 import './components/active-transition/_active-transition.js'
 import './components/date-picker/_date-picker.js'
 import './components/pop-confirm/_pop-confirm.js'
+import { push } from './components/message/_message-center.js'
+
+
+const Aurora = {
+
+}
+
+Aurora.message = push
+Aurora.info = push.bind(window, 'info')
+Aurora.danger = push.bind(window, 'danger')
+Aurora.warning = push.bind(window, 'warning')
+Aurora.success = push.bind(window, 'success')
+Aurora.loading = push.bind(window, 'loading')
+
+window.Aurora = Aurora
+
+export default Aurora

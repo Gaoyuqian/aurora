@@ -28,7 +28,7 @@ const AuInput = Vue.extend({
         return this.value
       },
       set (value) {
-        this.value = value
+        this.$emit('input', value)
       }
     },
     controlClass () {

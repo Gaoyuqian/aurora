@@ -1,0 +1,76 @@
+.au-message-center {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.au-message {
+  box-shadow: $message-shadow;
+  border: 1px solid $color-border;
+  line-height: 30px;
+  display: inline-block;
+  padding: 0 10px;
+  background-color: $color-white;
+  font-size: $fontsize-small;
+  margin: 10px;
+  display: flex;
+  align-items: flex-top;
+
+  .au-icon {
+    margin-right: 8px;
+    line-height: 30px;
+    font-size: $fontsize-medium;
+  }
+
+  .fa-check-circle {
+    color: $color-success;
+  }
+
+  .fa-info-circle {
+    color: $color-info;
+  }
+
+  .fa-exclamation-circle {
+    color: $color-warning;
+  }
+
+  .fa-times-circle {
+    color: $color-danger;
+  }
+
+  .fa-circle-o-notch {
+    color: $color-silver;
+  }
+}
+
+.au-message-content {
+  max-width: 300px;
+  text-align: center;
+}
+
+.message-fade-enter {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.message-fade-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform $transition-during, opacity $transition-during;
+}
+
+.message-fade-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.message-fade-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform $transition-during, opacity $transition-during;
+}
