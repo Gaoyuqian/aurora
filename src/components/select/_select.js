@@ -36,7 +36,6 @@ const AuSelect = Vue.extend({
       optionsElem: null,
       registeredChild: {},
       active: false
-      //selected: []
     }
   },
   computed: {
@@ -106,7 +105,6 @@ const AuSelect = Vue.extend({
     },
     calcText () {
       var label = '', child
-
       if (this.isEmptyValue()) {
         this.text = this.placeholder
       } else {
@@ -122,7 +120,7 @@ const AuSelect = Vue.extend({
       }
     },
     isEmptyValue () {
-      return this.mutiple ? this.value.length === 0 : !this.value
+      return this.mutiple ? this.value.length === 0 : this.value === ''
     },
     addValue (value, child) {
       if (this.disabled) {

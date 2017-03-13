@@ -18,6 +18,11 @@ const AuTooltip = Vue.extend({
       default: 'hover'
     }
   },
+  data () {
+    return {
+      timer: null
+    }
+  },
   mounted () {
     this.$refs.popup.setRelateElem(this.$el)
     document.body.appendChild(this.$refs.popup.$el)
@@ -28,8 +33,8 @@ const AuTooltip = Vue.extend({
         break
 
       case 'hover':
-        this.$el.addEventListener('mouseover', this.showPopup)
-        this.$el.addEventListener('mouseout', this.hidePopup)
+        this.$el.addEventListener('mouseover', this.delayShowPopup)
+        this.$el.addEventListener('mouseout', this.delayHidePopup)
         break
 
       case 'focus':
@@ -39,6 +44,20 @@ const AuTooltip = Vue.extend({
     }
   },
   methods: {
+    delayShowPopup () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+
+      this.timer = setTimeout(this.showPopup, TIMEOUT)
+    },
+    delayHidePopup () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+
+      this.timer = setTimeout(this.hidePopup, TIMEOUT)
+    },
     showPopup () {
       this.$refs.popup.show()
     },

@@ -43,6 +43,10 @@ const AuPopup = Vue.extend({
         result.push(`au-popup-${this.type}`)
       }
 
+      if (this.showArrow) {
+        result.push(`au-popup-has-arrow`)
+      }
+
       return result
     }
   },
