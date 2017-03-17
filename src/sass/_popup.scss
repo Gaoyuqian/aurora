@@ -21,8 +21,8 @@
   z-index: $zindex-popup;
 
   .au-popup-arrow {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     transform: $popup-arrow-rotate;
     position: absolute;
     box-shadow: $popup-shadow;
@@ -306,5 +306,6 @@
   .au-popup-inner,
   .au-popup-arrow {
     border-color: rgba($color-black-light-extra, 0.95);
+    box-shadow: none;
   }
 }

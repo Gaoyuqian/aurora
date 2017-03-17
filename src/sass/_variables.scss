@@ -106,12 +106,12 @@ $input-padding-x:           10px;
 $input-padding-y:           5px;
 
 $input-large-padding-y:     10px;
-$input-large-padding-x:     8px;
+$input-large-padding-x:     10px;
 $input-large-height:        $size-large-height;
 $input-large-fontsize:      $size-large-fontsize;
 
-$input-default-padding-y:   8px;
-$input-default-padding-x:   6px;
+$input-default-padding-y:   10px;
+$input-default-padding-x:   10px;
 $input-default-height:      $size-default-height;
 $input-default-fontsize:    $size-default-fontsize;
 
@@ -148,7 +148,7 @@ $time-picker-item-height:   36px;
 // -------------------------
 $popup-arrow-margin:        10px;
 $popup-arrow-width:         10px;
-$popup-arrow-offset:        -5px;
+$popup-arrow-offset:        -4px;
 $popup-arrow-rotate:        rotate(45deg);
 $popup-offset:              10px;
 $popup-shadow:              0 1px 5px rgba($color-black-light, 0.2);

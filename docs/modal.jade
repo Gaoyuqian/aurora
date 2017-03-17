@@ -20,8 +20,8 @@ block content
           div|这里是正文内容
           div|这里是正文内容
           div(slot="footer")
-            au-button(type="primary", size="small", @click="step2 = true")|提交
-            au-button(type="default", size="small", @click="isShow = false")|取消
+            au-button(type="default", @click="isShow = false")|取消
+            au-button(type="primary", @click="step2 = true")|提交
 
         au-modal(title="第二步", v-model="step2")
           div|这里是第二步

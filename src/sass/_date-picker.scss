@@ -167,7 +167,7 @@
   width: 253px * 2;
 
   .au-date-picker-panel:first-child {
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-white-dark;
   }
   .au-date-picker-content {
     flex: 1;
@@ -186,7 +186,7 @@
   padding: 0 4px;
   height: 35px;
   line-height: 35px;
-  font-size: $fontsize-default;
+  font-size: $fontsize-small;
   text-align: right;
   border-top: 1px solid $color-white-dark;
 }
@@ -239,7 +239,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $color-gray-light-extra;
+    background-color: $color-white-dark;
   }
 
   &.au-disabled {
@@ -285,7 +285,7 @@
   }
 
   .au-date-time-picker-panel:first-child {
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-white-dark;
   }
 }
 

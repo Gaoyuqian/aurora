@@ -1,5 +1,5 @@
 .au-tabs {
-
+  position: relative;
 }
 
 .au-tabs-heading {
@@ -12,12 +12,19 @@
 }
 
 .au-tab-item {
+  height: 40px;
   padding: 10px 20px;
   font-size: $fontsize-default;
   transition: all $transition-during;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+  color: $color-silver;
+
+  &:hover {
+    color: $color-black-light-extra;
+  }
+
   &.active {
     color: $color-primary;
   }
@@ -25,7 +32,7 @@
 
 .au-tabs-heading-active-line {
   position: absolute;
-  bottom: -1px;
+  top: 37px;
   height: 3px;
   background-color: $color-primary;
   transition-property: left, width;

@@ -18,9 +18,9 @@
 .au-message-inner {
   display: inline-block;
   pointer-events: all;
-  box-shadow: $message-shadow;
+  // box-shadow: $message-shadow;
   line-height: 40px;
-  background-color: $color-white;
+  background-color: $color-white-light;
   font-size: $fontsize-default;
   // border: 1px solid $color-border;
   position: relative;
@@ -57,7 +57,7 @@
   min-width: 260px;
   @include text-overflowing();
   text-align: left;
-  color: $color-silver-light;
+  color: $color-silver;
 }
 
 .message-fade-enter {

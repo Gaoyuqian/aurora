@@ -5,8 +5,8 @@
   cursor: pointer;
   border: 1px solid $color-border;
   font-size: 14px;
-  min-height: 30px;
-  line-height: 28px;
+  min-height: 36px;
+  line-height: 34px;
   user-select: none;
   transition: all $transition-during;
 
@@ -25,7 +25,7 @@
 
   &.active {
     border-color: $color-primary;
-    color: $color-primary;
+    // color: $color-primary;
     .fa-caret-down {
       transform: rotate(180deg);
     }
@@ -63,8 +63,9 @@
 }
 
 .au-select-item {
-  color: #FFFFFF;
-  background-color: $color-primary;
+  color: #4777e6;
+  background-color: #ecf1fd;
+  border: 1px solid #a3bbf2;
   height: 24px;
   line-height: 24px;
   padding: 0 8px;

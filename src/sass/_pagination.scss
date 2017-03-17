@@ -28,13 +28,18 @@
   font-size: $fontsize-small;
   border: 1px solid $color-border;
   color: $color-black-light-extra;
-  height: 30px;
-  line-height: 30px;
+  height: 28px;
+  line-height: 28px;
   padding: 0 10px;
   margin: 0 5px;
   cursor: pointer;
   user-select: none;
   transition: all $transition-during;
+  @include flex-center-center();
+
+  .au-icon {
+    margin: 0 4px;
+  }
 
   &:hover {
     color: $color-primary;
@@ -58,8 +63,8 @@
 .au-pagination-link-dot {
   font-size: $fontsize-default;
   color: $color-black-light-extra;
-  height: 30px;
-  line-height: 30px;
+  height: 28px;
+  line-height: 28px;
   padding: 0 2px;
   margin: 0 5px;
   cursor: pointer;
@@ -88,7 +93,7 @@
 
 .au-pagination-text {
   font-size: $fontsize-small;
-  line-height: 30px;
+  line-height: 28px;
   display: flex;
   align-items: center;
   white-space: nowrap;

@@ -5,6 +5,7 @@
       @click="prevPage"
     )
       au-icon(icon="angle-left")
+      |上一页
 
     .au-pagination-link(
       :class="{'au-pagination-disabled': isLeftOut(page) }",
@@ -37,6 +38,7 @@
       :class="{'au-pagination-disabled': isRightOut(page) }",
       @click="nextPage"
     )
+      |下一页
       au-icon(icon="angle-right")
 
   .au-pagination-item

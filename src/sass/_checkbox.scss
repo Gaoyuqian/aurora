@@ -43,8 +43,8 @@
 .au-checkbox-mark {
   background-color: $color-white;
   border: 1px solid $color-gray-light-extra;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   overflow: hidden;
   @include flex-center-center();
   transition: border-color $transition-during;

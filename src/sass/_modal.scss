@@ -1,5 +1,5 @@
 .au-modal-mask {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@
   line-height: 20px;
   display: flex;
   align-items: center;
-  padding: 20px 20px 10px;
+  padding: 16px 20px 10px;
 }
 
 .au-modal-heading-left {
@@ -56,13 +56,16 @@
 }
 
 .au-modal-content {
-  padding: 10px 20px 20px;
+  padding: 10px 20px;
   font-size: $fontsize-default;
 }
 
 .au-modal-footer {
   text-align: right;
-  padding: 16px 30px;
+  padding: 16px 20px;
+  .au-button {
+    margin: 0 3px;
+  }
 }
 
 
