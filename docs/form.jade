@@ -41,17 +41,33 @@ block content
 
               au-form-group
                 au-button(type="primary")|提交
-                &nbsp;
+                |&nbsp;
                 au-button(type="default")|重置
           au-flex-item
-    
+     template.js(scoped="scoped")
+       script.
+         {
+           data () {
+             return {
+               labelPosition: 'left',
+               labelWidth: '',
+               form: {
+                 name: '',
+                 gender: '1',
+                 class: '',
+                 desc: '',
+                 confirm: false
+               },
+               attrs: [
+               ]
+             }
+           }
+         }
     .docs-panel
       .docs-panel-content
       .docs-code
-        pre
-          code.html
-
-
+        docs-code.html
+        docs-code.js
 
   .docs-section
     h2|属性
@@ -61,20 +77,5 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins,
-      data () {
-        return {
-          labelPosition: 'left',
-          labelWidth: '',
-          form: {
-            name: '',
-            gender: '1',
-            class: '',
-            desc: '',
-            confirm: false
-          },
-          attrs: [
-          ]
-        }
-      }
+      mixins
     })

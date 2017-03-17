@@ -33,14 +33,13 @@ block content
     .docs-panel
       .docs-panel-content
       .docs-code
-        pre
-          code.html
+        docs-code.html
 
   .docs-section
     h2|多选选择器
     .docs-desc
       p|多选选择器的用法
-    
+
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex
@@ -49,8 +48,7 @@ block content
     .docs-panel
       .docs-panel-content
       .docs-code
-        pre
-          code.html
+        docs-code.html
 
   .docs-section
     h2|禁用选择器
@@ -64,12 +62,11 @@ block content
             au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
           au-flex-item(grow="1")
             au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
-      
+
     .docs-panel
       .docs-panel-content
       .docs-code
-        pre
-          code.html
+        docs-code.html
 
   .docs-section
     h2|属性

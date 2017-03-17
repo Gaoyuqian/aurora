@@ -188,12 +188,12 @@ html.no-js
         }
 
         Vue.component('docs-code', {
-          template: '<code v-html="html"></code>',
+          template: '<pre><code v-html="html"></code></pre>',
           props: {
             html: String
           },
           mounted () {
-            hljs.highlightBlock(this.$el)
+            hljs.highlightBlock(this.$el.querySelector('code'))
           }
         })
 
