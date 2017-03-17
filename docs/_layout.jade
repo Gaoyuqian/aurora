@@ -7,10 +7,15 @@ html.no-js
       block title
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href="../src/sass/main.css")
+    link(rel='stylesheet', href="../src/sass/aurora.css")
     link(rel='stylesheet', href="../lib/font-awesome-4.7.0/css/font-awesome.min.css")
     link(rel='stylesheet', href="./docs.css")
+    link(rel='stylesheet', href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css")
 
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify-css.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify-html.min.js")
   body
     <!--[if lt IE 8]>
     p.browsehappy
@@ -18,34 +23,182 @@ html.no-js
       | Please <a href="http://browsehappy.com/">upgrade your browser</a>
       | to improve your experience.
     <![endif]-->
-    #app(v-cloak)
-      block content
+
+    au-app#app(v-cloak)
+      au-header
+        h1(slot="logo")
+          |Aurora
+          span.version|v0.1
+
+        au-menu(slot="content-left", trigger="hover")
+          au-menu-item(href="flex.html", label="Flex", icon="")
+          au-menu-item(href="button.html", label="Button", icon="")
+
+          au-menu-item(label="表单", icon="wpforms")
+            au-menu
+              au-menu-item(href="input.html", label="Input")
+              au-menu-item(href="select.html", label="Select")
+              au-menu-item(href="checkbox.html", label="Checkbox")
+              au-menu-item(href="radio.html", label="Radio")
+              au-menu-item(href="form.html", label="Form")
+              au-menu-item(href="date-picker.html", label="DatePicker")
+              au-menu-item(href="upload.html", label="Upload")
+
+          au-menu-item(label="区块", icon="clone")
+            au-menu
+              au-menu-item(href="panel.html", label="Panel")
+              au-menu-item(href="table.html", label="Table")
+              au-menu-item(href="tabs.html", label="Tabs")
+              au-menu-item(href="pagination.html", label="Pagination")
+              au-menu-item(href="dropdown.html", label="Dropdown")
+              au-menu-item(href="modal.html", label="Modal")
+              au-menu-item(href="drag-modal.html", label="DragModal")
+
+          au-menu-item(label="消息", icon="sticky-note")
+            au-menu
+              au-menu-item(href="message.html", label="Message")
+              au-menu-item(href="tooltip.html", label="Tooltip")
+              au-menu-item(href="pop-confirm.html", label="PopConfirm")
+
+        au-menu(slot="content-right", trigger="hover")
+          au-menu-item()
+            div(slot="content")
+              img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
+              |Kevin
+            au-menu
+              au-menu-item(label="我的信息")
+              au-menu-item(label="退出")
+
+      au-content
+        au-menu(slot="sidebar")
+          au-menu-item(href="flex.html", label="Flex", icon="")
+          au-menu-item(href="button.html", label="Button", icon="")
+
+          au-menu-item(label="表单", icon="wpforms")
+            au-menu
+              au-menu-item(href="input.html", label="Input")
+              au-menu-item(href="select.html", label="Select")
+              au-menu-item(href="checkbox.html", label="Checkbox")
+              au-menu-item(href="radio.html", label="Radio")
+              au-menu-item(href="form.html", label="Form")
+              au-menu-item(href="date-picker.html", label="DatePicker")
+              au-menu-item(href="upload.html", label="Upload")
+
+          au-menu-item(label="区块", icon="clone")
+            au-menu
+              au-menu-item(href="panel.html", label="Panel")
+              au-menu-item(href="table.html", label="Table")
+              au-menu-item(href="tabs.html", label="Tabs")
+              au-menu-item(href="pagination.html", label="Pagination")
+              au-menu-item(href="dropdown.html", label="Dropdown")
+              au-menu-item(href="modal.html", label="Modal")
+              au-menu-item(href="drag-modal.html", label="DragModal")
+
+          au-menu-item(label="消息", icon="sticky-note")
+            au-menu
+              au-menu-item(href="message.html", label="Message")
+              au-menu-item(href="tooltip.html", label="Tooltip")
+              au-menu-item(href="pop-confirm.html", label="PopConfirm")
+
+        div(slot="container")
+          au-panel
+            block content
+          au-footer
+            |美利金融 Aurora项目
+
 
     script(src="../lib/vue.js")
-    script(src="../src/main.js")
+    script(src="../src/aurora.js")
     script.
-      const attrMixins = {
-        data () {
-          return {
-            attrColumns: [
-              {
-                label: '参数',
-                key: 'name'
-              },
-              {
-                label: '说明',
-                key: 'desc'
-              },
-              {
-                label: '类型',
-                key: 'type'
-              },
-              {
-                label: '默认值',
-                key: 'default'
-              }
-            ]
+      const mixins = []
+      !function () {
+        const sections = document.querySelectorAll('.docs-section')
+        ;[].forEach.call(sections, (section) => {
+          loadHtml(section)
+          loadJs(section)
+        })
+
+        function loadHtml (section) {
+          const template = section.querySelector('template.html')
+          if (!template) return
+          const code = section.querySelector('.docs-code pre code.html')
+          section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
+          code.innerHTML = convert(template.innerHTML)
+          hljs.highlightBlock(code)
+
+          template.parentElement.removeChild(template)
+
+          function convert(html) {
+            html = html.trim()
+
+            html = html_beautify(html, {
+              indent_size: 2
+            })
+            return htmlEncode(html)
+          }
+
+          function htmlEncode (str) {
+            var s = "";
+            if (str.length == 0) return "";
+            s = str.replace(/&/g, "&gt;");
+            s = s.replace(/</g, "&lt;");
+            s = s.replace(/>/g, "&gt;");
+            s = s.replace(/ /g, "&nbsp;");
+            s = s.replace(/\'/g, "&#39;");
+            s = s.replace(/\"/g, "&quot;");
+            s = s.replace(/\n/g, "<br>");
+            return s;
           }
         }
-      }
+
+        function loadJs (section) {
+          const template = section.querySelector('template.js')
+          if (!template) return
+          const js = convert(template.innerHTML)
+          const code = section.querySelector('.docs-code pre code.js')
+          code.innerHTML = 'export default ' + js
+          hljs.highlightBlock(code)
+
+          template.parentElement.removeChild(template)
+          var result
+          eval(`result = ${js}`)
+          mixins.push(result)
+
+          function convert (js) {
+            const div = document.createElement('div')
+            div.innerHTML = js
+            js = div.textContent.trim()
+            js = js_beautify(js, {
+              indent_size: 2
+            })
+            return js
+          }
+        }
+
+        mixins.push({
+          data () {
+            return {
+              columns: [
+                {
+                  label: '参数',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '类型',
+                  attrName: 'type'
+                },
+                {
+                  label: '默认值',
+                  attrName: 'default'
+                }
+              ]
+            }
+          }
+        })
+      }()
+
     block script

@@ -5,6 +5,7 @@ import './components/flex/_flex.js'
 import './components/flex/_flex-item.js'
 import './components/form/_form.js'
 import './components/form-group/_form-group.js'
+import './components/upload/_upload.js'
 import './components/input/_input.js'
 import './components/checkbox/_checkbox.js'
 import './components/checkbox-group/_checkbox-group.js'
@@ -17,18 +18,26 @@ import './components/table/_table.js'
 import './components/table-column/_table-column.js'
 import './components/panel/_panel.js'
 import './components/modal/_modal.js'
+import './components/drag-modal/_drag-modal.js'
 import './components/tabs/_tabs.js'
 import './components/tabs/_tab-panel.js'
 import './components/active-transition/_active-transition.js'
 import './components/date-picker/_date-picker.js'
 import './components/pop-confirm/_pop-confirm.js'
 import './components/tooltip/_tooltip.js'
+import './components/dropdown/_dropdown.js'
+import './components/menu/_menu.js'
+import './components/menu/_menu-item.js'
+import './components/pagination/_pagination.js'
+import './components/app/_app.js'
+import './components/header/_header.js'
+import './components/content/_content.js'
+import './components/footer/_footer.js'
+
 import { push } from './components/message/_message-center.js'
 
 
-const Aurora = {
-
-}
+const Aurora = {}
 
 Aurora.message = push
 Aurora.info = push.bind(window, 'info')

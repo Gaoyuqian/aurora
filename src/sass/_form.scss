@@ -1,7 +1,6 @@
 .au-form-group-label {
   line-height: 40px;
   height: 40px;
-  text-align: right;
   font-size: $fontsize-default;
   color: $color-black-light;
   cursor: default;
@@ -17,5 +16,24 @@
   user-select: none;
   .au-input {
     width: 100%;
+  }
+}
+
+.au-form-group-right-label {
+  .au-form-group-label {
+    text-align: right;
+  }
+}
+
+
+.au-form-group-top-label {
+  margin-bottom: 10px;
+  .au-form-group-label {
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .au-form-group-label-empty {
+    display: none;
   }
 }

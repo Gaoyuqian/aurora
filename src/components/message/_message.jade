@@ -4,10 +4,13 @@ transition(name="message-fade")
     v-if="isShow"
   )
     .au-message-inner
-      au-icon(icon="check-circle", v-if="type == 'success'")
-      au-icon(icon="info-circle", v-if="type == 'info'")
-      au-icon(icon="exclamation-circle", v-if="type == 'warning'")
-      au-icon(icon="times-circle", v-if="type == 'danger'")
-      au-icon(icon="circle-o-notch", v-if="type == 'loading'", autorotate)
+      .au-message-icon-wrapper(
+        :class="{ 'au-message-icon-wrapper-success': this.type === 'success', 'au-message-icon-wrapper-info': this.type === 'info' || this.type === 'loading', 'au-message-icon-wrapper-warning': this.type === 'warning', 'au-message-icon-wrapper-danger': this.type === 'danger' }"
+      )
+        au-icon(icon="check-circle-o", v-if="type === 'success'")
+        au-icon(icon="info-circle", v-if="type === 'info'")
+        au-icon(icon="exclamation-circle", v-if="type === 'warning'")
+        au-icon(icon="times-circle-o", v-if="type === 'danger'")
+        au-icon(icon="circle-o-notch", v-if="type === 'loading'", autorotate)
       .au-message-content
         |{{ message }}

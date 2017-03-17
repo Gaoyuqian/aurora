@@ -1,6 +1,15 @@
 const AuForm = Vue.extend({
   template: require('./_form.jade'),
-  props: {}
+  props: {
+    labelPosition: {
+      type: String,
+      default: 'left'
+    },
+    labelWidth: {
+      type: [Number, String],
+      default: ''
+    }
+  }
 })
 
 Vue.component('au-form', AuForm)

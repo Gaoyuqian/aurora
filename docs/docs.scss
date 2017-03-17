@@ -2,14 +2,9 @@ body {
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #333;
+  padding: 0;
+  margin: 0;
 }
-
-#app {
-  margin: 0 auto;
-  padding: 20px 40px;
-  min-width: 800px;
-}
-
 h1 {
   font-size: 30px;
   line-height: 50px;
@@ -34,6 +29,9 @@ h1 {
 
 .docs-panel {
   border: 1px solid #ccc;
+}
+
+.docs-panel-content {
   padding: 20px 40px;
 }
 
@@ -44,6 +42,13 @@ h1 {
   }
   > * {
     vertical-align: middle;
+  }
+}
+
+.docs-code {
+  border-top: 1px solid #ddd;
+  pre {
+    margin: 0;
   }
 }
 
@@ -66,4 +71,28 @@ h1 {
       background-color: #f4f4f4;
     }
   }
+}
+
+.version {
+  height: 16px;
+  line-height: 16px;
+  font-size: 12px;
+  margin: 0 5px;
+  vertical-align: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0 5px;
+  border-radius: 2px;
+}
+
+.hljs {
+  padding: 12px 40px !important;
+}
+
+.docs-code-title {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+  background-color: #f8f8f8;
 }

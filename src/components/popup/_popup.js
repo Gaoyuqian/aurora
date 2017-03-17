@@ -1,4 +1,5 @@
 import dispatch from '../../mixins/_dispatch'
+import element from '../../utils/_element'
 
 const PADDING = 10
 var showingPopup = null
@@ -64,14 +65,31 @@ const AuPopup = Vue.extend({
       this.top = `${top}px`
       this.left = `${left}px`
     },
+    getElemScrollTop (elem) {
+      var scrollTop = 0
+
+      while (elem = element.getScrollElem(elem)) {
+        scrollTop += elem.scrollTop
+      }
+
+      return scrollTop
+    },
+    getElemScrollLeft (elem) {
+      var scrollLeft = 0
+      while (elem = element.getScrollElem(elem)) {
+        scrollLeft += elem.scrollLeft
+      }
+      return scrollLeft
+    },
     getTop () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateTop = relateElem.offsetTop
+      const relateTop = element.getOffset(relateElem).top
       const relateHeight = relateElem.offsetHeight
+      const scrollTop = this.getElemScrollTop(relateElem)
       const elemHeight = this.$el.offsetHeight
-      const minTop = relateTop - elemHeight
-      const maxTop = relateTop + relateHeight
+      const minTop = relateTop - elemHeight - scrollTop
+      const maxTop = relateTop + relateHeight - scrollTop
       const topBorder = window.scrollY
       const bottomBorder = (window.scrollY + document.documentElement.clientHeight - elemHeight)
 
@@ -145,11 +163,12 @@ const AuPopup = Vue.extend({
     getLeft () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateLeft = relateElem.offsetLeft
+      const relateLeft = element.getOffset(relateElem).left
       const relateWidth = relateElem.offsetWidth
+      const scrollLeft = this.getElemScrollLeft(relateElem)
       const elemWidth = this.$el.offsetWidth
-      const minLeft = relateLeft - elemWidth
-      const maxLeft = relateLeft + relateWidth
+      const minLeft = relateLeft - elemWidth - scrollLeft
+      const maxLeft = relateLeft + relateWidth - scrollLeft
       const leftBorder = window.scrollX
       const rightBorder = (window.scrollX + document.documentElement.clientWidth - elemWidth)
 
@@ -238,8 +257,8 @@ const AuPopup = Vue.extend({
       this.$nextTick(() => {
         this.calPosition()
       })
-      window.addEventListener('resize', this.calPosition)
-      window.addEventListener('scroll', this.calPosition)
+      window.addEventListener('resize', this.calPosition, true)
+      window.addEventListener('scroll', this.calPosition, true)
       window.addEventListener('click', this.hide)
       this.$emit('show')
     },
@@ -249,6 +268,26 @@ const AuPopup = Vue.extend({
       window.removeEventListener('scroll', this.calPosition)
       window.removeEventListener('click', this.hide)
       this.$emit('hide')
+    },
+    getContentElem () {
+      return this.$el.querySelector('.au-popup-content')
+    },
+    setDropdown (dropdown) {
+      this.dropdown = dropdown
+      this.$el.addEventListener('mouseover', this.menuOver, true)
+      this.$el.addEventListener('mouseout', this.menuOut)
+    },
+    menuOver () {
+      this.dropdown.show()
+    },
+    menuOut () {
+      this.dropdown.hide()
+    },
+    beforeDestroy () {
+      if (this.dropdown) {
+        this.$el.removeEventListener('mouseover', this.menuOver)
+        this.$el.removeEventListener('mouseout', this.menuOut)
+      }
     }
   }
 })

@@ -11,19 +11,22 @@ block content
 
   .docs-section
     h2|按钮类型
-    .docs-desc
-      p|基础的按钮用法
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button|默认按钮
         au-button(type="primary")|主要按钮
         au-button(type="link")|主要按钮
+    .docs-desc
+      p|基础的按钮用法
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|按钮尺寸
-    .docs-desc
-      p|Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button(type="primary", size="large")|大型按钮
         au-button(type="primary", size="default")|中型按钮
@@ -35,11 +38,28 @@ block content
         au-button(type="link", size="small")|小型按钮
         au-button(type="link", size="mini")|超小按钮
 
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              active: '1'
+            }
+          }
+        }
+    .docs-desc
+      p|Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
+
   .docs-section
     h2|不同颜色
-    .docs-desc
-      p|不同的颜色倾向代表不同的提示
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button(type="primary")|主要按钮
         au-button(type="info")|信息按钮
@@ -72,33 +92,51 @@ block content
         au-button(type="warning", size="mini")|警告按钮
         au-button(type="default", size="mini")|默认按钮
 
+    .docs-desc
+      p|不同的颜色倾向代表不同的提示
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+
   .docs-section
     h2|不可用状态
-    .docs-desc
-      p|按钮不可用状态
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button(type="primary", disabled)|添加
         au-button(disabled)|添加
+    .docs-desc
+      p|按钮不可用状态
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|加载中
+    template.html(scoped="scoped")
+      .docs-panel-row
+        au-button(:loading="true")|加载中
     .docs-desc
       p|按钮加载中状态
     .docs-panel
-      .docs-panel-row
-        au-button(:loading="true")|加载中
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|图标按钮
-    .docs-desc
-      p|带图标的按钮可增强辨识度(有文字)或节省空间(无文字)
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
-        au-button(heading-icon="plus")|添加
-        au-button(trailing-icon="search")|添加
-        au-button(heading-icon="battery-three-quarters", trailing-icon="battery-three-quarters")|添加
-        au-button(type="primary", heading-icon="plus")|添加
+        au-button(icon="plus")|添加
+        au-button(icon="search")|添加
+        au-button(icon="battery-three-quarters")
+          |添加
+          au-icon(icon="battery-three-quarters")
+        au-button(type="primary", icon="plus")|添加
 
       .docs-panel-row
         au-button(icon="plus")
@@ -107,12 +145,18 @@ block content
       .docs-panel-row
         au-button(type="primary", icon="plus")
         au-button(type="primary", icon="search")
+    .docs-desc
+      p|带图标的按钮可增强辨识度(有文字)或节省空间(无文字)
+    .docs-panel
+      .docs-panel-content
+
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|按钮组
-    .docs-desc
-      p|以按钮组的方式出现，常用于多项类似操作
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(column="4")
           au-flex-item
@@ -128,24 +172,51 @@ block content
 
           au-flex-item
             au-button-group
-              au-button(:type="active == 1 ? 'primary' : 'default'", @click="active = 1")|按钮1
-              au-button(:type="active == 2 ? 'primary' : 'default'", @click="active = 2")|按钮2
-              au-button(:type="active == 3 ? 'primary' : 'default'", @click="active = 3")|按钮3
+              au-button(:type="active == 1 ? 'primary' : 'default'", @click="clickActive(1)")|按钮1
+              au-button(:type="active == 2 ? 'primary' : 'default'", @click="clickActive(2)")|按钮2
+              au-button(:type="active == 3 ? 'primary' : 'default'", @click="clickActive(3)")|按钮3
 
           au-flex-item
             au-button-group
               au-button(type="primary")|添加
               au-button(type="danger")|删除
 
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              active: '2'
+            }
+          },
+          methods: {
+            clickActive (value) {
+              this.active = value
+            }
+          }
+        }
+    .docs-desc
+      p|以按钮组的方式出现，常用于多项类似操作
+    .docs-panel
+      .docs-panel-content
+
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
+
+
   .docs-section
     h2|属性
-    au-table(:columns="attrColumns", :data="attrs")
+    au-table#table(:data="attrs")
+      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins: mixins,
       data () {
         return {
           attrs: [
@@ -160,6 +231,12 @@ block script
               desc: '按钮的大小 (可选值: large, default, small, mini)',
               type: 'String',
               default: 'default'
+            },
+            {
+              name: 'icon',
+              desc: '文字前显示的icon',
+              type: 'String',
+              default: 'null'
             },
             {
               name: 'href',
@@ -186,18 +263,6 @@ block script
               default: 'false'
             },
             {
-              name: 'heading-icon',
-              desc: '显示文字前方的icon',
-              type: 'String',
-              default: 'null'
-            },
-            {
-              name: 'trailing-icon',
-              desc: '显示文字后方的icon',
-              type: 'String',
-              default: 'null'
-            },
-            {
               name: 'native-type',
               desc: '原生type属性',
               type: 'String',
@@ -215,8 +280,7 @@ block script
               type: 'Boolean',
               default: 'false'
             }
-          ],
-          active: '1'
+          ]
         }
       }
     })

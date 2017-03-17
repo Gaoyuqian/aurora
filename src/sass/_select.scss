@@ -8,6 +8,7 @@
   min-height: 30px;
   line-height: 28px;
   user-select: none;
+  transition: all $transition-during;
 
   .fa-caret-down {
     font-size: $fontsize-large;

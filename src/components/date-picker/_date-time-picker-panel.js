@@ -70,6 +70,7 @@ const AuDateTimePickerPanel = Vue.extend({
   },
   created () {
     this.$on('hide.popup', () => {
+      console.log('hide.popup')
       this.hideTimePicker()
     })
 
@@ -77,7 +78,6 @@ const AuDateTimePickerPanel = Vue.extend({
       this.hideTimePicker()
       return false
     })
-
   },
   mounted () {
     this.$refs.datePicker.$on('change.temp', (value) => {
@@ -103,6 +103,7 @@ const AuDateTimePickerPanel = Vue.extend({
       if (!this.popup) {
         this.popup = this.$refs.popup
         this.popup.setRelateElem(this.$refs.timeInput.$el)
+        document.body.appendChild(this.popup.$el)
       }
 
       this.popup.show()

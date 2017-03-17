@@ -301,10 +301,10 @@
   .au-popup-inner,
   .au-popup-arrow,
   .au-popup-content {
-    background-color: $color-black-light;
+    background-color: rgba($color-black-light-extra, 0.95);
   }
   .au-popup-inner,
   .au-popup-arrow {
-    border-color: $color-black-light;
+    border-color: rgba($color-black-light-extra, 0.95);
   }
 }

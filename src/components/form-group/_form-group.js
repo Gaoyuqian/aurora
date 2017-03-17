@@ -5,6 +5,24 @@ const AuFormGroup = Vue.extend({
       type: String,
       default: ''
     }
+  },
+  computed: {
+    labelPosition () {
+      return this.$parent.labelPosition
+    },
+    labelWidth () {
+      return parseFloat(this.$parent.labelWidth)
+    },
+    labelStyle () {
+      const style = {}
+      if (this.labelPosition != 'top' && this.labelWidth) {
+        style.width = this.labelWidth + 'px'
+      }
+      return style
+    }
+  },
+  mounted () {
+
   }
 })
 

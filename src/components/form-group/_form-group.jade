@@ -1,5 +1,13 @@
-au-flex.au-form-group(gutter="20")
-  au-flex-item.au-form-group-label(span="4")
+au-flex.au-form-group(
+  :class="{ 'au-form-group-right-label': labelPosition === 'right', 'au-form-group-top-label': labelPosition === 'top' }",
+  :gutter="labelPosition === 'top' ? 0 : 20",
+  :direction="labelPosition === 'top' ? 'column' : 'row'"
+)
+  au-flex-item.au-form-group-label(
+    :style="labelStyle",
+    :class="{'au-form-group-label-empty': !label}",
+    :span="labelStyle.width ? null : 4"
+  )
     {{ label }}
   au-flex-item.au-form-group-control
     slot

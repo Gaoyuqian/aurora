@@ -1,5 +1,5 @@
 div.au-panel
-  .au-panel-heading
+  .au-panel-heading(v-if="label")
     .au-panel-heading-left
       .au-panel-label
         au-icon(:icon="icon", v-if="icon")

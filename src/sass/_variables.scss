@@ -40,6 +40,29 @@ $color-border-hover:        $color-gray;
 // -------------------------
 $border-radius:             0px;
 
+// Size
+// -------------------------
+
+$size-large-padding-y:      10px;
+$size-large-padding-x:      20px;
+$size-large-height:         40px;
+$size-large-fontsize:       $fontsize-large;
+
+$size-default-padding-y:    10px;
+$size-default-padding-x:    16px;
+$size-default-height:       36px;
+$size-default-fontsize:     $fontsize-default;
+
+$size-small-padding-y:      8px;
+$size-small-padding-x:      10px;
+$size-small-height:         28px;
+$size-small-fontsize:       $fontsize-small;
+
+$size-mini-padding-y:      5px;
+$size-mini-padding-x:      5px;
+$size-mini-height:         22px;
+$size-mini-fontsize:       $fontsize-small;
+
 
 // Button
 // -------------------------
@@ -82,9 +105,27 @@ $input-height:              40px;
 $input-padding-x:           10px;
 $input-padding-y:           5px;
 
-$input-height-small:        30px;
-$input-padding-x-small:     10px;
-$input-padding-y-small:     5px;
+$input-large-padding-y:     10px;
+$input-large-padding-x:     8px;
+$input-large-height:        $size-large-height;
+$input-large-fontsize:      $size-large-fontsize;
+
+$input-default-padding-y:   8px;
+$input-default-padding-x:   6px;
+$input-default-height:      $size-default-height;
+$input-default-fontsize:    $size-default-fontsize;
+
+$input-small-padding-y:     5px;
+$input-small-padding-x:     4px;
+$input-small-height:        $size-small-height;
+$input-small-fontsize:      $size-small-fontsize;
+
+$input-mini-padding-y:     2px;
+$input-mini-padding-x:     2px;
+$input-mini-height:        $size-mini-height;
+$input-mini-fontsize:      $size-mini-fontsize;
+
+
 
 // Transition
 // -------------------------
@@ -94,6 +135,10 @@ $transition-during:         0.25s;
 // z-index
 // -------------------------
 $zindex-popup:              5000;
+$zindex-popup-header:       6000;
+$zindex-popup-sidebar:      6000;
+$zindex-modal:              7000;
+$zindex-message:            8000;
 
 // Datetime
 // -------------------------

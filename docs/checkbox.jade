@@ -51,7 +51,8 @@ block content
 
   .docs-section
     h2|属性
-    au-table(:columns="attrColumns", :data="attrs")
+    au-table(:data="attrs")
+      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.

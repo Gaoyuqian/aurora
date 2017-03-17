@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Input
+  |Input
 
 block content
   .docs-heading
@@ -16,16 +16,52 @@ block content
       .docs-panel-row
         au-input(
           v-model="form.value",
-          name="name",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+      .docs-panel-row
+        au-input(
+          disabled,
+          v-model="form.value",
           placeholder="请输入名称",
           @focus="onFocus",
           @blur="onBlur"
         )
 
+  .docs-section
+    h2|多种大小
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
         au-input(
-          disabled,
           v-model="form.value",
-          name="name",
+          size="large"
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+      .docs-panel-row
+        au-input(
+          v-model="form.value",
+          size="default",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+      .docs-panel-row
+        au-input(
+          v-model="form.value",
+          size="small",
+          placeholder="请输入名称",
+          @focus="onFocus",
+          @blur="onBlur"
+        )
+      .docs-panel-row
+        au-input(
+          v-model="form.value",
+          size="mini",
           placeholder="请输入名称",
           @focus="onFocus",
           @blur="onBlur"
@@ -40,7 +76,6 @@ block content
         au-input(
           type="textarea",
           v-model="form.value",
-          name="name",
           placeholder="请输入名称",
           @focus="onFocus",
           @blur="onBlur",
@@ -51,7 +86,8 @@ block content
 
   .docs-section
     h2|属性
-    au-table(:columns="attrColumns", :data="attrs")
+    au-table(:data="attrs")
+      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
@@ -60,6 +96,7 @@ block script
       mixins: [ attrMixins ],
       data () {
         return {
+          attrs: [],
           form: {
             value: 'hello world'
           }

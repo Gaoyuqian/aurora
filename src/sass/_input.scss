@@ -11,13 +11,9 @@
   width: 100%;
   border: 1px solid $color-border;
   border-radius: $input-border-radius;
-  padding: $input-padding-y $input-padding-x;
-  line-height: ($input-height - $input-padding-y * 2);
   transition-property: border-color;
   transition-duration: 0.3s;
   color: #333;
-  font-size: $fontsize-default;
-  line-height: 22px;
 
   &:hover {
     border-color: $color-border-hover;
@@ -67,13 +63,46 @@
   @include flex-center-center();
 }
 
+.au-input-default {
+  .au-input-control {
+    padding: $input-default-padding-y $input-default-padding-x;
+    font-size: $input-default-fontsize;
+    &[type="text"] {
+      height: $input-default-height;
+      line-height: ($input-default-height - $input-default-padding-y * 2);
+    }
+  }
+}
+
+.au-input-large {
+  .au-input-control {
+    padding: $input-large-padding-y $input-large-padding-x;
+    font-size: $input-large-fontsize;
+    &[type="text"] {
+      height: $input-large-height;
+      line-height: ($input-large-height - $input-large-padding-y * 2);
+    }
+  }
+}
+
 .au-input-small {
   .au-input-control {
-    padding: $input-padding-y-small $input-padding-x-small;
-    line-height: ($input-height-small - $input-padding-y-small * 2);
-    font-size: 13px;
+    padding: $input-small-padding-y $input-small-padding-x;
+    font-size: $input-small-fontsize;
     &[type="text"] {
-      height: $input-height-small;
+      height: $input-small-height;
+      line-height: ($input-small-height - $input-small-padding-y * 2);
+    }
+  }
+}
+
+.au-input-mini {
+  .au-input-control {
+    padding: $input-mini-padding-y $input-mini-padding-x;
+    font-size: $input-mini-fontsize;
+    &[type="text"] {
+      height: $input-mini-height;
+      line-height: ($input-mini-height - $input-mini-padding-y * 2);
     }
   }
 }

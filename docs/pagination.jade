@@ -1,0 +1,34 @@
+extends ./_layout
+
+block title
+  |Pagination
+
+block content
+  .docs-heading
+    h1|AuPagination
+    .docs-desc
+
+  .docs-section
+    h2|基础分页
+    .docs-desc
+      p|基础分页的用法
+    .docs-panel
+      .docs-panel-row
+        au-pagination(v-model="page", :item-count="itemCount")
+      .docs-panel-row
+        au-pagination(v-model="page", :item-count="itemCount", :show-page-size-control="true")
+      .docs-panel-row
+        au-pagination(v-model="page", :item-count="itemCount", :show-page-control="true")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          page: 1,
+          itemCount: 200
+        }
+      }
+    })

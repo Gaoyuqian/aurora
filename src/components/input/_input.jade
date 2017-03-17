@@ -1,6 +1,4 @@
 .au-input(:class="inputClass")
-  .au-input-heading-icon-wrapper(v-if="headingIcon")
-    au-icon(:icon="headingIcon")
   input.au-input-control(
     v-if="type === 'text'",
     :class="controlClass",
@@ -24,5 +22,3 @@
     :rows="rows",
     :cols="cols"
   )
-  .au-input-tailing-icon-wrapper(v-if="tailingIcon")
-    au-icon(:icon="tailingIcon")

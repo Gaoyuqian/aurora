@@ -1,0 +1,23 @@
+.au-content {
+  flex: 1;
+  display: flex;
+}
+
+.au-content-sidebar {
+  width: 200px;
+  background-color: $color-black-light-extra;
+  color: $color-white;
+  overflow-y: auto;
+  position: relative;
+  z-index: $zindex-popup-header;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.au-content-container {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  background-color: $color-white-light;
+}

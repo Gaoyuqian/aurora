@@ -1,38 +1,17 @@
 .au-message-center {
   position: fixed;
-  top: 20px;
+  top: 4px;
   left: 0;
   width: 100%;
   text-align: center;
   pointer-events: none;
+  z-index: $zindex-message;
 }
 
 .au-message {
   .au-icon {
-    float: left;
-    line-height: 30px;
-    font-size: $fontsize-medium;
-    margin-right: 8px;
-  }
-
-  .fa-check-circle {
-    color: $color-success;
-  }
-
-  .fa-info-circle {
-    color: $color-info;
-  }
-
-  .fa-exclamation-circle {
-    color: $color-warning;
-  }
-
-  .fa-times-circle {
-    color: $color-danger;
-  }
-
-  .fa-circle-o-notch {
-    color: $color-silver;
+    font-size: $fontsize-large-extra;
+    color: $color-white;
   }
 }
 
@@ -40,21 +19,45 @@
   display: inline-block;
   pointer-events: all;
   box-shadow: $message-shadow;
-  border: 1px solid $color-border;
-  line-height: 30px;
-  padding: 0 10px;
+  line-height: 40px;
   background-color: $color-white;
-  font-size: $fontsize-small;
+  font-size: $fontsize-default;
+  // border: 1px solid $color-border;
   position: relative;
   clear: both;
   text-align: center;
   margin: 10px;
 }
 
-.au-message-content {
-  max-width: 300px;
-  text-align: center;
+.au-message-icon-wrapper {
+  width: 40px;
+  height: 40px;
   float: left;
+  @include flex-center-center();
+}
+
+.au-message-icon-wrapper-success {
+  background-color: $color-success;
+}
+
+.au-message-icon-wrapper-info {
+  background-color: $color-info;
+}
+
+.au-message-icon-wrapper-warning {
+  background-color: $color-warning;
+}
+
+.au-message-icon-wrapper-danger {
+  background-color: $color-danger;
+}
+
+.au-message-content {
+  padding: 0 10px;
+  min-width: 260px;
+  @include text-overflowing();
+  text-align: left;
+  color: $color-silver-light;
 }
 
 .message-fade-enter {

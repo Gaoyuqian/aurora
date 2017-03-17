@@ -121,13 +121,13 @@ const AuFlex = Vue.extend({
               itemStyle.margin = `${gutter}px`
               instance.columnMode = true
             } else {
-
               // cancel column-mode, if set before
               instance.columnMode = false
-              itemStyle.marginLeft = itemStyle.marginLeft || `${gutter}px`
-              itemStyle.marginRight = itemStyle.marginRight || `${gutter}px`
-              itemStyle.marginTop = itemStyle.marginTop || `${gutter}px`
-              itemStyle.marginBottom = itemStyle.marginBottom || `${gutter}px`
+
+              itemStyle.marginLeft = instance.offset ? itemStyle.marginLeft : `${gutter}px`
+              itemStyle.marginRight = instance.offset ? itemStyle.marginRight : `${gutter}px`
+              itemStyle.marginTop = instance.offset ? itemStyle.marginTop : `${gutter}px`
+              itemStyle.marginBottom = instance.offset ? itemStyle.marginBottom : `${gutter}px`
             }
           }
         })

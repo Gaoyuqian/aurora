@@ -29,14 +29,6 @@ Vue.component('au-button', {
       type: String,
       default: null
     },
-    headingIcon: {
-      type: String,
-      default: null
-    },
-    trailingIcon: {
-      type: String,
-      default: null
-    },
     nativeType: {
       type: String,
       default: 'button'
@@ -56,6 +48,7 @@ Vue.component('au-button', {
   },
   computed: {
     classObj () {
+      const $slots = this.$slots.default
       const obj = ['au-button']
 
       if (this.size !== 'default') {
@@ -70,7 +63,7 @@ Vue.component('au-button', {
         obj.push(`au-button-${this.type}`)
       }
 
-      if (this.icon) {
+      if (this.icon && !$slots) {
         obj.push(`au-button-icon`)
       }
 
@@ -93,33 +86,22 @@ Vue.component('au-button', {
     if (this.icon != null) {
       child.push(h('au-icon', {
         props: {
-          size: this.size,
           icon: this.icon
         }
       }))
-    } else {
-      if (this.headingIcon != null) {
-        child.push(h('au-icon', {
-          'class': 'au-button-heading-icon',
-          props: {
-            size: this.size,
-            icon: this.headingIcon
-          }
-        }))
-      }
-
-      child.push(this.$slots.default)
-
-      if (this.trailingIcon != null) {
-        child.push(h('au-icon', {
-          'class': 'au-button-trailing-icon',
-          props: {
-            size: this.size,
-            icon: this.trailingIcon
-          }
-        }))
-      }
     }
+
+    if (this.$slots.default) {
+      child.push(
+        h('span',
+          {
+            'class': 'au-button-content'
+          },
+          this.$slots.default
+        )
+      )
+    }
+
 
     if (this.href != null) {
       return h(

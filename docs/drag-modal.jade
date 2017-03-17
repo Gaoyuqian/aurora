@@ -1,0 +1,76 @@
+extends ./_layout
+
+block title
+  |DragModal
+
+block content
+  .docs-heading
+    h1|AuDragModal
+    .docs-desc
+
+  .docs-section
+    h2|基础DragModal
+    .docs-desc
+
+    .docs-panel
+      .docs-panel-row
+        au-button(type="primary", size="small", @click="showModals")|显示全部
+        au-button(type="primary", size="small", @click="value.isShow = !value.isShow", v-for="value in modals")|显示Modal
+        au-drag-modal(title="新页面", v-model="value.isShow", :top="top", :left="left", style="max-height:300px; width:500px;", v-for="value in modals")
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div|这里是正文内容
+          div(slot="footer")
+            au-button(type="primary", size="small")|提交
+            au-button(type="default", size="small", @click="value.isShow = false")|取消
+
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins: [ attrMixins ],
+      data () {
+        return {
+          attrs: [
+            {
+              name: 'column',
+              desc: '列信息',
+              type: 'Array',
+              default: 'null'
+            }
+          ],
+          top: null,
+          left: null,
+          modals: [
+            { isShow: false },
+            { isShow: false },
+            { isShow: false },
+            { isShow: false },
+            { isShow: false },
+            { isShow: false },
+            { isShow: false }
+          ]
+        }
+      },
+      methods: {
+        showModals () {
+          this.modals = this.modals.map((item) => {
+            item.isShow = !item.isShow
+            return item
+          })
+        }
+      }
+    })

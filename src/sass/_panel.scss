@@ -1,10 +1,18 @@
 .au-panel {
   border: 1px solid $color-border;
-  margin: 20px 0;
+  margin-bottom: 20px;
+  background-color: $color-white;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .au-panel-heading {
+  color: $color-black-light;
+  background-color: $color-white-light;
   border-bottom: 1px solid $color-border;
+  font-size: $fontsize-default;
   height: 40px;
   line-height: 40px;
   padding: 0 20px;
@@ -15,4 +23,5 @@
 
 .au-panel-content {
   padding: 20px;
+  font-size: $fontsize-default;
 }

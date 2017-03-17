@@ -18,7 +18,7 @@ div.au-select(
   popup(
     ref="popup"
   )
-    .au-options
+    .au-options(ref="options")
       au-option(
         v-if="options != null",
         v-for="option in options",

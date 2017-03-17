@@ -1,7 +1,7 @@
 import TableColumn from '../table-column/_table-column.js'
 const TD_PADDING = 20
 
-Vue.component('au-table', {
+const AuTable = Vue.extend({
   props: {
     data: {
       type: Array,
@@ -141,8 +141,6 @@ Vue.component('au-table', {
   },
   methods: {
     resetColumns () {
-      console.log('--------------------')
-      console.log(this.$slots.default)
       this.columns = (this.$slots.default || []).filter((slot) => { return slot.tag }).map((slot) => {
         return slot.componentInstance
       })
@@ -162,3 +160,7 @@ Vue.component('au-table', {
     }
   }
 })
+
+Vue.component('au-table', AuTable)
+
+export default AuTable

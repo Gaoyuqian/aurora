@@ -172,6 +172,8 @@ const AuSelect = Vue.extend({
         })
       }
 
+      console.log(this.$refs.options.style)
+      this.$refs.options.style.minWidth = this.$el.getClientRects()[0].width - 2 + 'px'
       this.optionsElem.show()
     },
     hideOptions () {

@@ -134,27 +134,30 @@ const AuDatePicker = Vue.extend({
         this.panel.reset()
 
         this.popup.setRelateElem(this.$el)
+
         document.body.appendChild(this.popup.$el)
 
         this.popup.$on('show', () => {
           this.inputActive = true
+          this.$nextTick(() => {
+            this.popup.broadcast('show.popup')
+          })
         })
 
         this.popup.$on('hide', () => {
           this.inputActive = false
+          console.log('hide.popup')
+          this.$nextTick(() => {
+            console.log(this.panel.broadcast, 'hide.popup')
+            this.popup.broadcast('hide.popup')
+          })
         })
       }
 
       this.popup.show()
-      this.$nextTick(() => {
-        this.panel.broadcast && this.panel.broadcast('show.popup')
-      })
     },
     hidePopup () {
       this.popup.hide()
-      this.$nextTick(() => {
-        this.panel.broadcast && this.panel.broadcast('hide.popup')
-      })
     }
   }
 })
