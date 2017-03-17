@@ -14,41 +14,56 @@ block content
     h2|水平居中
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(justify-content="center", align-items="center", gutter="10", style="height: 200px")
           au-flex-item.flex-item
             |hello world
           au-flex-item.flex-item(grow="1")
             |hello world
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|垂直模式
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(direction="column", gutter="10", style="height: 200px")
           au-flex-item.flex-item
             |hello world
           au-flex-item.flex-item
             |hello world
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|固定列
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(justify-content="flex-start", wrap="wrap", gutter="10", :column="column")
           au-flex-item.flex-item(v-for="item in list")
             |{{ item }}
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|栅格
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(justify-content="flex-start", wrap="wrap", gutter="10")
           au-flex-item.flex-item(v-for="item in list", span="4")
@@ -70,7 +85,12 @@ block content
           au-flex-item.flex-item(span="5", offset="1")
           au-flex-item.flex-item(span="3", offset="9")
           au-flex-item.flex-item(span="2", offset="4")
-
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+          
   .docs-section
     h2|AuFlex属性
     au-table(:data="flexAttrs")
@@ -95,7 +115,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           flexAttrs: [
