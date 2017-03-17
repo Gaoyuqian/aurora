@@ -12,37 +12,38 @@ block content
     h2
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-tabs
-          au-tab-panel(tab="哈哈", value="1")
-            哈哈
+          au-tab-panel(tab="北京", value="1")
+            北京
 
-          au-tab-panel(tab="呵呵呵呵呵呵", value="2")
-            呵呵呵呵呵呵1
+          au-tab-panel(tab="上海", value="2")
+            上海
 
-          au-tab-panel(tab="呵呵呵呵呵呵", value="3")
-            呵呵呵呵呵呵2
+          au-tab-panel(tab="广州", value="3")
+            广州
 
-          au-tab-panel(tab="呵呵呵呵呵呵", value="4")
-            呵呵呵呵呵呵3
-          au-tab-panel(tab="呵呵呵呵呵呵", value="5")
-            呵呵呵呵呵呵4
-          au-tab-panel(tab="呵呵呵呵呵呵", value="6")
-            呵呵呵呵呵呵5
-          au-tab-panel(tab="呵呵呵呵呵呵", value="7")
-            呵呵呵呵呵呵6
-          au-tab-panel(tab="呵呵呵呵呵呵", value="8")
-            呵呵呵呵呵呵7
-          au-tab-panel(tab="呵呵呵呵呵呵", value="9")
-            呵呵呵呵呵呵8
-          au-tab-panel(tab="呵呵呵呵呵呵", value="10")
-            呵呵呵呵呵呵8
+          au-tab-panel(tab="深圳", value="4")
+            深圳
+
+          au-tab-panel(tab="南京", value="5")
+            南京
+
+          au-tab-panel(tab="杭州", value="6")
+            杭州
+
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [

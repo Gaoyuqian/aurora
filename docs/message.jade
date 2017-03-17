@@ -12,7 +12,7 @@ block content
     h2|提示信息
     .docs-desc
       p|提示信息的用法
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-input(v-model="message")
       .docs-panel-row
@@ -21,7 +21,45 @@ block content
         au-button(size="small", @click="showDanger")|失败
         au-button(size="small", @click="showWarning")|警告
         au-button(size="small", @click="showLoading")|加载中
-
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              message: '提示信息',
+              func: null
+            }
+          },
+          methods: {
+            showInfo () {
+              Aurora.info(this.message)
+            },
+            showDanger () {
+              Aurora.danger(this.message)
+            },
+            showSuccess () {
+              Aurora.success(this.message)
+            },
+            showWarning () {
+              Aurora.warning(this.message)
+            },
+            showLoading () {
+              if (this.func) {
+                this.func()
+                this.func = null
+              } else {
+                this.func = Aurora.loading(this.message)
+              }
+            }
+          }
+        }
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
   .docs-section
     h2|属性
@@ -30,7 +68,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           message: '提示信息',

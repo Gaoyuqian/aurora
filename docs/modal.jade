@@ -12,7 +12,7 @@ block content
     h2|基础Modal
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button(type="primary", size="small", @click="isShow = true")|显示
         au-modal(title="新页面", v-model="isShow")
@@ -28,13 +28,32 @@ block content
           div(slot="footer")
             au-button(type="primary", size="small")|提交
             au-button(type="default", size="small", @click="step2 = false")|取消
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              isShow: false,
+              step2: false
+            }
+          }
+        }
+    
+    .docs-panel
+      .docs-panel-content
+
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [

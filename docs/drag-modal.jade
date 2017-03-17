@@ -12,7 +12,7 @@ block content
     h2|基础DragModal
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-button(type="primary", size="small", @click="showModals")|显示全部
         au-button(type="primary", size="small", @click="value.isShow = !value.isShow", v-for="value in modals")|显示Modal
@@ -35,13 +35,20 @@ block content
           div(slot="footer")
             au-button(type="primary", size="small")|提交
             au-button(type="default", size="small", @click="value.isShow = false")|取消
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [

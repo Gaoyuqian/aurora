@@ -55,6 +55,29 @@ block content
           au-radio-group(v-model="form.class")
             au-radio(:native-value="option.value", v-for="option in options")
               |{{ option.label }}
+    
+    template.js(scoped="scoped")
+      script.
+        {
+          data() {
+            return {
+              options: [
+                {
+                  value: '1',
+                  label: '三年一班'
+                },
+                {
+                  value: '2',
+                  label: '三年二班'
+                },
+                {
+                  value: '3',
+                  label: '三年三班'
+                }
+              ]
+            }
+          }
+        }
 
     .docs-panel
       .docs-panel-content
