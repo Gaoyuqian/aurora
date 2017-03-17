@@ -10,9 +10,11 @@ block content
 
   .docs-section
     h2|基础选择器
+
     .docs-desc
       p|基础选择器的用法
-    .docs-panel
+
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex
           au-flex-item(grow="1")
@@ -28,28 +30,46 @@ block content
          au-flex(justify-content="center")
            au-flex-item
              au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|多选选择器
     .docs-desc
       p|多选选择器的用法
-    .docs-panel
+    
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex
           au-flex-item(grow="1")
             au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|禁用选择器
     .docs-desc
       p|禁用选择器的用法
-    .docs-panel
+
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex
           au-flex-item(grow="1")
             au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
           au-flex-item(grow="1")
             au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
+      
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|属性
@@ -60,7 +80,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [

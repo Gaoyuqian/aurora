@@ -12,7 +12,7 @@ block content
     h2|Text
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-input(
           v-model="form.value",
@@ -28,12 +28,17 @@ block content
           @focus="onFocus",
           @blur="onBlur"
         )
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|多种大小
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-input(
           v-model="form.value",
@@ -66,12 +71,17 @@ block content
           @focus="onFocus",
           @blur="onBlur"
         )
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
   .docs-section
     h2|Textarea
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-input(
           type="textarea",
@@ -82,6 +92,11 @@ block content
           rows="10",
           cols="100"
         )
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
 
   .docs-section
@@ -93,7 +108,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [],
