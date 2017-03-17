@@ -41,7 +41,7 @@ block content
       .docs-code
         pre
           code.html
-    
+
 
   .docs-section
     h2|Radiox组
@@ -53,8 +53,9 @@ block content
           au-radio-group(:options="options" v-model="form.class")
         div
           au-radio-group(v-model="form.class")
-            au-radio(:native-value="option.value", v-for="option in options")|{{ option.label }}
-    
+            au-radio(:native-value="option.value", v-for="option in options")
+              |{{ option.label }}
+
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -65,7 +66,7 @@ block content
 
   .docs-section
     h2|属性
-    au-table(:columns="attrColumns", :data="attrs")
+    au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
@@ -74,6 +75,7 @@ block script
       mixins,
       data () {
         return {
+          option: {},
           form: {
             'class': '3',
             gender: 'female'
