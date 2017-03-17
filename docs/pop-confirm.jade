@@ -12,7 +12,7 @@ block content
     h2|基础选择器
     .docs-desc
       p|基础选择器的用法
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(wrap="wrap")
           au-flex-item(offset="4", span="16")
@@ -54,6 +54,25 @@ block content
                 au-pop-confirm(position="bottomRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
                   au-button|提交
               au-flex-item
+    template.js(scoped="scoped")
+      script.
+        {
+          methods: {
+            confirmHandler () {
+              console.log('confirm')
+            },
+            cancelHandler () {
+              console.log('cancel')
+            }
+          }
+        }
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
   .docs-section
     h2|属性
@@ -62,7 +81,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
 

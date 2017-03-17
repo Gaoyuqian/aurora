@@ -12,17 +12,22 @@ block content
     h2|基础Panel
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-panel(label="新页面", icon="fax")
           div|哈哈
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           attrs: [

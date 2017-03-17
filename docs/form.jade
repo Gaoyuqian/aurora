@@ -12,7 +12,7 @@ block content
     h2
     .docs-desc
 
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-flex(gutter="20")
           au-flex-item
@@ -44,7 +44,12 @@ block content
                 &nbsp;
                 au-button(type="default")|重置
           au-flex-item
-
+    
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
 
 
 
@@ -56,7 +61,7 @@ block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           labelPosition: 'left',

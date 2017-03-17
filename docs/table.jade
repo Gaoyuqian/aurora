@@ -13,7 +13,8 @@ block content
     h2|基础表格
     .docs-desc
       p|基础表格的用法
-    .docs-panel
+
+    template.html(scoped="scoped")
       .docs-panel-row
         au-table(:data="data")
           au-table-column(
@@ -39,11 +40,33 @@ block content
               au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
               au-button(type="warning", size="small", @click.native="editHandler(scope.index, scope.data)")|更新
               au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              data : [
+                { id: 1, name: 'kevin', age: '28' },
+                { id: 2, name: 'kevin', age: '27' },
+                { id: 3, name: 'kevin', age: '26' },
+                { id: 4, name: 'kevin', age: '25' }
+              ]
+            }
+          }
+        }
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
+
   .docs-section
     h2|列表格
     .docs-desc
       p|基础表格的用法
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-table(:data="keyValues", :no-header="true")
           au-table-column(
@@ -53,12 +76,41 @@ block content
           au-table-column(
             attr-name="value"
           )
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              keyValues: [
+                {
+                  key: '注册手机',
+                  value: '18300001511'
+                },
+                {
+                  key: '客户姓名',
+                  value: '叶一'
+                },
+                {
+                  key: '身份证号',
+                  value: '420502199001010016'
+                }
+              ],
+            }
+          }
+        }
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
   .docs-section
     h2|checkbox表格
     .docs-desc
       p|checkbox表格的用法
-    .docs-panel
+    template.html(scoped="scoped")
       .docs-panel-row
         au-table(ref="table", :data="data")
           au-table-column(
@@ -80,6 +132,31 @@ block content
             template(scope="scope")
               au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
               au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
+    template.js(scoped="scoped")
+      script.
+        {
+          data () {
+            return {
+              data : [
+                { id: 1, name: 'kevin', age: '28' },
+                { id: 2, name: 'kevin', age: '27' },
+                { id: 3, name: 'kevin', age: '26' },
+                { id: 4, name: 'kevin', age: '25' }
+              ],
+              checkeds: [
+                data[1],
+                data[2]
+              ]
+            }
+          }
+        }
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        pre
+          code.html
+        pre
+          code.js
 
 
 block script
