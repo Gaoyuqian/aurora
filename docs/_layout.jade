@@ -112,6 +112,8 @@ html.no-js
     script.
       const mixins = []
       !function () {
+        Vue.config.silent = true
+
         const sections = document.querySelectorAll('.docs-section')
         ;[].forEach.call(sections, (section) => {
           loadHtml(section)
@@ -120,11 +122,15 @@ html.no-js
 
         function loadHtml (section) {
           const template = section.querySelector('template.html')
-          if (!template) return
-          const code = section.querySelector('.docs-code pre code.html')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.html')
+          if (!code) {
+            return
+          }
           section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
-          code.innerHTML = convert(template.innerHTML)
-          hljs.highlightBlock(code)
+          code.setAttribute('html', convert(template.innerHTML))
 
           template.parentElement.removeChild(template)
 
@@ -136,30 +142,23 @@ html.no-js
             })
             return htmlEncode(html)
           }
-
-          function htmlEncode (str) {
-            var s = "";
-            if (str.length == 0) return "";
-            s = str.replace(/&/g, "&gt;");
-            s = s.replace(/</g, "&lt;");
-            s = s.replace(/>/g, "&gt;");
-            s = s.replace(/ /g, "&nbsp;");
-            s = s.replace(/\'/g, "&#39;");
-            s = s.replace(/\"/g, "&quot;");
-            s = s.replace(/\n/g, "<br>");
-            return s;
-          }
         }
 
         function loadJs (section) {
           const template = section.querySelector('template.js')
-          if (!template) return
-          const js = convert(template.innerHTML)
-          const code = section.querySelector('.docs-code pre code.js')
-          code.innerHTML = 'export default ' + js
-          hljs.highlightBlock(code)
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.js')
+          if (!code) {
+            return
+          }
+          const html = template.innerHTML
+          const js = convert(html)
 
+          code.setAttribute('html', 'export default ' + htmlEncode(js))
           template.parentElement.removeChild(template)
+
           var result
           eval(`result = ${js}`)
           mixins.push(result)
@@ -174,6 +173,29 @@ html.no-js
             return js
           }
         }
+
+        function htmlEncode (str) {
+          var s = "";
+          if (str.length == 0) return "";
+          s = str.replace(/&/g, "&gt;");
+          s = s.replace(/</g, "&lt;");
+          s = s.replace(/>/g, "&gt;");
+          s = s.replace(/ /g, "&nbsp;");
+          s = s.replace(/\'/g, "&#39;");
+          s = s.replace(/\"/g, "&quot;");
+          s = s.replace(/\n/g, "<br>");
+          return s;
+        }
+
+        Vue.component('docs-code', {
+          template: '<code v-html="html"></code>',
+          props: {
+            html: String
+          },
+          mounted () {
+            hljs.highlightBlock(this.$el)
+          }
+        })
 
         mixins.push({
           data () {
