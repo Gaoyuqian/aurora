@@ -3,13 +3,10 @@ const AuFlex = Vue.extend({
   props: {
     inline: Boolean,
     column: Boolean,
-    wrap: {
-      type: [String, Boolean],
-      default: null
-    },
+    wrap: [Boolean, String],
     justifyContent: {
       type: String,
-      default: null
+      default: ''
     },
     alignItems: {
       type: String,
@@ -17,18 +14,14 @@ const AuFlex = Vue.extend({
     },
     alignContent: {
       type: String,
-      default: null
+      default: ''
     },
     gutter: {
       type: [String, Number],
       default: 0
-    },
-    center: Boolean
+    }
   },
   computed: {
-    _wrap () {
-      return this.wrap === true ? 'wrap' : this.wrap
-    },
     styleObj () {
       const style = {}
 
@@ -40,12 +33,10 @@ const AuFlex = Vue.extend({
         style['flex-direction'] = 'column'
       }
 
-      if (this._wrap) {
-        style['flex-wrap'] = this._wrap
-      }
-
-      if (this.center) {
-        style['justify-content'] = 'center'
+      if (this.wrap === true || this.wrap === '') {
+        style['flex-wrap'] = 'wrap'
+      } else if (this.wrap !== false) {
+        style['flex-wrap'] = this.wrap
       }
 
       if (this.justifyContent) {

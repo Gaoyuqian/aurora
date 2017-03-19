@@ -10,12 +10,12 @@ html.no-js
     link(rel='stylesheet', href="../src/sass/aurora.css")
     link(rel='stylesheet', href="../lib/font-awesome-4.7.0/css/font-awesome.min.css")
     link(rel='stylesheet', href="./docs.css")
-    link(rel='stylesheet', href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/github.min.css")
+    link(rel='stylesheet', href="../lib/highlight.github.min.css")
 
-    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify-css.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.11/beautify-html.min.js")
+    script(src="../lib/highlight.min.js")
+    script(src="../lib/beautify.min.js")
+    script(src="../lib/beautify-css.min.js")
+    script(src="../lib/beautify-html.min.js")
   body
     <!--[if lt IE 8]>
     p.browsehappy
@@ -140,6 +140,7 @@ html.no-js
             html = html_beautify(html, {
               indent_size: 2
             })
+            html = html.replace(/=""/g, '')
             return htmlEncode(html)
           }
         }

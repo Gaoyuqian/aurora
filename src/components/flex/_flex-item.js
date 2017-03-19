@@ -2,38 +2,29 @@ const ROW_SPANS = 24
 const AuFlexItem = Vue.extend({
   template: `<div class="au-flex-item" :class="classObj" :style="styleObj"><slot></slot></div>`,
   props: {
-    flex: {
-      type: [Boolean, String, Number],
-      default: null
-    },
+    flex: [Boolean, String, Number],
     order: {
       type: String,
-      default: null
+      default: ''
     },
     grow: {
       type: String,
-      default: null
+      default: ''
     },
     shrink: {
       type: String,
-      default: null
+      default: ''
     },
     basis: {
       type: String,
-      default: null
+      default: ''
     },
     alignSelf: {
       type: String,
-      default: null
+      default: ''
     },
-    span: {
-      type: [String, Number],
-      default: null
-    },
-    offset: {
-      type: [String, Number],
-      default: null
-    }
+    span: [String, Number],
+    offset: [String, Number]
   },
   computed: {
     classObj () {
@@ -57,9 +48,9 @@ const AuFlexItem = Vue.extend({
         style['padding'] = (gutter / 2) + 'px'
       }
 
-      if (this.flex === true || this.flex === '') {
+      if (this.flex === true) {
         style['flex'] = '1'
-      } else if (this.flex) {
+      } else if (this.flex !== false) {
         style['flex'] = String(this.flex)
       }
 

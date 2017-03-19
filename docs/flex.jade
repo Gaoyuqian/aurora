@@ -14,7 +14,7 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex(gutter="10")
+        au-flex(gutter="10", disabled)
           au-flex-item
             .flex-item|hello world
           au-flex-item(flex)
@@ -46,11 +46,11 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex(justify-content="flex-start", wrap="wrap", gutter="10")
+        au-flex(justify-content="flex-start", wrap, gutter="10")
           au-flex-item(v-for="item in list", span="4")
             .flex-item|{{ item }}
 
-        au-flex(justify-content="flex-start", wrap="wrap", gutter="10")
+        au-flex(justify-content="flex-start", wrap, gutter="10")
           au-flex-item(span="12")
             .flex-item
           au-flex-item(span="12")
@@ -113,40 +113,40 @@ block script
         return {
           flexAttrs: [
             {
-              name: 'direction',
-              desc: '同flex-direction',
-              type: 'String',
-              default: 'null'
+              name: 'inline',
+              desc: '使用inline-flex',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'column',
+              desc: '使用flex-direction: column',
+              type: 'Boolean',
+              default: 'false'
             },
             {
               name: 'wrap',
               desc: '同flex-wrap',
-              type: 'String',
-              default: 'null'
+              type: 'String, Boolean',
+              default: 'false'
             },
             {
               name: 'justify-content',
               desc: '同justify-content',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'align-items',
               desc: '同align-items',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'align-content',
               desc: '同align-content',
               type: 'String',
-              default: 'null'
-            },
-            {
-              name: 'column',
-              desc: '列数量',
-              type: 'Number',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'gutter',
@@ -157,45 +157,51 @@ block script
           ],
           flexItemAttrs: [
             {
+              name: 'flex',
+              desc: '同flex',
+              type: 'String, Number, Boolean',
+              default: 'false'
+            },
+            {
               name: 'order',
               desc: '同order',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'grow',
               desc: '同flex-grow',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'shrink',
               desc: '同flex-shrink',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'basis',
               desc: '同flex-basis',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'align-self',
               desc: '同align-self',
               type: 'String',
-              default: 'null'
+              default: '""'
             },
             {
               name: 'span',
               desc: '栅格占格数, 每行24格',
-              type: 'String',
+              type: 'String, Number',
               default: 'null'
             },
             {
               name: 'offset',
               desc: '栅格左侧偏移占格数',
-              type: 'String',
+              type: 'String, Number',
               default: 'null'
             }
           ],
