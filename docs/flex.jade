@@ -4,8 +4,6 @@ block title
   |Flex
 
 block content
-
-
   .docs-heading
     h1|AuFlex
     .docs-desc
@@ -16,11 +14,11 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex(justify-content="center", align-items="center", gutter="10", style="height: 200px")
-          au-flex-item.flex-item
-            |hello world
-          au-flex-item.flex-item(grow="1")
-            |hello world
+        au-flex(gutter="10")
+          au-flex-item
+            .flex-item|hello world
+          au-flex-item(flex)
+            .flex-item|hello world
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -32,25 +30,11 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex(direction="column", gutter="10", style="height: 200px")
-          au-flex-item.flex-item
-            |hello world
-          au-flex-item.flex-item
-            |hello world
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
-
-  .docs-section
-    h2|固定列
-    .docs-desc
-
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(justify-content="flex-start", wrap="wrap", gutter="10", :column="column")
-          au-flex-item.flex-item(v-for="item in list")
-            |{{ item }}
+        au-flex(column, gutter="10", align-items="flex-start")
+          au-flex-item
+            .flex-item|hello world
+          au-flex-item
+            .flex-item|hello world
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -63,25 +47,36 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex(justify-content="flex-start", wrap="wrap", gutter="10")
-          au-flex-item.flex-item(v-for="item in list", span="4")
-            |{{ item }}
+          au-flex-item(v-for="item in list", span="4")
+            .flex-item|{{ item }}
 
         au-flex(justify-content="flex-start", wrap="wrap", gutter="10")
-          au-flex-item.flex-item(span="12")
-          au-flex-item.flex-item(span="12")
+          au-flex-item(span="12")
+            .flex-item
+          au-flex-item(span="12")
+            .flex-item
 
-          au-flex-item.flex-item(span="8")
-          au-flex-item.flex-item(span="8")
-          au-flex-item.flex-item(span="8")
+          au-flex-item(span="8")
+            .flex-item
+          au-flex-item(span="8")
+            .flex-item
+          au-flex-item(span="8")
+            .flex-item
 
-          au-flex-item.flex-item(span="6")
-          au-flex-item.flex-item(span="6")
-          au-flex-item.flex-item(span="6")
-          au-flex-item.flex-item(span="6")
-
-          au-flex-item.flex-item(span="5", offset="1")
-          au-flex-item.flex-item(span="3", offset="9")
-          au-flex-item.flex-item(span="2", offset="4")
+          au-flex-item(span="6")
+            .flex-item
+          au-flex-item(span="6")
+            .flex-item
+          au-flex-item(span="6")
+            .flex-item
+          au-flex-item(span="6")
+            .flex-item
+          au-flex-item(span="5", offset="1")
+            .flex-item
+          au-flex-item(span="3", offset="9")
+            .flex-item
+          au-flex-item(span="2", offset="4")
+            .flex-item
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -100,9 +95,11 @@ block content
 
 block script
   style.
+    .au-flex {
+      margin: 10px 0;
+    }
     .flex-item {
       background-color: #eee;
-      /*border-radius: 10px;*/
       height: 40px;
       line-height: 40px;
       padding: 0 10px;

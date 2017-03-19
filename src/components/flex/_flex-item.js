@@ -1,7 +1,11 @@
 const ROW_SPANS = 24
 const AuFlexItem = Vue.extend({
-  template: `<div class="au-flex-item" :style="styleObj"><slot></slot></div>`,
+  template: `<div class="au-flex-item" :class="classObj" :style="styleObj"><slot></slot></div>`,
   props: {
+    flex: {
+      type: [Boolean, String, Number],
+      default: null
+    },
     order: {
       type: String,
       default: null
@@ -32,8 +36,32 @@ const AuFlexItem = Vue.extend({
     }
   },
   computed: {
+    classObj () {
+      const classObj = []
+
+      if (this.span) {
+        classObj.push(`au-flex-item-span-${this.span}`)
+      }
+
+      if (this.offset) {
+        classObj.push(`au-flex-item-offset-${this.offset}`)
+      }
+
+      return classObj
+    },
     styleObj () {
       const style = {}
+      const gutter = parseFloat(this.$parent.gutter)
+
+      if (gutter) {
+        style['padding'] = (gutter / 2) + 'px'
+      }
+
+      if (this.flex === true || this.flex === '') {
+        style['flex'] = '1'
+      } else if (this.flex) {
+        style['flex'] = String(this.flex)
+      }
 
       if (this.order) {
         style['order'] = this.order
@@ -56,44 +84,6 @@ const AuFlexItem = Vue.extend({
       }
 
       return style
-    }
-  },
-  data () {
-    return {
-      // set by AuFlex
-      columnMode: false
-    }
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.updateUI)
-  },
-  mounted () {
-    this.updateUI()
-    window.addEventListener('resize', this.updateUI)
-  },
-  updated () {
-    this.updateUI()
-  },
-  methods: {
-    updateUI () {
-      if (!(this.span || this.offset)) {
-        return
-      }
-
-      const containerOuterWidth = this.$parent.getOuterWidth()
-      const gutter = this.$parent.gutter / 2
-      const span = Math.min(ROW_SPANS, parseInt(this.span, 10))
-      const offset = Math.min(ROW_SPANS, parseInt(this.offset, 10))
-      const itemWidth = span ? (containerOuterWidth * (span / ROW_SPANS) - gutter * 2) : null
-      const itemOffset = offset ? (containerOuterWidth * (offset / ROW_SPANS) + gutter) : null
-
-      if (itemWidth) {
-        this.$el.style.width = `${itemWidth}px`
-      }
-
-      if (itemOffset) {
-        this.$el.style.marginLeft = `${itemOffset}px`
-      }
     }
   }
 })
