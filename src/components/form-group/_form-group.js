@@ -19,6 +19,9 @@ const AuFormGroup = Vue.extend({
         style.width = this.labelWidth + 'px'
       }
       return style
+    },
+    isLabelTop () {
+      return this.labelPosition === 'top'
     }
   },
   mounted () {

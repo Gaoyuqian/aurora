@@ -33,7 +33,7 @@ block content
               au-form-group(label="性别")
                 au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
               au-form-group(label="班级")
-                au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class")
+                au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
               au-form-group(label="描述")
                 au-input(type="textarea", v-model="form.desc", rows="5")
               au-form-group()

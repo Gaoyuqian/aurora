@@ -151,25 +151,25 @@ block content
     h2|按钮组
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex(column="4")
-          au-flex-item
+        au-flex(wrap)
+          au-flex-item(span="6")
             au-button-group
               au-button(type="primary", icon="plus")
               au-button(type="primary", icon="remove")
 
-          au-flex-item
+          au-flex-item(span="6")
             au-button-group
               au-button(type="primary")|按钮1
               au-button(type="primary")|按钮2
               au-button(type="primary")|按钮3
 
-          au-flex-item
+          au-flex-item(span="6")
             au-button-group
               au-button(:type="active == 1 ? 'primary' : 'default'", @click="clickActive(1)")|按钮1
               au-button(:type="active == 2 ? 'primary' : 'default'", @click="clickActive(2)")|按钮2
               au-button(:type="active == 3 ? 'primary' : 'default'", @click="clickActive(3)")|按钮3
 
-          au-flex-item
+          au-flex-item(span="6")
             au-button-group
               au-button(type="primary")|添加
               au-button(type="danger")|删除

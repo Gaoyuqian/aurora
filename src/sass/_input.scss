@@ -40,6 +40,10 @@
   }
 }
 
+textarea.au-input-control {
+  resize: vertical;
+}
+
 .au-input-has-heading-icon .au-input-control,
 .au-input-has-tailing-icon .au-input-control {
   padding-right: $input-height

@@ -1,13 +1,18 @@
 au-flex.au-form-group(
   :class="{ 'au-form-group-right-label': labelPosition === 'right', 'au-form-group-top-label': labelPosition === 'top' }",
-  :gutter="labelPosition === 'top' ? 0 : 20",
-  :direction="labelPosition === 'top' ? 'column' : 'row'"
+  :gutter="isLabelTop ? 0 : 20",
+  :column="isLabelTop",
+  :align-items="isLabelTop ? 'stretch' : 'flex-start'"
 )
-  au-flex-item.au-form-group-label(
+  au-flex-item(
+    :span="isLabelTop ? null : 4",
     :style="labelStyle",
-    :class="{'au-form-group-label-empty': !label}",
-    :span="labelStyle.width ? null : 4"
+    v-if="label"
   )
-    {{ label }}
-  au-flex-item.au-form-group-control
-    slot
+    .au-form-group-label(
+      :class="{'au-form-group-label-empty': !label}"
+    )
+      {{ label }}
+  au-flex-item(flex="1", :offset="label || isLabelTop ? 0 : 4")
+    .au-form-group-control
+      slot

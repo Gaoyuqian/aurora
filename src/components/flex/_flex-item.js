@@ -29,13 +29,15 @@ const AuFlexItem = Vue.extend({
   computed: {
     classObj () {
       const classObj = []
+      const span = parseInt(this.span, 10)
+      const offset = parseInt(this.offset, 10)
 
-      if (this.span) {
-        classObj.push(`au-flex-item-span-${this.span}`)
+      if (span > 0 && span <= 24) {
+        classObj.push(`au-flex-item-span-${span}`)
       }
 
-      if (this.offset) {
-        classObj.push(`au-flex-item-offset-${this.offset}`)
+      if (offset > 0 && offset <= 24) {
+        classObj.push(`au-flex-item-offset-${offset}`)
       }
 
       return classObj

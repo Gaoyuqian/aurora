@@ -3,7 +3,7 @@ const AuForm = Vue.extend({
   props: {
     labelPosition: {
       type: String,
-      default: 'left'
+      default: 'right'
     },
     labelWidth: {
       type: [Number, String],

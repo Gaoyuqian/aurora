@@ -1,7 +1,12 @@
+.au-form-group {
+  margin-bottom: 10px;
+}
+
 .au-form-group-label {
   line-height: 40px;
   height: 40px;
   font-size: $fontsize-default;
+  font-weight: bold;
   color: $color-black-light;
   cursor: default;
   user-select: none;
