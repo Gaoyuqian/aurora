@@ -1,6 +1,6 @@
 const ROW_SPANS = 24
-const AuFlexItem = Vue.extend({
-  template: `<div class="au-flex-item" :class="classObj" :style="styleObj"><slot></slot></div>`,
+const AuItem = Vue.extend({
+  template: `<div class="au-item" :class="classObj" :style="styleObj"><slot></slot></div>`,
   props: {
     flex: [Boolean, String, Number],
     order: {
@@ -33,11 +33,11 @@ const AuFlexItem = Vue.extend({
       const offset = parseInt(this.offset, 10)
 
       if (span > 0 && span <= 24) {
-        classObj.push(`au-flex-item-span-${span}`)
+        classObj.push(`au-item-span-${span}`)
       }
 
       if (offset > 0 && offset <= 24) {
-        classObj.push(`au-flex-item-offset-${offset}`)
+        classObj.push(`au-item-offset-${offset}`)
       }
 
       return classObj
@@ -81,6 +81,6 @@ const AuFlexItem = Vue.extend({
   }
 })
 
-Vue.component('au-flex-item', AuFlexItem)
+Vue.component('au-item', AuItem)
 
-export default AuFlexItem
+export default AuItem

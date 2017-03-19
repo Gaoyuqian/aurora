@@ -15,9 +15,9 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex(gutter="10", disabled)
-          au-flex-item
+          au-item
             .flex-item|hello world
-          au-flex-item(flex)
+          au-item(flex)
             .flex-item|hello world
     .docs-panel
       .docs-panel-content
@@ -31,9 +31,9 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex(column, gutter="10", align-items="flex-start")
-          au-flex-item
+          au-item
             .flex-item|hello world
-          au-flex-item
+          au-item
             .flex-item|hello world
     .docs-panel
       .docs-panel-content
@@ -47,35 +47,35 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex(justify-content="flex-start", wrap, gutter="10")
-          au-flex-item(v-for="item in list", span="4")
+          au-item(v-for="item in list", span="4")
             .flex-item|{{ item }}
 
         au-flex(justify-content="flex-start", wrap, gutter="10")
-          au-flex-item(span="12")
+          au-item(span="12")
             .flex-item
-          au-flex-item(span="12")
-            .flex-item
-
-          au-flex-item(span="8")
-            .flex-item
-          au-flex-item(span="8")
-            .flex-item
-          au-flex-item(span="8")
+          au-item(span="12")
             .flex-item
 
-          au-flex-item(span="6")
+          au-item(span="8")
             .flex-item
-          au-flex-item(span="6")
+          au-item(span="8")
             .flex-item
-          au-flex-item(span="6")
+          au-item(span="8")
             .flex-item
-          au-flex-item(span="6")
+
+          au-item(span="6")
             .flex-item
-          au-flex-item(span="5", offset="1")
+          au-item(span="6")
             .flex-item
-          au-flex-item(span="3", offset="9")
+          au-item(span="6")
             .flex-item
-          au-flex-item(span="2", offset="4")
+          au-item(span="6")
+            .flex-item
+          au-item(span="5", offset="1")
+            .flex-item
+          au-item(span="3", offset="9")
+            .flex-item
+          au-item(span="2", offset="4")
             .flex-item
     .docs-panel
       .docs-panel-content
@@ -88,8 +88,8 @@ block content
       au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
   .docs-section
-    h2|AuFlexItem属性
-    au-table(:data="flexItemAttrs")
+    h2|AuItem属性
+    au-table(:data="itemAttrs")
       au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 
@@ -155,7 +155,7 @@ block script
               default: '0'
             }
           ],
-          flexItemAttrs: [
+          itemAttrs: [
             {
               name: 'flex',
               desc: '同flex',

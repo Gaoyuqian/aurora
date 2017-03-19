@@ -17,10 +17,10 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex
-          au-flex-item(grow="1")
+          au-item(grow="1")
             au-select(v-model="form.class", :options="options", placeholder="请选择班级")
 
-          au-flex-item
+          au-item
             au-select(v-model="form.class", placeholder="请选择班级")
               au-option(
                 v-for="option in options",
@@ -28,7 +28,7 @@ block content
                 :value="option.value"
               )
          au-flex(justify-content="center")
-           au-flex-item
+           au-item
              au-select(v-model="form.class", :options="options", placeholder="请选择班级")
     .docs-panel
       .docs-panel-content
@@ -43,7 +43,7 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex
-          au-flex-item(grow="1")
+          au-item(grow="1")
             au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
     .docs-panel
       .docs-panel-content
@@ -58,9 +58,9 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex
-          au-flex-item(grow="1")
+          au-item(grow="1")
             au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
-          au-flex-item(grow="1")
+          au-item(grow="1")
             au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
 
     .docs-panel

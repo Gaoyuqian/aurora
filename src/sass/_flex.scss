@@ -10,16 +10,16 @@
 }
 
 @for $i from 1 through 24 {
-  .au-flex-item-span-#{$i} {
+  .au-item-span-#{$i} {
     width: 100% / (24 / $i);
   }
 
-  .au-flex-item-offset-#{$i} {
+  .au-item-offset-#{$i} {
     margin-left: 100% / (24 / $i);
   }
 }
 
 
-.au-flex-item {
+.au-item {
   overflow: hidden;
 }

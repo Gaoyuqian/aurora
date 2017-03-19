@@ -15,18 +15,18 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         au-flex(gutter="20")
-          au-flex-item
+          au-item
             au-button-group
               au-button(:type="labelPosition === 'left' ? 'primary': 'default'", @click="labelPosition = 'left'")|Left
               au-button(:type="labelPosition === 'top' ? 'primary': 'default'", @click="labelPosition = 'top'")|Top
               au-button(:type="labelPosition === 'right' ? 'primary': 'default'", @click="labelPosition = 'right'")|Right
 
-          au-flex-item(span="4")
+          au-item(span="4")
             au-input(v-model="labelWidth", placeholder="请输入label宽度")
 
       .docs-panel-row
         au-flex(gutter="30")
-          au-flex-item(style="width: 600px;")
+          au-item(style="width: 600px;")
             au-form(:label-position="labelPosition", :label-width="labelWidth")
               au-form-group(label="姓名")
                 au-input(v-model="form.name", placeholder="请输入姓名")
@@ -43,7 +43,7 @@ block content
                 au-button(type="primary")|提交
                 |&nbsp;
                 au-button(type="default")|重置
-          au-flex-item
+          au-item
      template.js(scoped="scoped")
        script.
          {
