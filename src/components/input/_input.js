@@ -51,6 +51,8 @@ const AuInput = Vue.extend({
         classObj.push('disabled')
       }
 
+      classObj.push(`au-select-${this.size}`)
+
       return classObj
     }
   },
