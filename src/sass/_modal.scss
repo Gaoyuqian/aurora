@@ -140,7 +140,7 @@
   }
 }
 
-.au-drag-modal-dragging {
+.au-drag-modal-dragging * {
   user-select: none;
   pointer-events: none;
 }

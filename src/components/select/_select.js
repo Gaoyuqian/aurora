@@ -28,6 +28,10 @@ const AuSelect = Vue.extend({
     disabled: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: String,
+      default: 'default'
     }
   },
   data () {

@@ -10,7 +10,7 @@ const AuFlex = Vue.extend({
     },
     alignItems: {
       type: String,
-      default: 'center'
+      default: ''
     },
     alignContent: {
       type: String,
@@ -45,6 +45,10 @@ const AuFlex = Vue.extend({
 
       if (this.alignItems) {
         style['align-items'] = this.alignItems
+      } else {
+        if (!this.column) {
+          style['align-items'] = 'center'
+        }
       }
 
       if (this.alignContent) {

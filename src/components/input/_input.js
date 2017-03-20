@@ -39,6 +39,19 @@ const AuInput = Vue.extend({
       const classObject = []
       classObject.push(`au-input-${this.size}`)
       return classObject
+    },
+    classObj () {
+      const classObj = []
+
+      if (this.active) {
+        classObj.push('active')
+      }
+
+      if (this.disabled) {
+        classObj.push('disabled')
+      }
+
+      return classObj
     }
   },
   methods: {

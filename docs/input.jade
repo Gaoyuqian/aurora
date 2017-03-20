@@ -13,21 +13,24 @@ block content
     .docs-desc
 
     template.html(scoped="scoped")
-      .docs-panel-row
-        au-input(
-          v-model="form.value",
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
-      .docs-panel-row
-        au-input(
-          disabled,
-          v-model="form.value",
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
+      au-flex(column)
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              v-model="form.value",
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              disabled,
+              v-model="form.value",
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -38,38 +41,43 @@ block content
     .docs-desc
 
     template.html(scoped="scoped")
-      .docs-panel-row
-        au-input(
-          v-model="form.value",
-          size="large"
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
-      .docs-panel-row
-        au-input(
-          v-model="form.value",
-          size="default",
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
-      .docs-panel-row
-        au-input(
-          v-model="form.value",
-          size="small",
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
-      .docs-panel-row
-        au-input(
-          v-model="form.value",
-          size="mini",
-          placeholder="请输入名称",
-          @focus="onFocus",
-          @blur="onBlur"
-        )
+      au-flex(column)
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              v-model="form.value",
+              size="large"
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              v-model="form.value",
+              size="default",
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              v-model="form.value",
+              size="small",
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
+        au-item(span="12")
+          .docs-panel-row
+            au-input(
+              v-model="form.value",
+              size="mini",
+              placeholder="请输入名称",
+              @focus="onFocus",
+              @blur="onBlur"
+            )
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -108,7 +116,56 @@ block script
       mixins,
       data () {
         return {
-          attrs: [],
+          attrs: [
+            {
+              name: 'type',
+              desc: '选择使用text或textarea',
+              type: 'String',
+              default: 'text'
+            },
+            {
+              name: 'placeholder',
+              desc: '占位符',
+              type: 'String',
+              default: '""'
+            },
+            {
+              name: 'v-model',
+              desc: '绑定的内容',
+              type: 'String',
+              default: '""'
+            },
+            {
+              name: 'rows',
+              desc: '同原生的textarea rows',
+              type: 'String, Number',
+              default: '""'
+            },
+            {
+              name: 'cols',
+              desc: '同原生的textarea cols',
+              type: 'String, Number',
+              default: '""'
+            },
+            {
+              name: 'readonly',
+              desc: '是否只读',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'disabled',
+              desc: '是否禁用',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'size',
+              desc: '组件的大小',
+              type: 'String',
+              default: 'default'
+            }
+          ],
           form: {
             value: 'hello world'
           }

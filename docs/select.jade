@@ -16,8 +16,8 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-flex
-          au-item(grow="1")
+        au-flex(column, gutter="10")
+          au-item
             au-select(v-model="form.class", :options="options", placeholder="请选择班级")
 
           au-item
@@ -27,9 +27,6 @@ block content
                 :label="option.label",
                 :value="option.value"
               )
-         au-flex(justify-content="center")
-           au-item
-             au-select(v-model="form.class", :options="options", placeholder="请选择班级")
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -45,6 +42,7 @@ block content
         au-flex
           au-item(grow="1")
             au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+
     .docs-panel
       .docs-panel-content
       .docs-code

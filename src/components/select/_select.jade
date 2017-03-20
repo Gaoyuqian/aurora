@@ -1,6 +1,6 @@
 div.au-select(
   @click="clickHandler",
-  :class="{ active: active, 'disabled': disabled }"
+  :class="classObj"
 )
   .au-select-inner
     .au-select-text(v-if="text")
