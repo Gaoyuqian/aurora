@@ -147,6 +147,10 @@ const AuSelect = Vue.extend({
         this.hideOptions()
       }
 
+      if (this.filter) {
+        this.$refs.text.focus()
+      }
+
       this.$nextTick(() => {
         this.$refs.popup.calPosition()
       })
@@ -154,6 +158,9 @@ const AuSelect = Vue.extend({
     unselectValueHandler (value, child) {
       if (!this.mutiple) {
         return
+      }
+      if (this.filter) {
+        this.$refs.text.focus()
       }
       this.removeValue(value)
       if (!this.mutiple) {
