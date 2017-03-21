@@ -22,7 +22,7 @@
   border: 1px solid $color-border;
   margin: 40px auto;
   width: 400px;
-  background-color: #fff;
+  background-color: $color-white;
   transition: all $transition-during;
 }
 
@@ -71,7 +71,6 @@
 
 .au-modal-wrap-enter {
   opacity: 0;
-
   .au-modal {
     transform: translateY(-20px);
   }
@@ -100,26 +99,27 @@
   }
 }
 
-/* .au-modal-enter { */
-/*   transform: translateY(-500px); */
-/* } */
 
-/* .au-modal-enter-to { */
-/*   transform: translateY(0px); */
-/*   transition: all 0.25s; */
-/* } */
+.au-drag-modal-enter {
+  opacity: 0;
+}
 
-/* .au-modal-leave { */
-/*   transform: translateY(0px); */
-/* } */
+.au-drag-modal-enter-to {
+  opacity: 1;
+  transition: opacity $transition-during;
+}
 
-/* .au-modal-leave-to { */
-/*   transform: translateY(-20px); */
-/*   transition: all 0.25s; */
-/* } */
+.au-drag-modal-leave {
+  opacity: 1;
+}
 
+.au-drag-modal-leave-to {
+  opacity: 0;
+  transition: opacity $transition-during;
+}
 
 .au-drag-modal {
+  background-color: $color-white;
   position: absolute;
   z-index: $zindex-modal;
   background-color: #fff;

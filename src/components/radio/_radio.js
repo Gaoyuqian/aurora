@@ -2,9 +2,13 @@ import AuRadioGroup from '../radio-group/_radio-group.js'
 
 const AuRadio = Vue.extend({
   template: require('./_radio.jade'),
+  model: {
+    prop: 'checkedValue',
+    event: 'input'
+  },
   props: {
+    checkedValue: [String, Number],
     value: [String, Number],
-    nativeValue: [String, Number],
     label: String,
     disabled: {
       type: Boolean,
@@ -13,14 +17,14 @@ const AuRadio = Vue.extend({
   },
   computed: {
     checked () {
-      return this.model === this.nativeValue
+      return this.model === this.value
     },
     isGroup () {
       return this.$parent instanceof AuRadioGroup
     },
     model: {
       get () {
-        return this.isGroup ? this.$parent.value : this.value
+        return this.isGroup ? this.$parent.value : this.checkedValue
       },
       set (value) {
         if (this.isGroup) {
@@ -37,7 +41,7 @@ const AuRadio = Vue.extend({
         return
       }
 
-      this.model = this.nativeValue
+      this.model = this.value
     }
   }
 })

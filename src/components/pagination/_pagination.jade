@@ -1,4 +1,4 @@
-.au-pagination
+.au-pagination(:class="classObj")
   .au-pagination-item
     .au-pagination-link(
       :class="{'au-pagination-disabled': isLeftOut(page) }",
@@ -50,4 +50,4 @@
         |{{ displayPage }}
       |页 / 共{{ pageCount }}页
   .au-pagination-item(v-if="showPageSizeControl")
-    au-select(v-model="selfPageSize", :options="pageSizeSelectOptions")
+    au-select(v-model="selfPageSize", :options="pageSizeSelectOptions", size="small")

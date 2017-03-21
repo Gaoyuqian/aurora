@@ -15,7 +15,13 @@ const AuSelect = Vue.extend({
     },
     value: {
       type: [Number, String, Array],
-      required: true
+      required: true,
+      validator (value) {
+        if (this.mutiple) {
+          return Array.isArray(value)
+        }
+        return true
+      }
     },
     placeholder: {
       type: String,
@@ -32,14 +38,22 @@ const AuSelect = Vue.extend({
     size: {
       type: String,
       default: 'default'
-    }
+    },
+    filter: {
+      type: [Boolean],
+      default: false
+    },
+    clearable: Boolean
   },
   data () {
     return {
       text: '',
       optionsElem: null,
       registeredChild: {},
-      active: false
+      active: false,
+      textModel: '',
+      focusOption: null,
+      interval: null
     }
   },
   computed: {
@@ -52,35 +66,32 @@ const AuSelect = Vue.extend({
           return { label, value }
         })
       } else {
-        return []
+        return [this.value]
       }
+    },
+    classObj () {
+      const classObj = []
+
+      if (this.active) {
+        classObj.push('active')
+      }
+
+      if (this.disabled) {
+        classObj.push('disabled')
+      }
+
+      if (this.clearable && !this.isEmptyValue()) {
+        classObj.push('au-select-clearable')
+      }
+
+      classObj.push(`au-select-${this.size}`)
+
+      return classObj
     }
   },
   created () {
-    this.$on('select.option', (value, child) => {
-      this.addValue(value, child)
-      if (!this.mutiple) {
-        this.hideOptions()
-      }
-
-      this.$nextTick(() => {
-        this.$refs.popup.calPosition()
-      })
-    })
-
-    this.$on('unselect.option', (value, child) => {
-      if (!this.mutiple) {
-        return
-      }
-      this.removeValue(value)
-      if (!this.mutiple) {
-        this.hideOptions()
-      }
-
-      this.$nextTick(() => {
-        this.$refs.popup.calPosition()
-      })
-    })
+    this.$on('select.option', this.selectValueHandler)
+    this.$on('unselect.option', this.unselectValueHandler)
 
     this.$on('register.option', (child) => {
       this.registeredChild[child._uid] = child
@@ -93,8 +104,66 @@ const AuSelect = Vue.extend({
       this.setOptionActive()
       this.calcText()
     })
+
+    this.$on('focus.option', (child) => {
+      this.clearFocusOption()
+      this.focusOption = child
+    })
+
+    this.$on('blur.option', (child) => {
+      this.clearFocusOption()
+      this.focusOption = null
+    })
+  },
+  updated () {
+    if (this.mutiple && this.filter) {
+      const text = this.$refs.text
+      const style = window.getComputedStyle(text)
+      if (this.selected.length > 0) {
+        let width = Math.max(10, this.getTextWidth(this.textModel, `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`))
+        width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + 20
+        text.style.width = `${width}px`;
+      } else {
+        text.style.width = 'auto';
+      }
+    }
+    this.updatePopWidth()
+  },
+  mounted () {
+    this.$refs.popup.setRelateElem(this.$el)
   },
   methods: {
+    clearValueHandler ($event) {
+      $event.stopPropagation()
+      if (this.mutiple) {
+        this.$emit('input', [])
+      } else {
+        this.$emit('input', '')
+      }
+    },
+    selectValueHandler (value, child) {
+      this.addValue(value, child)
+      if (!this.mutiple) {
+        this.hideOptions()
+      }
+
+      this.$nextTick(() => {
+        this.$refs.popup.calPosition()
+      })
+    },
+    unselectValueHandler (value, child) {
+      if (!this.mutiple) {
+        return
+      }
+      this.removeValue(value)
+      if (!this.mutiple) {
+        this.hideOptions()
+      }
+
+      this.$nextTick(() => {
+        this.$refs.popup.calPosition()
+      })
+    },
     getLabel (value) {
       var cid, child
 
@@ -121,6 +190,10 @@ const AuSelect = Vue.extend({
           }
         }
         this.text = label
+      }
+
+      if (!this.isEmptyValue() && this.filter) {
+        this.textModel = this.text
       }
     },
     isEmptyValue () {
@@ -156,46 +229,200 @@ const AuSelect = Vue.extend({
       if (this.disabled) {
         return
       }
-      this.showOptions();
+
+      if (this.filter) {
+        this.$refs.text.focus()
+      } else {
+        if (this.active) {
+          this.hideOptions()
+        } else {
+          this.showOptions()
+        }
+      }
     },
     showOptions () {
-      if (this.active) {
-        this.hideOptions()
-        return
-      }
-
       if (this.optionsElem == null) {
         this.optionsElem = this.$refs.popup
-        this.optionsElem.setRelateElem(this.$el)
         document.body.appendChild(this.optionsElem.$el)
         this.optionsElem.$on('show', () => {
           this.active = true
+          this.clearOptions()
         })
         this.optionsElem.$on('hide', () => {
           this.active = false
+          this.calcText()
         })
       }
 
-      console.log(this.$refs.options.style)
-      this.$refs.options.style.minWidth = this.$el.getClientRects()[0].width - 2 + 'px'
+      this.updatePopWidth()
       this.optionsElem.show()
     },
     hideOptions () {
       this.optionsElem.hide()
     },
+    updatePopWidth () {
+      this.$refs.options.style.minWidth = this.$el.getClientRects()[0].width - 2 + 'px'
+    },
     setOptionActive () {
       var child
       const value = this.mutiple ? this.value : [this.value]
-      for (var key in this.registeredChild) {
+      for (let key in this.registeredChild) {
         child = this.registeredChild[key]
         child.setActive(value.indexOf(child.value) > -1)
       }
+    },
+    keyContinueBind (func) {
+      func()
+      this.interval = setInterval(func, 400)
+    },
+    textFocusHandler ($event) {
+      $event.stopPropagation()
+      this.showOptions()
+    },
+    keyDownHandler ($event) {
+      clearInterval(this.interval)
+
+      switch ($event.key) {
+        case 'Backspace':
+          if (this.mutiple && !this.textModel && this.value.length > 0) {
+            this.value.splice(this.value.length - 1, 1)
+            this.$emit('input', this.value)
+            this.$nextTick(this.$refs.popup.calPosition)
+          }
+          break
+        case 'n':
+          if (!$event.ctrlKey) {
+            break
+          }
+        case "ArrowDown":
+          $event.preventDefault()
+          this.keyContinueBind(() => {
+            this.getNextFocusOption('down')
+          })
+          break
+        case 'p':
+          if (!$event.ctrlKey) {
+            break
+          }
+        case "ArrowUp":
+          $event.preventDefault()
+          this.keyContinueBind(() => {
+            this.getNextFocusOption('up')
+          })
+          break
+      }
+    },
+    keyUpHandler ($event) {
+      clearInterval(this.interval)
+      if ($event.ctrlKey || $event.key === 'Control') {
+        return
+      }
+
+      console.log($event)
+
+      switch ($event.key) {
+        case "ArrowDown":
+        case "ArrowUp":
+          break
+        case "Enter":
+          if (this.focusOption) {
+            const selected = this.selected.some((item) => { return item.value === this.focusOption.value })
+            if (selected) {
+              this.unselectValueHandler(this.focusOption.value, this.focusOption)
+            } else {
+              this.selectValueHandler(this.focusOption.value, this.focusOption)
+            }
+          }
+          if (!this.mutiple) {
+            this.$refs.text.blur()
+          }
+          break
+        case "Escape":
+          this.hideOptions()
+          break
+        default:
+          break
+      }
+    },
+    clearFocusOption () {
+      if (this.focusOption) {
+        this.focusOption.isFocus = false
+        this.focusOption = null
+      }
+    },
+    getNextFocusOption (direction = 'down') {
+      const options = this.getOptionInstances(true)
+      if (options.length === 0) {
+        return
+      }
+
+      if (!this.focusOption) {
+        if (direction === 'down') {
+          this.focusOption = options[0]
+        } else {
+          this.focusOption = options[options.length - 1]
+        }
+      } else {
+        const index = options.indexOf(this.focusOption)
+        this.clearFocusOption()
+        if (direction === 'down') {
+          this.focusOption = options[index + 1] || options[0]
+        } else {
+          this.focusOption = options[index - 1] || options[options.length - 1]
+        }
+      }
+
+      this.focusOption.isFocus = true
+    },
+    clearOptions () {
+      for (let key in this.registeredChild) {
+        child = this.registeredChild[key]
+        child.isHide = false
+      }
+      this.clearFocusOption()
+    },
+    queryOptions () {
+      const text = this.textModel.trim()
+      for (let key in this.registeredChild) {
+        child = this.registeredChild[key]
+        child.isHide = (
+          text &&
+          child.label.toLowerCase().indexOf(text.toLowerCase()) === -1
+        )
+      }
+
+      this.clearFocusOption()
+      this.getNextFocusOption()
+
+      this.$nextTick(() => {
+        if (this.$refs.popup) {
+          this.$refs.popup.calPosition()
+        }
+      })
+    },
+    getOptionInstances (isShow) {
+      $children = this.$refs.popup.$children
+      $children = $children.filter((option) => {
+        return option instanceof Option && (!isShow || !option.isHide)
+      })
+      return $children
+    },
+    getTextWidth (text, font) {
+      // re-use canvas object for better performance
+      var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));
+      var context = canvas.getContext("2d");
+      context.font = font;
+      var metrics = context.measureText(text);
+      return metrics.width;
     }
   },
   watch: {
     value () {
       this.setOptionActive()
       this.calcText()
+    },
+    textModel (newValue, oldValue) {
+      this.queryOptions()
     }
   }
 })

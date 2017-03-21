@@ -33,6 +33,24 @@ block content
         docs-code.html
 
   .docs-section
+    h2|可清空
+
+    .docs-desc
+      p|可清空的用法
+
+    template.html(scoped="scoped")
+      .docs-panel-row
+        au-flex(column, gutter="10")
+          au-item
+            au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
+          au-item
+            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", clearable)
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        docs-code.html
+
+  .docs-section
     h2|多选选择器
     .docs-desc
       p|多选选择器的用法
@@ -42,6 +60,45 @@ block content
         au-flex
           au-item(grow="1")
             au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        docs-code.html
+
+  .docs-section
+    h2|多种大小
+    .docs-desc
+      p|多种大小的用法
+
+    template.html(scoped="scoped")
+      .docs-panel-row
+
+        au-flex(gutter="10")
+          au-item(span="12")
+            au-flex(column, gutter="10")
+              au-item(span="12")
+                au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
+          au-item(span="12")
+            au-flex(column, gutter="10")
+              au-item(span="12")
+                au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-select(mutiple, size="large", v-model="form.classes", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-select(mutiple, size="default", v-model="form.classes", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-select(mutiple, size="small", v-model="form.classes", :options="options", placeholder="请选择班级")
+              au-item(span="12")
+                au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-select(mutiple, size="mini", v-model="form.classes", :options="options", placeholder="请选择班级")
 
     .docs-panel
       .docs-panel-content
@@ -60,6 +117,19 @@ block content
             au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
           au-item(grow="1")
             au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
+
+  .docs-section
+    h2|搜索选择器
+    .docs-desc
+      p|搜索选择器的用法
+
+    template.html(scoped="scoped")
+      .docs-panel-row
+        au-flex
+          au-item(grow="1")
+            au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
+          au-item(grow="1")
+            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
 
     .docs-panel
       .docs-panel-content
@@ -96,11 +166,23 @@ block script
               desc: '同原生的placeholder',
               type: 'String',
               default: '请选择'
-            }
+            },
+            {
+              name: 'mutiple',
+              desc: '是否使用多选, 若设置为true, v-model需要绑定数组对象',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'size',
+              desc: '选择器的大小 (可选值: large, default, small, mini)',
+              type: 'String',
+              default: 'default'
+            },
           ],
           form: {
-              'class': '2',
-              classes: []
+              'class': '',
+              'classes': []
             },
             options: [
               {

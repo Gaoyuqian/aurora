@@ -2,7 +2,7 @@
   div(v-if="options && options.length > 0")
     au-radio(
       v-for="item in options",
-      :native-value="item.value",
+      :value="item.value",
       :label="item.label"
     )
   slot(v-else)

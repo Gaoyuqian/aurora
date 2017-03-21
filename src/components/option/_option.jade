@@ -1,6 +1,9 @@
 div.au-option(
   @click="clickHandler",
-  :class="{ active: active }"
+  :class="{ 'active': active, 'au-focus': isFocus }",
+  v-if="!isHide",
+  @mouseover="mouseoverHandler",
+  @mouseout="mouseoutHandler"
 )
   div(v-if="label")
     |{{label}}

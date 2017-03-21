@@ -2,18 +2,33 @@ div.au-select(
   @click="clickHandler",
   :class="classObj"
 )
-  .au-select-inner
-    .au-select-text(v-if="text")
+  .au-select-content
+    .au-select-text(v-if="text && !filter")
       |{{ text }}
 
-    .au-select-list(v-if="mutiple && selected.length > 0")
-      div.au-select-item(
-        v-for="s in selected"
-      )
-        |{{ s.label }}
-        au-icon(icon="close", @click.native="removeValueHandler($event, s.value)")
+    div.au-select-item(
+      v-if="mutiple",
+      v-for="s in selected"
+    )
+      |{{ s.label }}
+      au-icon(icon="close", @click.native="removeValueHandler($event, s.value)")
 
+    input.au-select-input(
+      v-model="textModel",
+      type="text",
+      ref="text",
+      v-if="filter",
+      @focus="textFocusHandler",
+      @keydown="keyDownHandler",
+      @keyup="keyUpHandler",
+      @click="$event.stopPropagation()",
+      :placeholder="(selected.length === 0 || !mutiple) ? placeholder : ''",
+      :readonly='!active'
+    )
+  .au-select-right-icon(
+  )
     au-icon(icon="caret-down")
+    au-icon(icon="close", @click.native="clearValueHandler")
 
   popup(
     ref="popup"
@@ -27,3 +42,4 @@ div.au-select(
         :showCheck="mutiple"
       )
       slot(v-if="options == null")
+      div.au-option-empty(v-if="_isMounted && getOptionInstances(true).length === 0")|无数据

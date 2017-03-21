@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Checkbox
+  |Checkbox
 
 block content
   .docs-heading
@@ -26,8 +26,8 @@ block content
       p|基础Checkbox的用法
     template.html(scoped="scoped")
       .docs-panel-row
-        au-checkbox(label="男", native-value="1", v-model="form.genders")
-        au-checkbox(label="女", native-value="2", v-model="form.genders")
+        au-checkbox(label="男", value="1", v-model="form.genders")
+        au-checkbox(label="女", value="2", v-model="form.genders")
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -39,8 +39,8 @@ block content
       p|禁用Checkbox的用法
     template.html(scoped="scoped")
       .docs-panel-row
-        au-checkbox(label="男", native-value="1", v-model="form.genders", disabled)
-        au-checkbox(label="女", native-value="2", v-model="form.genders", disabled)
+        au-checkbox(label="男", value="1", v-model="form.genders", disabled)
+        au-checkbox(label="女", value="2", v-model="form.genders", disabled)
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -102,12 +102,37 @@ block script
       data () {
         return {
           attrs: [
+
             {
               name: 'v-model',
               desc: '绑定的数据',
               type: 'String, Number',
               default: ''
-            }
+            },
+            {
+              name: 'value',
+              desc: '匹配的数据',
+              type: 'String, Number, Boolean',
+              default: ''
+            },
+            {
+              name: 'value',
+              desc: '显示的内容',
+              type: 'String',
+              default: ''
+            },
+            {
+              name: 'indeterminate',
+              desc: 'indeterminate模式',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'disabled',
+              desc: '是否禁用',
+              type: 'Boolean',
+              default: 'false'
+            },
           ],
           form: {
             all: false,

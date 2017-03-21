@@ -1,32 +1,68 @@
 .au-select {
   max-width: 300px;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
   white-space: nowrap;
   cursor: pointer;
   border: 1px solid $color-border;
-  font-size: 14px;
-  min-height: 36px;
-  line-height: 34px;
   user-select: none;
   transition: all $transition-during;
+  vertical-align: middle;
+  position: relative;
 
-  .fa-caret-down {
-    font-size: $fontsize-large;
-    color: $color-border;
-    transition: all $transition-during;
+  .au-select-right-icon {
+    @include flex-center-center();
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px;
+
+    .au-icon {
+      color: $color-border;
+      transition: all $transition-during;
+    }
+    .au-icon-close {
+      display: none;
+    }
+  }
+
+  &.au-select-clearable:hover {
+    .au-select-right-icon {
+      .au-icon-caret-down {
+        display: none;
+      }
+      .au-icon-close {
+        display: block;
+        positoin: relative;
+
+        &:hover {
+          color: $color-silver-light !important;
+        }
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: -5px;
+          left: -5px;
+          right: -5px;
+          bottom: -5px;
+        }
+      }
+    }
   }
 
   &:hover {
     border-color: $color-border-hover;
-    .fa-caret-down {
+    .au-select-right-icon .au-icon {
       color: $color-border-hover;
     }
   }
 
   &.active {
     border-color: $color-primary;
-    // color: $color-primary;
-    .fa-caret-down {
+    .au-select-right-icon .au-caret-down {
       transform: rotate(180deg);
     }
   }
@@ -41,15 +77,21 @@
     }
     .au-select-item {
       background-color: $color-gray;
+      color: $color-white;
+      border-color: $color-gray;
     }
+  }
+
+  .au-icon-caret-down {
+    font-size: 18px;
   }
 }
 
-.au-select-inner {
+
+.au-select-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
+  flex-wrap: wrap;
+  margin-right: 20px;
 }
 
 .au-select-text {
@@ -67,7 +109,7 @@
   background-color: #ecf1fd;
   border: 1px solid #a3bbf2;
   height: 24px;
-  line-height: 24px;
+  line-height: 22px;
   padding: 0 8px;
   font-size: $fontsize-small;
   margin: 5px;
@@ -76,4 +118,55 @@
     margin-left: 8px;
     font-size: $fontsize-small !important;
   }
+}
+
+
+.au-select-large {
+  min-height: $select-large-height;
+  padding: $select-large-padding-y $select-large-padding-x;
+  font-size: $select-large-fontsize;
+  &, .au-icon-caret-down {
+    line-height: $select-large-height - ($select-large-padding-y * 2) - 2;
+  }
+}
+
+.au-select-default {
+  min-height: $select-default-height;
+  padding: $select-default-padding-y $select-default-padding-x;
+  font-size: $select-default-fontsize;
+  &, .au-icon-caret-down {
+    line-height: $select-default-height - ($select-default-padding-y * 2) - 2;
+  }
+}
+
+.au-select-small {
+  min-height: $select-small-height;
+  padding: $select-small-padding-y $select-small-padding-x;
+  font-size: $select-small-fontsize;
+  &, .au-icon-caret-down {
+    line-height: $select-small-height - ($select-small-padding-y * 2) - 2;
+  }
+}
+
+.au-select-mini {
+  min-height: $select-mini-height;
+  padding: $select-mini-padding-y $select-mini-padding-x;
+  font-size: $select-mini-fontsize;
+  &, .au-icon-caret-down {
+    line-height: $select-mini-height - ($select-mini-padding-y * 2) - 2;
+  }
+}
+
+.au-select-input {
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.au-select-text-hidden {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
 }

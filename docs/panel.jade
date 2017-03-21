@@ -14,13 +14,18 @@ block content
 
     template.html(scoped="scoped")
       .docs-panel-row
-        au-panel(label="新页面")
+        au-panel(title="新页面", collapse, v-model="isCollapse")
           div|哈哈
+
     .docs-panel
       .docs-panel-content
       .docs-code
         docs-code.html
 
+  .docs-section
+    h2|属性
+    au-table#table(:data="attrs")
+      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
@@ -29,14 +34,15 @@ block script
       mixins,
       data () {
         return {
+          isCollapse: true,
           attrs: [
             {
-              name: 'column',
-              desc: '列信息',
-              type: 'Array',
-              default: 'null'
+              name: 'title',
+              desc: '显示的title',
+              type: 'String',
+              default: ''
             }
-          ],
+          ]
         }
       }
     })

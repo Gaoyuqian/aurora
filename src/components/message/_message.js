@@ -30,7 +30,7 @@ const AuMessage = Vue.extend({
         if (this.$el.parentNode) {
           this.$el.parentNode.removeChild(this.$el);
         }
-      }, 400)
+      }, 0)
     }
   }
 })

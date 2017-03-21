@@ -4,8 +4,8 @@ transition(name="message-fade")
     v-if="isShow"
   )
     .au-message-inner
-      .au-message-icon-wrapper(
-        :class="{ 'au-message-icon-wrapper-success': this.type === 'success', 'au-message-icon-wrapper-info': this.type === 'info' || this.type === 'loading', 'au-message-icon-wrapper-warning': this.type === 'warning', 'au-message-icon-wrapper-danger': this.type === 'danger' }"
+      .au-message-icon(
+        :class="{ 'au-message-icon-success': this.type === 'success', 'au-message-icon-info': this.type === 'info' || this.type === 'loading', 'au-message-icon-warning': this.type === 'warning', 'au-message-icon-danger': this.type === 'danger' }"
       )
         au-icon(icon="check-circle-o", v-if="type === 'success'")
         au-icon(icon="info-circle", v-if="type === 'info'")
@@ -14,3 +14,6 @@ transition(name="message-fade")
         au-icon(icon="circle-o-notch", v-if="type === 'loading'", autorotate)
       .au-message-content
         |{{ message }}
+
+      .au-message-close(@click="disappear", v-if="type != 'loading'")
+        au-icon(icon="times")

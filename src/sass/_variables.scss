@@ -126,6 +126,28 @@ $input-mini-height:        $size-mini-height;
 $input-mini-fontsize:      $size-mini-fontsize;
 
 
+// Select
+// -------------------------
+$select-large-padding-y:   0px;
+$select-large-padding-x:   10px;
+$select-large-height:      $size-large-height;
+$select-large-fontsize:    $size-large-fontsize;
+
+$select-default-padding-y: 0px;
+$select-default-padding-x: 10px;
+$select-default-height:    $size-default-height;
+$select-default-fontsize:  $size-default-fontsize;
+
+$select-small-padding-y:   0px;
+$select-small-padding-x:   $size-small-padding-x;
+$select-small-height:      $size-small-height;
+$select-small-fontsize:    $size-small-fontsize;
+
+$select-mini-padding-y:    0px;
+$select-mini-padding-x:    $size-mini-padding-x;
+$select-mini-height:       $size-mini-height;
+$select-mini-fontsize:     $size-mini-fontsize;
+
 
 // Transition
 // -------------------------

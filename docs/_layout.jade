@@ -59,15 +59,22 @@ html.no-js
               au-menu-item(href="message.html", label="Message")
               au-menu-item(href="tooltip.html", label="Tooltip")
               au-menu-item(href="pop-confirm.html", label="PopConfirm")
-
-        au-menu(slot="content-right", trigger="hover")
-          au-menu-item()
-            div(slot="content")
-              img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
-              |Kevin
-            au-menu
-              au-menu-item(label="我的信息")
-              au-menu-item(label="退出")
+          div(slot="content-right")
+            au-dropdown
+              div
+                img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
+                |Kevin
+              au-menu
+                au-menu-item(label="我的信息")
+                au-menu-item(label="退出")
+        //- au-menu(slot="content-right", trigger="hover")
+        //-   au-menu-item
+        //-     div(slot="content")
+        //-       img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
+        //-       |Kevin
+        //-     au-menu
+        //-       au-menu-item(label="我的信息")
+        //-       au-menu-item(label="退出")
 
       au-content
         au-menu(slot="sidebar")
@@ -101,10 +108,10 @@ html.no-js
               au-menu-item(href="pop-confirm.html", label="PopConfirm")
 
         div(slot="container")
-          au-panel(label="内容")
+          au-panel
             block content
           au-footer
-            |美利金融 Aurora项目
+            |Copyright © 2017 美利金融 Aurora项目
 
 
     script(src="../lib/vue.js")

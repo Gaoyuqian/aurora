@@ -9,7 +9,8 @@ const AuTable = Vue.extend({
         return []
       }
     },
-    noHeader: Boolean
+    noHeader: Boolean,
+    loading: Boolean
   },
   data () {
     return {
@@ -21,6 +22,7 @@ const AuTable = Vue.extend({
     this.resetColumns()
   },
   render (h) {
+    var content
     const rows = this.data.map((row, index) => {
       return h('tr', this.columns.map((column, columnIndex) => {
         const Ctor = column.$scopedSlots.default
@@ -36,7 +38,7 @@ const AuTable = Vue.extend({
           style.width = style.width || '56px'
           content = [h('au-checkbox', {
             domProps: {
-              value: column.isCheckedRow(row)
+              checkedValue: column.isCheckedRow(row)
             },
             on: {
               input: (value) => {
@@ -104,7 +106,7 @@ const AuTable = Vue.extend({
 
           content = [h('au-checkbox', {
             domProps: {
-              value: checkedCount === length,
+              checkedValue: checkedCount === length,
               indeterminate: checkedCount > 0 && checkedCount < length
             },
             on: {
@@ -128,20 +130,44 @@ const AuTable = Vue.extend({
       h('tbody',rows)
     )
 
+    const children = [
+      h('div', {'class': 'au-table-hidden'}, [this.$slots.default]),
+      h('table', tableContent)
+    ]
+
+    if (this.data.length === 0) {
+      children.push(
+        h('div', {
+          'class': 'au-table-empty'
+        },
+          this.$slots.empty || '暂无内容'
+        )
+      )
+    }
+
+    if (this.loading) {
+      children.push(
+        h('div', {
+          'class': 'au-table-loading'
+        },
+          [h('div'), h('div'), h('div'), h('div'), h('div')]
+        )
+      )
+    }
+
     return h(
       'div',
       {
         'class': 'au-table'
       },
-      [
-        h('div', {'class': 'au-table-hidden'}, [this.$slots.default]),
-        h('table', tableContent)
-      ]
+      children
     )
   },
   methods: {
     resetColumns () {
-      this.columns = (this.$slots.default || []).filter((slot) => { return slot.tag }).map((slot) => {
+      this.columns = (this.$slots.default || []).filter((slot) => {
+        return slot.componentInstance instanceof TableColumn
+      }).map((slot) => {
         return slot.componentInstance
       })
     },

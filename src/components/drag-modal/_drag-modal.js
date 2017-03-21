@@ -26,7 +26,6 @@ function resetModals () {
   })
 }
 
-
 const AuDragModal = Vue.extend({
   template: require('./_drag-modal.jade'),
   props: {

@@ -1,5 +1,4 @@
 import dispatch from '../../mixins/_dispatch'
-import element from '../../utils/_element'
 
 const PADDING = 10
 var showingPopup = null
@@ -65,31 +64,14 @@ const AuPopup = Vue.extend({
       this.top = `${top}px`
       this.left = `${left}px`
     },
-    getElemScrollTop (elem) {
-      var scrollTop = 0
-
-      while (elem = element.getScrollElem(elem)) {
-        scrollTop += elem.scrollTop
-      }
-
-      return scrollTop
-    },
-    getElemScrollLeft (elem) {
-      var scrollLeft = 0
-      while (elem = element.getScrollElem(elem)) {
-        scrollLeft += elem.scrollLeft
-      }
-      return scrollLeft
-    },
     getTop () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateTop = element.getOffset(relateElem).top
+      const relateTop = relateElem.getBoundingClientRect().top
       const relateHeight = relateElem.offsetHeight
-      const scrollTop = this.getElemScrollTop(relateElem)
       const elemHeight = this.$el.offsetHeight
-      const minTop = relateTop - elemHeight - scrollTop
-      const maxTop = relateTop + relateHeight - scrollTop
+      const minTop = relateTop - elemHeight
+      const maxTop = relateTop + relateHeight
       const topBorder = window.scrollY
       const bottomBorder = (window.scrollY + document.documentElement.clientHeight - elemHeight)
 
@@ -163,12 +145,11 @@ const AuPopup = Vue.extend({
     getLeft () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateLeft = element.getOffset(relateElem).left
+      const relateLeft = relateElem.getBoundingClientRect().left
       const relateWidth = relateElem.offsetWidth
-      const scrollLeft = this.getElemScrollLeft(relateElem)
       const elemWidth = this.$el.offsetWidth
-      const minLeft = relateLeft - elemWidth - scrollLeft
-      const maxLeft = relateLeft + relateWidth - scrollLeft
+      const minLeft = relateLeft - elemWidth
+      const maxLeft = relateLeft + relateWidth
       const leftBorder = window.scrollX
       const rightBorder = (window.scrollX + document.documentElement.clientWidth - elemWidth)
 
@@ -263,9 +244,12 @@ const AuPopup = Vue.extend({
       this.$emit('show')
     },
     hide () {
+      if (showingPopup === this) {
+        showingPopup = null
+      }
       this.isShow = false
-      window.removeEventListener('resize', this.calPosition)
-      window.removeEventListener('scroll', this.calPosition)
+      window.removeEventListener('resize', this.calPosition, true)
+      window.removeEventListener('scroll', this.calPosition, true)
       window.removeEventListener('click', this.hide)
       this.$emit('hide')
     },

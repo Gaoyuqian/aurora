@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Radio
+  |Radio
 
 block content
   .docs-heading
@@ -15,12 +15,12 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         div
-          au-radio(label="男", native-value="male", v-model="form.gender")
-          au-radio(label="女", native-value="female", v-model="form.gender")
+          au-radio(label="男", value="male", v-model="form.gender")
+          au-radio(label="女", value="female", v-model="form.gender")
 
         div
-          au-radio(native-value="male", v-model="form.gender")|男
-          au-radio(native-value="female", v-model="form.gender")|女
+          au-radio(value="male", v-model="form.gender")|男
+          au-radio(value="female", v-model="form.gender")|女
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -33,8 +33,8 @@ block content
     template.html(scoped="scoped")
       .docs-panel-row
         div
-          au-radio(label="男", native-value="male", v-model="form.gender", disabled)
-          au-radio(label="女", native-value="female", v-model="form.gender", disabled)
+          au-radio(label="男", value="male", v-model="form.gender", disabled)
+          au-radio(label="女", value="female", v-model="form.gender", disabled)
     .docs-panel
       .docs-panel-content
       .docs-code
@@ -50,9 +50,9 @@ block content
           au-radio-group(:options="options" v-model="form.class")
         div
           au-radio-group(v-model="form.class")
-            au-radio(:native-value="option.value", v-for="option in options")
+            au-radio(:value="option.value", v-for="option in options")
               |{{ option.label }}
-    
+
     template.js(scoped="scoped")
       script.
         {

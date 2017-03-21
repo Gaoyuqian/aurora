@@ -12,7 +12,9 @@ const AuOption = Vue.extend({
   },
   data () {
     return {
-      active: false
+      active: false,
+      isHide: false,
+      isFocus: false
     }
   },
   created () {
@@ -29,8 +31,19 @@ const AuOption = Vue.extend({
         : 'select.option',
         this.value, this)
     },
+    mouseoverHandler () {
+      this.dispatch('focus.option', this)
+      this.isFocus = true
+    },
+    mouseoutHandler () {
+      this.dispatch('blur.option', this)
+      this.isFocus = false
+    },
     setActive (isActive) {
       this.active = isActive
+    },
+    setFocus (isFocus) {
+      this.isFocus = isFocus
     }
   }
 })

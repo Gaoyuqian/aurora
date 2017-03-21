@@ -5,7 +5,7 @@ au-flex.au-form-group(
   :align-items="isLabelTop ? 'stretch' : 'flex-start'"
 )
   au-item(
-    :span="isLabelTop ? null : 4",
+    :span="isLabelTop || labelWidth ? null : 4",
     :style="labelStyle",
     v-if="label"
   )

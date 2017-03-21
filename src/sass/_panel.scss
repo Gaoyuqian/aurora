@@ -17,12 +17,39 @@
   line-height: 40px;
   font-weight: bold;
   padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.au-panel-heading-left {
+  flex: 1;
   .au-icon {
     margin-right: 10px;
   }
 }
 
+.au-panel-collapse-icon {
+  user-select: none;
+  margin-right: -20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: $color-black-light-extra;
+  @include flex-center-center();
+  &:hover {
+    color: $color-primary;
+  }
+}
+
 .au-panel-content {
-  padding: 20px;
   font-size: $fontsize-default;
+  transition: height $transition-during;
+  position: relative;
+  overflow: hidden;
+  margin-top: -1px;
+  will-change: height;
+}
+
+.au-panel-content-inner {
+  padding: 20px;
 }

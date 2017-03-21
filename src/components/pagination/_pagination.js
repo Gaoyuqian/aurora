@@ -1,6 +1,10 @@
 const AuPagination = Vue.extend({
   template: require('./_pagination.jade'),
   props: {
+    align: {
+      type: String,
+      default: 'left'
+    },
     value: {
       type: Number,
       default: 1
@@ -21,14 +25,15 @@ const AuPagination = Vue.extend({
         return this.pageSizeOptions[0] || 10
       }
     },
-    align: {
-      type: String,
-      default: 'right'
-    },
     showPageSizeControl: Boolean,
     showPageControl: Boolean
   },
   computed: {
+    classObj () {
+      const classObj = []
+      classObj.push(`au-pagination-${this.align}`)
+      return classObj
+    },
     pageSizeSelectOptions () {
       return this.pageSizeOptions.map((value) => {
         return {

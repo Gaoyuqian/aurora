@@ -1,13 +1,17 @@
 const AuCheckbox = Vue.extend({
   template: require('./_checkbox.jade'),
+  model: {
+    prop: 'checkedValue',
+    event: 'input'
+  },
   props: {
-    nativeValue: {
+    value: {
       type: [String, Number, Boolean],
       default () {
         return true
       }
     },
-    value: [String, Number, Boolean, Array],
+    checkedValue: [String, Number, Boolean, Array],
     label: String,
     indeterminate: {
       type: Boolean,
@@ -19,15 +23,15 @@ const AuCheckbox = Vue.extend({
     }
   },
   created () {
-    if (this.nativeValue === true && (this.value == null || this.value === '')) {
+    if (this.value === true && (this.checkedValue == null || this.checkedValue === '')) {
       this.$emit('input', false)
     }
   },
   computed: {
     checked () {
-      return Array.isArray(this.value)
-           ? this.value.indexOf(this.nativeValue) > -1
-           : this.value === this.nativeValue
+      return Array.isArray(this.checkedValue)
+           ? this.checkedValue.indexOf(this.value) > -1
+           : this.checkedValue === this.value
     }
   },
   methods: {
@@ -36,9 +40,9 @@ const AuCheckbox = Vue.extend({
         return
       }
 
-      if (Array.isArray(this.value)) {
-        const value = this.value.slice()
-        const pos = value.indexOf(this.nativeValue)
+      if (Array.isArray(this.checkedValue)) {
+        const value = this.checkedValue.slice()
+        const pos = value.indexOf(this.value)
 
         if (this.checked) {
           if (pos > -1) {
@@ -46,13 +50,13 @@ const AuCheckbox = Vue.extend({
           }
         } else {
           if (pos === -1) {
-            value.push(this.nativeValue)
+            value.push(this.value)
           }
         }
 
         this.$emit('input', value)
       } else {
-        this.$emit('input', this.checked ? (this.nativeValue === true ? false : '') : this.nativeValue)
+        this.$emit('input', this.checked ? (this.value === true ? false : '') : this.value)
       }
     }
   }

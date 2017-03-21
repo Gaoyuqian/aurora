@@ -1,15 +1,27 @@
 .au-pagination {
   display: flex;
   align-items: center;
-
-  .au-icon {
-    font-size: $fontsize-large;
-  }
+  margin: 20px 0;
 }
 
 .au-pagination-item {
   display: flex;
-  margin: 0 10px;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.au-pagination-left {
+  justify-content: flex-start;
+}
+
+.au-pagination-center {
+  justify-content: center;
+}
+
+.au-pagination-right {
+  justify-content: flex-end;
 }
 
 .au-pagination-left {
@@ -31,7 +43,7 @@
   height: 28px;
   line-height: 28px;
   padding: 0 10px;
-  margin: 0 5px;
+  margin-right: 10px;
   cursor: pointer;
   user-select: none;
   transition: all $transition-during;
@@ -39,6 +51,7 @@
 
   .au-icon {
     margin: 0 4px;
+    font-size: $fontsize-large;
   }
 
   &:hover {
@@ -58,6 +71,10 @@
     border-color: $color-primary;
     color: $color-white;
   }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .au-pagination-link-dot {
@@ -66,7 +83,7 @@
   height: 28px;
   line-height: 28px;
   padding: 0 2px;
-  margin: 0 5px;
+  margin-right: 10px;
   cursor: pointer;
   @include flex-center-center();
   width: 20px;
@@ -88,6 +105,10 @@
       display: block;
       color: $color-primary;
     }
+  }
+
+  .au-icon {
+    font-size: $fontsize-large;
   }
 }
 
