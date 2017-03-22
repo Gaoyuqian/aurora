@@ -19,6 +19,8 @@
 .au-popup {
   position: absolute;
   z-index: $zindex-popup;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
   .au-popup-arrow {
     width: 8px;
@@ -32,6 +34,7 @@
   }
 
   &.au-popup-has-arrow {
+    padding: 0;
     &.au-popup-top-left {
       .au-popup-inner {
         top: (-$popup-offset);

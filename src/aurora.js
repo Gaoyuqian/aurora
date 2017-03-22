@@ -36,7 +36,6 @@ import './components/footer/_footer.js'
 
 import { push } from './components/message/_message-center.js'
 
-
 const Aurora = {}
 
 Aurora.message = push

@@ -11,19 +11,26 @@ html.no-js
     link(rel='stylesheet', href="../lib/font-awesome-4.7.0/css/font-awesome.min.css")
     link(rel='stylesheet', href="./docs.css")
     link(rel='stylesheet', href="../lib/highlight.github.min.css")
-
     script(src="../lib/highlight.min.js")
     script(src="../lib/beautify.min.js")
     script(src="../lib/beautify-css.min.js")
     script(src="../lib/beautify-html.min.js")
+    style.
+      .browsehappy {
+        height: 40px;
+        line-height: 40px;
+        background-color: #f5ffbd;
+        color: #333;
+        text-align: center;
+        font-size: 12px;
+      }
   body
     <!--[if lt IE 8]>
     p.browsehappy
-      | You are using an <strong>outdated</strong> browser.
-      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
-      | to improve your experience.
+      | 您正在使用 <strong>过时</strong> 的浏览器.
+      | 请 <a href="http://browsehappy.com/">更新您的浏览器</a>
+      | 来使用此项目
     <![endif]-->
-
     au-app#app(v-cloak)
       au-header
         h1(slot="logo")
@@ -112,7 +119,6 @@ html.no-js
             block content
           au-footer
             |Copyright © 2017 美利金融 Aurora项目
-
 
     script(src="../lib/vue.js")
     script(src="../src/aurora.js")

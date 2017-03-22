@@ -45,7 +45,7 @@ const AuDropdown = Vue.extend({
   beforeDestroy () {
     if (this.menu) {
       if (this.trigger === 'hover') {
-        this.$el.removeEventListener('mouseover', this.show)
+        this.$el.removeEventListener('mouseover', this.show, true)
         this.$el.removeEventListener('mouseout', this.hide)
       } else if (this.trigger === 'click') {
         this.$el.removeEventListener('click', this.clickHandler, true)

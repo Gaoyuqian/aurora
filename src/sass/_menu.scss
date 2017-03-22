@@ -63,8 +63,8 @@
 
 .au-content-sidebar {
   .au-menu-item-title {
-    background-color: $color-black-light-extra;
-    color: $color-silver-light;
+    background-color: $color-black-light;
+    color: $color-gray;
     height: 46px;
     line-height: 46px;
     font-weight: bold;
@@ -89,7 +89,7 @@
     }
 
     &:hover {
-      background-color: $color-black-light;
+      background-color: $color-black;
       color: $color-white;
     }
   }
@@ -109,7 +109,7 @@
 
     .au-menu-item:hover {
       .au-menu-item-title {
-        background-color: $color-black-light;
+        background-color: $color-black;
         color: $color-white;
       }
     }
@@ -117,11 +117,15 @@
 
   .au-menu-item-show-child {
     .au-menu-item-title {
-      background-color: $color-black-light;
+      // background-color: $color-black-light;
     }
     .au-menu {
       .au-menu-item-title {
-        background-color: rgba($color-black-light, 0.7);
+        background-color: #2C2C2C;
+
+        &:hover {
+
+        }
       }
     }
     .au-menu-item-arrow .au-icon {
