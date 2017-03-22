@@ -1,216 +1,159 @@
+const TIMEOUT = 200
+
 import dispatch from '../../mixins/_dispatch.js'
 import Popup from '../popup/_popup.js'
+import Menu from './_menu.js'
 
 const AuMenuItem = Vue.extend({
+  template: require('./_menu-item.jade'),
   mixins: [dispatch],
   props: {
     href: String,
-    target: String,
-    icon: String,
-    label: String
+    target: {
+      type: String,
+      default: '_self'
+    },
+    icon: String
   },
   data () {
     return {
-      hasChild: false,
-      isShowChild: false,
-      childHeight: 0,
-      isHeader: false,
-      isSidebar: false,
+      subMenu: null,
       popup: null,
-      timer: null
+      isShowSubMenu: false,
+      contentStyle: {},
+      timeout: null
     }
   },
-  created () {
-    const $slots = this.$slots.default
-    this.hasChild = ($slots != null && $slots.length > 0)
+  computed: {
+    cls () {
+      const cls = []
+      if (this.isShowSubMenu) {
+        cls.push('au-menu-item-show-sub-menu')
+      }
+      return cls
+    }
   },
-  render (h) {
-    const $slots = this.$slots.default
-    const childs = []
-    var elemName, elemAttrs
-    if (this.icon) {
-      childs.push(
-        h('div', {
-          'class': 'au-menu-item-icon'
-        },[
-          h('au-icon', {
-            props: {
-              icon: this.icon
-            }
-          })
-        ])
-      )
-    }
-    const content = this.$slots.content
+  mounted () {
+    const trigger = this.$parent.menuTrigger
+    this.$children.forEach((item) => {
+      if (item instanceof Menu) {
+        item.isVertical = this.$parent.isVertical
+        item.isSubMenu = true
+        this.subMenu = item
 
-    if (content && content.length > 0) {
-      if (content[0].elm) {
-        content[0].elm.classList.add('au-menu-item-text')
-      }
-    }
+        this.$nextTick(() => {
+          if (item.isVertical) {
+            this.$refs.content.appendChild(item.$el)
+          } else {
+            item.isPopupMenu = true
+            this.popup = new Popup()
+            this.popup.$mount(document.createElement('div'))
+            this.popup.setRelateElem(this.$el)
+            this.popup.getContentElem().appendChild(item.$el)
+            this.popup.setDropdown(this, trigger === 'hover')
+            document.body.appendChild(this.popup.$el)
 
-    childs.push(
-      content || h('div',
-        {
-          'class': 'au-menu-item-text'
-        },
-        this.label
-      )
-    )
+            this.subMenu.$on('click.item', () => {
+              this.hideSubMenu()
+            })
 
-    if (this.hasChild) {
-      childs.push(
-        h('div',
-          {
-            'class': 'au-menu-item-arrow'
-          },
-          [h('au-icon', {
-            props: {
-              icon: 'chevron-down'
-            }
-          })]
-        )
-      )
-    }
+            this.popup.$on('show', () => {
+              this.isShowSubMenu = true
+            })
 
-    if (this.href) {
-      elemName = 'a'
-      elemAttrs = {
-        href: this.href,
-        target: this.target
-      }
-    } else {
-      elemName = 'div'
-      elemAttrs = {}
-    }
+            this.popup.$on('hide', () => {
+              this.isShowSubMenu = false
+            })
+          }
+        })
 
-    return h(
-      elemName,
-      {
-        'class': {
-          'au-menu-item': true,
-          'au-menu-item-show-child': this.isShowChild
-        },
-        attrs: elemAttrs,
-        on: {
-          click: this.clickHandler,
-          mouseover: this.mouseoverHandler,
-          mouseout: this.mouseoutHandler
+        if (trigger === 'hover') {
+          this.$refs.title.addEventListener('mouseover', this.onMouseover, true)
+          this.$refs.title.addEventListener('mouseout', this.onMouseout)
         }
-      },
-      [
-        h(
-          'div',{
-            'class': 'au-menu-item-title'
-          },
-          childs
-        ),
-        h(
-          'div',{
-            'class': 'au-menu-item-child',
-            style: {
-              height: this.isSidebar ? this.childHeight ? this.childHeight + 'px' : 0 : ''
-            }
-          },
-          $slots
-        )
-      ]
-    )
+      }
+    })
+
+    this.$refs.title.addEventListener('click', this.onClick, true)
+  },
+  beforeDestroy () {
+    this.$refs.title.removeEventListener('click', this.onClick, true)
+    this.$refs.title.removeEventListener('mouseover', this.onMouseover, true)
+    this.$refs.title.removeEventListener('mouseout', this.onMouseout)
   },
   methods: {
-    clearTimer () {
-      if (this.timer) {
-        clearTimeout(this.timer)
-        this.timer = null
-      }
+    onMouseover () {
+      this.showSubMenu(true)
     },
-    clickHandler ($event) {
+    onMouseout () {
+      this.hideSubMenu()
+    },
+    onClick ($event) {
       $event.stopPropagation()
 
-      if (this.$parent.trigger === 'click') {
-        this.toggleChild()
-      }
-      this.dispatch('click.item')
-    },
-    mouseoverHandler ($event) {
-      if (this.$parent.trigger === 'hover') {
-        this.toggleChild(true)
-      }
-      this.$parent.$emit('mouseover.item', this)
-      this.$parent.$emit('show.line', this)
-    },
-    mouseoutHandler ($event) {
-      if (this.$parent.trigger === 'hover') {
-        this.toggleChild(false)
-      }
-      this.$parent.$emit('mouseout.item', this)
-      this.$parent.$emit('hide.line', this)
-    },
-    toggleChild (willShow) {
-      this.clearTimer()
-
-      if (this.hasChild) {
-        if (this.isSidebar) {
-          willShow = willShow || !this.isShowChild
-          this.isShowChild = willShow
-
-          this.timer = setTimeout(() => {
-            if (this.isShowChild) {
-              const menu = this.$el.querySelector('.au-menu')
-              this.childHeight = menu.offsetHeight
-            } else {
-              this.childHeight = 0
-            }
-          }, this.$parent.trigger === 'hover' ? 100 : 0)
-        } else if (this.isHeader) {
-          willShow = willShow || !this.popup.isShow
-          if (willShow) {
-            this.dispatch('show.line', this)
-          } else {
-            this.dispatch('hide.line', this)
-          }
-          this.timer = setTimeout(() => {
-            if (this.popup) {
-              this.popup.$el.style.minWidth = this.$el.offsetWidth + 'px'
-              if (willShow) {
-                this.popup.show()
-              } else {
-                this.popup.hide()
-              }
-            }
-          }, this.$parent.trigger === 'hover' ? 100 : 0)
+      if (this.subMenu != null) {
+        if (this.isShowSubMenu) {
+          this.hideSubMenu(true)
+        } else {
+          this.showSubMenu(true)
         }
       }
+
+      if (this.href) {
+        window.open(this.href, this.target);
+      }
+
+      this.$parent.$emit('click.item', this)
+    },
+    showSubMenu (immediately) {
+      this.clear()
+      if (!this.subMenu || this.isShowSubMenu) {
+        return
+      }
+      this.timeout = setTimeout(() => {
+        if (this.$parent.isVertical) {
+          this.isShowSubMenu = true
+          this.contentStyle = { display: 'block', height: '0px' }
+          this.$nextTick(() => {
+            const height = this.subMenu.$el.offsetHeight
+            this.contentStyle = { height: height + 'px' }
+          })
+        } else {
+          this.popup.show()
+          this.popup.syncWidth()
+        }
+      }, immediately ? 0 : TIMEOUT)
+    },
+    hideSubMenu (immediately) {
+      this.clear()
+
+      if (!this.subMenu || !this.isShowSubMenu) {
+        return
+      }
+
+      this.timeout = setTimeout(() => {
+        if (this.$parent.isVertical) {
+          this.isShowSubMenu = false
+          this.contentStyle = { height: '0px' }
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.contentStyle.display = 'hidden'
+            }, 300)
+          })
+        } else {
+          this.popup.hide()
+        }
+      }, immediately ? 0 : TIMEOUT)
     },
     show () {
-      this.toggleChild(true)
+      this.showSubMenu()
     },
     hide () {
-      this.toggleChild(false)
+      this.hideSubMenu()
     },
-    setIsHeader () {
-      this.isHeader = true
-      if (this.hasChild) {
-        const child = this.$el.querySelector('.au-menu-item-child')
-        this.popup = new Popup()
-        this.popup.$mount(document.createElement('div'))
-        this.popup.$el.querySelector('.au-popup-content').appendChild(child)
-        this.popup.setRelateElem(this.$el)
-        document.body.appendChild(this.popup.$el)
-        this.popup.setDropdown(this)
-
-        this.popup.$on('show', () => {
-          this.isShowChild = true
-        })
-
-        this.popup.$on('hide', () => {
-          this.isShowChild = false
-        })
-      }
-    },
-    setIsSidebar () {
-      this.isSidebar = true
-      this.childHeight = 0
+    clear () {
+      clearTimeout(this.timeout)
+      this.timeout = null
     }
   }
 })

@@ -1,88 +1,66 @@
-const indexOf = [].indexOf
-import AuMenuItem from './_menu-item.js'
+import AuHeader from '../header/_header.js'
+import AuContent from '../content/_content.js'
 
 const AuMenu = Vue.extend({
   template: require('./_menu.jade'),
   props: {
-    trigger: {
+    menuTrigger: {
       type: String,
       default: 'click'
+    },
+    vertical: Boolean
+  },
+  computed: {
+    classObj () {
+      const classObj = []
+
+      if (this.isPopupMenu) {
+        classObj.push('au-menu-popup-menu')
+      } else {
+        if (this.isVertical) {
+          classObj.push('au-menu-vertical')
+        } else {
+          classObj.push('au-menu-horizontal')
+        }
+      }
+
+      if (this.isSubMenu) {
+        classObj.push('au-menu-sub-menu')
+      }
+      return classObj
     }
   },
   data () {
     return {
-      isSidebar: false,
-      isHeader: false,
-      activeLineStyle: {
-        width: 0,
-        left: 0
-      },
-      timer: null
+      isSubMenu: false,
+      isVertical: this.vertical,
+      isPopupMenu: false
     }
   },
-  mounted () {
-    this.$on('click.item', () => {
-      this.$emit('hide')
-    })
-
-    const $elem = this.$el
-    while ($elem = $elem.parentElement) {
-      if (indexOf.call($elem.classList, 'au-menu') > -1) {
-        return
-
-      } else if (indexOf.call($elem.classList, 'au-content-sidebar') > -1) {
-        this.isSidebar = true
-        break
-
-      } else if (indexOf.call($elem.classList, 'au-header') > -1) {
-        this.isHeader = true
-        break
+  beforeMount () {
+    if (!this.$options.propsData.vertical) {
+      if (this.getParent(AuHeader) != null) {
+        this.isVertical = false
+      } else if (this.getParent(AuContent) != null) {
+        this.isVertical = true
       }
-    }
-
-    this.$children.forEach((item) => {
-      if (item instanceof AuMenuItem) {
-        if (this.isHeader) {
-          item.setIsHeader()
-        } else if (this.isSidebar) {
-          item.setIsSidebar()
-        }
-      }
-    })
-
-    if (this.isHeader) {
-      this.$on('show.line', (item) => {
-        this.clearTimer()
-        this.timer = setTimeout(() => {
-          this.activeLineStyle = {
-            transform: 'scale(1)',
-            left: item.$el.offsetLeft + 'px',
-            width: item.$el.offsetWidth + 'px'
-          }
-          this.timer = null
-        }, 100)
-      })
-
-      this.$on('hide.line', (item) => {
-        this.clearTimer()
-        this.timer = setTimeout(() => {
-          this.activeLineStyle = {
-            transform: 'scale(0)',
-            left: this.activeLineStyle.left,
-            width: this.activeLineStyle.width
-          }
-          this.timer = null
-        }, 100)
-
-      })
     }
   },
   methods: {
-    clearTimer () {
-      if (this.timer) {
-        clearTimeout(this.timer)
-        this.timer = null
-      }
+    getParent (Ctor) {
+      var elem = this.$parent
+      do {
+        if (elem && elem instanceof Ctor) {
+          return elem
+        }
+      } while (elem = elem.$parent)
+
+      return null
+    }
+  },
+  watch: {
+    vertical (vertical) {
+      this.isVertical = vertical
     }
   }
 })

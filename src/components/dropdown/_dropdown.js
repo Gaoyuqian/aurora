@@ -26,9 +26,10 @@ const AuDropdown = Vue.extend({
         this.popup.$mount(document.createElement('div'))
         this.popup.setRelateElem(this.$el.children[0])
         this.popup.getContentElem().appendChild(component.$el)
-        this.popup.setDropdown(this)
+        this.popup.setDropdown(this, this.trigger === 'hover')
         document.body.appendChild(this.popup.$el)
-        component.$on('hide', () => {
+        component.isPopupMenu = true
+        component.$on('click.item', () => {
           this.hide(true)
         })
 

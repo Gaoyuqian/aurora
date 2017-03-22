@@ -37,43 +37,44 @@ html.no-js
           |Aurora
           span.version|v0.1
 
-        au-menu(slot="content-left", trigger="hover")
-          au-menu-item(href="flex.html", label="Flex", icon="")
-          au-menu-item(href="button.html", label="Button", icon="")
+        au-menu(slot="content-left", menu-trigger="click")
+          au-menu-item(href="flex.html", icon="")|Flex
+          au-menu-item(href="button.html", icon="")|Button
 
-          au-menu-item(label="表单")
+          au-menu-item|表单
             au-menu
-              au-menu-item(href="input.html", label="Input")
-              au-menu-item(href="select.html", label="Select")
-              au-menu-item(href="checkbox.html", label="Checkbox")
-              au-menu-item(href="radio.html", label="Radio")
-              au-menu-item(href="form.html", label="Form")
-              au-menu-item(href="date-picker.html", label="DatePicker")
-              au-menu-item(href="upload.html", label="Upload")
+              au-menu-item(href="input.html")|Input
+              au-menu-item(href="select.html")|Select
+              au-menu-item(href="checkbox.html")|Checkbox
+              au-menu-item(href="radio.html")|Radio
+              au-menu-item(href="form.html")|Form
+              au-menu-item(href="date-picker.html")|DatePicker
+              au-menu-item(href="upload.html")|Upload
 
-          au-menu-item(label="区块")
+          au-menu-item|区块
             au-menu
-              au-menu-item(href="panel.html", label="Panel")
-              au-menu-item(href="table.html", label="Table")
-              au-menu-item(href="tabs.html", label="Tabs")
-              au-menu-item(href="pagination.html", label="Pagination")
-              au-menu-item(href="dropdown.html", label="Dropdown")
-              au-menu-item(href="modal.html", label="Modal")
-              au-menu-item(href="drag-modal.html", label="DragModal")
+              au-menu-item(href="panel.html")|Panel
+              au-menu-item(href="table.html")|Table
+              au-menu-item(href="tabs.html")|Tabs
+              au-menu-item(href="pagination.html")|Pagination
+              au-menu-item(href="dropdown.html")|Dropdown
+              au-menu-item(href="modal.html")|Modal
+              au-menu-item(href="drag-modal.html")|DragModal
 
-          au-menu-item(label="消息")
+          au-menu-item|消息
             au-menu
-              au-menu-item(href="message.html", label="Message")
-              au-menu-item(href="tooltip.html", label="Tooltip")
-              au-menu-item(href="pop-confirm.html", label="PopConfirm")
-          div(slot="content-right")
-            au-dropdown
-              div
-                img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
-                |Kevin
+              au-menu-item(href="message.html")|Message
+              au-menu-item(href="tooltip.html")|Tooltip
+              au-menu-item(href="pop-confirm.html")|PopConfirm
+
+        div(slot="content-right")
+          au-menu
+            au-menu-item
+              img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
+              |Kevin
               au-menu
-                au-menu-item(label="我的信息")
-                au-menu-item(label="退出")
+                au-menu-item|我的信息
+                au-menu-item|退出
         //- au-menu(slot="content-right", trigger="hover")
         //-   au-menu-item
         //-     div(slot="content")
@@ -84,35 +85,39 @@ html.no-js
         //-       au-menu-item(label="退出")
 
       au-content
-        au-menu(slot="sidebar")
-          au-menu-item(href="flex.html", label="Flex", icon="wpforms")
-          au-menu-item(href="button.html", label="Button", icon="wpforms")
-
-          au-menu-item(label="表单", icon="wpforms")
+        div(slot="sidebar")
+          au-menu-group(title="基础")
             au-menu
-              au-menu-item(href="input.html", label="Input")
-              au-menu-item(href="select.html", label="Select")
-              au-menu-item(href="checkbox.html", label="Checkbox")
-              au-menu-item(href="radio.html", label="Radio")
-              au-menu-item(href="form.html", label="Form")
-              au-menu-item(href="date-picker.html", label="DatePicker")
-              au-menu-item(href="upload.html", label="Upload")
+              au-menu-item(href="flex.html")|Flex
+              au-menu-item(href="button.html")|Button
 
-          au-menu-item(label="区块", icon="clone")
+          au-menu-group(title="表单")
             au-menu
-              au-menu-item(href="panel.html", label="Panel")
-              au-menu-item(href="table.html", label="Table")
-              au-menu-item(href="tabs.html", label="Tabs")
-              au-menu-item(href="pagination.html", label="Pagination")
-              au-menu-item(href="dropdown.html", label="Dropdown")
-              au-menu-item(href="modal.html", label="Modal")
-              au-menu-item(href="drag-modal.html", label="DragModal")
+              au-menu-item(href="input.html")|Input
+              au-menu-item(href="select.html")|Select
+              au-menu-item(href="checkbox.html")|Checkbox
+              au-menu-item(href="radio.html")|Radio
+              au-menu-item(href="form.html")|Form
+              au-menu-item(href="date-picker.html")|DatePicker
+              au-menu-item(href="upload.html")|Upload
 
-          au-menu-item(label="消息", icon="sticky-note")
+          au-menu-group(title="其他")
             au-menu
-              au-menu-item(href="message.html", label="Message")
-              au-menu-item(href="tooltip.html", label="Tooltip")
-              au-menu-item(href="pop-confirm.html", label="PopConfirm")
+              au-menu-item(icon="clone")|区块
+                au-menu
+                  au-menu-item(href="panel.html")|Panel
+                  au-menu-item(href="table.html")|Table
+                  au-menu-item(href="tabs.html")|Tabs
+                  au-menu-item(href="pagination.html")|Pagination
+                  au-menu-item(href="dropdown.html")|Dropdown
+                  au-menu-item(href="modal.html")|Modal
+                  au-menu-item(href="drag-modal.html")|DragModal
+
+              au-menu-item(icon="sticky-note")|消息
+                au-menu
+                  au-menu-item(href="message.html")|Message
+                  au-menu-item(href="tooltip.html")|Tooltip
+                  au-menu-item(href="pop-confirm.html")|PopConfirm
 
         div(slot="container")
           au-panel

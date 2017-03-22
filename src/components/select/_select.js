@@ -127,10 +127,10 @@ const AuSelect = Vue.extend({
         text.style.width = 'auto';
       }
     }
-    this.updatePopWidth()
+    this.$refs.popup.syncWidth()
   },
   mounted () {
-    this.$refs.popup.setRelateElem(this.$el)
+    this.$refs.popup.setRelateElem(this.$el, true)
   },
   methods: {
     clearValueHandler ($event) {
@@ -261,14 +261,10 @@ const AuSelect = Vue.extend({
         })
       }
 
-      this.updatePopWidth()
       this.optionsElem.show()
     },
     hideOptions () {
       this.optionsElem.hide()
-    },
-    updatePopWidth () {
-      this.$refs.options.style.minWidth = this.$el.getClientRects()[0].width - 2 + 'px'
     },
     setOptionActive () {
       var child
@@ -324,8 +320,6 @@ const AuSelect = Vue.extend({
       if ($event.ctrlKey || $event.key === 'Control') {
         return
       }
-
-      console.log($event)
 
       switch ($event.key) {
         case "ArrowDown":

@@ -23,14 +23,17 @@ const AuPopup = Vue.extend({
       top: 0,
       left: 0,
       isShow: false,
-      direction: 'bottom'
+      direction: 'bottom',
+      minWidth: null,
+      isAutoSyncWidth: false
     }
   },
   computed: {
     style () {
       return {
         top: this.top,
-        left: this.left
+        left: this.left,
+        'minWidth': this.minWidth
       }
     },
     classObject () {
@@ -50,9 +53,16 @@ const AuPopup = Vue.extend({
       return result
     }
   },
+  beforeDestroy () {
+    if (this.dropdownIsHover) {
+      this.$el.removeEventListener('mouseover', this.menuOver)
+      this.$el.removeEventListener('mouseout', this.menuOut)
+    }
+  },
   methods: {
-    setRelateElem (relateElem) {
+    setRelateElem (relateElem, isAutoSyncWidth) {
       this.relateElem = relateElem
+      this.isAutoSyncWidth = isAutoSyncWidth
     },
     clickHandler ($event) {
       $event.stopPropagation()
@@ -222,6 +232,9 @@ const AuPopup = Vue.extend({
       this.top = `${top}px`
       this.left = `${left}px`
     },
+    syncWidth () {
+      this.minWidth = this.relateElem.getClientRects()[0].width + 'px'
+    },
     show () {
       if (!this.selfControl && showingPopup) {
         showingPopup.hide()
@@ -242,6 +255,9 @@ const AuPopup = Vue.extend({
       window.addEventListener('scroll', this.calPosition, true)
       window.addEventListener('click', this.hide)
       this.$emit('show')
+      if (this.isAutoSyncWidth) {
+        this.syncWidth()
+      }
     },
     hide () {
       if (showingPopup === this) {
@@ -256,22 +272,19 @@ const AuPopup = Vue.extend({
     getContentElem () {
       return this.$el.querySelector('.au-popup-content')
     },
-    setDropdown (dropdown) {
+    setDropdown (dropdown, isHover) {
       this.dropdown = dropdown
+      this.dropdownIsHover = isHover
+      if (isHover) {
       this.$el.addEventListener('mouseover', this.menuOver, true)
-      this.$el.addEventListener('mouseout', this.menuOut)
+        this.$el.addEventListener('mouseout', this.menuOut)
+      }
     },
     menuOver () {
       this.dropdown.show()
     },
     menuOut () {
       this.dropdown.hide()
-    },
-    beforeDestroy () {
-      if (this.dropdown) {
-        this.$el.removeEventListener('mouseover', this.menuOver)
-        this.$el.removeEventListener('mouseout', this.menuOut)
-      }
     }
   }
 })

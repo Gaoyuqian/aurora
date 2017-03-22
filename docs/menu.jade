@@ -1,0 +1,70 @@
+extends ./_layout
+
+block title
+  |Menu
+
+block content
+  .docs-heading
+    h1|AuMenu
+    .docs-desc
+
+  .docs-section
+    h2|水平菜单
+    .docs-desc
+
+    template.html(scoped="scoped")
+      au-flex(column)
+        au-item(span="12")
+          .docs-panel-row
+            .docs-menu-wrapper
+              au-menu
+                au-menu-item|首页
+                  au-menu
+                    au-menu-item|子项目1
+                    au-menu-item|子项目2
+                    au-menu-item|子项目3
+                au-menu-item|内容
+                au-menu-item|列表
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        docs-code.html
+
+  .docs-section
+    h2|垂直菜单
+    .docs-desc
+
+    template.html(scoped="scoped")
+      au-flex(column)
+        au-item(span="12")
+          .docs-panel-row
+            .docs-menu-wrapper
+              au-menu(vertical)
+                au-menu-item(icon="home")|首页
+                  au-menu
+                    au-menu-item|子项目1
+                    au-menu-item|子项目2
+                    au-menu-item|子项目3
+                au-menu-item(icon="home")|内容
+                au-menu-item|列表
+    .docs-panel
+      .docs-panel-content
+      .docs-code
+        docs-code.html
+
+  .docs-section
+    h2|属性
+    au-table(:data="attrs")
+      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins,
+      data () {
+        return {
+          attrs: []
+        }
+      }
+    })
