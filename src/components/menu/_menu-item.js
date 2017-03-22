@@ -13,13 +13,15 @@ const AuMenuItem = Vue.extend({
       type: String,
       default: '_self'
     },
-    icon: String
+    icon: String,
+    value: String
   },
   data () {
     return {
       subMenu: null,
       popup: null,
       isShowSubMenu: false,
+      isActive: false,
       contentStyle: {},
       timeout: null
     }
@@ -30,6 +32,10 @@ const AuMenuItem = Vue.extend({
       if (this.isShowSubMenu) {
         cls.push('au-menu-item-show-sub-menu')
       }
+
+      if ((!this.$parent.isVertical || this.subMenu == null) && this.isActive) {
+        cls.push('au-menu-item-active')
+      }
       return cls
     }
   },
@@ -38,7 +44,6 @@ const AuMenuItem = Vue.extend({
     this.$children.forEach((item) => {
       if (item instanceof Menu) {
         item.isVertical = this.$parent.isVertical
-        item.isSubMenu = true
         this.subMenu = item
 
         this.$nextTick(() => {
@@ -76,6 +81,27 @@ const AuMenuItem = Vue.extend({
 
     this.$refs.title.addEventListener('click', this.onClick, true)
   },
+  created () {
+    this.$on('check.selected', (selected) => {
+      if (this.subMenu != null) {
+        this.isActive = false
+      } else {
+        if (selected.indexOf(this.value) > -1) {
+          this.isActive = true
+          this.dispatch('add.selected')
+        } else {
+          this.isActive = false
+        }
+      }
+    })
+
+    this.$on('add.selected', () => {
+      this.isActive = true
+      if (this.$parent.isVertical && this.subMenu && !this.isShowSubMenu) {
+        this.showSubMenu(true)
+      }
+    })
+  },
   beforeDestroy () {
     this.$refs.title.removeEventListener('click', this.onClick, true)
     this.$refs.title.removeEventListener('mouseover', this.onMouseover, true)
@@ -104,6 +130,7 @@ const AuMenuItem = Vue.extend({
       }
 
       this.$parent.$emit('click.item', this)
+      this.$emit('click', $event)
     },
     showSubMenu (immediately) {
       this.clear()

@@ -1,14 +1,22 @@
 import AuHeader from '../header/_header.js'
-import AuContent from '../content/_content.js'
+import AuSidebar from '../content/_sidebar.js'
+import dispatch from '../../mixins/_dispatch.js'
 
 const AuMenu = Vue.extend({
   template: require('./_menu.jade'),
+  mixins: [dispatch],
   props: {
     menuTrigger: {
       type: String,
       default: 'click'
     },
-    vertical: Boolean
+    vertical: Boolean,
+    selected: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   },
   computed: {
     classObj () {
@@ -41,9 +49,14 @@ const AuMenu = Vue.extend({
     if (!this.$options.propsData.vertical) {
       if (this.getParent(AuHeader) != null) {
         this.isVertical = false
-      } else if (this.getParent(AuContent) != null) {
+      } else if (this.getParent(AuSidebar) != null) {
         this.isVertical = true
       }
+    }
+  },
+  mounted () {
+    if (this.selected.length > 0) {
+      this.checkSelected()
     }
   },
   methods: {
@@ -56,11 +69,17 @@ const AuMenu = Vue.extend({
       } while (elem = elem.$parent)
 
       return null
+    },
+    checkSelected () {
+      this.broadcast('check.selected', this.selected)
     }
   },
   watch: {
     vertical (vertical) {
       this.isVertical = vertical
+    },
+    selected () {
+      this.checkSelected()
     }
   }
 })

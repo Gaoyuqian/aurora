@@ -52,6 +52,13 @@
     }
   }
 
+  .au-menu-item-active > .au-menu-item-title {
+    color: $color-primary;
+    &:after {
+      opacity: 1;
+    }
+  }
+
   .au-menu-item-arrow {
     margin-left: 5px;
   }
@@ -89,11 +96,11 @@
       background-color: $color-black;
       color: $color-white;
     }
+  }
 
-    &.active {
-      background-color: $color-primary;
-      color: $color-white;
-    }
+  .au-menu-item-active > .au-menu-item-title {
+    background-color: $color-primary;
+    color: $color-white;
   }
 
   .au-menu-item-text {
@@ -135,11 +142,11 @@
     &:hover {
       background-color: $color-white-light;
     }
+  }
 
-    &.active {
-      background-color: $color-primary;
-      color: $color-white;
-    }
+  .au-menu-item-active > .au-menu-item-title {
+    background-color: $color-primary;
+    color: $color-white;
   }
 }
 

@@ -1,14 +1,10 @@
 import Menu from '../menu/_menu.js'
-import dispatch from '../../mixins/_dispatch'
+import AuSidebar from './_sidebar.js'
 
 const AuContent = Vue.extend({
   template: require('./_content.jade'),
-  mixins: [dispatch],
-  created () {
-    this.dispatch('show.sidebar')
-  },
-  beforeDestroy () {
-    this.dispatch('hide.sidebar')
+  components: {
+    AuSidebar
   }
 })
 

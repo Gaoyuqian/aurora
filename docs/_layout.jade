@@ -37,35 +37,36 @@ html.no-js
           |Aurora
           span.version|v0.1
 
-        au-menu(slot="content-left", menu-trigger="click")
-          au-menu-item(href="flex.html", icon="")|Flex
-          au-menu-item(href="button.html", icon="")|Button
+        au-menu(slot="content-left", menu-trigger="click", :selected="selected")
+          au-menu-item(href="flex.html", value="flex")|Flex
+          au-menu-item(href="button.html", value="button")|Button
 
           au-menu-item|表单
             au-menu
-              au-menu-item(href="input.html")|Input
-              au-menu-item(href="select.html")|Select
-              au-menu-item(href="checkbox.html")|Checkbox
-              au-menu-item(href="radio.html")|Radio
-              au-menu-item(href="form.html")|Form
-              au-menu-item(href="date-picker.html")|DatePicker
-              au-menu-item(href="upload.html")|Upload
+              au-menu-item(href="input.html", value="input")|Input
+              au-menu-item(href="select.html", value="select")|Select
+              au-menu-item(href="checkbox.html", value="checkbox")|Checkbox
+              au-menu-item(href="radio.html", value="radio")|Radio
+              au-menu-item(href="form.html", value="form")|Form
+              au-menu-item(href="date-picker.html", value="date-picker")|DatePicker
+              au-menu-item(href="upload.html", value="upload")|Upload
 
           au-menu-item|区块
             au-menu
-              au-menu-item(href="panel.html")|Panel
-              au-menu-item(href="table.html")|Table
-              au-menu-item(href="tabs.html")|Tabs
-              au-menu-item(href="pagination.html")|Pagination
-              au-menu-item(href="dropdown.html")|Dropdown
-              au-menu-item(href="modal.html")|Modal
-              au-menu-item(href="drag-modal.html")|DragModal
+              au-menu-item(href="panel.html", value="panel")|Panel
+              au-menu-item(href="table.html", value="table")|Table
+              au-menu-item(href="tabs.html", value="tabs")|Tabs
+              au-menu-item(href="pagination.html", value="pagination")|Pagination
+              au-menu-item(href="dropdown.html", value="dropdown")|Dropdown
+              au-menu-item(href="modal.html", value="modal")|Modal
+              au-menu-item(href="drag-modal.html", value="drag-modal")|DragModal
+              au-menu-item(href="menu.html", value="menu")|Menu
 
           au-menu-item|消息
             au-menu
-              au-menu-item(href="message.html")|Message
-              au-menu-item(href="tooltip.html")|Tooltip
-              au-menu-item(href="pop-confirm.html")|PopConfirm
+              au-menu-item(href="message.html", value="message")|Message
+              au-menu-item(href="tooltip.html", value="tooltip")|Tooltip
+              au-menu-item(href="pop-confirm.html", value="pop-confirm")|PopConfirm
 
         div(slot="content-right")
           au-menu
@@ -87,37 +88,38 @@ html.no-js
       au-content
         div(slot="sidebar")
           au-menu-group(title="基础")
-            au-menu
-              au-menu-item(href="flex.html")|Flex
-              au-menu-item(href="button.html")|Button
+            au-menu(:selected="selected")
+              au-menu-item(href="flex.html", value="flex")|Flex
+              au-menu-item(href="button.html", value="button")|Button
 
           au-menu-group(title="表单")
-            au-menu
-              au-menu-item(href="input.html")|Input
-              au-menu-item(href="select.html")|Select
-              au-menu-item(href="checkbox.html")|Checkbox
-              au-menu-item(href="radio.html")|Radio
-              au-menu-item(href="form.html")|Form
-              au-menu-item(href="date-picker.html")|DatePicker
-              au-menu-item(href="upload.html")|Upload
+            au-menu(:selected="selected")
+              au-menu-item(href="input.html", value="input")|Input
+              au-menu-item(href="select.html", value="select")|Select
+              au-menu-item(href="checkbox.html", value="checkbox")|Checkbox
+              au-menu-item(href="radio.html", value="radio")|Radio
+              au-menu-item(href="form.html", value="form")|Form
+              au-menu-item(href="date-picker.html", value="date-picker")|DatePicker
+              au-menu-item(href="upload.html", value="upload")|Upload
 
           au-menu-group(title="其他")
-            au-menu
+            au-menu(:selected="selected")
               au-menu-item(icon="clone")|区块
                 au-menu
-                  au-menu-item(href="panel.html")|Panel
-                  au-menu-item(href="table.html")|Table
-                  au-menu-item(href="tabs.html")|Tabs
-                  au-menu-item(href="pagination.html")|Pagination
-                  au-menu-item(href="dropdown.html")|Dropdown
-                  au-menu-item(href="modal.html")|Modal
-                  au-menu-item(href="drag-modal.html")|DragModal
+                  au-menu-item(href="panel.html", value="panel")|Panel
+                  au-menu-item(href="table.html", value="table")|Table
+                  au-menu-item(href="tabs.html", value="tabs")|Tabs
+                  au-menu-item(href="pagination.html", value="pagination")|Pagination
+                  au-menu-item(href="dropdown.html", value="dropdown")|Dropdown
+                  au-menu-item(href="modal.html", value="modal")|Modal
+                  au-menu-item(href="drag-modal.html", value="drag-modal")|DragModal
+                  au-menu-item(href="menu.html", value="menu")|Menu
 
               au-menu-item(icon="sticky-note")|消息
                 au-menu
-                  au-menu-item(href="message.html")|Message
-                  au-menu-item(href="tooltip.html")|Tooltip
-                  au-menu-item(href="pop-confirm.html")|PopConfirm
+                  au-menu-item(href="message.html", value="message")|Message
+                  au-menu-item(href="tooltip.html", value="tooltip")|Tooltip
+                  au-menu-item(href="pop-confirm.html", value="pop-confirm")|PopConfirm
 
         div(slot="container")
           au-panel
@@ -219,6 +221,7 @@ html.no-js
         mixins.push({
           data () {
             return {
+              selected: [],
               columns: [
                 {
                   label: '参数',
@@ -237,6 +240,12 @@ html.no-js
                   attrName: 'default'
                 }
               ]
+            }
+          },
+          created () {
+            const match = window.location.href.match(/\/([-\w]+)\.html/)
+            if (match) {
+              this.selected.push(match[1])
             }
           }
         })
