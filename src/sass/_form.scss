@@ -1,5 +1,9 @@
 .au-form-group {
   margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .au-form-group-label {

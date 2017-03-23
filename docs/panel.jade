@@ -4,28 +4,29 @@ block title
   |Panel
 
 block content
-  .docs-heading
-    h1|AuPanel
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuPanel
+      .docs-desc
 
-  .docs-section
-    h2|基础Panel
-    .docs-desc
+    .docs-section
+      h2|基础Panel
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-panel(title="新页面", collapse, v-model="isCollapse")
-          div|哈哈
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-panel(title="新页面", collapse, v-model="isCollapse")
+            div|哈哈
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|属性
-    au-table#table(:data="attrs")
-      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .docs-section
+      h2|属性
+      au-table#table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.

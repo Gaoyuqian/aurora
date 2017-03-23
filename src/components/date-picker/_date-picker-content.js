@@ -12,7 +12,7 @@ const AuDatePickerContent = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     },
     range: {
@@ -150,6 +150,9 @@ const AuDatePickerContent = Vue.extend({
       return result
     },
     isEqualDate (date1, date2) {
+      if (date1 == null || date2 == null) {
+        return false
+      }
       return datetime.compareDate('date', date1, date2) === 0
     },
     isToday (date) {

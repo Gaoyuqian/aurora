@@ -17,7 +17,7 @@ const AuDateTimePickerPanel = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     },
     range: {
@@ -45,7 +45,6 @@ const AuDateTimePickerPanel = Vue.extend({
         })
       }
     },
-
     timeModel: {
       get () {
         return this.value
@@ -55,11 +54,10 @@ const AuDateTimePickerPanel = Vue.extend({
       }
     },
     date () {
-      this.model
-      return dateFormat(this.model, 'yyyy-mm-dd')
+      return this.model ? dateFormat(this.model, 'yyyy-mm-dd') : ''
     },
     time () {
-      return dateFormat(this.model, 'HH:MM:ss')
+      return this.model ? dateFormat(this.model, 'HH:MM:ss') : ''
     }
   },
   data () {
@@ -70,7 +68,6 @@ const AuDateTimePickerPanel = Vue.extend({
   },
   created () {
     this.$on('hide.popup', () => {
-      console.log('hide.popup')
       this.hideTimePicker()
     })
 
@@ -95,9 +92,12 @@ const AuDateTimePickerPanel = Vue.extend({
   },
   methods: {
     reset () {
-      this.tempValue = new Date(this.value)
+      this.initTempValue()
       this.$refs.datePicker && this.$refs.datePicker.reset()
       this.$refs.timeModel && this.$refs.timeModel.reset()
+    },
+    initTempValue () {
+      this.tempValue = this.value ? new Date(this.value) : new Date()
     },
     showTimePicker () {
       if (!this.popup) {
@@ -132,6 +132,9 @@ const AuDateTimePickerPanel = Vue.extend({
     }
   },
   watch: {
+    value () {
+      this.initTempValue()
+    },
     tempValue (value) {
       this.$refs.datePicker.tempValue = value
     }

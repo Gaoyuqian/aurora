@@ -4,75 +4,76 @@ block title
   |Checkbox
 
 block content
-  .docs-heading
-    h1|AuCheckbox
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuCheckbox
+      .docs-desc
 
-  .docs-section
-    h2|是否选择器
-    .docs-desc
+    .docs-section
+      h2|是否选择器
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-checkbox(label="是否同意", v-model="form.isConfirm")
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-checkbox(label="是否同意", v-model="form.isConfirm")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|基础Checkbox
-    .docs-desc
-      p|基础Checkbox的用法
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-checkbox(label="男", value="1", v-model="form.genders")
-        au-checkbox(label="女", value="2", v-model="form.genders")
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+    .docs-section
+      h2|基础Checkbox
+      .docs-desc
+        p|基础Checkbox的用法
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-checkbox(label="男", value="1", v-model="form.genders")
+          au-checkbox(label="女", value="2", v-model="form.genders")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|禁用Checkbox
-    .docs-desc
-      p|禁用Checkbox的用法
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-checkbox(label="男", value="1", v-model="form.genders", disabled)
-        au-checkbox(label="女", value="2", v-model="form.genders", disabled)
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+    .docs-section
+      h2|禁用Checkbox
+      .docs-desc
+        p|禁用Checkbox的用法
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-checkbox(label="男", value="1", v-model="form.genders", disabled)
+          au-checkbox(label="女", value="2", v-model="form.genders", disabled)
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|Checkbox Group
-    .docs-desc
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-checkbox-group(:options="cityOptions", v-model="form.cities")
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+    .docs-section
+      h2|Checkbox Group
+      .docs-desc
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-checkbox-group(:options="cityOptions", v-model="form.cities")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|全选
-    .docs-desc
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-checkbox(label="全选", :indeterminate="indeterminate", v-model="checkAll")
-        au-checkbox-group(:options="cityOptions", v-model="form.cities")
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+    .docs-section
+      h2|全选
+      .docs-desc
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-checkbox(label="全选", :indeterminate="indeterminate", v-model="checkAll")
+          au-checkbox-group(:options="cityOptions", v-model="form.cities")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|属性
-    au-table(:data="attrs")
-      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .docs-section
+      h2|属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.

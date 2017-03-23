@@ -12,7 +12,7 @@ const AuMonthPickerPanel = Vue.extend({
   props: {
     value: Date,
     default () {
-      return new Date()
+      return null
     }
   },
   computed: {
@@ -28,7 +28,7 @@ const AuMonthPickerPanel = Vue.extend({
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       type: 'month'
     }
   },
@@ -52,8 +52,11 @@ const AuMonthPickerPanel = Vue.extend({
     })
   },
   methods: {
+    initTempValue () {
+      this.tempValue = this.value ? new Date(this.value) : new Date()
+    },
     reset () {
-      this.tempValue = new Date(this.value)
+      this.initTempValue()
       this.type = 'month'
       this.$refs.monthContent.reset()
       this.$refs.yearContent.reset()
@@ -61,7 +64,7 @@ const AuMonthPickerPanel = Vue.extend({
   },
   watch: {
     value (value) {
-      this.tempValue = new Date(value)
+      this.initTempValue()
     }
   }
 })

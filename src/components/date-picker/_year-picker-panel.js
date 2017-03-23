@@ -10,7 +10,7 @@ const AuYearPickerPanel = Vue.extend({
   props: {
     value: Date,
     default () {
-      return new Date()
+      return null
     }
   },
   computed: {

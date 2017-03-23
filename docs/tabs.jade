@@ -4,39 +4,40 @@ block title
   Tabs
 
 block content
-  .docs-heading
-    h1|AuTabs
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuTabs
+      .docs-desc
 
-  .docs-section
-    h2
-    .docs-desc
+    .docs-section
+      h2
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-tabs
-          au-tab-panel(tab="北京", value="1")
-            |北京
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-tabs
+            au-tab-panel(tab="北京", value="1")
+              |北京
 
-          au-tab-panel(tab="上海", value="2")
-            |上海
+            au-tab-panel(tab="上海", value="2")
+              |上海
 
-          au-tab-panel(tab="广州", value="3")
-            |广州
+            au-tab-panel(tab="广州", value="3")
+              |广州
 
-          au-tab-panel(tab="深圳", value="4")
-            |深圳
+            au-tab-panel(tab="深圳", value="4")
+              |深圳
 
-          au-tab-panel(tab="南京", value="5")
-            |南京
+            au-tab-panel(tab="南京", value="5")
+              |南京
 
-          au-tab-panel(tab="杭州", value="6")
-            |杭州
+            au-tab-panel(tab="杭州", value="6")
+              |杭州
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
 block script
   script.

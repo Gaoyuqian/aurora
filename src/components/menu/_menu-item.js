@@ -44,6 +44,7 @@ const AuMenuItem = Vue.extend({
     this.$children.forEach((item) => {
       if (item instanceof Menu) {
         item.isVertical = this.$parent.isVertical
+        item.isSubMenu = true
         this.subMenu = item
 
         this.$nextTick(() => {

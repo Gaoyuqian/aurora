@@ -14,7 +14,7 @@ const AuTimePickerPanel = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     },
     timeType: {
@@ -24,7 +24,7 @@ const AuTimePickerPanel = Vue.extend({
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       isDisabledHour: datetime.getIsDisabledFuncByComponent(this, 'hour'),
       isDisabledMinute: datetime.getIsDisabledFuncByComponent(this, 'minute'),
       isDisabledSecond: datetime.getIsDisabledFuncByComponent(this, 'second')
@@ -32,7 +32,7 @@ const AuTimePickerPanel = Vue.extend({
   },
   created () {
     this.$on('check.isDisabled', () => {
-      this.checkIsDisabled(this.value, (model) => {
+      this.checkIsDisabled(this.value || this.tempValue, (model) => {
         if (+this.value !== +model) {
           this.$emit('input', model)
         }
@@ -52,7 +52,7 @@ const AuTimePickerPanel = Vue.extend({
     model: {
       get () {
         this.value
-        return new Date(this.value)
+        return this.value ? new Date(this.value) : null
       },
       set (value) {
         this.checkIsDisabled(value, (model) => {
@@ -62,30 +62,30 @@ const AuTimePickerPanel = Vue.extend({
     },
     hour: {
       get () {
-        return this.model.getHours()
+        return this.model ? this.model.getHours() : ''
       },
       set (value) {
-        const model = new Date(this.model)
+        const model = new Date(this.model || this.tempValue)
         model.setHours(value)
         this.model = model
       }
     },
     minute: {
       get () {
-        return this.model.getMinutes()
+        return this.model ? this.model.getMinutes() : ''
       },
       set (value) {
-        const model = new Date(this.model)
+        const model = new Date(this.model || this.tempValue)
         model.setMinutes(value)
         this.model = model
       }
     },
     second: {
       get () {
-        return this.model.getSeconds()
+        return this.model ? this.model.getSeconds() : ''
       },
       set (value) {
-        const model = new Date(this.model)
+        const model = new Date(this.model || this.tempValue)
         model.setSeconds(value)
         this.$emit('input', model)
       }
@@ -106,7 +106,7 @@ const AuTimePickerPanel = Vue.extend({
     },
     getMinutes (hour) {
       const minutes = this.getRange(0, 59)
-      const value = new Date(this.model)
+      const value = new Date(this.tempValue)
       value.setHours(hour)
 
       return minutes.map((minute) => {
@@ -119,7 +119,7 @@ const AuTimePickerPanel = Vue.extend({
     },
     getSeconds (hour, minute) {
       const seconds = this.getRange(0, 59)
-      const value = new Date(this.model)
+      const value = new Date(this.tempValue)
       value.setHours(hour)
       value.setMinutes(minute)
 

@@ -4,47 +4,48 @@ block title
   |Modal
 
 block content
-  .docs-heading
-    h1|AuModal
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuModal
+      .docs-desc
 
-  .docs-section
-    h2|基础Modal
-    .docs-desc
+    .docs-section
+      h2|基础Modal
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-button(type="primary", size="small", @click="isShow = true")|显示
-        au-modal(title="新页面", v-model="isShow")
-          div|这里是正文内容
-          div|这里是正文内容
-          div|这里是正文内容
-          div(slot="footer")
-            au-button(type="default", @click="isShow = false")|取消
-            au-button(type="primary", @click="step2 = true")|提交
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-button(type="primary", size="small", @click="isShow = true")|显示
+          au-modal(title="新页面", v-model="isShow")
+            div|这里是正文内容
+            div|这里是正文内容
+            div|这里是正文内容
+            div(slot="footer")
+              au-button(type="default", @click="isShow = false")|取消
+              au-button(type="primary", @click="step2 = true")|提交
 
-        au-modal(title="第二步", v-model="step2")
-          div|这里是第二步
-          div(slot="footer")
-            au-button(type="primary", size="small")|提交
-            au-button(type="default", size="small", @click="step2 = false")|取消
-    template.js(scoped="scoped")
-      script.
-        {
-          data () {
-            return {
-              isShow: false,
-              step2: false
+          au-modal(title="第二步", v-model="step2")
+            div|这里是第二步
+            div(slot="footer")
+              au-button(type="primary", size="small")|提交
+              au-button(type="default", size="small", @click="step2 = false")|取消
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                isShow: false,
+                step2: false
+              }
             }
           }
-        }
 
-    .docs-panel
-      .docs-panel-content
+      .docs-panel
+        .docs-panel-content
 
-      .docs-code
-        docs-code.html
-        docs-code.js
+        .docs-code
+          docs-code.html
+          docs-code.js
 
 
 block script

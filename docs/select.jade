@@ -4,142 +4,143 @@ block title
   |Select
 
 block content
-  .docs-heading
-    h1|AuSelect
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuSelect
+      .docs-desc
 
-  .docs-section
-    h2|基础选择器
+    .docs-section
+      h2|基础选择器
 
-    .docs-desc
-      p|基础选择器的用法
+      .docs-desc
+        p|基础选择器的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(column, gutter="10")
-          au-item
-            au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(column, gutter="10")
+            au-item
+              au-select(v-model="form.class", :options="options", placeholder="请选择班级")
 
-          au-item
-            au-select(v-model="form.class", placeholder="请选择班级")
-              au-option(
-                v-for="option in options",
-                :label="option.label",
-                :value="option.value"
-              )
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+            au-item
+              au-select(v-model="form.class", placeholder="请选择班级")
+                au-option(
+                  v-for="option in options",
+                  :label="option.label",
+                  :value="option.value"
+                )
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|可清空
+    .docs-section
+      h2|可清空
 
-    .docs-desc
-      p|可清空的用法
+      .docs-desc
+        p|可清空的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(column, gutter="10")
-          au-item
-            au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
-          au-item
-            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", clearable)
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(column, gutter="10")
+            au-item
+              au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
+            au-item
+              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", clearable)
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|多选选择器
-    .docs-desc
-      p|多选选择器的用法
+    .docs-section
+      h2|多选选择器
+      .docs-desc
+        p|多选选择器的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex
-          au-item(grow="1")
-            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex
+            au-item(grow="1")
+              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|多种大小
-    .docs-desc
-      p|多种大小的用法
+    .docs-section
+      h2|多种大小
+      .docs-desc
+        p|多种大小的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
+      template.html(scoped="scoped")
+        .docs-panel-row
 
-        au-flex(gutter="10")
-          au-item(span="12")
-            au-flex(column, gutter="10")
-              au-item(span="12")
-                au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
-          au-item(span="12")
-            au-flex(column, gutter="10")
-              au-item(span="12")
-                au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
-                au-select(mutiple, size="large", v-model="form.classes", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
-                au-select(mutiple, size="default", v-model="form.classes", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
-                au-select(mutiple, size="small", v-model="form.classes", :options="options", placeholder="请选择班级")
-              au-item(span="12")
-                au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
-                au-select(mutiple, size="mini", v-model="form.classes", :options="options", placeholder="请选择班级")
+          au-flex(gutter="10")
+            au-item(span="12")
+              au-flex(column, gutter="10")
+                au-item(span="12")
+                  au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
+            au-item(span="12")
+              au-flex(column, gutter="10")
+                au-item(span="12")
+                  au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
+                  au-select(mutiple, size="large", v-model="form.classes", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
+                  au-select(mutiple, size="default", v-model="form.classes", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
+                  au-select(mutiple, size="small", v-model="form.classes", :options="options", placeholder="请选择班级")
+                au-item(span="12")
+                  au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
+                  au-select(mutiple, size="mini", v-model="form.classes", :options="options", placeholder="请选择班级")
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|禁用选择器
-    .docs-desc
-      p|禁用选择器的用法
+    .docs-section
+      h2|禁用选择器
+      .docs-desc
+        p|禁用选择器的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex
-          au-item(grow="1")
-            au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
-          au-item(grow="1")
-            au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex
+            au-item(grow="1")
+              au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+            au-item(grow="1")
+              au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
 
-  .docs-section
-    h2|搜索选择器
-    .docs-desc
-      p|搜索选择器的用法
+    .docs-section
+      h2|搜索选择器
+      .docs-desc
+        p|搜索选择器的用法
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex
-          au-item(grow="1")
-            au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
-          au-item(grow="1")
-            au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex
+            au-item(grow="1")
+              au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
+            au-item(grow="1")
+              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|属性
-    au-table(:data="attrs")
-      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .docs-section
+      h2|属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.

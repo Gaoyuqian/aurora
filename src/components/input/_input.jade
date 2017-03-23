@@ -1,8 +1,8 @@
 .au-input(:class="inputClass")
   input.au-input-control(
-    v-if="type === 'text'",
+    v-if="type === 'text' || type === 'password'",
     :class="controlClass",
-    type="text",
+    :type="type",
     :placeholder="placeholder",
     @blur="onBlur",
     @focus="onFocus",
@@ -22,3 +22,12 @@
     :rows="rows",
     :cols="cols"
   )
+  .au-input-icon(
+    v-if="icon",
+    @click="onClickIcon",
+    @mouseover="onMouseOverIcon",
+    @mouseout="onMouseOutIcon"
+  )
+    au-icon(
+      :icon="icon"
+    )

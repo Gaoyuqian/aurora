@@ -8,13 +8,13 @@ const AuYearPickerContent = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     }
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'year')
     }
   },
@@ -31,7 +31,7 @@ const AuYearPickerContent = Vue.extend({
       }
     },
     currentYear () {
-      return this.model.getFullYear()
+      return this.model ? this.model.getFullYear() : ''
     },
     startYear () {
       var value = new Date(this.tempValue)
@@ -59,13 +59,13 @@ const AuYearPickerContent = Vue.extend({
   },
   methods: {
     reset () {
-      this.tempValue = new Date(this.value)
+      this.tempValue = this.value ? new Date(this.value) : new Date()
     },
     setYear (year) {
       if (year.isDisabled) {
         return
       }
-      const value = new Date(this.model)
+      const value = this.model ? new Date(this.model) : datetime.getClearDate()
       value.setFullYear(year.year)
       this.model = value
     },

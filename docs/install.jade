@@ -1,0 +1,31 @@
+extends ./_layout
+
+block title
+  |Start
+
+block content
+  au-panel
+    section
+      h3|安装
+    section
+      h3|安装font-awesome
+      p
+       a(href="http://fontawesome.io/", target="_blank")|http://fontawesome.io/
+    section
+      h3|下载文件
+      p|请下载aurora的js, css文件
+      p
+        a(href="../src/aurora.js", target="_blank")|aurora.js
+      p
+        a(href="../src/sass/aurora.css", target="_blank")|aurora.css
+
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins,
+      data () {
+        return {}
+      }
+    })

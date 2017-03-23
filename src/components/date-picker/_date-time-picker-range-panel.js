@@ -20,12 +20,12 @@ const AuDateTimePickerRangePanel = Vue.extend({
     return {
       status: 'free', // free, click1
       displayValue: [
-        new Date(this.value[0]),
-        new Date(this.value[1])
+        this.value[0] ? new Date(this.value[0]) : null,
+        this.value[1] ? new Date(this.value[1]) : null
       ],
       tempValue: [
-        new Date(this.value[0]),
-        new Date(this.value[1])
+        this.value[0] ? new Date(this.value[0]) : new Date(),
+        this.value[1] ? new Date(this.value[1]) : new Date()
       ]
     }
   },
@@ -40,8 +40,7 @@ const AuDateTimePickerRangePanel = Vue.extend({
     },
     leftValue: {
       get () {
-        this.displayValue
-        return new Date(this.displayValue[0])
+        return this.displayValue[0]
       },
       set (value) {
         this.displayValue = [value, this.rightValue]
@@ -50,8 +49,7 @@ const AuDateTimePickerRangePanel = Vue.extend({
     },
     rightValue: {
       get () {
-        this.displayValue
-        return new Date(this.displayValue[1])
+        return this.displayValue[1]
       },
       set (value) {
         this.displayValue = [this.leftValue, value]
@@ -81,7 +79,7 @@ const AuDateTimePickerRangePanel = Vue.extend({
       this.$emit('input', [this.value[0], value])
     })
 
-    this.updateRightContent(this.leftValue)
+    this.updateRightContent(this.leftValue || new Date())
   },
   methods: {
     updateLeftContent (value) {
@@ -115,15 +113,19 @@ const AuDateTimePickerRangePanel = Vue.extend({
     },
     reset () {
       this.status = 'free'
-      this.displayValue = this.tempValue = [
-        new Date(this.value[0]),
-        new Date(this.value[1])
+      this.displayValue = [
+        this.value[0] ? new Date(this.value[0]) : null,
+        this.value[1] ? new Date(this.value[1]) : null
+      ]
+      this.tempValue = [
+        this.value[0] ? new Date(this.value[0]) : new Date(),
+        this.value[1] ? new Date(this.value[1]) : new Date()
       ]
       this.$refs.leftContent.reset()
       this.$refs.rightContent.reset()
-      this.$refs.leftContent.tempValue = this.leftValue
+      this.$refs.leftContent.tempValue = this.leftValue || new Date()
       this.$nextTick(() => {
-        this.updateRightContent(this.leftValue)
+        this.updateRightContent(this.leftValue || new Date())
       })
     },
     closeHandler () {

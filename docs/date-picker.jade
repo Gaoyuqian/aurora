@@ -4,120 +4,121 @@ block title
   |DatePicker
 
 block content
-  .docs-heading
-    h1|AuDatePicker
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuDatePicker
+      .docs-desc
 
-  .docs-section
-    h2|日期选择器
-    .docs-desc
+    .docs-section
+      h2|日期选择器
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|按日期选择
-            au-date-picker(v-model="date", :disabled-date="disabledWeek")
-          au-item(span="8")
-            h4|按日期选择
-            au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|按日期选择
+              au-date-picker(v-model="date", :disabled-date="disabledWeek", clearable)
+            au-item(span="8")
+              h4|按日期选择
+              au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07")
 
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|按年选择
-            au-date-picker(v-model="year", type="year")
-          au-item(span="8")
-            h4|按年选择
-            au-date-picker(v-model="year", type="year", start-date="2017", end-date="2018")
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|按年选择
+              au-date-picker(v-model="year", type="year", clearable)
+            au-item(span="8")
+              h4|按年选择
+              au-date-picker(v-model="year", type="year", start-date="2017", end-date="2018")
 
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|按月选择
-            au-date-picker(v-model="month", type="month")
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|按月选择
+              au-date-picker(v-model="month", type="month", clearable)
 
-          au-item(span="8")
-            h4|按月选择
-            au-date-picker(v-model="month", type="month", start-date="2017-2", end-date="2017-10")
+            au-item(span="8")
+              h4|按月选择
+              au-date-picker(v-model="month", type="month", start-date="2017-2", end-date="2017-10")
 
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|选择日期范围
-            au-date-picker(v-model="daterange", type="daterange")
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|选择日期范围
+              au-date-picker(v-model="daterange", type="daterange", clearable)
 
-          au-item(span="8")
-            h4|选择日期范围
-            au-date-picker(v-model="daterange", type="daterange", start-date="2017-2-7", end-date="2017-10-1")
+            au-item(span="8")
+              h4|选择日期范围
+              au-date-picker(v-model="daterange", type="daterange", start-date="2017-2-7", end-date="2017-10-1")
 
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|选择日期时间
-            au-date-picker(v-model="datetime", type="datetime")
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|选择日期时间
+              au-date-picker(v-model="datetime", type="datetime", clearable)
 
-          au-item(span="8")
-            h4|选择日期时间
-            au-date-picker(v-model="datetime", type="datetime", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
+            au-item(span="8")
+              h4|选择日期时间
+              au-date-picker(v-model="datetime", type="datetime", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
 
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|选择日期时间范围
-            au-date-picker(v-model="datetimerange", type="datetimerange")
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|选择日期时间范围
+              au-date-picker(v-model="datetimerange", type="datetimerange", clearable)
 
-          au-item(span="8")
-            h4|选择日期时间范围
-            au-date-picker(v-model="datetimerange", type="datetimerange", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
-    template.js(scoped="scoped")
-      script.
-        {
-          data () {
-            return {
-              date: '2017-02-27',
-              year: '2017-02-27',
-              month: '2017-02',
-              daterange: ['2017-02-07', '2017-06-11'],
-              datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-              datetime: '2017-02-27 08:11:12',
-              time: '11:11:11',
-              attrs: [
-                {
-                  name: '',
-                  desc: '',
-                  type: '',
-                  default: ''
-                }
-              ]
-            }
-          },
-          methods: {
-            disabledWeek (date) {
-              const day = date.getDay()
-              return day === 0 || day === 6
+            au-item(span="8")
+              h4|选择日期时间范围
+              au-date-picker(v-model="datetimerange", type="datetimerange", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                date: '2017-02-27',
+                year: '2017-02-27',
+                month: '2017-02',
+                daterange: ['2017-02-07', '2017-06-11'],
+                datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+                datetime: '2017-02-27 08:11:12',
+                time: '11:11:11',
+                attrs: [
+                  {
+                    name: '',
+                    desc: '',
+                    type: '',
+                    default: ''
+                  }
+                ]
+              }
+            },
+            methods: {
+              disabledWeek (date) {
+                const day = date.getDay()
+                return day === 0 || day === 6
+              }
             }
           }
-        }
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
-        docs-code.js
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
 
-  .docs-section
-    h2|时间选择器
-    .docs-desc
+    .docs-section
+      h2|时间选择器
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(gutter="20", wrap="wrap")
-          au-item(span="8")
-            h4|选择时间
-            au-date-picker(v-model="time", type="time")
-          au-item(span="8")
-            h4|选择时间
-            au-date-picker(v-model="time", type="time", start-date="08:08:08")
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|选择时间
+              au-date-picker(v-model="time", type="time")
+            au-item(span="8")
+              h4|选择时间
+              au-date-picker(v-model="time", type="time", start-date="08:08:08")
 
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
 block script
   script.
@@ -127,11 +128,11 @@ block script
       data () {
         return {
           date: '2017-02-27',
-          year: '2017-02-27',
-          month: '2017-02',
-          daterange: ['2017-02-07', '2017-06-11'],
-          datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-          datetime: '2017-02-27 08:11:12',
+          year: '',
+          month: '',
+          daterange: ['', ''], // ['2017-02-07', '2017-06-11'],
+          datetimerange: ['', ''], // ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+          datetime: '', // '2017-02-27 08:11:12',
           time: '11:11:11',
           attrs: [
             {

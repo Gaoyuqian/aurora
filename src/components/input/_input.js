@@ -5,7 +5,7 @@ const AuInput = Vue.extend({
       type: String,
       default: 'text',
       validator (value) {
-        return value === 'text' || value === 'textarea'
+        return ['text', 'textarea', 'password'].indexOf(value) > -1
       }
     },
     placeholder: String,
@@ -18,7 +18,8 @@ const AuInput = Vue.extend({
     size: {
       type: String,
       default: 'default'
-    }
+    },
+    icon: String
   },
   computed: {
     model: {
@@ -38,6 +39,10 @@ const AuInput = Vue.extend({
     inputClass () {
       const classObject = []
       classObject.push(`au-input-${this.size}`)
+
+      if (this.icon) {
+        classObject.push('au-input-with-icon')
+      }
       return classObject
     }
   },
@@ -50,6 +55,15 @@ const AuInput = Vue.extend({
     },
     onKeyup ($event) {
       this.$emit('input', $event.target.value)
+    },
+    onClickIcon ($event) {
+      this.$emit('click-icon', $event)
+    },
+    onMouseOverIcon ($event) {
+      this.$emit('mouseover-icon', $event)
+    },
+    onMouseOutIcon ($event) {
+      this.$emit('mouseout-icon', $event)
     }
   }
 })

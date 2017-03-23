@@ -23,13 +23,13 @@ const AuMonthPickerContent = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     }
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'month')
     }
   },
@@ -37,12 +37,6 @@ const AuMonthPickerContent = Vue.extend({
     this.reset()
   },
   computed: {
-    isCurrentYear () {
-      return this.model.getFullYear() === this.tempValue.getFullYear()
-    },
-    currentMonth () {
-      return this.model.getMonth() + 1
-    },
     model: {
       get () {
         return this.value
@@ -53,6 +47,12 @@ const AuMonthPickerContent = Vue.extend({
         }
         this.$emit('change', value)
       }
+    },
+    isCurrentYear () {
+      return this.model && this.model.getFullYear() === this.tempValue.getFullYear()
+    },
+    currentMonth () {
+      return this.model && this.model.getMonth() + 1
     },
     year () {
       var value = new Date(this.tempValue)
@@ -74,7 +74,6 @@ const AuMonthPickerContent = Vue.extend({
         })
       }
 
-      new Date()
       return months
     }
   },
@@ -83,7 +82,10 @@ const AuMonthPickerContent = Vue.extend({
       return monthsMap[month] || ''
     },
     reset () {
-      this.tempValue = new Date(this.value)
+      this.initTempValue()
+    },
+    initTempValue () {
+      this.tempValue = this.value ? new Date(this.value) : new Date()
     },
     setMonth (month) {
       if (month.isDisabled) {
@@ -108,8 +110,8 @@ const AuMonthPickerContent = Vue.extend({
     }
   },
   watch: {
-    value (value) {
-      this.tempValue = value
+    value () {
+      this.initTempValue()
     }
   }
 })

@@ -4,7 +4,10 @@ div.au-date-picker
     @click.native="clickHandler",
     readonly,
     :active="inputActive",
-    :tailing-icon="tailingIcon"
+    :icon="icon",
+    @click-icon="clickIconHandler",
+    @mouseover-icon="mouseoverIconHandler"
+    @mouseout-icon="mouseoutIconHandler"
   )
   popup(ref="popup")
     au-year-picker-panel(

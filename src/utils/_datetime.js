@@ -108,5 +108,16 @@ export default {
     return (date) => {
       return this.getIsDisabledDate(date, funcs)
     }
+  },
+  getClearDate () {
+    const date = new Date()
+
+    date.setMonth(0)
+    date.setDate(1)
+    date.setHours(0)
+    date.setMinutes(0)
+    date.setSeconds(0)
+
+    return date
   }
 }

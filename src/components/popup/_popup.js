@@ -71,6 +71,15 @@ const AuPopup = Vue.extend({
       const top = this.getTop()
       const left = this.getLeft()
 
+      const sidebar = document.querySelector('.au-content-sidebar')
+      const header = document.querySelector('.au-header')
+      if (sidebar) {
+        left = Math.max(sidebar.getBoundingClientRect().width, left)
+      }
+      if (header) {
+        top = Math.max(header.getBoundingClientRect().height, top)
+      }
+
       this.top = `${top}px`
       this.left = `${left}px`
     },

@@ -18,15 +18,15 @@ const AuDatePickerRangePanel = Vue.extend({
     return {
       status: 'free', // free, click1
       tempValue: [
-        new Date(this.value[0]),
-        new Date(this.value[1])
+        this.value[0] ? new Date(this.value[0]) : new Date(),
+        this.value[1] ? new Date(this.value[1]) : new Date()
       ]
     }
   },
   computed: {
     leftValue: {
       get () {
-        return new Date(this.value[0])
+        return this.value[0] ? new Date(this.value[0]) : null
       },
       set (value) {
 
@@ -34,7 +34,7 @@ const AuDatePickerRangePanel = Vue.extend({
     },
     rightValue: {
       get () {
-        return new Date(this.value[1])
+        return this.value[1] ? new Date(this.value[1]) : null
       },
       set (value) {
 
@@ -55,7 +55,7 @@ const AuDatePickerRangePanel = Vue.extend({
     $refs.leftContent.$on('click.range', this.clickItem)
     $refs.rightContent.$on('click.range', this.clickItem)
 
-    this.updateRightContent(this.leftValue)
+    this.updateRightContent(this.tempValue[0])
   },
   methods: {
     updateLeftContent (value) {
@@ -88,14 +88,14 @@ const AuDatePickerRangePanel = Vue.extend({
     reset () {
       this.status = 'free'
       this.tempValue = [
-        new Date(this.value[0]),
-        new Date(this.value[1])
+        this.value[0] ? new Date(this.value[0]) : new Date(),
+        this.value[1] ? new Date(this.value[1]) : new Date()
       ]
       this.$refs.leftContent.reset()
       this.$refs.rightContent.reset()
-      this.$refs.leftContent.tempValue = this.leftValue
+      this.$refs.leftContent.tempValue = this.leftValue || new Date()
       this.$nextTick(() => {
-        this.updateRightContent(this.leftValue)
+        this.updateRightContent(this.tempValue[0])
       })
     }
   }

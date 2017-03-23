@@ -4,28 +4,33 @@ const AuFormGroup = Vue.extend({
     label: {
       type: String,
       default: ''
-    }
+    },
+    labelPosition: String,
+    labelWidth: [Number, String]
   },
   computed: {
-    labelPosition () {
-      return this.$parent.labelPosition
-    },
-    labelWidth () {
-      return parseFloat(this.$parent.labelWidth)
-    },
     labelStyle () {
       const style = {}
-      if (this.labelPosition != 'top' && this.labelWidth) {
-        style.width = this.labelWidth + 'px'
+      const labelWidth = this.getLabelWidth()
+      if (this.getLabelPosition() != 'top' && labelWidth) {
+        style.width = labelWidth + 'px'
       }
       return style
     },
     isLabelTop () {
-      return this.labelPosition === 'top'
+      return this.getLabelPosition() === 'top'
     }
   },
   mounted () {
 
+  },
+  methods: {
+    getLabelPosition () {
+      return this.labelPosition || this.$parent.labelPosition
+    },
+    getLabelWidth () {
+      return this.labelWidth || parseFloat(this.$parent.labelWidth)
+    }
   }
 })
 

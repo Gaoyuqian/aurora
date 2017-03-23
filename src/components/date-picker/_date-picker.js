@@ -46,25 +46,31 @@ const AuDatePicker = Vue.extend({
             return 'yyyy-mm-dd HH:MM:ss'
         }
       }
-    }
+    },
+    clearable: Boolean
   },
   computed: {
     model: {
       get () {
-        this.value
         if (this.type === 'daterange' || this.type === 'datetimerange') {
-          return this.value ? this.value.map(item => new Date(item)) : [new Date(), new Date()]
+          return this.value.map((item) => {
+            return item ? new Date(item) : null
+          })
         } else if (this.type === 'time') {
           const date = new Date()
           const arr = this.value.split(':')
 
-          arr[0] && date.setHours(arr[0])
-          arr[1] && date.setMinutes(arr[1])
-          arr[2] && date.setSeconds(arr[2])
+          if (arr.length === 3) {
+            arr[0] && date.setHours(arr[0])
+            arr[1] && date.setMinutes(arr[1])
+            arr[2] && date.setSeconds(arr[2])
+          } else {
+            date = null
+          }
 
           return date
         } else {
-          return this.value ? new Date(this.value) : new Date()
+          return this.value ? new Date(this.value) : null
         }
       },
       set (value) {
@@ -77,9 +83,9 @@ const AuDatePicker = Vue.extend({
       }
     },
     datetime () {
-      return this.getFormatDatetime(this.model)
+      return this.model ? this.getFormatDatetime(this.model) : ''
     },
-    tailingIcon () {
+    defaultIcon () {
       return this.type === 'time' ? 'clock-o' : 'calendar-o'
     }
   },
@@ -88,7 +94,9 @@ const AuDatePicker = Vue.extend({
       tempValue: new Date(this.value),
       popup: null,
       panel: null,
-      inputActive: false
+      inputActive: false,
+      icon: null,
+      clickIconHandler: null
     }
   },
   created () {
@@ -97,9 +105,27 @@ const AuDatePicker = Vue.extend({
       return false
     })
   },
+  mounted () {
+    this.icon = this.defaultIcon
+  },
   methods: {
+    isEmptyValue () {
+      if (this.type === 'daterange' || this.type === 'datetimerange') {
+        return !this.value[0] && !this.value[1]
+      } else {
+        return !this.value
+      }
+    },
     getFormatDatetime (value) {
+      if (!value) {
+        return ''
+      }
+
       if (Array.isArray(value)) {
+        if (!value[0] || !value[1]) {
+          return ''
+        }
+
         return value.map((item) => {
           return this.getFormatDatetime(item)
         }).join(' ~ ')
@@ -146,9 +172,7 @@ const AuDatePicker = Vue.extend({
 
         this.popup.$on('hide', () => {
           this.inputActive = false
-          console.log('hide.popup')
           this.$nextTick(() => {
-            console.log(this.panel.broadcast, 'hide.popup')
             this.popup.broadcast('hide.popup')
           })
         })
@@ -158,6 +182,24 @@ const AuDatePicker = Vue.extend({
     },
     hidePopup () {
       this.popup.hide()
+    },
+    clearDatetime ($event) {
+      $event.stopPropagation()
+      if (this.type === 'daterange' || this.type === 'datetimerange') {
+        this.model = ['', '']
+      } else {
+        this.model = ''
+      }
+    },
+    mouseoverIconHandler () {
+      if (this.clearable && !this.isEmptyValue()) {
+        this.icon = 'close'
+        this.clickIconHandler = this.clearDatetime
+      }
+    },
+    mouseoutIconHandler () {
+      this.icon = this.defaultIcon
+      this.clickIconHandler = null
     }
   }
 })

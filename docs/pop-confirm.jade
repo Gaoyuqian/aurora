@@ -4,74 +4,75 @@ block title
   |PopConfrim
 
 block content
-  .docs-heading
-    h1|AuPopConfrim
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuPopConfrim
+      .docs-desc
 
-  .docs-section(style="height:2000px;")
-    h2|基础选择器
-    .docs-desc
-      p|基础选择器的用法
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-flex(wrap="wrap")
-          au-item(offset="4", span="16")
-            au-flex(gutter="20")
-              au-item(style="text-align: center", span="8", offset="8")
-                au-pop-confirm(position="topLeft", message="这是一段内容确定要删除吗？", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                au-pop-confirm(position="top", message="这是一段内容确定要删除吗？", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                au-pop-confirm(position="topRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-            au-flex(gutter="20")
-              au-item(style="text-align: right", span="8")
-                au-pop-confirm(position="leftTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                br
-                au-pop-confirm(position="left", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                br
-                au-pop-confirm(position="leftBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
+    .docs-section(style="height:2000px;")
+      h2|基础选择器
+      .docs-desc
+        p|基础选择器的用法
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(wrap="wrap")
+            au-item(offset="4", span="16")
+              au-flex(gutter="20")
+                au-item(style="text-align: center", span="8", offset="8")
+                  au-pop-confirm(position="topLeft", message="这是一段内容确定要删除吗？", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  au-pop-confirm(position="top", message="这是一段内容确定要删除吗？", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  au-pop-confirm(position="topRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+              au-flex(gutter="20")
+                au-item(style="text-align: right", span="8")
+                  au-pop-confirm(position="leftTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  br
+                  au-pop-confirm(position="left", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  br
+                  au-pop-confirm(position="leftBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
 
-              au-item(style="text-align: left", span="8", offset="8")
-                au-pop-confirm(position="rightTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                br
-                au-pop-confirm(position="right", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                br
-                au-pop-confirm(position="rightBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-            au-flex(gutter="20")
-              au-item(style="text-align: center", span="8", offset="8")
-                au-pop-confirm(position="bottomLeft", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                au-pop-confirm(position="bottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-                au-pop-confirm(position="bottomRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
-                  au-button|提交
-    template.js(scoped="scoped")
-      script.
-        {
-          methods: {
-            confirmHandler () {
-              console.log('confirm')
-            },
-            cancelHandler () {
-              console.log('cancel')
+                au-item(style="text-align: left", span="8", offset="8")
+                  au-pop-confirm(position="rightTop", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  br
+                  au-pop-confirm(position="right", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  br
+                  au-pop-confirm(position="rightBottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+              au-flex(gutter="20")
+                au-item(style="text-align: center", span="8", offset="8")
+                  au-pop-confirm(position="bottomLeft", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  au-pop-confirm(position="bottom", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+                  au-pop-confirm(position="bottomRight", message="确定要提交吗?", @confirm="confirmHandler", @cancel="cancelHandler")
+                    au-button|提交
+      template.js(scoped="scoped")
+        script.
+          {
+            methods: {
+              confirmHandler () {
+                console.log('confirm')
+              },
+              cancelHandler () {
+                console.log('cancel')
+              }
             }
           }
-        }
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
-        docs-code.js
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
 
-  .docs-section
-    h2|属性
+    .docs-section
+      h2|属性
 
 block script
   script.

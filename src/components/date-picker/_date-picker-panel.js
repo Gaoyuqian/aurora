@@ -13,7 +13,7 @@ const AuDatePickerPanel = Vue.extend({
     value: {
       type: Date,
       default () {
-        return new Date()
+        return null
       }
     },
     range: {

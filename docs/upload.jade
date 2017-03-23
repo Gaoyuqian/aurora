@@ -4,30 +4,31 @@ block title
   |Upload
 
 block content
-  .docs-heading
-    h1|AuUpload
-    .docs-desc
+  au-panel
+    .docs-heading
+      h1|AuUpload
+      .docs-desc
 
-  .docs-section
-    h2|基础上传组件
-    .docs-desc
+    .docs-section
+      h2|基础上传组件
+      .docs-desc
 
-    template.html(scoped="scoped")
-      .docs-panel-row
-        au-upload(@change="onChange")
-      .docs-panel-row
-        au-upload(@change="onChange", button-size="small")
-      .docs-panel-row
-        au-upload(@change="onChange", button-size="mini")
-    .docs-panel
-      .docs-panel-content
-      .docs-code
-        docs-code.html
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-upload(@change="onChange")
+        .docs-panel-row
+          au-upload(@change="onChange", button-size="small")
+        .docs-panel-row
+          au-upload(@change="onChange", button-size="mini")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
-  .docs-section
-    h2|属性
-    au-table(:data="attrs")
-      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .docs-section
+      h2|属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.

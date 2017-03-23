@@ -1,6 +1,5 @@
 .au-select {
-  max-width: 300px;
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
@@ -10,6 +9,8 @@
   transition: all $transition-during;
   vertical-align: middle;
   position: relative;
+  width: 100%;
+  background-color: $color-white;
 
   .au-select-right-icon {
     @include flex-center-center();

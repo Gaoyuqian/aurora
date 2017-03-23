@@ -89,6 +89,7 @@ html.no-js
         div(slot="sidebar")
           au-menu-group(title="基础")
             au-menu(:selected="selected")
+              au-menu-item(href="install.html", value="install")|安装
               au-menu-item(href="flex.html", value="flex")|Flex
               au-menu-item(href="button.html", value="button")|Button
 
@@ -122,8 +123,7 @@ html.no-js
                   au-menu-item(href="pop-confirm.html", value="pop-confirm")|PopConfirm
 
         div(slot="container")
-          au-panel
-            block content
+          block content
           au-footer
             |Copyright © 2017 美利金融 Aurora项目
 
