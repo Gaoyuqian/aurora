@@ -86,6 +86,13 @@
   .au-icon-caret-down {
     font-size: 18px;
   }
+
+  &.au-select-placeholder {
+    .au-select-text {
+      opacity: 1;
+      color: $color-silver-light-extra;
+    }
+  }
 }
 
 

@@ -84,6 +84,10 @@ const AuSelect = Vue.extend({
         classObj.push('au-select-clearable')
       }
 
+      if (this.isEmptyValue()) {
+        classObj.push('au-select-placeholder')
+      }
+
       classObj.push(`au-select-${this.size}`)
 
       return classObj
