@@ -47,7 +47,8 @@ const AuDatePicker = Vue.extend({
         }
       }
     },
-    clearable: Boolean
+    clearable: Boolean,
+    placeholder: String
   },
   computed: {
     model: {

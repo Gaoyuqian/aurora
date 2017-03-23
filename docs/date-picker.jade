@@ -18,10 +18,10 @@ block content
           au-flex(gutter="20", wrap="wrap")
             au-item(span="8")
               h4|按日期选择
-              au-date-picker(v-model="date", :disabled-date="disabledWeek", clearable)
+              au-date-picker(v-model="date", :disabled-date="disabledWeek", clearable, placeholder="请选择日期")
             au-item(span="8")
               h4|按日期选择
-              au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07")
+              au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07", placeholder="请选择日期")
 
           au-flex(gutter="20", wrap="wrap")
             au-item(span="8")

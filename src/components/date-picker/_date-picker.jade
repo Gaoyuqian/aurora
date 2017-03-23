@@ -2,6 +2,7 @@ div.au-date-picker
   au-input(
     v-model="datetime",
     @click.native="clickHandler",
+    :placeholder="placeholder",
     readonly,
     :active="inputActive",
     :icon="icon",
