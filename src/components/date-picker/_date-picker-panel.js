@@ -41,7 +41,7 @@ const AuDatePickerPanel = Vue.extend({
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       type: 'date'
     }
   },
@@ -102,7 +102,7 @@ const AuDatePickerPanel = Vue.extend({
       if (this.range) {
         value = new Date(this.tempValue)
       } else {
-        value = new Date(this.value)
+        value = this.value ? new Date(this.value) : new Date()
       }
 
       $refs.yearContent.tempValue = value

@@ -26,7 +26,7 @@ const AuDatePickerContent = Vue.extend({
   },
   data () {
     return {
-      tempValue: new Date(this.value),
+      tempValue: this.value ? new Date(this.value) : new Date(),
       mouseoverValue: null,
       isDisabledFunc: datetime.getIsDisabledFuncByComponent(this, 'date')
     }
@@ -47,7 +47,6 @@ const AuDatePickerContent = Vue.extend({
       return dateFormat(this.tempValue, 'mm')
     },
     days () {
-      this.tempValue
       this.mouseoverValue
 
       var value = new Date(this.tempValue)
@@ -80,7 +79,7 @@ const AuDatePickerContent = Vue.extend({
   methods: {
     reset () {
       this.mouseoverValue = null
-      this.tempValue = new Date(this.value)
+      this.tempValue = this.value ? new Date(this.value) : new Date()
     },
     clickItem (day) {
       if (day.isDisabled) {
@@ -194,7 +193,7 @@ const AuDatePickerContent = Vue.extend({
       if (this.range) {
         return
       }
-      this.tempValue = new Date(value)
+      this.tempValue = value ? new Date(value) : new Date()
     }
   }
 })
