@@ -1,5 +1,5 @@
 au-flex.au-form-group(
-  :class="{ 'au-form-group-right-label': labelPosition === 'right', 'au-form-group-top-label': labelPosition === 'top' }",
+  :class="cls",
   :gutter="isLabelTop ? 0 : 20",
   :column="isLabelTop",
   :align-items="isLabelTop ? 'stretch' : 'flex-start'"

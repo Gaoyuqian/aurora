@@ -19,6 +19,17 @@ const AuFormGroup = Vue.extend({
     },
     isLabelTop () {
       return this.getLabelPosition() === 'top'
+    },
+    cls () {
+      const cls = []
+      const labelPosition = this.getLabelPosition()
+      if (labelPosition === 'right') {
+        cls.push('au-form-group-right-label')
+      } else if (labelPosition === 'top') {
+        cls.push('au-form-group-top-label')
+      }
+
+      return cls
     }
   },
   mounted () {
