@@ -52,13 +52,15 @@ const AuDatePicker = Vue.extend({
   computed: {
     model: {
       get () {
+        value = this.value
+
         if (this.type === 'daterange' || this.type === 'datetimerange') {
-          return this.value.map((item) => {
-            return item ? new Date(item) : null
+          return value.map((item) => {
+            return this.getDateByString(item)
           })
         } else if (this.type === 'time') {
           const date = new Date()
-          const arr = this.value.split(':')
+          const arr = value.split(':')
 
           if (arr.length === 3) {
             arr[0] && date.setHours(arr[0])
@@ -70,7 +72,7 @@ const AuDatePicker = Vue.extend({
 
           return date
         } else {
-          return this.value ? new Date(this.value) : null
+          return this.getDateByString(value)
         }
       },
       set (value) {
@@ -109,6 +111,18 @@ const AuDatePicker = Vue.extend({
     this.icon = this.defaultIcon
   },
   methods: {
+    getDateByString (value) {
+      if (!value) {
+        return null
+      }
+
+      if (navigator.userAgent.indexOf('Firefox') > -1) {
+        if (value.indexOf(':') > -1) {
+          value = value.replace(/-/g, '/')
+        }
+      }
+      return new Date(value)
+    },
     isEmptyValue () {
       if (this.type === 'daterange' || this.type === 'datetimerange') {
         return !this.value[0] && !this.value[1]

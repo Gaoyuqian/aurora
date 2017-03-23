@@ -3,7 +3,7 @@ import dispatch from '../../mixins/_dispatch'
 const AuSidebar = Vue.extend({
   template: require('./_sidebar.jade'),
   mixins: [dispatch],
-  created () {
+  mounted () {
     this.dispatch('show.sidebar')
   },
   beforeDestroy () {
