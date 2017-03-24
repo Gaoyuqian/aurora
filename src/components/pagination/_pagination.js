@@ -47,6 +47,7 @@ const AuPagination = Vue.extend({
         return this.value
       },
       set (value) {
+        this.$emit('change', value)
         this.$emit('input', value)
       }
     },

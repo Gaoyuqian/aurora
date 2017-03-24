@@ -1,8 +1,19 @@
 .au-input(:class="inputClass")
   input.au-input-control(
-    v-if="type === 'text' || type === 'password'",
+    v-if="type === 'text'",
     :class="controlClass",
-    :type="type",
+    type="type",
+    :placeholder="placeholder",
+    @blur="onBlur",
+    @focus="onFocus",
+    v-model="model",
+    :readonly="readonly",
+    :disabled="disabled"
+  )
+  input.au-input-control(
+    v-if="type === 'password'",
+    :class="controlClass",
+    type="password",
     :placeholder="placeholder",
     @blur="onBlur",
     @focus="onFocus",
