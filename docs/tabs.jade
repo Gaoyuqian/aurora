@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Tabs
+  |Tabs
 
 block content
   au-panel
@@ -15,11 +15,11 @@ block content
 
       template.html(scoped="scoped")
         .docs-panel-row
-          au-tabs
+          au-tabs(v-model="value")
             au-tab-panel(tab="北京", value="1")
               |北京
 
-            au-tab-panel(tab="上海", value="2")
+            au-tab-panel(tab="上海", value="2", badge="2")
               |上海
 
             au-tab-panel(tab="广州", value="3")
@@ -39,6 +39,17 @@ block content
         .docs-code
           docs-code.html
 
+    .docs-section
+      h2|AuTabs属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
+    .docs-section
+      h2|AuTabPanel属性
+      au-table(:data="panelAttrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
+
 block script
   script.
     new Vue({
@@ -48,12 +59,33 @@ block script
         return {
           attrs: [
             {
-              name: '',
-              desc: '',
-              type: '',
+              name: 'v-model',
+              desc: '显示某个tab的值',
+              type: 'String, Number',
               default: ''
             }
-          ]
+          ],
+          panelAttrs: [
+            {
+              name: 'value',
+              desc: 'tab的值',
+              type: 'String, Number',
+              default: ''
+            },
+            {
+              name: 'tab',
+              desc: 'tab的名称',
+              type: 'String',
+              default: ''
+            },
+            {
+              name: 'badge',
+              desc: '显示的badge',
+              type: 'String, Number',
+              default: ''
+            }
+          ],
+          value: '3'
         }
       }
     })

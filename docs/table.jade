@@ -35,7 +35,7 @@ block content
             )
             au-table-column(
               label="操作",
-              auto-width
+              nowrap
             )
               template(scope="scope")
                 au-button(type="success", size="small", @click.native="editHandler(scope.index, scope.data)")|添加
@@ -168,7 +168,7 @@ block content
           au-table(:data="keyValues", :no-header="true")
             au-table-column(
               attr-name="key",
-              :is-head="true"
+              highlight
             )
             au-table-column(
               attr-name="value"
@@ -251,6 +251,16 @@ block content
           docs-code.html
           docs-code.js
 
+    .docs-section
+      h2|AuTable属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
+    .docs-section
+      h2|AuTableColumn属性
+      au-table(:data="columnAttrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
 
 block script
   script.
@@ -268,84 +278,60 @@ block script
           showAge: false,
           attrs: [
             {
-              name: 'column',
-              desc: '列信息',
+              name: 'data',
+              desc: '数据内容',
               type: 'Array',
-              default: 'null'
+              default: '[]'
             },
-
+            {
+              name: 'no-header',
+              desc: '不显示标题',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'loading',
+              desc: '是否显示加载中样式',
+              type: 'Boolean',
+              default: 'false'
+            }
           ],
-          columns: [
+          columnAttrs: [
             {
-              label: '姓名',
-              key: 'name'
+              name: 'label',
+              desc: '显示的标题',
+              type: 'String',
+              default: ''
             },
             {
-              label: '性别',
-              key: 'age',
-              style: {
-                textAlign: 'right',
-                width: '100px'
-              }
+              name: 'attr-name',
+              desc: '属性名',
+              type: 'String',
+              default: ''
             },
             {
-              label: (h) => {
-                return h(
-                  'div',
-                  {
-                    style:{
-                      color: 'red'
-                    },
-                  },
-                  '出生年月'
-                )
-              },
-              key: 'age',
-              style: {
-                textAlign: 'right',
-                width: '100px'
-              }
+              name: 'highlight',
+              desc: '高亮显示此列',
+              type: 'Boolean',
+              default: 'false'
             },
             {
-              label: '操作',
-              style: {
-                width: '200px'
-              },
-              content: (h, row) => {
-                return [
-                  h(
-                    'au-button',
-                    {
-                      props: {
-                        type: 'primary',
-                        size: 'small'
-                      },
-                      on: {
-                        click: function () {
-                          console.log(row)
-                        }
-                      }
-                    },
-                    '编辑'
-                  ),
-                  ' ',
-                  h(
-                    'au-button',
-                    {
-                      props: {
-                        type: 'danger',
-                        size: 'small'
-                      },
-                      on: {
-                        click: () => {
-
-                        }
-                      }
-                    },
-                    '删除'
-                  )
-                ]
-              }
+              name: 'type',
+              desc: '列类型(可选值: "", checkbox)',
+              type: 'String',
+              default: ''
+            },
+            {
+              name: 'nowrap',
+              desc: '控制此列内容不折行, 会计算出最小的宽度',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'v-model',
+              desc: 'type:checkbox时的值, 通过和data中的值做全等比较',
+              type: 'Array',
+              default: '[]'
             }
           ],
           data,

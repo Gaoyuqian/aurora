@@ -19,7 +19,7 @@ const AuTabs = Vue.extend({
         })
       }
       return tabs
-    },
+    }
   },
   data () {
     return {
@@ -31,8 +31,9 @@ const AuTabs = Vue.extend({
     if (!this.value) {
       this.setValue(this.tabs[0].value)
     } else {
+      this.currentValue = this.value
       this.setChildrenActive()
-      this.calLineStyle()
+      this.$nextTick(this.calLineStyle)
     }
   },
   methods: {

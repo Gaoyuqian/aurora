@@ -60,40 +60,9 @@ block content
           docs-code.html
           docs-code.js
 
-    .docs-section
-      h2|属性
-
 block script
   script.
     new Vue({
       el: '#app',
-      mixins,
-      data () {
-        return {
-          message: '提示信息',
-          func: null
-        }
-      },
-      methods: {
-        showInfo () {
-          Aurora.info(this.message)
-        },
-        showDanger () {
-          Aurora.danger(this.message)
-        },
-        showSuccess () {
-          Aurora.success(this.message)
-        },
-        showWarning () {
-          Aurora.warning(this.message)
-        },
-        showLoading () {
-          if (this.func) {
-            this.func()
-            this.func = null
-          } else {
-            this.func = Aurora.loading(this.message)
-          }
-        }
-      }
+      mixins
     })

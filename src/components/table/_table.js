@@ -54,7 +54,7 @@ const AuTable = Vue.extend({
           content = row[column.attrName]
         }
 
-        if (column.autoWidth && index === 0) {
+        if (column.nowrap && index === 0) {
           this.$nextTick(() => {
             const trs = this.$el.querySelectorAll('tbody tr')
             var width = 0
@@ -81,7 +81,7 @@ const AuTable = Vue.extend({
         return h(
           'td',
           {
-            'class': { 'au-table-head': column.isHead },
+            'class': { 'au-table-head': column.highlight },
             style
           },
           [h('div', {

@@ -5,10 +5,9 @@ const AuTableColumn = Vue.extend({
   props: {
     label: String,
     attrName: String,
-    isHead: Boolean,
-    style: String,
+    highlight: Boolean,
     type: String, // '', checkbox
-    autoWidth: Boolean,
+    nowrap: Boolean,
     value: { // for checked rows
       type: Array,
       default: null

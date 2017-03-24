@@ -149,6 +149,7 @@ const AuSelect = Vue.extend({
       this.addValue(value, child)
       if (!this.mutiple) {
         this.hideOptions()
+        return
       }
 
       if (this.filter) {
