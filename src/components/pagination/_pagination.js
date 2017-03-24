@@ -52,7 +52,7 @@ const AuPagination = Vue.extend({
       }
     },
     pageCount () {
-      return Math.max(1, Math.floor(this.itemCount / this.selfPageSize))
+      return Math.max(1, Math.ceil(this.itemCount / this.selfPageSize))
     },
     numbers () {
       var page = Math.max(this.page - 2, 1)
