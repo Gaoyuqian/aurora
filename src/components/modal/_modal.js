@@ -1,6 +1,6 @@
 import AuModalMask from './_modal-mask.js'
 var mask
-var zIndex = 10000
+var zIndex = 7000
 const modalQueue = []
 
 const AuModal = Vue.extend({
