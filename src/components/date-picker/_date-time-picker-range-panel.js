@@ -81,13 +81,11 @@ const AuDateTimePickerRangePanel = Vue.extend({
   },
   methods: {
     updateLeftContent (value) {
-      console.log('update left')
       value = new Date(value)
       value.setMonth(value.getMonth() - 1)
       this.$refs.leftContent.tempValue = value
     },
     updateRightContent (value) {
-      console.log('update right')
       value = new Date(value)
       value.setMonth(value.getMonth() + 1)
       this.$refs.rightContent.tempValue = value

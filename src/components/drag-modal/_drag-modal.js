@@ -79,11 +79,6 @@ const AuDragModal = Vue.extend({
   },
   methods: {
     reset () {
-      console.log('reset')
-      console.log(
-        this.getTop(),
-        this.getBoundTop(this.getTop())
-      )
       this.setLeft(
         this.getBoundLeft(this.getLeft())
       )
