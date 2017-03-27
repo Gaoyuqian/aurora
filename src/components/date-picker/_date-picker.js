@@ -90,6 +90,9 @@ const AuDatePicker = Vue.extend({
     },
     defaultIcon () {
       return this.type === 'time' ? 'clock-o' : 'calendar-o'
+    },
+    cls () {
+      return ['au-date-picker-' + this.type]
     }
   },
   data () {

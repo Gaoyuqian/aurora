@@ -42,7 +42,6 @@
     line-height: 30px;
     font-size: $fontsize-small;
     font-weight: 400;
-    color: $color-silver;
   }
 }
 
@@ -58,6 +57,14 @@
     input[type="text"],
     input[type="password"] {
       width: 150px;
+    }
+
+    .au-date-picker-daterange input[type="text"] {
+      width: 230px;
+    }
+
+    .au-date-picker-datetimerange input[type="text"] {
+      width: 360px;
     }
 
     .au-form-group-label, .au-form-group-control {
