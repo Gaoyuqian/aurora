@@ -8,6 +8,16 @@ const AuForm = Vue.extend({
     labelWidth: {
       type: [Number, String],
       default: ''
+    },
+    inline: Boolean
+  },
+  computed: {
+    cls () {
+      const cls = []
+      if (this.inline) {
+        cls.push('au-form-inline')
+      }
+      return cls
     }
   }
 })

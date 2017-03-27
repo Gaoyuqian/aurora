@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  Form
+  |Form
 
 block content
   au-panel
@@ -34,7 +34,9 @@ block content
                 au-form-group(label="性别")
                   au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
                 au-form-group(label="班级")
-                  au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
+                  au-flex
+                    au-item(span="12")
+                      au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
                 au-form-group(label="描述")
                   au-input(type="textarea", v-model="form.desc", rows="5")
                 au-form-group()
@@ -69,6 +71,37 @@ block content
         .docs-code
           docs-code.html
           docs-code.js
+
+
+
+
+    .docs-section
+      h2|Inline表单
+      .docs-desc
+
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(gutter="30")
+            au-item(style="width: 600px;")
+              au-form(inline, label-position="top")
+                au-form-group(label="账号")
+                  au-input(v-model="form.name", placeholder="请输入账号")
+                au-form-group(label="账号")
+                  au-input(type="password", v-model="form.name", placeholder="请输入密码")
+                au-form-group(label="账号")
+                  au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
+                au-form-group(label="账号")
+                  au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
+
+                au-form-group
+                  au-button(type="primary")|提交
+                  |&nbsp;
+                  au-button(type="default")|重置
+            au-item
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
 
     .docs-section
       h2|属性

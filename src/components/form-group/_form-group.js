@@ -30,6 +30,9 @@ const AuFormGroup = Vue.extend({
       }
 
       return cls
+    },
+    inline () {
+      return this.$parent.inline
     }
   },
   mounted () {

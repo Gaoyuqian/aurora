@@ -40,9 +40,40 @@
   .au-form-group-label {
     height: 30px;
     line-height: 30px;
+    font-size: $fontsize-small;
+    font-weight: 400;
+    color: $color-silver;
+  }
+}
+
+.au-form-inline {
+  .au-form-group {
+    margin: 0 5px;
+    width: auto;
+    display: inline-block;
+    min-width: 150px;
+    white-space: nowrap;
+    vertical-align: top;
+
+    input[type="text"],
+    input[type="password"] {
+      width: 150px;
+    }
+
+    .au-form-group-label, .au-form-group-control {
+      display: inline-flex;
+    }
+    .au-form-group-label {
+      padding: 0 10px;
+    }
   }
 
-  .au-form-group-label-empty {
-    display: none;
+  .au-form-group-top-label {
+    .au-form-group-label, .au-form-group-control {
+      display: flex;
+    }
+    .au-form-group-label {
+      padding: 0;
+    }
   }
 }
