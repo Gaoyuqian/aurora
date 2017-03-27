@@ -21,6 +21,7 @@
   z-index: $zindex-popup;
   padding-top: 5px;
   padding-bottom: 5px;
+  pointer-events: none;
 
   .au-popup-arrow {
     width: 8px;
@@ -274,6 +275,7 @@
   z-index: 10000;
   overflow: hidden;
   background-color: $color-white;
+  pointer-events: all;
 }
 
 .popup-fade-enter {
