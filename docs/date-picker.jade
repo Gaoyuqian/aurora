@@ -120,6 +120,30 @@ block content
         .docs-code
           docs-code.html
 
+    .docs-section
+      h2|控制时间的format
+      .docs-desc
+
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-flex(gutter="20", wrap="wrap")
+            au-item(span="8")
+              h4|选择时间
+              au-date-picker(v-model="time", type="time", format="HH:MM")
+            au-item(span="8")
+              h4|选择时间
+              au-date-picker(v-model="time", type="time", format="ss")
+
+            au-item(span="8")
+              h4|选择时间
+              au-date-picker(v-model="datetime", type="datetime", format="yyyy-mm-dd HH:MM")
+
+
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+
 block script
   script.
     new Vue({

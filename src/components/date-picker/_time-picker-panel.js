@@ -17,9 +17,9 @@ const AuTimePickerPanel = Vue.extend({
         return null
       }
     },
-    timeType: {
+    format: {
       type: String,
-      default: 'hour-minute' // all, hour, minute, second
+      default: 'HH:MM:ss'
     }
   },
   data () {
@@ -40,6 +40,28 @@ const AuTimePickerPanel = Vue.extend({
     })
   },
   computed: {
+    showing () {
+      const format = this.format
+      const result = {
+        length: 0
+      }
+      if (format.match('HH')) {
+        result.hour = true
+        result.length++
+      }
+
+      if (format.match('MM')) {
+        result.minute = true
+        result.length++
+      }
+
+      if (format.match('ss')) {
+        result.second = true
+        result.length++
+      }
+
+      return result
+    },
     hours () {
       return this.getHours()
     },

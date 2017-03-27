@@ -32,7 +32,8 @@ const AuDateTimePickerPanel = Vue.extend({
       type: Boolean,
       default: true
     },
-    fixedTempValue: Boolean
+    fixedTempValue: Boolean,
+    format: String
   },
   computed: {
     model: {
@@ -55,10 +56,12 @@ const AuDateTimePickerPanel = Vue.extend({
       }
     },
     date () {
-      return this.model ? dateFormat(this.model, 'yyyy-mm-dd') : ''
+      const formatArr = this.format.split(/\s/)
+      return this.model ? dateFormat(this.model, formatArr[0]) : ''
     },
     time () {
-      return this.model ? dateFormat(this.model, 'HH:MM:ss') : ''
+      const formatArr = this.format.split(/\s/)
+      return this.model ? dateFormat(this.model, formatArr[1]) : ''
     }
   },
   data () {

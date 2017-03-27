@@ -37,7 +37,8 @@ div.au-date-picker(:class="cls")
       v-if="type === 'datetime'",
       :startDate="startDate",
       :endDate="endDate",
-      :disabledDate="disabledDate"
+      :disabledDate="disabledDate",
+      :format="format"
     )
     au-date-picker-range-panel(
       v-model="model",
@@ -51,12 +52,14 @@ div.au-date-picker(:class="cls")
       v-if="type === 'time'",
       :startDate="startDate",
       :endDate="endDate",
-      :disabledDate="disabledDate"
+      :disabledDate="disabledDate",
+      :format="format"
     )
     au-date-time-picker-range-panel(
       v-model="model",
       v-if="type === 'datetimerange'",
       :startDate="startDate",
       :endDate="endDate",
-      :disabledDate="disabledDate"
+      :disabledDate="disabledDate",
+      :format="format"
     )

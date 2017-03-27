@@ -14,7 +14,8 @@ const AuDateTimePickerRangePanel = Vue.extend({
       default () {
         return []
       }
-    }
+    },
+    format: String
   },
   data () {
     return {

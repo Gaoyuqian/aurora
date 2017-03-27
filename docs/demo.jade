@@ -33,7 +33,7 @@ block content
 
       au-table-column(
         label='操作',
-        auto-width
+        nowrap
       )
         template(scope="scope")
           au-button(type="primary", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑

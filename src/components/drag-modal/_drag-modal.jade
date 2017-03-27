@@ -8,7 +8,7 @@ transition(name="au-drag-modal")
           au-icon(:icon="icon", v-if="icon")
           |{{ title }}
 
-      .au-modal-heading-right
+      .au-modal-heading-right(v-if="!noClose")
         div.au-modal-close(@click="closeHandler")
           au-icon(icon="close")
 

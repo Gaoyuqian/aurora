@@ -62,14 +62,20 @@ const AuDatePicker = Vue.extend({
         } else if (this.type === 'time') {
           const date = new Date()
           const arr = value.split(':')
+          const formatArr = this.format.split(':')
 
-          if (arr.length === 3) {
-            arr[0] && date.setHours(arr[0])
-            arr[1] && date.setMinutes(arr[1])
-            arr[2] && date.setSeconds(arr[2])
-          } else {
-            date = null
-          }
+          formatArr.some((format, index) => {
+            if (arr[index] == null) {
+              return false
+            }
+            if (format === 'HH') {
+              date.setHours(arr[index])
+            } else if (format === 'MM') {
+              date.setMinutes(arr[index])
+            } else if (format === 'ss') {
+              date.setSeconds(arr[index])
+            }
+          })
 
           return date
         } else {

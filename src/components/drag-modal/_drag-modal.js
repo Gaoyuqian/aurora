@@ -33,7 +33,8 @@ const AuDragModal = Vue.extend({
     icon: String,
     value: Boolean,
     top: [Number, String],
-    left: [Number, String]
+    left: [Number, String],
+    noClose: Boolean
   },
   data () {
     return {

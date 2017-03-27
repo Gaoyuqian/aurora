@@ -8,7 +8,8 @@ const AuModal = Vue.extend({
   props: {
     title: String,
     icon: String,
-    value: Boolean
+    value: Boolean,
+    noClose: Boolean
   },
   data () {
     return {
