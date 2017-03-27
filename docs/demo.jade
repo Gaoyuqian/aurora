@@ -11,7 +11,7 @@ block content
       au-form-group(label="密码")
         au-input(type="password", v-model="form.password", placeholder="请输入密码")
       au-form-group(label="年龄")
-        au-select(v-model="form.age", :options="[{label:'28',value:'28'}]", placeholder="请选择年龄")
+        au-select(v-model="form.age", :options="[{label:'28',value:'28'}]", placeholder="请选择年龄", clearable)
       au-form-group(label="日期")
         au-date-picker(v-model="form.datetimerange", type="datetimerange", clearable, placeholder="请选择时间")
       au-form-group(label="日期")

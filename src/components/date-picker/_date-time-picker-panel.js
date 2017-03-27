@@ -31,7 +31,8 @@ const AuDateTimePickerPanel = Vue.extend({
     isShowBottomBar: {
       type: Boolean,
       default: true
-    }
+    },
+    fixedTempValue: Boolean
   },
   computed: {
     model: {
@@ -133,7 +134,9 @@ const AuDateTimePickerPanel = Vue.extend({
   },
   watch: {
     value () {
-      this.initTempValue()
+      if (!this.fixedTempValue) {
+        this.initTempValue()
+      }
     },
     tempValue (value) {
       this.$refs.datePicker.tempValue = value
