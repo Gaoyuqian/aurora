@@ -20,10 +20,7 @@ Vue.component('au-icon', {
       const obj = []
       obj.push('fa-' + this.icon)
       obj.push('au-icon-' + this.icon)
-
-      if (this.size !== 'default') {
-        obj.push('au-icon-' + this.size)
-      }
+      obj.push('au-icon-' + this.size)
 
       if (this.type) {
         obj.push('au-icon-' + this.type)

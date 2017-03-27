@@ -19,7 +19,9 @@
 
 .au-menu-item-arrow {
   transition: transform $transition-during;
-  font-size: $fontsize-small;
+  .au-icon {
+    font-size: $fontsize-small;
+  }
 }
 
 .au-menu-item-text {
@@ -109,9 +111,11 @@
 
   .au-menu-item-icon {
     width: 50px;
-    font-size: $fontsize-large;
     display: flex;
     align-items: center;
+    .au-icon {
+      font-size: $fontsize-large;
+    }
   }
 
   .au-menu-item-arrow {
