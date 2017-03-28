@@ -24,6 +24,10 @@ const AuUpload = Vue.extend({
     }
   },
   methods: {
+    clear () {
+      this.$refs.file.value = ''
+      this.fileName = ''
+    },
     buttonClickHandler () {
       this.$refs.file.click()
     },

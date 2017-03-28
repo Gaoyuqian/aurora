@@ -24,6 +24,7 @@
       color: $color-border;
       transition: all $transition-during;
     }
+
     .au-icon-close {
       display: none;
     }
@@ -63,7 +64,7 @@
 
   &.active {
     border-color: $color-primary;
-    .au-select-right-icon .au-caret-down {
+    .au-select-right-icon .au-icon-caret-down {
       transform: rotate(180deg);
     }
   }

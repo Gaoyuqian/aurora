@@ -15,7 +15,7 @@ const AuMenu = Vue.extend({
   },
   computed: {
     currentSelected () {
-      return Array.isArray(this.selected) ? this.selected : [this.selected]
+      return Array.isArray(this.selected) ? this.selected : this.selected ? [this.selected] : []
     },
     classObj () {
       const classObj = []
