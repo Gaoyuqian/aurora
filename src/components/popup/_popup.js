@@ -83,6 +83,13 @@ const AuPopup = Vue.extend({
       this.top = `${top}px`
       this.left = `${left}px`
     },
+
+    recalHandler () {
+      this.calPosition()
+      if (this.isAutoSyncWidth) {
+        this.syncWidth()
+      }
+    },
     getTop () {
       const position = this.position
       const relateElem = this.relateElem
@@ -242,7 +249,7 @@ const AuPopup = Vue.extend({
       this.left = `${left}px`
     },
     syncWidth () {
-      this.minWidth = this.relateElem.getClientRects()[0].width + 'px'
+      this.minWidth = this.relateElem.getBoundingClientRect().width + 'px'
     },
     show () {
       if (!this.selfControl && showingPopup) {
@@ -260,8 +267,8 @@ const AuPopup = Vue.extend({
       this.$nextTick(() => {
         this.calPosition()
       })
-      window.addEventListener('resize', this.calPosition, true)
-      window.addEventListener('scroll', this.calPosition, true)
+      window.addEventListener('resize', this.recalHandler, true)
+      window.addEventListener('scroll', this.recalHandler, true)
       window.addEventListener('click', this.hide)
       this.$emit('show')
       if (this.isAutoSyncWidth) {
@@ -273,8 +280,8 @@ const AuPopup = Vue.extend({
         showingPopup = null
       }
       this.isShow = false
-      window.removeEventListener('resize', this.calPosition, true)
-      window.removeEventListener('scroll', this.calPosition, true)
+      window.removeEventListener('resize', this.recalHandler, true)
+      window.removeEventListener('scroll', this.recalHandler, true)
       window.removeEventListener('click', this.hide)
       this.$emit('hide')
     },

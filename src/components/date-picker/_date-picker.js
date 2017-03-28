@@ -107,8 +107,7 @@ const AuDatePicker = Vue.extend({
       popup: null,
       panel: null,
       inputActive: false,
-      icon: null,
-      clickIconHandler: null
+      icon: null
     }
   },
   created () {
@@ -207,23 +206,26 @@ const AuDatePicker = Vue.extend({
     hidePopup () {
       this.popup.hide()
     },
-    clearDatetime ($event) {
-      $event.stopPropagation()
+    clearDatetime () {
       if (this.type === 'daterange' || this.type === 'datetimerange') {
         this.model = ['', '']
       } else {
         this.model = ''
       }
     },
+    clickIconHandler ($event) {
+      $event.stopPropagation()
+      if (this.clearable && !this.isEmptyValue()) {
+        this.clearDatetime()
+      }
+    },
     mouseoverIconHandler () {
       if (this.clearable && !this.isEmptyValue()) {
         this.icon = 'close'
-        this.clickIconHandler = this.clearDatetime
       }
     },
     mouseoutIconHandler () {
       this.icon = this.defaultIcon
-      this.clickIconHandler = null
     }
   }
 })
