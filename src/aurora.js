@@ -37,6 +37,8 @@ import './components/header/_header.js'
 import './components/content/_content.js'
 import './components/footer/_footer.js'
 
+import ticker from './_ticker.js'
+
 import { push } from './components/message/_message-center.js'
 
 const Aurora = {}
@@ -48,29 +50,7 @@ Aurora.warning = push.bind(window, 'warning')
 Aurora.success = push.bind(window, 'success')
 Aurora.loading = push.bind(window, 'loading')
 
-Aurora.ticker = {
-  events: [],
-  interval: null,
-  add (event) {
-    this.events.push(event)
-  },
-  remove () {
-    const pos = this.events.indexOf(event)
-    this.events.splice(pos, 1)
-  },
-  start () {
-    this.interval = setInterval(() => {
-      if (this.events.length === 0) {
-        return
-      }
-      this.events.forEach((callback) => {
-        callback()
-      })
-    }, 1000 / 60)
-  }
-}
-
-Aurora.ticker.start()
+Aurora.ticker = ticker
 
 window.Aurora = Aurora
 
