@@ -9,7 +9,8 @@ const AuModal = Vue.extend({
     title: String,
     icon: String,
     value: Boolean,
-    noClose: Boolean
+    noClose: Boolean,
+    width: [String, Number]
   },
   data () {
     return {
@@ -18,9 +19,18 @@ const AuModal = Vue.extend({
   },
   computed: {
     style () {
-      return {
+      const style = {
         'z-index': this.zIndex
       }
+      return style
+    },
+    modalStyle () {
+      const style = {}
+      const width = parseFloat(this.width)
+      if (width) {
+        style.width = width + 'px'
+      }
+      return style
     }
   },
   created () {

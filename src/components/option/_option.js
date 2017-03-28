@@ -4,17 +4,30 @@ const AuOption = Vue.extend({
   template: require('./_option.jade'),
   props: {
     label: String,
-    value: [String, Number],
-    showCheck: {
-      type: Boolean,
-      default: false
-    }
+    value: [String, Number]
   },
   data () {
     return {
       active: false,
       isHide: false,
-      isFocus: false
+      isFocus: false,
+      mutiple: false
+    }
+  },
+  computed: {
+    cls () {
+      const cls = []
+      if (this.mutiple) {
+        cls.push('au-option-mutiple')
+      }
+      if (this.active) {
+        cls.push('active')
+      }
+
+      if (this.isFocus) {
+        cls.push('au-focus')
+      }
+      return cls
     }
   },
   created () {
@@ -39,7 +52,8 @@ const AuOption = Vue.extend({
       this.dispatch('blur.option', this)
       this.isFocus = false
     },
-    setActive (isActive) {
+    setActive (isActive, select) {
+      this.mutiple = select.mutiple
       this.active = isActive
     },
     setFocus (isFocus) {

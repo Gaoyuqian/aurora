@@ -1,6 +1,6 @@
 div.au-option(
   @click="clickHandler",
-  :class="{ 'active': active, 'au-focus': isFocus }",
+  :class="cls",
   v-if="!isHide",
   @mouseover="mouseoverHandler",
   @mouseout="mouseoutHandler"
@@ -9,4 +9,4 @@ div.au-option(
     |{{label}}
   div(v-else)
     slot
-  au-icon(icon="check", v-if="showCheck")
+  au-icon(icon="check")

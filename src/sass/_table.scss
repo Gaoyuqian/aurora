@@ -11,6 +11,8 @@
 
 .au-table {
   position: relative;
+  overflow: auto;
+  min-height: 200px;
 }
 
 .au-table table {
@@ -48,6 +50,8 @@
   @include fullscreen();
   @include flex-center-center();
   background-color: rgba($color-white, 0.5);
+  border: 1px solid $color-border;
+  border-top: none;
 
   > div {
     width: 6px;
@@ -76,7 +80,7 @@
 .au-table-empty {
   border: 1px solid $color-border;
   border-top: none;
-  min-height: 120px;
+  min-height: 180px;
   @include flex-center-center();
   padding: 10px;
   color: $color-black-light-extra;

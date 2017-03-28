@@ -1,7 +1,7 @@
 const TIMEOUT = 200
 
 import dispatch from '../../mixins/_dispatch.js'
-import Popup from '../popup/_popup.js'
+import Popup, { hideShowingPopup } from '../popup/_popup.js'
 import Menu from './_menu.js'
 
 const AuMenuItem = Vue.extend({
@@ -117,6 +117,7 @@ const AuMenuItem = Vue.extend({
     },
     onClick ($event) {
       $event.stopPropagation()
+      hideShowingPopup()
 
       if (this.subMenu != null) {
         if (this.isShowSubMenu) {

@@ -252,9 +252,8 @@ const AuPopup = Vue.extend({
       this.minWidth = this.relateElem.getBoundingClientRect().width + 'px'
     },
     show () {
-      if (!this.selfControl && showingPopup) {
-        showingPopup.hide()
-        showingPopup = null
+      if (!this.selfControl) {
+        hideShowingPopup()
       }
       if (this.relateElem == null) {
         return
@@ -272,7 +271,7 @@ const AuPopup = Vue.extend({
       window.addEventListener('click', this.hide)
       this.$emit('show')
       if (this.isAutoSyncWidth) {
-        this.syncWidth()
+        this.$nextTick(this.syncWidth)
       }
     },
     hide () {
@@ -306,3 +305,9 @@ const AuPopup = Vue.extend({
 })
 
 export default AuPopup
+export function hideShowingPopup () {
+  if (showingPopup) {
+    showingPopup.hide()
+    showingPopup = null
+  }
+}

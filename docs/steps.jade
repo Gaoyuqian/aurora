@@ -16,12 +16,31 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-steps
-            au-step(title="abc")
-            au-step(title="def")
+            au-step(title="abc", desc="子标题")
+            au-step(title="def", desc="子标题")
+            au-step(title="def", desc="子标题", v-if="showStep3")
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                active: '2',
+                showStep3: false
+              }
+            },
+            mounted () {
+              setTimeout(() => {
+                this.showStep3 = true
+              }, 1000)
+            },
+            methods: {
+            }
+          }
       .docs-panel
         .docs-panel-content
         .docs-code
           docs-code.html
+          docs-code.js
 
     .docs-section
       h2|属性

@@ -106,7 +106,7 @@ const AuTable = Vue.extend({
 
           content = [h('au-checkbox', {
             domProps: {
-              checkedValue: checkedCount === length,
+              checkedValue: length > 0 && checkedCount === length,
               indeterminate: checkedCount > 0 && checkedCount < length
             },
             on: {
@@ -135,7 +135,7 @@ const AuTable = Vue.extend({
       h('table', tableContent)
     ]
 
-    if (this.data.length === 0) {
+    if (this.data.length === 0 && !this.loading) {
       children.push(
         h('div', {
           'class': 'au-table-empty'

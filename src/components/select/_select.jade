@@ -38,8 +38,7 @@ div.au-select(
         v-if="options != null",
         v-for="option in options",
         :label="option.label",
-        :value="option.value",
-        :showCheck="mutiple"
+        :value="option.value"
       )
       slot(v-if="options == null")
       div.au-option-empty(v-if="_isMounted && getOptionInstances(true).length === 0")|无数据

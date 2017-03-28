@@ -179,9 +179,19 @@ $popup-shadow:              0 1px 5px rgba($color-black-light, 0.2);
 // -------------------------
 $message-shadow:            0 1px 5px rgba($color-black-light, 0.2);
 
+
 // Tabs
 // -------------------------
 $tabs-badge-back-color:     #FA0000;
 $tabs-badge-width:          16px;
 $tabs-badge-fontsize:       $fontsize-small;
 $tabs-badge-padding:        5px;
+
+
+// Steps
+// -------------------------
+$steps-line-color:         $color-white-dark;
+$steps-icon-color:         $color-gray-light;
+$steps-icon-text-color:    $color-silver-light;
+$steps-color:              $color-silver-light;
+$steps-active-color:       $color-primary;

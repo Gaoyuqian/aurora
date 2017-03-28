@@ -131,7 +131,9 @@ const AuSelect = Vue.extend({
         text.style.width = 'auto';
       }
     }
-    this.$refs.popup.syncWidth()
+    this.$nextTick(() => {
+      this.$refs.popup.syncWidth()
+    })
   },
   mounted () {
     this.$refs.popup.setRelateElem(this.$el, true)
@@ -274,7 +276,7 @@ const AuSelect = Vue.extend({
       const value = this.mutiple ? this.value : [this.value]
       for (let key in this.registeredChild) {
         child = this.registeredChild[key]
-        child.setActive(value.indexOf(child.value) > -1)
+        child.setActive(value.indexOf(child.value) > -1, this)
       }
     },
     keyContinueBind (func) {
