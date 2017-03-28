@@ -51,7 +51,7 @@ const AuTable = Vue.extend({
             }
           })]
         } else {
-          content = row[column.attrName]
+          content = this.getAttr(row, column.attrName)
         }
 
         if (column.nowrap && index === 0) {
@@ -164,6 +164,46 @@ const AuTable = Vue.extend({
     )
   },
   methods: {
+    getAttr (obj, attrName) {
+      const key = '([\\w\\$]+)'
+      const origAttrName = attrName
+      const origObj = JSON.stringify(obj)
+
+      attrName = attrName.replace(new RegExp('^' + key), (_, value) => {
+        try {
+          obj = obj[value]
+        } catch (e) {
+          console.error(`Cannot get value by ${origAttrName} in AuTable`, origObj)
+          obj = ''
+        }
+        return ''
+      })
+
+      while (attrName) {
+        let found = false
+        attrName = attrName.replace(new RegExp('^\\.' + key + '|^\\[' + key + '\\]'), (_, value1, value2) => {
+          const value = value1 || value2
+          try {
+            obj = obj[value]
+            found = true
+
+          } catch (e) {
+            console.error(`Cannot get value by ${origAttrName} in AuTable`, origObj)
+            obj = ''
+          }
+          return ''
+        })
+
+        if (!found) {
+          if (attrName) {
+            console.error(`cannot match attr-name: ${attrName} in AuTable`, origObj)
+          }
+          break
+        }
+      }
+
+      return obj
+    },
     resetColumns () {
       this.columns = (this.$slots.default || []).filter((slot) => {
         return slot.componentInstance instanceof TableColumn

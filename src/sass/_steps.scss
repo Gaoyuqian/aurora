@@ -1,0 +1,37 @@
+.au-steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.au-step {
+  width: 120px;
+  text-align: center;
+}
+
+.au-step-icon {
+  @include flex-center-center();
+}
+
+.au-step-index {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: 2px solid $color-primary;
+  background-color: $color-white;
+  font-size: $fontsize-large;
+  @include flex-center-center();
+}
+
+.au-step-title, .au-step-desc {
+  margin-top: 10px;
+  color: $color-black-light-extra;
+}
+
+.au-step-title {
+  font-size: $fontsize-default;
+  line-height: $fontsize-default * 1.2;
+}
+.au-step-desc {
+  font-size: $fontsize-small;
+  line-height: $fontsize-small * 1.2;
+}

@@ -1,3 +1,6 @@
+import AuForm from '../form/_form.js'
+import instance from '../../utils/_instance.js'
+
 const AuFormGroup = Vue.extend({
   template: require('./_form-group.jade'),
   props: {
@@ -32,18 +35,21 @@ const AuFormGroup = Vue.extend({
       return cls
     },
     inline () {
-      return this.$parent.inline
+      return this.getForm().inline
     }
   },
   mounted () {
 
   },
   methods: {
+    getForm () {
+      return instance.getParent(this, AuForm) || {}
+    },
     getLabelPosition () {
-      return this.labelPosition || this.$parent.labelPosition
+      return this.labelPosition || this.getForm().labelPosition
     },
     getLabelWidth () {
-      return this.labelWidth || parseFloat(this.$parent.labelWidth)
+      return this.labelWidth || parseFloat(this.getForm().labelWidth)
     }
   }
 })

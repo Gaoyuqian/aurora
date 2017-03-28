@@ -1,0 +1,7 @@
+.au-step
+  .au-step-icon
+    au-icon(:icon="icon", v-if="icon")
+    .au-step-index(v-else)|1
+
+  .au-step-title(v-if="title")|{{ title }}
+  .au-step-desc(v-if="desc")|{{ desc }}

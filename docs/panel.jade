@@ -17,6 +17,9 @@ block content
         .docs-panel-row
           au-panel(title="新页面", collapse, v-model="isCollapse")
             div|哈哈
+            div(slot="footer", style="text-align:right")
+              au-button(type="default", size="small")|取消
+              au-button(type="primary", size="small")|提交
 
       .docs-panel
         .docs-panel-content

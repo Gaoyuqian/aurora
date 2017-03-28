@@ -251,6 +251,60 @@ block content
           docs-code.html
           docs-code.js
 
+
+    .docs-section
+      h2|多层级属性
+      .docs-desc
+        p|带分页表格的用法
+
+      template.html
+        .docs-panel-row
+          au-table(:data="deepData")
+            au-table-column(
+              label="Name",
+              attr-name="name"
+            )
+            au-table-column(
+              label="Parent name",
+              attr-name="parent.name"
+            )
+            au-table-column(
+              label="Car Id",
+              attr-name="parent.car.id"
+            )
+            au-table-column(
+              label="Cat Name",
+              attr-name="cat[1].name"
+            )
+
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                deepData: [
+                  {
+                    name: 'kevin',
+                    parent: {
+                      name: 'kevin\'s father',
+                      car: {
+                        id: '123'
+                      }
+                    },
+                    cat: [
+                      { name: 'katty' }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
+
     .docs-section
       h2|AuTable属性
       au-table(:data="attrs")

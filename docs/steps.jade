@@ -1,0 +1,41 @@
+extends ./_layout
+
+block title
+  |Steps
+
+block content
+  au-panel
+    .docs-heading
+      h1|AuSteps
+      .docs-desc
+
+    .docs-section
+      h2
+      .docs-desc
+
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-steps
+            au-step(title="abc")
+            au-step(title="def")
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+
+    .docs-section
+      h2|属性
+      au-table(:data="attrs")
+        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins,
+      data () {
+        return {
+          attrs: []
+        }
+      }
+    })

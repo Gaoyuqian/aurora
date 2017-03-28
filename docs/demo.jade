@@ -6,20 +6,24 @@ block title
 block content
   au-panel(title="内容")
     au-form(inline, label-position="top")
-      au-form-group(label="姓名")
-        au-input(v-model="form.name", placeholder="请输入姓名")
-      au-form-group(label="密码")
-        au-input(type="password", v-model="form.password", placeholder="请输入密码")
-      au-form-group(label="年龄")
-        au-select(v-model="form.age", :options="[{label:'28',value:'28'}]", placeholder="请选择年龄", clearable)
-      au-form-group(label="日期")
-        au-date-picker(v-model="form.datetimerange", type="datetimerange", clearable, placeholder="请选择时间")
-      au-form-group(label="日期")
-        au-date-picker(v-model="form.datetimerange", type="daterange", clearable, placeholder="请选择时间")
-      au-form-group(label="日期")
-        au-date-picker(v-model="form.date", type="month", clearable, placeholder="请选择时间")
-      au-form-group
-        au-button(native-type='submit', type="primary")|搜索
+      au-flex
+        au-item
+          au-form-group(label="姓名")
+            au-input(v-model="form.name", placeholder="请输入姓名")
+          au-form-group(label="密码")
+            au-input(type="password", v-model="form.password", placeholder="请输入密码")
+          au-form-group(label="年龄")
+            au-select(v-model="form.age", :options="[{label:'28',value:'28'}]", placeholder="请选择年龄", clearable)
+          au-form-group(label="日期")
+            au-date-picker(v-model="form.datetimerange", type="datetimerange", clearable, placeholder="请选择时间")
+      au-flex
+        au-item
+          au-form-group(label="日期")
+            au-date-picker(v-model="form.datetimerange", type="daterange", clearable, placeholder="请选择时间")
+          au-form-group(label="日期")
+            au-date-picker(v-model="form.date", type="month", clearable, placeholder="请选择时间")
+          au-form-group
+            au-button(native-type='submit', type="primary")|搜索
 
     au-table(:data="data", style="margin-top: 20px;")
       au-table-column(
