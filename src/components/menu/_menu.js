@@ -11,14 +11,12 @@ const AuMenu = Vue.extend({
       default: 'click'
     },
     vertical: Boolean,
-    selected: {
-      type: Array,
-      default () {
-        return []
-      }
-    }
+    selected: [Array, String]
   },
   computed: {
+    currentSelected () {
+      return Array.isArray(this.selected) ? this.selected : [this.selected]
+    },
     classObj () {
       const classObj = []
 
@@ -55,7 +53,7 @@ const AuMenu = Vue.extend({
     }
   },
   mounted () {
-    if (this.selected.length > 0) {
+    if (this.currentSelected.length > 0) {
       this.checkSelected()
     }
   },
@@ -71,14 +69,14 @@ const AuMenu = Vue.extend({
       return null
     },
     checkSelected () {
-      this.broadcast('check.selected', this.selected)
+      this.broadcast('check.selected', this.currentSelected)
     }
   },
   watch: {
     vertical (vertical) {
       this.isVertical = vertical
     },
-    selected () {
+    currentSelected () {
       this.checkSelected()
     }
   }

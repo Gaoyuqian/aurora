@@ -117,7 +117,7 @@ const AuMenuItem = Vue.extend({
     },
     onClick ($event) {
       $event.stopPropagation()
-      hideShowingPopup()
+      // hideShowingPopup()
 
       if (this.subMenu != null) {
         if (this.isShowSubMenu) {

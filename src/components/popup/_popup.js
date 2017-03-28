@@ -58,8 +58,19 @@ const AuPopup = Vue.extend({
       this.$el.removeEventListener('mouseover', this.menuOver)
       this.$el.removeEventListener('mouseout', this.menuOut)
     }
+    Aurora.ticker.remove(this.tickerEvent)
   },
   methods: {
+    tickerEvent () {
+      if (this.relateElem) {
+        if (this.relateElem.offsetParent == null) {
+          if (this.isShow) {
+            this.hide()
+          }
+          Aurora.ticker.remove(this.tickerEvent)
+        }
+      }
+    },
     setRelateElem (relateElem, isAutoSyncWidth) {
       this.relateElem = relateElem
       this.isAutoSyncWidth = isAutoSyncWidth
@@ -273,8 +284,10 @@ const AuPopup = Vue.extend({
       if (this.isAutoSyncWidth) {
         this.$nextTick(this.syncWidth)
       }
+      Aurora.ticker.add(this.tickerEvent)
     },
     hide () {
+      Aurora.ticker.remove(this.tickerEvent)
       if (showingPopup === this) {
         showingPopup = null
       }

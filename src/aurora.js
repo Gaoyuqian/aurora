@@ -48,6 +48,30 @@ Aurora.warning = push.bind(window, 'warning')
 Aurora.success = push.bind(window, 'success')
 Aurora.loading = push.bind(window, 'loading')
 
+Aurora.ticker = {
+  events: [],
+  interval: null,
+  add (event) {
+    this.events.push(event)
+  },
+  remove () {
+    const pos = this.events.indexOf(event)
+    this.events.splice(pos, 1)
+  },
+  start () {
+    this.interval = setInterval(() => {
+      if (this.events.length === 0) {
+        return
+      }
+      this.events.forEach((callback) => {
+        callback()
+      })
+    }, 1000 / 60)
+  }
+}
+
+Aurora.ticker.start()
+
 window.Aurora = Aurora
 
 export default Aurora
