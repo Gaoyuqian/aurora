@@ -1,8 +1,12 @@
 import AuStep from './_step.js'
+import dispatch from '../../mixins/_dispatch.js'
+
 const AuSteps = Vue.extend({
   template: require('./_steps.jade'),
+  mixins: [dispatch],
   props: {
-    active: [String, Number],
+    activeIndex: [String, Number],
+    dot: Boolean
   },
   data () {
     return {
@@ -10,6 +14,13 @@ const AuSteps = Vue.extend({
     }
   },
   computed: {
+    cls () {
+      const cls = []
+      if (this.dot) {
+        cls.push('au-steps-dot')
+      }
+      return cls
+    },
     childs () {
       return this.$children.filter((child) => {
         return child instanceof AuStep
@@ -25,17 +36,31 @@ const AuSteps = Vue.extend({
       return
     }
     this.lines = lines
-    this.$nextTick(this.$forceUpdate)
+    this.$nextTick(() => {
+      this.$forceUpdate()
+      this.broadcast('update.index')
+    })
   },
   methods: {
+    getChildren () {
+      const slots = this.$slots.default
+      return slots.filter((slot) => {
+        return slot.componentInstance && slot.componentInstance instanceof AuStep
+      }).map((slot) => {
+        return slot.componentInstance
+      })
+    },
+    getIndex (children) {
+      return this.getChildren().filter((child) => {
+        return child instanceof AuStep
+      }).indexOf(children)
+    },
     isEqualLine (line1, line2) {
       return JSON.stringify(line1) === JSON.stringify(line2)
     },
     getLines () {
       const lines = []
-      const children = this.$children.filter((child) => {
-        return child instanceof AuStep
-      })
+      const children = this.getChildren()
       const length = children.length
       var index = 0
 
@@ -48,7 +73,9 @@ const AuSteps = Vue.extend({
         let elemRect = this.$el.getBoundingClientRect()
 
         lines.push({
-          'class': {},
+          'class': {
+            'au-steps-line-active': this.activeIndex > index
+          },
           style: {
             left: (leftRect.left + leftRect.width - elemRect.left) + 'px',
             width: (rightRect.left - leftRect.left - leftRect.width) + 'px'

@@ -15,10 +15,15 @@ block content
 
       template.html(scoped="scoped")
         .docs-panel-row
-          au-steps
-            au-step(title="abc", desc="子标题")
-            au-step(title="def", desc="子标题")
-            au-step(title="def", desc="子标题", v-if="showStep3")
+          au-steps(active-index="1", dot)
+            au-step(title="title1", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="title3", desc="子标题")
       template.js(scoped="scoped")
         script.
           {
