@@ -200,3 +200,22 @@ $steps-current-text-color: $color-black-light;
 $steps-dot-width:          6px;
 $steps-dot-active-width:   $steps-dot-width;
 $steps-dot-current-width:  8px;
+
+
+
+// Tag
+// -------------------------
+$tag-colors: (
+  "red":                   #ED5565,
+  "orange":                #E9573F,
+  "yellow":                #F6BB42,
+  "green":                 #8CC152,
+  "cyan":                  #37BC9B,
+  "sky":                   #3BAFDA,
+  "blue":                  #4A89DC,
+  "purple":                #967ADC,
+  "pink":                  #D770AD,
+  "light":                 #E6E9ED,
+  "gray":                  #AAB2BD,
+  "dark":                  #434A54
+)

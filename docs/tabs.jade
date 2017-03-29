@@ -16,28 +16,39 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-tabs(v-model="value")
-            au-tab-panel(tab="北京", value="1")
-              |北京
+            au-tab-panel(:tab="tab.name", :value="tab.value", v-for="tab in tabs")
+              |{{tab.name}}
 
-            au-tab-panel(tab="上海", value="2", badge="2")
-              |上海
-
-            au-tab-panel(tab="广州", value="3")
-              |广州
-
-            au-tab-panel(tab="深圳", value="4")
-              |深圳
-
-            au-tab-panel(tab="南京", value="5")
-              |南京
-
-            au-tab-panel(tab="杭州", value="6")
-              |杭州
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                value: '1',
+                tabs: []
+              }
+            },
+            mounted () {
+              setTimeout(() => {
+                this.tabs = [
+                  {
+                    name: '北京',
+                    value: '1'
+                  },
+                  {
+                    name: '上海',
+                    value: '2'
+                  }
+                ]
+              }, 0)
+            }
+          }
 
       .docs-panel
         .docs-panel-content
         .docs-code
           docs-code.html
+          docs-code.js
 
     .docs-section
       h2|AuTabs属性
@@ -84,8 +95,7 @@ block script
               type: 'String, Number',
               default: ''
             }
-          ],
-          value: '3'
+          ]
         }
       }
     })
