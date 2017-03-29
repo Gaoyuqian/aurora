@@ -214,9 +214,10 @@ const AuDatePicker = Vue.extend({
       }
     },
     clickIconHandler ($event) {
-      $event.stopPropagation()
       if (this.clearable && !this.isEmptyValue()) {
+        $event.stopPropagation()
         this.clearDatetime()
+        this.icon = this.defaultIcon
       }
     },
     mouseoverIconHandler () {
