@@ -1,0 +1,38 @@
+extends ./_layout
+
+block title
+  |Tag
+
+block content
+  au-panel
+    .docs-heading
+      h1|AuTag
+      .docs-desc
+
+    .docs-section
+      h2|AuTag
+      template.html(scoped="scoped")
+        .docs-panel-row
+          au-tag|标签
+          au-tag(type="primary")|标签
+          au-tag(type="info")|标签
+          au-tag(type="danger")|标签
+          au-tag(type="warning")|标签
+          au-tag(type="success")|标签
+          au-tag(type="darker")|标签
+      .docs-desc
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+
+block script
+  script.
+    new Vue({
+      el: '#app',
+      mixins,
+      data () {
+        return {
+        }
+      }
+    })
