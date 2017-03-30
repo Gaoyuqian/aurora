@@ -16,7 +16,7 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-tabs(v-model="value")
-            au-tab-panel(:tab="tab.name", :value="tab.value", v-for="tab in tabs")
+            au-tab-panel(:tab="tab.name", :value="tab.value", :disabled="tab.disabled" v-for="tab in tabs")
               |{{tab.name}}
 
       template.js(scoped="scoped")
@@ -38,6 +38,11 @@ block content
                   {
                     name: '上海',
                     value: '2'
+                  },
+                  {
+                    name: '广州',
+                    value: '3',
+                    disabled: true
                   }
                 ]
               }, 0)

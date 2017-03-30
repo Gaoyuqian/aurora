@@ -3,7 +3,8 @@ const AuTabPanel = Vue.extend({
   props: {
     value: [String, Number],
     tab: [String],
-    badge: [String, Number]
+    badge: [String, Number],
+    disabled: Boolean
   },
   data () {
     return {

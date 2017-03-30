@@ -5,22 +5,6 @@ const AuTabs = Vue.extend({
   props: {
     value: [String, Number]
   },
-  /* computed: {
-   *   tabs () {
-   *     const tabs = []
-   *     const slot = this.$slots.default
-
-   *     if (slot) {
-   *       slot.forEach((item) => {
-   *         if (item.componentOptions && item.componentOptions.Ctor == AuTabPanel) {
-   *           const props = item.componentOptions.propsData
-   *           tabs.push(props)
-   *         }
-   *       })
-   *     }
-   *     return tabs
-   *   }
-   * },*/
   data () {
     return {
       tabs: [],
@@ -77,6 +61,11 @@ const AuTabs = Vue.extend({
         })
       }
       return tabs
+    },
+    clickTab (tab) {
+      if (!tab.disabled) {
+        this.setValue(tab.value)
+      }
     },
     setValue (value) {
       this.$emit('input', value)

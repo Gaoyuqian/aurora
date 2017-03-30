@@ -1,10 +1,6 @@
 const AuTag = Vue.extend({
   template: require('./_tag.jade')
   props: {
-    type: {
-      type: String,
-      default: 'default'
-    },
     color: {
       type: String,
       default: ''
@@ -17,8 +13,6 @@ const AuTag = Vue.extend({
       const cls = []
       if (this.color) {
         cls.push(`au-tag-${this.color}`)
-      } else {
-        cls.push(`au-tag-${this.type}`)
       }
 
       if (this.bordered) {

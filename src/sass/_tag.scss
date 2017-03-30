@@ -4,46 +4,11 @@
   padding: 0 10px;
   height: 22px;
   line-height: 22px;
+  background-color: $color-white-dark;
 }
 
 .au-tag-content {
   flex-grow: 1;
-}
-
-.au-tag-primary {
-  background-color: $color-primary;
-  color: $color-white;
-}
-
-.au-tag-info {
-  background-color: $color-info;
-  color: $color-white;
-}
-
-.au-tag-success {
-  background-color: $color-success;
-  color: $color-white;
-}
-
-.au-tag-warning {
-  background-color: $color-warning;
-  color: $color-white;
-}
-
-.au-tag-danger {
-  background-color: $color-danger;
-  color: $color-white;
-}
-
-.au-tag-darker {
-  background-color: $color-black-light;
-  color: $color-white;
-}
-
-.au-tag-default {
-  border: 1px solid $color-border;
-  background-color: $color-white-dark;
-  color: $color-black-light-extra;
 }
 
 .au-tag-icon {

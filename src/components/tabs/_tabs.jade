@@ -1,6 +1,6 @@
 div.au-tabs
   .au-tabs-heading
-    .au-tab-item(v-for="tab in tabs", :class="{ active: currentValue == tab.value }", @click="setValue(tab.value)")
+    .au-tab-item(v-for="tab in tabs", :class="{ active: currentValue == tab.value, disabled: tab.disabled }", @click="clickTab(tab)")
       |{{ tab.tab }}
       .au-tab-badge(v-if="tab.badge")|{{tab.badge}}
   .au-tabs-heading-active-line(:style="activeLineStyle")

@@ -53,33 +53,21 @@ block content
           docs-code.js
 
     .docs-section
-      h2|AuTag
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-tag|标签
-          au-tag(type="primary")|标签
-          au-tag(type="info")|标签
-          au-tag(type="danger")|标签
-          au-tag(type="warning")|标签
-          au-tag(type="success")|标签
-          au-tag(type="darker")|标签
-      .docs-desc
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-
-    .docs-section
       h2|关闭按钮
       template.html(scoped="scoped")
         .docs-panel-row
-          au-tag(closeable, @close="onClose")|标签
-          au-tag(type="primary", closeable)|标签
-          au-tag(type="info", closeable)|标签
-          au-tag(type="danger", closeable)|标签
-          au-tag(type="warning", closeable)|标签
-          au-tag(type="success", closeable)|标签
-          au-tag(type="darker", closeable)|标签
+          au-tag(color="red", closeable, @close="onClose")|标签
+          au-tag(color="orange", closeable, @close="onClose")|标签
+          au-tag(color="yellow", closeable, @close="onClose")|标签
+          au-tag(color="green", closeable, @close="onClose")|标签
+          au-tag(color="cyan", closeable, @close="onClose")|标签
+          au-tag(color="sky", closeable, @close="onClose")|标签
+          au-tag(color="blue", closeable, @close="onClose")|标签
+          au-tag(color="purple", closeable, @close="onClose")|标签
+          au-tag(color="pink", closeable, @close="onClose")|标签
+          au-tag(color="light", closeable, @close="onClose")|标签
+          au-tag(color="gray", closeable, @close="onClose")|标签
+          au-tag(color="dark", closeable, @close="onClose")|标签
       template.js(scoped="scoped")
         script.
           {

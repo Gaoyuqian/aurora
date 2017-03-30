@@ -29,6 +29,11 @@
   &.active {
     color: $color-primary;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    color: $color-gray-light;
+  }
 }
 
 .au-tabs-heading-active-line {

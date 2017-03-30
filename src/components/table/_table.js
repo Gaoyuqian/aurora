@@ -158,7 +158,10 @@ const AuTable = Vue.extend({
     return h(
       'div',
       {
-        'class': 'au-table'
+        'class': {
+          'au-table': true,
+          'au-table-loading': this.loading
+        }
       },
       children
     )

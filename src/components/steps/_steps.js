@@ -44,6 +44,9 @@ const AuSteps = Vue.extend({
   methods: {
     getChildren () {
       const slots = this.$slots.default
+      if (slots == null) {
+        return []
+      }
       return slots.filter((slot) => {
         return slot.componentInstance && slot.componentInstance instanceof AuStep
       }).map((slot) => {
