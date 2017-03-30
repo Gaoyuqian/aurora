@@ -5,7 +5,7 @@ transition(
     v-show="isShow",
     :class="cls"
   )
-    .au-alert-icon
+    .au-alert-icon(v-if="icon")
       au-icon(:icon="icon")
     .au-alert-content
       .au-alert-title(v-if="title")|{{ title }}
