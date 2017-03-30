@@ -1,19 +1,18 @@
 transition(name="message-fade")
   .au-message(
-    :class="classObject",
+    :class="cls",
     v-if="isShow"
   )
     .au-message-inner
-      .au-message-icon(
-        :class="{ 'au-message-icon-success': this.type === 'success', 'au-message-icon-info': this.type === 'info' || this.type === 'loading', 'au-message-icon-warning': this.type === 'warning', 'au-message-icon-danger': this.type === 'danger' }"
-      )
+      .au-message-icon
         au-icon(icon="check-circle-o", v-if="type === 'success'")
         au-icon(icon="info-circle", v-if="type === 'info'")
         au-icon(icon="exclamation-circle", v-if="type === 'warning'")
-        au-icon(icon="times-circle-o", v-if="type === 'danger'")
+        au-icon(icon="times-circle-o", v-if="type === 'danger' || type === 'error'")
         au-icon(icon="circle-o-notch", v-if="type === 'loading'", autorotate)
       .au-message-content
-        |{{ message }}
-
-      .au-message-close(@click="disappear", v-if="type != 'loading'")
-        au-icon(icon="times")
+        .au-message-title(v-if="title")|{{ title }}
+        .au-message-desc(v-if="message")|{{ message }}
+      .au-message-buttons(v-if="type != 'loading' || buttons.length > 0")
+        .au-message-button(v-for="button in buttons", @click="button.callback")|{{ button.title }}
+        .au-message-button(v-if="type != 'loading'", @click="disappear")|关闭

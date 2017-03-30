@@ -26,7 +26,15 @@ const AuSteps = Vue.extend({
         return child instanceof AuStep
       })
     }
-  }
+  },
+  created () {
+    window.addEventListener('resize', this.onUpdate)
+    window.addEventListener('scroll', this.onUpdate)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onUpdate)
+    window.removedEventListener('scroll', this.onUpdate)
+  },
   mounted () {
     this.lines = this.getLines()
   },
@@ -42,6 +50,10 @@ const AuSteps = Vue.extend({
     })
   },
   methods: {
+    onUpdate () {
+      console.log('onupdate')
+      this.lines = this.getLines()
+    },
     getChildren () {
       const slots = this.$slots.default
       if (slots == null) {

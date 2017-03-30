@@ -51,6 +51,12 @@ Aurora.warning = push.bind(window, 'warning')
 Aurora.success = push.bind(window, 'success')
 Aurora.loading = push.bind(window, 'loading')
 
+Vue.use({
+  install (Vue, options) {
+    Vue.prototype.$message = Aurora.message
+  }
+})
+
 Aurora.ticker = ticker
 
 window.Aurora = Aurora

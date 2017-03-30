@@ -3,7 +3,7 @@
   top: 4px;
   left: 0;
   width: 100%;
-  text-align: center;
+  text-align: right;
   pointer-events: none;
   z-index: $zindex-message;
 }
@@ -14,89 +14,127 @@
 
 .au-message-inner {
   display: inline-block;
+  width: $message-width;
+  height: $message-height;
   pointer-events: all;
   box-shadow: $message-shadow;
   line-height: 40px;
-  background-color: $color-white;
-  font-size: $fontsize-default;
-  border: 1px solid $color-border;
+  color: $color-white;
+  font-weight: 600;
   position: relative;
   clear: both;
   text-align: center;
   margin: 10px;
 }
 
+.au-message-success {
+  .au-message-inner {
+    background-color: rgba($color-success, 0.95);
+  }
+}
+
+.au-message-danger, .au-message-error {
+  .au-message-inner {
+    background-color: rgba($color-danger, 0.95);
+  }
+}
+
+.au-message-warning {
+  .au-message-inner {
+    background-color: rgba($color-warning, 0.95);
+  }
+}
+
+.au-message-info, .au-message-loading {
+  .au-message-inner {
+    background-color: rgba($color-info, 0.95);
+  }
+}
+
 .au-message-icon {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   float: left;
-  @include flex-center-center();
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 10px;
   .au-icon {
-    font-size: $fontsize-large-extra;
+    font-size: 28px;
     color: $color-white;
   }
 }
 
-.au-message-close {
-  width: 40px;
-  height: 40px;
-  @include flex-center-center();
+.au-message-content {
+  padding: 10px;
+  margin-right: $message-button-width;
+  text-align: left;
+  margin-left: 60px;
+  overflow: hidden;
+}
+
+.au-message-title {
+  font-size: $fontsize-default;
+  line-height: ($fontsize-default * 1.2);
+  font-weight: bold;
+  margin-bottom: 5px;
+  @include text-overflowing();
+}
+
+.au-message-desc {
+  font-size: $fontsize-small;
+  line-height: ($fontsize-small * 1.2);
+  height: ($fontsize-small * 1.2) * 2;
+  overflow: hidden;
+}
+
+.au-message-only-desc .au-message-desc {
+  height: ($fontsize-small * 1.2) * 4;
+}
+
+.au-message-buttons {
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+  width: $message-button-width;
+  height: $message-height;
   position: absolute;
   top: 0;
   right: 0;
-  .au-icon {
-    font-size: $fontsize-medium;
-    color: $color-black-light-extra;
-    cursor: pointer;
-    &:hover {
-      color: $color-primary;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.au-message-button {
+  @include flex-center-center();
+  font-size: $fontsize-small;
+  color: $color-white;
+  flex: 1;
+  transition: background-color $transition-during;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
-.au-message-icon-success {
-  background-color: $color-success;
-}
-
-.au-message-icon-info {
-  background-color: $color-info;
-}
-
-.au-message-icon-warning {
-  background-color: $color-warning;
-}
-
-.au-message-icon-danger {
-  background-color: $color-danger;
-}
-
-.au-message-content {
-  padding: 0 10px;
-  margin-right: 40px;
-  min-width: 260px;
-  @include text-overflowing();
-  text-align: left;
-  color: $color-silver;
-}
-
 .message-fade-enter {
-  transform: translateY(-10px);
-  opacity: 0;
+  transform: translateX($message-width);
 }
 
 .message-fade-enter-to {
-  transform: translateY(0);
-  opacity: 1;
-  transition: transform $transition-during, opacity $transition-during;
+  transform: translateX(0);
+  transition: transform $message-transition-during;
 }
 
 .message-fade-leave {
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateX(0);
 }
 
 .message-fade-leave-to {
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: transform $transition-during, opacity $transition-during;
+  transform: translateX($message-width);
+  transition: transform $message-transition-during;
 }

@@ -4,14 +4,23 @@ const AuMessage = Vue.extend({
   data () {
     return {
       type: 'default',
+      title: '提示信息',
       message: '',
       timer: null,
-      isShow: false
+      isShow: false,
+      options: {}
     }
   },
   computed: {
-    classObject () {
-      return [`au-message-${this.type}`]
+    cls () {
+      const cls = [`au-message-${this.type}`]
+      if (!this.title) {
+        cls.push('au-message-only-desc')
+      }
+      return cls
+    },
+    buttons () {
+      return this.options && this.options.buttons || []
     }
   },
   mounted () {
