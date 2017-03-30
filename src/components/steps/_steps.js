@@ -26,7 +26,7 @@ const AuSteps = Vue.extend({
         return child instanceof AuStep
       })
     }
-  }
+  },
   mounted () {
     this.lines = this.getLines()
   },

@@ -27,29 +27,37 @@ block content
           {
             data () {
               return {
-                message: '提示信息',
+                title: '',
+                message: '提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息',
                 func: null
               }
             },
             methods: {
               showInfo () {
-                Aurora.info(this.message)
+                this.$message('info', this.title, this.message, {
+                  buttons: [{
+                    title: '确定',
+                    callback: () => {
+                      console.log('fuck you')
+                    }
+                  }]
+                })
               },
               showDanger () {
-                Aurora.danger(this.message)
+                this.$message('error', this.title, this.message)
               },
               showSuccess () {
-                Aurora.success(this.message)
+                this.$message('success', this.title, this.message)
               },
               showWarning () {
-                Aurora.warning(this.message)
+                this.$message('warning', this.title, this.message)
               },
               showLoading () {
                 if (this.func) {
                   this.func()
                   this.func = null
                 } else {
-                  this.func = Aurora.loading(this.message)
+                  this.func = this.$message('loading', this.title, this.message)
                 }
               }
             }

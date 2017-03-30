@@ -15,7 +15,6 @@ $color-success:             #00D397;
 $color-warning:             #FFCC01;
 $color-danger:              #FF4E4C;
 
-
 $color-black:               #000000;
 $color-black-light:         #222222;
 $color-black-light-extra:   #333333;
@@ -153,7 +152,6 @@ $select-mini-fontsize:     $size-mini-fontsize;
 // -------------------------
 $transition-during:         0.25s;
 
-
 // z-index
 // -------------------------
 $zindex-popup:              5000;
@@ -177,7 +175,11 @@ $popup-shadow:              0 1px 5px rgba($color-black-light, 0.2);
 
 // Message
 // -------------------------
+$message-width:             280px;
+$message-height:            74px;
 $message-shadow:            0 1px 5px rgba($color-black-light, 0.2);
+$message-transition-during: 0.5s;
+$message-button-width:      56px;
 
 
 // Tabs

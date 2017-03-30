@@ -1,5 +1,5 @@
 const AuTag = Vue.extend({
-  template: require('./_tag.jade')
+  template: require('./_tag.jade'),
   props: {
     color: {
       type: String,

@@ -17,6 +17,9 @@ const AuMessageCenter = Vue.extend({
   },
   methods: {
     createMessage (data) {
+      if (!data.title) {
+        delete data.title
+      }
       const message = new AuMessage({
         data
       })
@@ -54,12 +57,18 @@ export default AuMessageCenter
 
 var messageCenter
 
-export function push (type, message) {
+export function push (type, title, message, options) {
+  if (message == null || typeof message !== 'string') {
+    options = message
+    message = title
+    title = ''
+  }
+
   if (messageCenter == null) {
     messageCenter = (new AuMessageCenter()).$mount(document.createElement('div'))
   }
 
   return messageCenter.push({
-    type, message
+    type, title, message, options
   })
 }
