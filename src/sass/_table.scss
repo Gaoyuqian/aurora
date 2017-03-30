@@ -14,10 +14,6 @@
   overflow: auto;
 }
 
-.au-table-loading {
-  min-height: 200px;
-}
-
 .au-table table {
   width: 100%;
   border-collapse: collapse;
@@ -53,13 +49,11 @@
   @include fullscreen();
   @include flex-center-center();
   background-color: rgba($color-white, 0.5);
-  border: 1px solid $color-border;
-  border-top: none;
 
   > div {
-    width: 6px;
-    height: 40px;
-    margin: 0 5px;
+    width: 3px;
+    height: 20px;
+    margin: 0 2px;
     animation: table-loading-animate 1.2s infinite ease-in-out;
 
     &:nth-child(2) {
