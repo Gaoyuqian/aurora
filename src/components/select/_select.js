@@ -209,8 +209,12 @@ const AuSelect = Vue.extend({
         this.text = label
       }
 
-      if (!this.isEmptyValue() && this.filter) {
-        this.textModel = this.text
+      if (this.filter) {
+        if (!this.isEmptyValue()) {
+          this.textModel = this.text
+        } else {
+          this.textModel = ''
+        }
       }
     },
     isEmptyValue () {
