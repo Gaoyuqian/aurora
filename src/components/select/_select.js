@@ -126,9 +126,10 @@ const AuSelect = Vue.extend({
       if (this.selected.length > 0) {
         let width = Math.max(10, this.getTextWidth(this.textModel, `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`))
         width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + 20
+        width = Math.min(this.$el.getBoundingClientRect().width - 40, width)
         text.style.width = `${width}px`;
       } else {
-        text.style.width = 'auto';
+        text.style.width = '100%';
       }
     }
     this.$nextTick(() => {

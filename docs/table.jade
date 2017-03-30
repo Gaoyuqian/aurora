@@ -38,7 +38,7 @@ block content
               nowrap
             )
               template(scope="scope")
-                au-button(type="success", size="small", @click.native="editHandler(scope.index, scope.data)")|添加
+                au-button(type="success", size="small", href="#")|添加
                 au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
                 au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
                 au-button(type="warning", size="small", @click.native="editHandler(scope.index, scope.data)")|更新

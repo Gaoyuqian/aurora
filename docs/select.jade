@@ -127,9 +127,9 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-flex
-            au-item(grow="1")
+            au-item(span="12")
               au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
-            au-item(grow="1")
+            au-item(span="12")
               au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
 
       .docs-panel
