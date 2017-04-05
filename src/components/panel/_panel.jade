@@ -4,9 +4,9 @@ div.au-panel
       .au-panel-title
         au-icon(:icon="icon", v-if="icon")
         |{{ title }}
-        slot(name="heading-right")
 
     .au-panel-heading-right
+      slot(name="heading-right")
       .au-panel-collapse-icon(v-if="collapse", @click="onCollapseChange")
         au-icon(icon="plus", v-if="!model")
         au-icon(icon="minus", v-if="model")

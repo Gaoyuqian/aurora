@@ -17,7 +17,7 @@ const AuSelect = Vue.extend({
       type: [Number, String, Array],
       required: true,
       validator (value) {
-        if (this.mutiple) {
+        if (this.multiple) {
           return Array.isArray(value)
         }
         return true
@@ -27,7 +27,7 @@ const AuSelect = Vue.extend({
       type: String,
       default: '请选择'
     },
-    mutiple: {
+    multiple: {
       type: Boolean,
       default: false
     },
@@ -53,14 +53,15 @@ const AuSelect = Vue.extend({
       active: false,
       textModel: '',
       focusOption: null,
-      interval: null
+      interval: null,
+      timestamp: new Date()
     }
   },
   computed: {
     selected () {
-      this.value
+      this.timestamp
 
-      if (this.mutiple) {
+      if (this.multiple) {
         return this.value.map((value) => {
           var label = this.getLabel(value)
           return { label, value }
@@ -99,8 +100,12 @@ const AuSelect = Vue.extend({
 
     this.$on('register.option', (child) => {
       this.registeredChild[child._uid] = child
+      if (child.value == null) {
+        console.error('[AuSelect] option value is ${child.value}')
+      }
       this.setOptionActive()
       this.calcText()
+      this.timestamp = new Date()
     })
 
     this.$on('unregister.option', (child) => {
@@ -120,7 +125,7 @@ const AuSelect = Vue.extend({
     })
   },
   updated () {
-    if (this.mutiple && this.filter) {
+    if (this.multiple && this.filter) {
       const text = this.$refs.text
       const style = window.getComputedStyle(text)
       if (this.selected.length > 0) {
@@ -146,7 +151,7 @@ const AuSelect = Vue.extend({
   methods: {
     clearValueHandler ($event) {
       $event.stopPropagation()
-      if (this.mutiple) {
+      if (this.multiple) {
         this.$emit('input', [])
       } else {
         this.$emit('input', '')
@@ -154,7 +159,7 @@ const AuSelect = Vue.extend({
     },
     selectValueHandler (value, child) {
       this.addValue(value, child)
-      if (!this.mutiple) {
+      if (!this.multiple) {
         this.hideOptions()
         return
       }
@@ -168,7 +173,7 @@ const AuSelect = Vue.extend({
       })
     },
     unselectValueHandler (value, child) {
-      if (!this.mutiple) {
+      if (!this.multiple) {
         this.hideOptions()
         return
       }
@@ -218,13 +223,13 @@ const AuSelect = Vue.extend({
       }
     },
     isEmptyValue () {
-      return this.mutiple ? this.value.length === 0 : this.value === ''
+      return this.multiple ? this.value.length === 0 : this.value === ''
     },
     addValue (value, child) {
       if (this.disabled) {
         return
       }
-      if (this.mutiple) {
+      if (this.multiple) {
         this.$emit('input', this.value.concat(value))
       } else {
         this.$emit('input', value)
@@ -282,7 +287,7 @@ const AuSelect = Vue.extend({
     },
     setOptionActive () {
       var child
-      const value = this.mutiple ? this.value : [this.value]
+      const value = this.multiple ? this.value : [this.value]
       for (let key in this.registeredChild) {
         child = this.registeredChild[key]
         child.setActive(value.indexOf(child.value) > -1, this)
@@ -301,7 +306,7 @@ const AuSelect = Vue.extend({
 
       switch ($event.key) {
         case 'Backspace':
-          if (this.mutiple && !this.textModel && this.value.length > 0) {
+          if (this.multiple && !this.textModel && this.value.length > 0) {
             this.value.splice(this.value.length - 1, 1)
             this.$emit('input', this.value)
             this.$nextTick(this.$refs.popup.calPosition)
@@ -348,7 +353,7 @@ const AuSelect = Vue.extend({
               this.selectValueHandler(this.focusOption.value, this.focusOption)
             }
           }
-          if (!this.mutiple) {
+          if (!this.multiple) {
             this.$refs.text.blur()
           }
           break

@@ -13,3 +13,7 @@
 .text-danger {
   color: $color-danger;
 }
+.text-mute {
+  color: $color-gray-light;
+  cursor: not-allowed;
+}

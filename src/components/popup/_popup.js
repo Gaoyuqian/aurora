@@ -104,7 +104,7 @@ const AuPopup = Vue.extend({
     getTop () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateTop = relateElem.getBoundingClientRect().top
+      const relateTop = relateElem.getBoundingClientRect().top + window.scrollY
       const relateHeight = relateElem.offsetHeight
       const elemHeight = this.$el.offsetHeight
       const minTop = relateTop - elemHeight
@@ -182,7 +182,7 @@ const AuPopup = Vue.extend({
     getLeft () {
       const position = this.position
       const relateElem = this.relateElem
-      const relateLeft = relateElem.getBoundingClientRect().left
+      const relateLeft = relateElem.getBoundingClientRect().left + window.scrollX
       const relateWidth = relateElem.offsetWidth
       const elemWidth = this.$el.offsetWidth
       const minLeft = relateLeft - elemWidth

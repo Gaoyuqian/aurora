@@ -45,7 +45,7 @@ block content
             au-item
               au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
             au-item
-              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", clearable)
+              au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级", clearable)
       .docs-panel
         .docs-panel-content
         .docs-code
@@ -60,7 +60,7 @@ block content
         .docs-panel-row
           au-flex
             au-item(grow="1")
-              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+              au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级")
 
       .docs-panel
         .docs-panel-content
@@ -90,16 +90,16 @@ block content
               au-flex(column, gutter="10")
                 au-item(span="12")
                   au-select(size="large", v-model="form.class", :options="options", placeholder="请选择班级")
-                  au-select(mutiple, size="large", v-model="form.classes", :options="options", placeholder="请选择班级")
+                  au-select(multiple, size="large", v-model="form.classes", :options="options", placeholder="请选择班级")
                 au-item(span="12")
                   au-select(size="default", v-model="form.class", :options="options", placeholder="请选择班级")
-                  au-select(mutiple, size="default", v-model="form.classes", :options="options", placeholder="请选择班级")
+                  au-select(multiple, size="default", v-model="form.classes", :options="options", placeholder="请选择班级")
                 au-item(span="12")
                   au-select(size="small", v-model="form.class", :options="options", placeholder="请选择班级")
-                  au-select(mutiple, size="small", v-model="form.classes", :options="options", placeholder="请选择班级")
+                  au-select(multiple, size="small", v-model="form.classes", :options="options", placeholder="请选择班级")
                 au-item(span="12")
                   au-select(size="mini", v-model="form.class", :options="options", placeholder="请选择班级")
-                  au-select(mutiple, size="mini", v-model="form.classes", :options="options", placeholder="请选择班级")
+                  au-select(multiple, size="mini", v-model="form.classes", :options="options", placeholder="请选择班级")
 
       .docs-panel
         .docs-panel-content
@@ -115,7 +115,7 @@ block content
         .docs-panel-row
           au-flex
             au-item(grow="1")
-              au-select(disabled, mutiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+              au-select(disabled, multiple, v-model="form.classes", :options="options", placeholder="请选择班级")
             au-item(grow="1")
               au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
 
@@ -130,7 +130,7 @@ block content
             au-item(span="12")
               au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
             au-item(span="12")
-              au-select(mutiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
+              au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
 
       .docs-panel
         .docs-panel-content
@@ -169,7 +169,7 @@ block script
               default: '请选择'
             },
             {
-              name: 'mutiple',
+              name: 'multiple',
               desc: '是否使用多选, 若设置为true, v-model需要绑定数组对象',
               type: 'Boolean',
               default: 'false'
@@ -183,34 +183,39 @@ block script
           ],
           form: {
               'class': '',
-              'classes': []
-            },
-            options: [
-              {
-                label: '三年一班',
-                value: '1'
-              },
-              {
-                label: '三年二班',
-                value: '2'
-              },
-              {
-                label: '三年三班',
-                value: '3'
-              },
-              {
-                label: '三年四班',
-                value: '4'
-              },
-              {
-                label: '三年五班',
-                value: '5'
-              },
-              {
-                label: '三年六班',
-                value: '6'
-              }
-            ]
+              'classes': ['1', '2']
+          },
+          options: []
         }
+      },
+      created () {
+        setTimeout(() => {
+          this.options = [
+            {
+              label: '三年一班',
+              value: '1'
+            },
+            {
+              label: '三年二班',
+              value: '2'
+            },
+            {
+              label: '三年三班',
+              value: '3'
+            },
+            {
+              label: '三年四班',
+              value: '4'
+            },
+            {
+              label: '三年五班',
+              value: '5'
+            },
+            {
+              label: '三年六班',
+              value: '6'
+            }
+          ]
+        }, 2000)
       }
     })

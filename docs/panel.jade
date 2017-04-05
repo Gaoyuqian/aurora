@@ -16,6 +16,8 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-panel(title="新页面", collapse, v-model="isCollapse")
+            div(slot="heading-right")
+              |abc
             div|哈哈
             div(slot="footer", style="text-align:right")
               au-button(type="default", size="small")|取消

@@ -4,21 +4,21 @@ const AuOption = Vue.extend({
   template: require('./_option.jade'),
   props: {
     label: String,
-    value: [String, Number]
+    value: [String, Number, Object]
   },
   data () {
     return {
       active: false,
       isHide: false,
       isFocus: false,
-      mutiple: false
+      multiple: false
     }
   },
   computed: {
     cls () {
       const cls = []
-      if (this.mutiple) {
-        cls.push('au-option-mutiple')
+      if (this.multiple) {
+        cls.push('au-option-multiple')
       }
       if (this.active) {
         cls.push('active')
@@ -53,7 +53,7 @@ const AuOption = Vue.extend({
       this.isFocus = false
     },
     setActive (isActive, select) {
-      this.mutiple = select.mutiple
+      this.multiple = select.multiple
       this.active = isActive
     },
     setFocus (isFocus) {

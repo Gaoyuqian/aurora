@@ -6,12 +6,12 @@ const AuCheckbox = Vue.extend({
   },
   props: {
     value: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default () {
         return true
       }
     },
-    checkedValue: [String, Number, Boolean, Array],
+    checkedValue: [String, Number, Boolean, Array, Object],
     label: String,
     indeterminate: {
       type: Boolean,

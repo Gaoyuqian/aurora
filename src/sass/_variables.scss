@@ -154,9 +154,8 @@ $transition-during:         0.25s;
 
 // z-index
 // -------------------------
-$zindex-popup:              5000;
-$zindex-popup-header:       6000;
-$zindex-popup-sidebar:      6000;
+$zindex-popup:              15000;
+$zindex-layout:             6000;
 $zindex-modal:              7000; // 7000~9999 for modal
 $zindex-message:            10000;
 

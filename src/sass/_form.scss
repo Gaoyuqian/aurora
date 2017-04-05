@@ -1,4 +1,9 @@
+.au-form {
+  user-select: none;
+}
+
 .au-form-group {
+  user-select: all;
   margin-bottom: 10px;
 
   &:last-child {
@@ -50,7 +55,6 @@
     margin: 0 5px;
     width: auto;
     display: inline-block;
-    min-width: 150px;
     white-space: nowrap;
     vertical-align: top;
 

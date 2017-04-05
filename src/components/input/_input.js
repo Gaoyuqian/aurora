@@ -19,7 +19,16 @@ const AuInput = Vue.extend({
       type: String,
       default: 'default'
     },
-    icon: String
+    icon: String,
+    maxlength: [String, Number],
+    width: [String, Number],
+    resize: {
+      type: String
+      default: 'vertical',
+      validator (value) {
+        return ['none', 'both', 'horizontal', 'vertical'].indexOf(value) > -1
+      }
+    }
   },
   computed: {
     model: {
@@ -35,6 +44,18 @@ const AuInput = Vue.extend({
         active: this.active,
         disabled: this.disabled
       }
+    },
+    style () {
+      const style = {}
+      if (this.width) {
+        let width = String(this.width)
+        style.width = width + 'px'
+      }
+
+      if (this.type === 'textarea') {
+        style.resize = this.resize
+      }
+      return style
     },
     inputClass () {
       const classObject = []

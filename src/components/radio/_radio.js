@@ -7,8 +7,8 @@ const AuRadio = Vue.extend({
     event: 'input'
   },
   props: {
-    checkedValue: [String, Number],
-    value: [String, Number],
+    checkedValue: [String, Number, Object],
+    value: [String, Number, Object],
     label: String,
     disabled: {
       type: Boolean,

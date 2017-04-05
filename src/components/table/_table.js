@@ -135,7 +135,7 @@ const AuTable = Vue.extend({
       h('table', tableContent)
     ]
 
-    if (this.data.length === 0 && !this.loading) {
+    if (this.data.length === 0) {
       children.push(
         h('div', {
           'class': 'au-table-empty'

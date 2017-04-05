@@ -7,7 +7,7 @@ div.au-select(
       |{{ text }}
 
     div.au-select-item(
-      v-if="mutiple",
+      v-if="multiple",
       v-for="s in selected"
     )
       |{{ s.label }}
@@ -22,7 +22,7 @@ div.au-select(
       @keydown="keyDownHandler",
       @keyup="keyUpHandler",
       @click="$event.stopPropagation()",
-      :placeholder="(selected.length === 0 || !mutiple) ? placeholder : ''",
+      :placeholder="(selected.length === 0 || !multiple) ? placeholder : ''",
       :readonly='!active'
     )
   .au-select-right-icon(

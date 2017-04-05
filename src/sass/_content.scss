@@ -13,7 +13,7 @@
   color: $color-white;
   overflow-y: auto;
   position: relative;
-  z-index: $zindex-popup-header;
+  z-index: $zindex-layout;
   &::-webkit-scrollbar {
     display: none;
   }
