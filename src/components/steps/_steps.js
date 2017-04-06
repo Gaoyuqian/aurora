@@ -51,7 +51,6 @@ const AuSteps = Vue.extend({
   },
   methods: {
     onUpdate () {
-      console.log('onupdate')
       this.lines = this.getLines()
     },
     getChildren () {

@@ -145,8 +145,10 @@ const AuSelect = Vue.extend({
     this.$refs.popup.setRelateElem(this.$el, true)
   },
   beforeDestroy () {
-    const $el = this.optionsElem.$el
-    $el.parentElement.removeChild($el)
+    if (this.optionsElem != null) {
+      const $el = this.optionsElem.$el
+      $el.parentElement.removeChild($el)
+    }
   },
   methods: {
     clearValueHandler ($event) {
