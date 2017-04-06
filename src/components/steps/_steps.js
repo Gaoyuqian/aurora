@@ -33,7 +33,7 @@ const AuSteps = Vue.extend({
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onUpdate)
-    window.removedEventListener('scroll', this.onUpdate)
+    window.removeEventListener('scroll', this.onUpdate)
   },
   mounted () {
     this.lines = this.getLines()
