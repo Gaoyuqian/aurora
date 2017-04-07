@@ -65,16 +65,16 @@ const AuPagination = Vue.extend({
       return numbers
     },
     isShowStartArrow () {
-      return this.page > 4
+      return this.numbers[0] > 2
     },
     isShowStartPage () {
-      return this.page > 3
+      return this.numbers[0] > 1
     },
     isShowEndArrow () {
-      return this.page < (this.pageCount - 4)
+      return this.numbers[this.numbers.length - 1] < (this.pageCount - 1)
     },
     isShowEndPage () {
-      return this.page < (this.pageCount - 3)
+      return this.numbers[this.numbers.length - 1] < (this.pageCount)
     }
   },
   data () {

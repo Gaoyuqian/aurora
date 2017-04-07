@@ -23,7 +23,7 @@ const AuInput = Vue.extend({
     maxlength: [String, Number],
     width: [String, Number],
     resize: {
-      type: String
+      type: String,
       default: 'vertical',
       validator (value) {
         return ['none', 'both', 'horizontal', 'vertical'].indexOf(value) > -1
