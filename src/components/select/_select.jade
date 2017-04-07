@@ -23,7 +23,8 @@ div.au-select(
       @keyup="keyUpHandler",
       @click="$event.stopPropagation()",
       :placeholder="(selected.length === 0 || !multiple) ? placeholder : ''",
-      :readonly='!active'
+      :readonly='!active',
+      :disabled="disabled"
     )
   .au-select-right-icon(
   )
