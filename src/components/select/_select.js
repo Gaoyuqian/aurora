@@ -27,22 +27,13 @@ const AuSelect = Vue.extend({
       type: String,
       default: '请选择'
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
+    disabled: Boolean,
     size: {
       type: String,
       default: 'default'
     },
-    filter: {
-      type: [Boolean],
-      default: false
-    },
+    filter: Boolean,
     clearable: Boolean
   },
   data () {
@@ -58,6 +49,9 @@ const AuSelect = Vue.extend({
     }
   },
   computed: {
+    showInput () {
+      return this.filter && !this.disabled
+    },
     selected () {
       this.timestamp
 
@@ -125,8 +119,8 @@ const AuSelect = Vue.extend({
     })
   },
   updated () {
+    const text = this.$refs.text
     if (this.multiple && this.filter) {
-      const text = this.$refs.text
       const style = window.getComputedStyle(text)
       if (this.selected.length > 0) {
         let width = Math.max(10, this.getTextWidth(this.textModel, `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`))
@@ -136,6 +130,8 @@ const AuSelect = Vue.extend({
       } else {
         text.style.width = '100%';
       }
+    } else {
+      text.style.width = '100%';
     }
     this.$nextTick(() => {
       this.$refs.popup.syncWidth()

@@ -17,7 +17,7 @@ div.au-select(
       v-model="textModel",
       type="text",
       ref="text",
-      v-if="filter",
+      v-if="showInput",
       @focus="textFocusHandler",
       @keydown="keyDownHandler",
       @keyup="keyUpHandler",
