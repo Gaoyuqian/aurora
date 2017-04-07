@@ -151,12 +151,16 @@ const AuSelect = Vue.extend({
     }
   },
   methods: {
+    changeValue (value) {
+      this.$emit('input', value)
+      this.$emit('change', value)
+    },
     clearValueHandler ($event) {
       $event.stopPropagation()
       if (this.multiple) {
-        this.$emit('input', [])
+        this.changeValue([])
       } else {
-        this.$emit('input', '')
+        this.changeValue('')
       }
     },
     selectValueHandler (value, child) {
@@ -232,9 +236,9 @@ const AuSelect = Vue.extend({
         return
       }
       if (this.multiple) {
-        this.$emit('input', this.value.concat(value))
+        this.changeValue(this.value.concat(value))
       } else {
-        this.$emit('input', value)
+        this.changeValue(value)
       }
     },
     removeValue (value) {
@@ -245,7 +249,7 @@ const AuSelect = Vue.extend({
       if (pos > -1) {
         this.value.splice(pos, 1)
       }
-      this.$emit('input', this.value.slice())
+      this.changeValue(this.value.slice())
     },
     removeValueHandler ($event, value) {
       $event.stopPropagation()
@@ -310,7 +314,7 @@ const AuSelect = Vue.extend({
         case 'Backspace':
           if (this.multiple && !this.textModel && this.value.length > 0) {
             this.value.splice(this.value.length - 1, 1)
-            this.$emit('input', this.value)
+            this.changeValue(this.value)
             this.$nextTick(this.$refs.popup.calPosition)
           }
           break

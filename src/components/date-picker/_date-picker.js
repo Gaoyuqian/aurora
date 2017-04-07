@@ -89,6 +89,7 @@ const AuDatePicker = Vue.extend({
           value = this.getFormatDatetime(value)
         }
         this.$emit('input', value)
+        this.$emit('change', value)
       }
     },
     datetime () {

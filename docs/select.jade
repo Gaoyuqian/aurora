@@ -19,7 +19,7 @@ block content
         .docs-panel-row
           au-flex(column, gutter="10")
             au-item
-              au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+              au-select(v-model="form.class", :options="options", placeholder="请选择班级", @change="onChange")
 
             au-item
               au-select(v-model="form.class", placeholder="请选择班级")
@@ -217,5 +217,10 @@ block script
             }
           ]
         }, 2000)
+      },
+      methods: {
+        onChange (value) {
+          console.log(value)
+        }
       }
     })
