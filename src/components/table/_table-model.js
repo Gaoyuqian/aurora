@@ -109,7 +109,7 @@ class TableColumn {
           'div',
           {
             'class': {
-              'au-table-expand-icon': true
+              'au-table-expand-icon': true,
               'active': pos > -1
             },
             on: {
@@ -129,7 +129,7 @@ class TableColumn {
           })])
       ]
     } else {
-      content = this.getCtorContent() || this.getAttr(data, prop)
+      content = this.getCtorContent(data, index) || this.getAttr(data, prop)
     }
 
     return h('div', {

@@ -20,7 +20,7 @@ const AuTableBody = Vue.extend({
           childs = [h(
             'td',
             {
-              'class': 'au-table-expand-td'
+              'class': 'au-table-expand-td',
               attrs: {
                 colspan: columnLength - count
               }

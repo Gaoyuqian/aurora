@@ -2,13 +2,11 @@ import AuTableHead from './_table-head.js'
 import AuTableBody from './_table-body.js'
 import AuTableFixed from './_table-fixed.js'
 import TableColumn from './_table-column.js'
-import TableContainer from './_table-container.js'
 import { TableModel } from './_table-model.js'
 
 const AuTable = Vue.extend({
   template: require('./_table.jade'),
   components: {
-    TableContainer,
     AuTableHead,
     AuTableBody,
     AuTableFixed
@@ -96,8 +94,6 @@ const AuTable = Vue.extend({
       this.model = new TableModel(this)
     },
     updateColumns () {
-      console.log('columns')
-      console.log(this.$slots.default)
       this.columns = (this.$slots.default || []).filter((slot) => {
         return slot.componentInstance instanceof TableColumn
       }).map((slot, index) => {
