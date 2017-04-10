@@ -36,12 +36,12 @@ const AuTableFixed = Vue.extend({
           const rect = cell.getBoundingClientRect()
           return sum + rect.width
         }, 0)
+        fixedWidth -= 1 // -1 for border
         this.$refs.fixed.style.width = `${fixedWidth}px`
       })
       this.$refs.bodyWrapper.style.top = `${this.model.tableHeadHeight}px`
     },
     updateScroll (value) {
-      console.log(this.$refs.bodyWrapper, value)
       this.$refs.bodyWrapper.scrollTop = value
     }
   },

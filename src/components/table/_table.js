@@ -20,9 +20,10 @@ const AuTable = Vue.extend({
         return []
       }
     },
-    noHeader: Boolean,
+    noHeader: Boolean, // depre
     loading: Boolean,
-    maxHeight: [String, Number]
+    maxHeight: [String, Number],
+    bordered: Boolean
   },
   data () {
     return {
@@ -44,6 +45,13 @@ const AuTable = Vue.extend({
         'min-width': this.model ? this.model.minWidth : 'auto',
         'max-height': maxHeight
       }
+    },
+    cls () {
+      const cls = []
+      if (this.bordered) {
+        cls.push('au-table-bordered')
+      }
+      return cls
     },
 
     mainColumns () {
@@ -81,10 +89,6 @@ const AuTable = Vue.extend({
       const target = $event.target
       this.model.tableScrollLeft = target.scrollLeft
       this.model.tableScrollTop = target.scrollTop
-      console.log(
-        this.model.tableScrollLeft,
-        this.model.tableScrollTop
-      )
     },
     onUpdateTable () {
       this.timestamp = new Date()
@@ -92,6 +96,8 @@ const AuTable = Vue.extend({
       this.model = new TableModel(this)
     },
     updateColumns () {
+      console.log('columns')
+      console.log(this.$slots.default)
       this.columns = (this.$slots.default || []).filter((slot) => {
         return slot.componentInstance instanceof TableColumn
       }).map((slot, index) => {
@@ -102,6 +108,9 @@ const AuTable = Vue.extend({
   watch: {
     'model.tableScrollLeft' (value) {
       this.$refs.headScroll.$el.scrollLeft = value
+    },
+    data () {
+      this.$nextTick(this.onUpdateTable)
     }
   }
 })

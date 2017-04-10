@@ -30,3 +30,16 @@
   right: 0;
   bottom: 0;
 }
+
+@mixin link-extend($width:10px) {
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -$width;
+    left: -$width;
+    right: -$width;
+    bottom: -$width;
+  }
+}

@@ -1,36 +1,93 @@
 class TableColumn {
-  constructor (column) {
+  constructor (column, tableObj) {
+    this.tableObj = tableObj
     this.originColumn = column
     this.title = column.label
     this.prop = column.attrName
-    this.width = column.width || 80
+    this.width = column.width
     this.fixed = column.fixed
+    this.type = column.type
     this.fixedType = ''
+    if (column.type === 'expand') {
+      if (column.defaultExpandAll) {
+        this.expandRows = this.tableObj.rows.slice()
+      } else {
+        this.expandRows = column.expandRows || []
+      }
+    }
+
+    if (!this.width) {
+      if (column.type === 'checkbox' || column.type === 'expand') {
+        this.width = this.width || '56'
+      } else {
+        this.width = 80
+      }
+    }
+  }
+
+  setAllChecked (column, isChecked) {
+    const table = this.tableObj.table
+    if (isChecked) {
+      column.model = this.tableObj.rows
+    } else {
+      column.model = []
+    }
+
+    table.$nextTick(() => {
+      table.$forceUpdate()
+      table.$emit('select', column.model)
+      table.$emit('select.all', column.model)
+    })
   }
 
   getTitle (h, table) {
+    if (this.type === 'expand') {
+      return null
+    } else if (this.type === 'checkbox') {
+      const column = this.originColumn
+      const checkedCount = column.getCheckedCount()
+      const length = this.tableObj.rows.length
+
+      return h('div', {'class':'au-table-cell'}, [h('au-checkbox', {
+        domProps: {
+          checkedValue: checkedCount === length,
+          indeterminate: checkedCount > 0 && checkedCount < length
+        },
+        on: {
+          input: (value) => {
+            this.setAllChecked(column, value)
+          }
+        }
+      })])
+    }
     return h('div', {
       'class': 'au-table-cell'
     }, this.title)
   }
 
+  getCtorContent (data, index) {
+    const Ctor = this.originColumn.$scopedSlots.default
+    if (!Ctor) {
+      return null
+    }
+    return Ctor({
+      data,
+      index
+    })
+  }
+
+  isExpand (data) {
+    return this.expandRows.indexOf(data) > -1
+  }
+
   getContent (h, data, index, table) {
     const column = this.originColumn
     const prop = this.prop
-    const Ctor = column.$scopedSlots.default
     const vdata = column.$vnode.data
     const style = vdata.staticStyle || vdata.style || {}
     var content
 
-    if (Ctor) {
-      content = Ctor({
-        data,
-        index: index
-      })
-    } else if (column.type === 'checkbox') {
-
-      // TODO: remove following code
-      style.width = style.width || '56px'
+    if (column.type === 'checkbox') {
       content = [h('au-checkbox', {
         domProps: {
           checkedValue: column.isCheckedRow(data)
@@ -38,15 +95,41 @@ class TableColumn {
         on: {
           input: (value) => {
             column.toggleCheckedRow(data, value)
-            this.$nextTick(() => {
-              this.$forceUpdate()
+            this.tableObj.table.$nextTick(() => {
+              this.tableObj.table.$forceUpdate()
               table.$emit('select', column.model)
             })
           }
         }
       })]
+    } else if (column.type === 'expand') {
+      const pos = this.expandRows.indexOf(data)
+      content = [
+        h(
+          'div',
+          {
+            'class': {
+              'au-table-expand-icon': true
+              'active': pos > -1
+            },
+            on: {
+              click: () => {
+                if (pos === -1) {
+                  this.expandRows.push(data)
+                } else {
+                  this.expandRows.splice(pos, 1)
+                }
+              }
+            }
+          },
+          [h('au-icon', {
+            domProps: {
+              icon: 'caret-right'
+            }
+          })])
+      ]
     } else {
-      content = this.getAttr(data, prop)
+      content = this.getCtorContent() || this.getAttr(data, prop)
     }
 
     return h('div', {
@@ -115,7 +198,7 @@ export class TableModel {
   initColumns () {
     const columns = this.table.columns
     this.columns = columns.map((column) => {
-      return new TableColumn(column)
+      return new TableColumn(column, this)
     })
     this.initLeftFixedColumns()
     this.initRightFixedColumns()

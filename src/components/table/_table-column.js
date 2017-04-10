@@ -13,7 +13,9 @@ const AuTableColumn = Vue.extend({
       default: null
     },
     fixed: Boolean,
-    width: [String, Number]
+    width: [String, Number],
+    expandRows: Array,
+    defaultExpandAll: Boolean
   },
   computed: {
     model: {

@@ -31,7 +31,7 @@
 
   th, td {
     font-size: $fontsize-default;
-    border-right: 1px solid $color-border;
+    //border-right: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
     text-align: left;
     min-height: 40px;
@@ -47,12 +47,19 @@
   }
 }
 
+.au-table-bordered {
+  th, td {
+    border-right: 1px solid $color-border;
+  }
+}
+
 .au-table-hidden {
   display: none;
 }
 
 .au-table-cell {
-  display: inline-block;
+  display: block;
+  text-align: left;
   white-space: normal;
   word-break: break-all;
   padding: 0 15px;
@@ -126,7 +133,6 @@
 .au-table-fixed {
   overflow: hidden;
   background-color: $color-white;
-  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.4);
 }
 
 .au-table-fixed-inner {
@@ -148,6 +154,7 @@
 }
 
 .au-table-fixed-left {
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -160,6 +167,7 @@
 }
 
 .au-table-fixed-right {
+  box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   right: 0;
@@ -168,5 +176,26 @@
   .au-table-fixed-inner, .au-table-fixed-body {
     right: 0;
     left: auto;
+  }
+}
+
+.au-table-expand-td {
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  background-color: #f8f8f8;
+}
+
+.au-table-expand-icon {
+  cursor: pointer;
+  .au-icon {
+    transition: transform $transition-during;
+    font-size: 18px;
+    @include link-extend();
+  }
+
+  &.active {
+    .au-icon {
+      transform: rotate(90deg);
+    }
   }
 }

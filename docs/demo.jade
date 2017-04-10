@@ -27,10 +27,27 @@ block content
 
     au-table(:data="data", style="margin-top: 20px;", max-height="400")
       au-table-column(
+        type="expand",
+        :expand-rows="expandRows"
+      )
+        template(scope="scope")
+          |hello world
+          au-steps(active-index="1", dot, v-if="false")
+            au-step(title="title1", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+            au-step(title="第二次风控调用", desc="子标题", icon="home")
+      au-table-column(
+        type="checkbox",
+        v-model="checkedRow"
+      )
+      au-table-column(
         label='姓名',
         attr-name="name",
-        width="200",
-        fixed
+        width="200"
       )
 
       au-table-column(
@@ -77,8 +94,7 @@ block content
       au-table-column(
         label='操作',
         nowrap,
-        width="200",
-        fixed
+        width="200"
       )
         template(scope="scope")
           au-button(type="primary", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑
@@ -92,17 +108,7 @@ block script
       el: '#app',
       mixins,
       data () {
-        return {
-          form: {
-            name: '',
-            password: '',
-            age: '',
-            date: '',
-            datetimerange: ['', '']
-          },
-          page: 1,
-          itemCount: 300,
-          data: [
+        const data = [
             { id: 1, name: 'kevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevin', age: '28' },
             { id: 2, name: 'kevin', age: '27' },
             { id: 3, name: 'kevin', age: '26' },
@@ -120,6 +126,35 @@ block script
             { id: 3, name: 'kevin', age: '26' },
             { id: 4, name: 'kevin', age: '25' }
           ]
+        return {
+          form: {
+            name: '',
+            password: '',
+            age: '',
+            date: '',
+            datetimerange: ['', '']
+          },
+          page: 1,
+          itemCount: 300,
+          checkedRow: [],
+          data,
+          expandRows: [data[1], data[2]]
         }
+      },
+      mounted () {
+        setTimeout(() => {
+          console.log(this.data)
+          this.data = [
+            {
+              id: 999,
+              name: 'lucy'
+            },
+            {
+              id: 1000,
+              name: 'lily'
+            }
+          ]
+          console.log(this.data)
+        }, 1000)
       }
     })
