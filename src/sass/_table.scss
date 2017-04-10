@@ -12,11 +12,13 @@
 .au-table {
   position: relative;
   overflow: auto;
+  border: 1px solid $color-border;
 }
 
 .au-table table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   th, .au-table-head {
     background-color: $color-white-light;
     color: $color-black-light;
@@ -29,11 +31,19 @@
 
   th, td {
     font-size: $fontsize-default;
-    border: 1px solid $color-border;
-    padding: 10px 20px;
+    border-right: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
     text-align: left;
     min-height: 40px;
     line-height: 20px;
+    padding: 10px 0;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+  tr:last-child td {
+    border-bottom: none;
   }
 }
 
@@ -43,6 +53,9 @@
 
 .au-table-cell {
   display: inline-block;
+  white-space: normal;
+  word-break: break-all;
+  padding: 0 15px;
 }
 
 .au-table-loading {
@@ -81,4 +94,79 @@
   @include flex-center-center();
   padding: 10px;
   color: $color-black-light-extra;
+}
+
+
+.table-container-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  .table-container-inner {
+    position: absolute;
+    left: 0;
+    right: auto;
+    top: 0;
+  }
+}
+
+.au-table-head {
+  width: 100%;
+  overflow: hidden;
+}
+
+.au-table-body { }
+
+.au-table-scroll {
+  overflow: auto;
+}
+
+.au-table-fixed {
+  overflow: hidden;
+  background-color: $color-white;
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.4);
+}
+
+.au-table-fixed-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  .au-table-fixed-body {
+    flex: 1;
+  }
+}
+
+.au-table-fixed-body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.au-table-fixed-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  .au-table-fixed-inner, .au-table-fixed-body {
+    left: 0;
+    right: auto;
+  }
+}
+
+.au-table-fixed-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  .au-table-fixed-inner, .au-table-fixed-body {
+    right: 0;
+    left: auto;
+  }
 }

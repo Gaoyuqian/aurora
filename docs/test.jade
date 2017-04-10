@@ -1,7 +1,7 @@
 extends ./_layout
 
 block title
-  |Demo
+  |Test
 
 block content
   au-panel(title="内容")
@@ -25,60 +25,20 @@ block content
           au-form-group
             au-button(native-type='submit', type="primary")|搜索
 
-    au-table(:data="data", style="margin-top: 20px;", max-height="400")
+    au-table(:data="data", style="margin-top: 20px;")
       au-table-column(
         label='姓名',
-        attr-name="name",
-        width="200",
-        fixed
+        attr-name="name"
       )
-
       au-table-column(
         label='年龄',
         attr-name="age",
-        width="800"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
-      )
-
-      au-table-column(
-        label='年龄',
-        attr-name="age"
+        v-if="showAge"
       )
 
       au-table-column(
         label='操作',
-        nowrap,
-        width="200",
-        fixed
+        nowrap
       )
         template(scope="scope")
           au-button(type="primary", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑
@@ -102,24 +62,18 @@ block script
           },
           page: 1,
           itemCount: 300,
+          showAge: false,
           data: [
-            { id: 1, name: 'kevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevin', age: '28' },
+            { id: 1, name: 'kevin', age: '28' },
             { id: 2, name: 'kevin', age: '27' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
-            { id: 3, name: 'kevin', age: '26' },
-            { id: 4, name: 'kevin', age: '25' },
             { id: 3, name: 'kevin', age: '26' },
             { id: 4, name: 'kevin', age: '25' }
           ]
         }
+      },
+      created () {
+        setTimeout(() => {
+          this.showAge = true
+        }, 2000)
       }
     })

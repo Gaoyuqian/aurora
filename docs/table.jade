@@ -11,6 +11,59 @@ block content
       .docs-desc
 
     .docs-section
+      h2|固定列表格
+      .docs-desc
+        p||固定列表格的用法
+
+      template.html
+        .docs-panel-row
+          au-table(:data="data", max-height="400")
+            au-table-column(
+              label="ID",
+              attr-name="id",
+              fixed
+            )
+            au-table-column(
+              label="Name",
+              attr-name="name"
+            )
+            au-table-column(
+              label="Age",
+              attr-name="age",
+              v-if="showAge"
+            )
+            au-table-column(
+              label="操作",
+              nowrap
+            )
+              template(scope="scope")
+                au-button(type="success", size="small", href="#")|添加
+                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
+                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
+                au-button(type="warning", size="small", @click.native="editHandler(scope.index, scope.data)")|更新
+                au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
+      template.js(scoped="scoped")
+        script.
+          {
+            data () {
+              return {
+                isShowLoading: false,
+                data : [
+                  { id: 1, name: 'kevin', age: '28' },
+                  { id: 2, name: 'kevin', age: '27' },
+                  { id: 3, name: 'kevin', age: '26' },
+                  { id: 4, name: 'kevin', age: '25' }
+                ]
+              }
+            }
+          }
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
+
+    .docs-section
       h2|基础表格
       .docs-desc
         p|基础表格的用法
@@ -323,6 +376,18 @@ block script
       { id: 1, name: 'kevin', age: '28' },
       { id: 2, name: 'kevin', age: '27' },
       { id: 3, name: 'kevin', age: '26' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
+      { id: 4, name: 'kevin', age: '25' },
       { id: 4, name: 'kevin', age: '25' }
     ]
     new Vue({

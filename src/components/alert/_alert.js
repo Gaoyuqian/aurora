@@ -24,16 +24,12 @@ const AuAlert = Vue.extend({
         switch (this.type) {
           case 'success':
             return 'check-circle-o'
-            break
           case 'info':
             return 'info-circle'
-            break
           case 'warning':
             return 'exclamation-circle'
-            break
           case 'danger':
             return 'times-circle-o'
-            break
           default:
             return ''
         }

@@ -1,0 +1,8 @@
+.au-table-container
+  table
+    thead
+      tr
+        td(v-for="head in heads")|head
+    tbody
+      tr(v-for="item in data")
+        td|{{ item.column }}
