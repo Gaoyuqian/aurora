@@ -27,22 +27,13 @@ const AuSelect = Vue.extend({
       type: String,
       default: '请选择'
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    multiple: Boolean,
+    disabled: Boolean,
     size: {
       type: String,
       default: 'default'
     },
-    filter: {
-      type: [Boolean],
-      default: false
-    },
+    filter: Boolean,
     clearable: Boolean
   },
   data () {
@@ -58,6 +49,9 @@ const AuSelect = Vue.extend({
     }
   },
   computed: {
+    showInput () {
+      return this.filter && (!this.multiple || !this.disabled)
+    },
     selected () {
       this.timestamp
 
@@ -125,14 +119,18 @@ const AuSelect = Vue.extend({
     })
   },
   updated () {
-    if (this.multiple && this.filter) {
-      const text = this.$refs.text
-      const style = window.getComputedStyle(text)
-      if (this.selected.length > 0) {
-        let width = Math.max(10, this.getTextWidth(this.textModel, `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`))
-        width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + 20
-        width = Math.min(this.$el.getBoundingClientRect().width - 40, width)
-        text.style.width = `${width}px`;
+    const text = this.$refs.text
+    if (text) {
+      if (this.multiple && this.filter) {
+        const style = window.getComputedStyle(text)
+        if (this.selected.length > 0) {
+          let width = Math.max(10, this.getTextWidth(this.textModel, `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`))
+          width += parseFloat(style.paddingLeft) + parseFloat(style.paddingRight) + 20
+          width = Math.min(this.$el.getBoundingClientRect().width - 40, width)
+          text.style.width = `${width}px`;
+        } else {
+          text.style.width = '100%';
+        }
       } else {
         text.style.width = '100%';
       }
@@ -145,8 +143,10 @@ const AuSelect = Vue.extend({
     this.$refs.popup.setRelateElem(this.$el, true)
   },
   beforeDestroy () {
-    const $el = this.optionsElem.$el
-    $el.parentElement.removeChild($el)
+    if (this.optionsElem != null) {
+      const $el = this.optionsElem.$el
+      $el.parentElement.removeChild($el)
+    }
   },
   methods: {
     changeValue (value) {
@@ -234,9 +234,9 @@ const AuSelect = Vue.extend({
         return
       }
       if (this.multiple) {
-        this.$emit('input', this.value.concat(value))
+        this.changeValue(this.value.concat(value))
       } else {
-        this.$emit('input', value)
+        this.changeValue(value)
       }
     },
     removeValue (value) {
@@ -247,9 +247,7 @@ const AuSelect = Vue.extend({
       if (pos > -1) {
         this.value.splice(pos, 1)
       }
-      const value = this.value.slice()
-      this.$emit('input', value)
-      this.$emit('change', value)
+      this.changeValue(this.value.slice())
     },
     removeValueHandler ($event, value) {
       $event.stopPropagation()
@@ -314,8 +312,7 @@ const AuSelect = Vue.extend({
         case 'Backspace':
           if (this.multiple && !this.textModel && this.value.length > 0) {
             this.value.splice(this.value.length - 1, 1)
-            this.$emit('input', this.value)
-            this.$emit('change', this.value)
+            this.changeValue(this.value)
             this.$nextTick(this.$refs.popup.calPosition)
           }
           break

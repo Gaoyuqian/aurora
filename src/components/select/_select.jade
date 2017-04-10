@@ -17,13 +17,14 @@ div.au-select(
       v-model="textModel",
       type="text",
       ref="text",
-      v-if="filter",
+      v-if="showInput",
       @focus="textFocusHandler",
       @keydown="keyDownHandler",
       @keyup="keyUpHandler",
       @click="$event.stopPropagation()",
       :placeholder="(selected.length === 0 || !multiple) ? placeholder : ''",
-      :readonly='!active'
+      :readonly='!active',
+      :disabled="disabled"
     )
   .au-select-right-icon(
   )

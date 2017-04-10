@@ -181,6 +181,12 @@
   border: none;
   font-size: inherit;
   line-height: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.au-select.disabled .au-select-input {
+  cursor: not-allowed;
 }
 
 .au-select-text-hidden {
