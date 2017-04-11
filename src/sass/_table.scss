@@ -31,12 +31,12 @@
 
   th, td {
     font-size: $fontsize-default;
-    //border-right: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
     text-align: left;
     min-height: 40px;
     line-height: 20px;
     padding: 10px 0;
+    overflow: hidden;
 
     &:last-child {
       border-right: none;

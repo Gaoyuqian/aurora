@@ -3,6 +3,7 @@ import AuTableBody from './_table-body.js'
 import AuTableFixed from './_table-fixed.js'
 import TableColumn from './_table-column.js'
 import { TableModel } from './_table-model.js'
+import resizer from '../../utils/_resizer.js'
 
 const AuTable = Vue.extend({
   template: require('./_table.jade'),
@@ -55,7 +56,6 @@ const AuTable = Vue.extend({
       }
       return cls
     },
-
     mainColumns () {
       this.timestamp
       return this.model ?
@@ -70,14 +70,12 @@ const AuTable = Vue.extend({
   },
   mounted () {
     this.$refs.scroll.addEventListener('scroll', this.onScroll)
-    window.addEventListener('scroll', this.calPosition)
-    window.addEventListener('resize', this.calPosition)
+    resizer.add(this.$el, this.calPosition)
     this.$nextTick(this.calPosition)
   },
   beforeDestroy () {
     this.$refs.scroll.removeEventListener('scroll', this.onScroll)
-    window.removeEventListener('scroll', this.calPosition)
-    window.removeEventListener('resize', this.calPosition)
+    resizer.remove(this.$el, this.calPosition)
   },
   methods: {
     calPosition () {
@@ -134,9 +132,14 @@ const AuTable = Vue.extend({
         const headRect = headScroll.$el.getBoundingClientRect()
         this.model.tableHeadHeight = headRect.height
       }
+
+      setTimeout(() => {
+        this.onScroll()
+      }, 100)
     },
-    onScroll ($event) {
-      const target = $event.target
+    onScroll () {
+      const target = this.$refs.scroll
+      console.log(target.scrollLeft, target.scrollTop)
       this.model.tableScrollLeft = target.scrollLeft
       this.model.tableScrollTop = target.scrollTop
     },

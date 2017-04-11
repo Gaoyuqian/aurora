@@ -98,8 +98,8 @@ block content
         fixed
       )
         template(scope="scope")
-          au-button(type="primary", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑
-          au-button(type="danger", size="mini", @click.native="console.log(scope.index, scope.data)")|删除
+          au-button(type="link", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑
+          au-button(type="link", size="mini", @click.native="console.log(scope.index, scope.data)")|删除
 
     au-pagination(v-model="page", :item-count="itemCount", align="right")
 

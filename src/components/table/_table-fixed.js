@@ -42,7 +42,7 @@ const AuTableFixed = Vue.extend({
       this.$refs.bodyWrapper.style.top = `${this.model.tableHeadHeight}px`
     },
     updateScroll (value) {
-      this.$refs.bodyWrapper.scrollTop = value
+      this.$refs.bodyWrapper.scrollTop = this.model.tableScrollTop
     }
   },
   watch: {

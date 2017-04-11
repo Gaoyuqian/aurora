@@ -173,6 +173,8 @@
   background: transparent;
   border-color: transparent;
   color: $color-primary;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   &:hover,
   &:focus {
     color: darken($color-primary, 20%);
