@@ -95,7 +95,6 @@ const AuTable = Vue.extend({
       this.model.tableWidth = rect.width
 
       this.$nextTick(() => {
-        console.log(scrollRect.width, rect.width, scrollWidth)
         if (scrollRect.height < rect.height - scrollWidth) {
           this.$refs.headScroll.$el.style.paddingRight = scrollWidthPx
 
