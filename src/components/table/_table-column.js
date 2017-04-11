@@ -2,6 +2,7 @@ import dispatch from '../../mixins/_dispatch'
 
 const AuTableColumn = Vue.extend({
   mixins: [dispatch],
+  template: '<div></div>',
   props: {
     label: String,
     attrName: String,

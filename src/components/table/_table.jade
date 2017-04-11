@@ -2,12 +2,12 @@
   .au-table-hidden
     slot
 
-  au-table-head(:model="model", ref="headScroll")
+  au-table-head(:model="model", ref="headScroll", v-if="showHeader")
   .au-table-scroll(:style="style", ref="scroll")
     au-table-body(:model="model")
 
-  AuTableFixed(:model="model", fixed-type="left", :fixed-columns="model.leftColumns", v-if="model.leftColumns.length > 0")
-  AuTableFixed(:model="model", fixed-type="right", :fixed-columns="model.rightColumns", v-if="model.rightColumns.length > 0")
+  AuTableFixed(:model="model", fixed-type="left", :fixed-columns="model.leftColumns", v-if="model.leftColumns.length > 0", ref="leftFixed")
+  AuTableFixed(:model="model", fixed-type="right", :fixed-columns="model.rightColumns", v-if="model.rightColumns.length > 0", ref="rightFixed")
 
   .au-table-loading(v-if="loading")
     div

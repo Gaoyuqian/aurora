@@ -26,7 +26,7 @@ const AuTableBody = Vue.extend({
               }
             },
             [
-              h('div', {'class': 'au-table-cell'}, [column.getCtorContent()])
+              h('div', {'class': 'au-table-cell'}, [column.getCtorContent(row, index)])
             ]
           )]
 
@@ -43,7 +43,7 @@ const AuTableBody = Vue.extend({
         }
 
         const content = column.getContent(h, row, index, this)
-        tds.push(h('td', [content]))
+        tds.push(h(column.highlight ? 'th' : 'td', [content]))
       })
       rows.push(h('tr', {}, tds))
       if (addonRow) {

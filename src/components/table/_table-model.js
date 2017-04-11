@@ -7,6 +7,7 @@ class TableColumn {
     this.width = column.width
     this.fixed = column.fixed
     this.type = column.type
+    this.highlight = column.highlight
     this.fixedType = ''
     if (column.type === 'expand') {
       if (column.defaultExpandAll) {
@@ -185,6 +186,7 @@ export class TableModel {
     this.rows = table.data
     this.initColumns()
     this.updateModel()
+    this.showHeader = table.showHeader
     this.tableWidth = null
     this.tableScrollLeft = null
     this.tableScrollTop = null

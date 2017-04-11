@@ -137,8 +137,8 @@ const AuDragModal = Vue.extend({
       document.body.classList.remove('au-drag-modal-dragging')
     },
     onMousemove ($event) {
-      $event.preventDefault()
       if (this.isMoving) {
+        $event.preventDefault()
         this.isDragged = true
         this.setTop(this.getBoundTop(($event.pageY - this.clickPoints.y) + this.originPoints.y))
         this.setLeft(this.getBoundLeft(($event.pageX - this.clickPoints.x) + this.originPoints.x))

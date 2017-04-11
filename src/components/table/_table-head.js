@@ -25,7 +25,14 @@ const AuTableHead = Vue.extend({
 
     return h('div', {
       'class': 'au-table-head'
-    }, [table])
+    }, [h('div', {
+      'class': 'au-table-head-inner'
+    }, [table])])
+  },
+  watch: {
+    'model.tableScrollLeft' (value) {
+      this.$el.querySelector('.au-table-head-inner').scrollLeft = value
+    }
   }
 })
 

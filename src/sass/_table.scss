@@ -122,6 +122,12 @@
 .au-table-head {
   width: 100%;
   overflow: hidden;
+  background-color: $color-white-light;
+}
+
+.au-table-head-inner {
+  width: 100%;
+  overflow: hidden;
 }
 
 .au-table-body { }
@@ -190,7 +196,7 @@
   .au-icon {
     transition: transform $transition-during;
     font-size: 18px;
-    @include link-extend();
+    @include link-extend(20px);
   }
 
   &.active {
