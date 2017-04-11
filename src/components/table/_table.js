@@ -88,6 +88,7 @@ const AuTable = Vue.extend({
 
       const leftFixed = this.$refs.leftFixed
       const rightFixed = this.$refs.rightFixed
+      const headScroll = this.$refs.headScroll
 
       const scrollWidth = this.getScrollWidth()
       const scrollWidthPx = `${scrollWidth}px`
@@ -96,13 +97,17 @@ const AuTable = Vue.extend({
 
       this.$nextTick(() => {
         if (scrollRect.height < rect.height - scrollWidth) {
-          this.$refs.headScroll.$el.style.paddingRight = scrollWidthPx
+          if (headScroll) {
+            headScroll.$el.style.paddingRight = scrollWidthPx
+          }
 
           if (rightFixed) {
             rightFixed.$el.style.right = scrollWidthPx
           }
         } else {
-          this.$refs.headScroll.$el.style.paddingRight = 0
+          if (headScroll) {
+            headScroll.$el.style.paddingRight = 0
+          }
           if (rightFixed) {
             rightFixed.$el.style.right = '0'
           }
@@ -125,8 +130,8 @@ const AuTable = Vue.extend({
         }
       })
 
-      if (this.showHeader) {
-        const headRect = this.$refs.headScroll.$el.getBoundingClientRect()
+      if (headScroll) {
+        const headRect = headScroll.$el.getBoundingClientRect()
         this.model.tableHeadHeight = headRect.height
       }
     },
