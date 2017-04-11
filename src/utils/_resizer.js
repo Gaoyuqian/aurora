@@ -62,7 +62,10 @@ export default {
     if (!element.__resizeListeners__.length) {
       if (attachEvent) element.detachEvent('onresize', resizeListener);
       else {
-        element.__resizeTrigger__.contentDocument.defaultView.removeEventListener('resize', resizeListener);
+        var contentDocument = element.__resizeTrigger__.contentDocument
+        if (contentDocument != null) {
+          element.__resizeTrigger__.contentDocument.defaultView.removeEventListener('resize', resizeListener);
+        }
         element.__resizeTrigger__ = !element.removeChild(element.__resizeTrigger__);
       }
     }

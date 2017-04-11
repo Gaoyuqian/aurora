@@ -133,9 +133,7 @@ const AuTable = Vue.extend({
         this.model.tableHeadHeight = headRect.height
       }
 
-      setTimeout(() => {
-        this.onScroll()
-      }, 100)
+      this.onScroll()
     },
     onScroll () {
       const target = this.$refs.scroll
