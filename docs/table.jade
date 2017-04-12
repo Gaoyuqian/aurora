@@ -218,7 +218,7 @@ block content
         p|基础表格的用法
       template.html(scoped="scoped")
         .docs-panel-row
-          au-table(:data="keyValues", :no-header="true")
+          au-table(:data="keyValues", :show-header="false", bordered)
             au-table-column(
               attr-name="key",
               highlight
@@ -404,10 +404,10 @@ block script
               default: '[]'
             },
             {
-              name: 'no-header',
-              desc: '不显示标题',
+              name: 'show-header',
+              desc: '是否显示标题',
               type: 'Boolean',
-              default: 'false'
+              default: 'true'
             },
             {
               name: 'loading',

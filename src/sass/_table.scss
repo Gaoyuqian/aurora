@@ -42,8 +42,10 @@
       border-right: none;
     }
   }
-  tr:last-child td {
-    border-bottom: none;
+  tr:last-child {
+    th, td {
+      border-bottom: none;
+    }
   }
 }
 
