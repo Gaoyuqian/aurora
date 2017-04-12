@@ -61,7 +61,7 @@ const AuSelect = Vue.extend({
           return { label, value }
         })
       } else {
-        return [this.value]
+        return [{ label: '', value: this.value }]
       }
     },
     classObj () {

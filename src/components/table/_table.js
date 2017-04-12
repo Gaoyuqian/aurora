@@ -137,7 +137,6 @@ const AuTable = Vue.extend({
     },
     onScroll () {
       const target = this.$refs.scroll
-      console.log(target.scrollLeft, target.scrollTop)
       this.model.tableScrollLeft = target.scrollLeft
       this.model.tableScrollTop = target.scrollTop
     },
