@@ -1,7 +1,9 @@
 transition(name="message-fade")
   .au-message(
     :class="cls",
-    v-if="isShow"
+    v-if="isShow",
+    @mouseover="onMouseover",
+    @mouseout="onMouseout"
   )
     .au-message-inner
       .au-message-icon
