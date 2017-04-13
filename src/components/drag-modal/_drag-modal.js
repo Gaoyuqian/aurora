@@ -76,6 +76,8 @@ const AuDragModal = Vue.extend({
     window.removeEventListener('resize', this.reset)
     window.removeEventListener('scroll', this.reset)
 
+    this.$el.parentElement.removeChild(this.$el)
+
     removeModal(this)
   },
   methods: {

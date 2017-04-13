@@ -40,7 +40,7 @@ const AuModal = Vue.extend({
     document.body.appendChild(this.$el)
   },
   beforeDestroy () {
-
+    this.$el.parentElement.removeChild(this.$el)
   },
   methods: {
     clear () {
