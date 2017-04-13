@@ -1,4 +1,7 @@
 import AuMessage from './_message.js'
+
+const MAX_COUNT = 3
+
 const AuMessageCenter = Vue.extend({
   template: require('./_message-center.jade'),
   components: {
@@ -11,9 +14,6 @@ const AuMessageCenter = Vue.extend({
     return {
       messages: []
     }
-  },
-  computed: {
-    classObject () { }
   },
   methods: {
     createMessage (data) {
@@ -39,10 +39,23 @@ const AuMessageCenter = Vue.extend({
       } else {
         this.messages.push(message)
 
-        if (this.messages.length > 3) {
-          this.messages[0].disappear()
+        if (this.messages.length > MAX_COUNT) {
+          let message = this.getFirstUnTouchingMessage()
+          if (message) {
+            message.disappear()
+          }
         }
       }
+    },
+    getFirstUnTouchingMessage () {
+      for (let i = 0, length = this.messages.length; i < length; i++) {
+        const message = this.messages[i]
+        if (!message.isTouching) {
+          return message
+        }
+      }
+
+      return null
     },
     disappearHandler (message) {
       const pos = this.messages.indexOf(message)

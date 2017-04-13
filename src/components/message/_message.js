@@ -1,4 +1,6 @@
 
+const HIDE_CURING = 3000
+
 const AuMessage = Vue.extend({
   template: require('./_message.jade'),
   data () {
@@ -8,6 +10,7 @@ const AuMessage = Vue.extend({
       message: '',
       timer: null,
       isShow: false,
+      isTouching: false,
       options: {}
     }
   },
@@ -25,21 +28,35 @@ const AuMessage = Vue.extend({
   },
   mounted () {
     if (this.type !== 'loading') {
-      this.timer = setTimeout(this.disappear, 3000)
+      this.startDisappear()
     }
     this.isShow = true
   },
   methods: {
-    disappear () {
+    onMouseover () {
+      this.isTouching = true
+      this.clearDisappear()
+    },
+    onMouseout () {
+      this.isTouching = false
+      this.startDisappear()
+    },
+    startDisappear () {
+      this.timer = setTimeout(this.disappear, HIDE_CURING)
+    },
+    clearDisappear () {
       clearTimeout(this.timer)
+    },
+    disappear () {
+      this.clearDisappear()
       this.isShow = false
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.$parent.disappearHandler(this)
         this.$destroy(true)
         if (this.$el.parentNode) {
           this.$el.parentNode.removeChild(this.$el);
         }
-      }, 0)
+      })
     }
   }
 })
