@@ -59,7 +59,9 @@ const AuPopup = Vue.extend({
       this.$el.removeEventListener('mouseout', this.menuOut)
     }
     Aurora.ticker.remove(this.tickerEvent)
-    this.$el.parentElement.removeChild(this.$el)
+    if (this.$el.parentElement != null) {
+      this.$el.parentElement.removeChild(this.$el)
+    }
   },
   methods: {
     tickerEvent () {
