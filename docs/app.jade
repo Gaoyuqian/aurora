@@ -4,29 +4,96 @@ block title
   |App
 
 block content
-  .docs-heading
-    h1|AuApp
-    .docs-desc
+  au-panel
 
-  .docs-section
-    h2|基础应用
-    .docs-desc
-      p|基础应用的用法
-    .docs-panel
-      .docs-panel-row
-        au-app
+    .docs-section
+      .docs-desc
+        .markdown-body
+          :markdown-it
+            # 基础组件
+            ## `au-app`
+            `au-app`组件本身只是一个简单的根组件，内部可以包含任何组件。
+
+    .docs-section
+      .docs-desc
+        .markdown-body
+          :markdown-it
+            ## `au-header`
+            `au-header`组件为页面的header。
+            有3个具名`slot`：
+            * `logo` header左侧logo位
+            * `content-left` header左边
+            * `content-right` header右边
+            ### 例子
+      template.html(scoped="scoped")
+        // style为方便测试添加的样式
+        au-app(style="border: 1px solid black;")
           au-header
-            div(slot="logo")|Hello
-          au-sideber
-            au-menu
-          au-container
-            au-panel
+            h1(slot="logo") logo
+            au-menu(slot="content-left")
+              au-menu-item(href="#") 左
+              au-menu-item(href="#") 左
+              au-menu-item(href="#") 左
+            au-menu(slot="content-right")
+              au-menu-item(href="#") 右
+              au-menu-item(href="#") 右
+              au-menu-item(href="#") 右
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
+
+    .docs-section
+      .docs-desc
+        .markdown-body
+          :markdown-it
+            ## `au-content`
+            有2个具名slot
+            * `sidebar` 侧边栏
+            * `container` 内容
+            > 现在并没有提供API来隐藏`sidebar`，所以请填充`sidebard`的内容
+            ### 例子
+      template.html(scoped="scoped")
+        // style为方便测试添加的样式
+        au-app(style="height: 500px; border: 1px solid black;")
+          au-header
+            h1(slot="logo") logo
+            au-menu(slot="content-left")
+              au-menu-item(href="#") 左
+              au-menu-item(href="#") 左
+              au-menu-item(href="#") 左
+            au-menu(slot="content-right")
+              au-menu-item(href="#") 右
+              au-menu-item(href="#") 右
+              au-menu-item(href="#") 右
+          au-content
+            div(slot="sidebar")
+              au-menu-group(title="菜单1")
+                au-menu
+                  au-menu-item(href="#")|菜单1-1
+                  au-menu-item(href="#")|菜单1-2
+                  au-menu-item(href="#")|菜单1-3
+                  au-menu-item(href="#")|菜单1-4
+              au-menu-group(title="菜单2")
+                au-menu
+                  au-menu-item(href="#")|菜单2-1
+                  au-menu-item(href="#")|菜单2-2
+                  au-menu-item(href="#")|菜单2-3
+                  au-menu-item(href="#")|菜单2-4
+            div(slot="container")
+              | 内容区域
+      .docs-panel
+        .docs-panel-content
+        .docs-code
+          docs-code.html
+          docs-code.js
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins: [ attrMixins ],
+      mixins,
       data () {
         return {
           page: 1,

@@ -11,6 +11,7 @@ html.no-js
     link(rel='stylesheet', href="../src/sass/aurora.css")
     link(rel='stylesheet', href="./docs.css")
     link(rel='stylesheet', href="../lib/highlight.github.min.css")
+    link(rel='stylesheet', href="./css/markdown.css")
     script(src="../lib/highlight.min.js")
     script(src="../lib/beautify.min.js")
     script(src="../lib/beautify-css.min.js")
@@ -40,6 +41,7 @@ html.no-js
         au-menu(slot="content-left", menu-trigger="click", :selected="selected")
           au-menu-item(href="flex.html", value="flex")|Flex
           au-menu-item(href="button.html", value="button")|Button
+          au-menu-item(href="App.html", value="App")|App
 
           au-menu-item|表单
             au-menu
@@ -83,6 +85,7 @@ html.no-js
           au-menu-group(title="基础")
             au-menu(:selected="selected")
               au-menu-item(href="install.html", value="install")|安装
+              au-menu-item(href="App.html", value="App")|App
               au-menu-item(href="flex.html", value="flex")|Flex
               au-menu-item(href="button.html", value="button")|Button
 
