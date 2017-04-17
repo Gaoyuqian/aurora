@@ -19,6 +19,10 @@ const AuFlex = Vue.extend({
     gutter: {
       type: [String, Number],
       default: 0
+    },
+    direction: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -31,6 +35,10 @@ const AuFlex = Vue.extend({
 
       if (this.column) {
         style['flex-direction'] = 'column'
+      }
+
+      if (this.direction) {
+        style['flex-direction'] = this.direction
       }
 
       if (this.wrap === true || this.wrap === '') {
