@@ -98,7 +98,7 @@ class TableColumn {
             column.toggleCheckedRow(data, value)
             this.tableObj.table.$nextTick(() => {
               this.tableObj.table.$forceUpdate()
-              table.$emit('select', column.model)
+              this.tableObj.table.$emit('select', column.model)
             })
           }
         }
@@ -115,11 +115,15 @@ class TableColumn {
             },
             on: {
               click: () => {
+                var expanded
                 if (pos === -1) {
+                  expanded = true
                   this.expandRows.push(data)
                 } else {
+                  expanded = false
                   this.expandRows.splice(pos, 1)
                 }
+                this.tableObj.table.$emit('expand', expanded, data)
               }
             }
           },
