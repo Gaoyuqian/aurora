@@ -4,6 +4,7 @@ class TableColumn {
     this.originColumn = column
     this.title = column.label
     this.prop = column.attrName
+    this.originWidth = column.width
     this.width = column.width
     this.fixed = column.fixed
     this.type = column.type
@@ -19,9 +20,9 @@ class TableColumn {
 
     if (!this.width) {
       if (column.type === 'checkbox' || column.type === 'expand') {
-        this.width = this.width || '56'
+        this.originWidth = this.width = this.width || '56'
       } else {
-        this.width = 80
+        this.width = '80'
       }
     }
   }
@@ -42,6 +43,9 @@ class TableColumn {
   }
 
   getTitle (h, table) {
+    if (this.type === 'expand') {
+      return null
+    }
     if (this.type === 'checkbox') {
       const column = this.originColumn
       const checkedCount = column.getCheckedCount()
@@ -256,6 +260,25 @@ export class TableModel {
     })
 
     return h('colgroup', cols)
+  }
+
+  updateColumnsWidth () {
+    var tableWidth = this.tableWidth
+    const noWidthColumns = []
+    this.columns.forEach((column) => {
+      if (!column.originWidth) {
+        noWidthColumns.push(column)
+      } else {
+        tableWidth -= parseFloat(column.originWidth)
+      }
+    })
+
+    if (noWidthColumns.length > 0) {
+      tableWidth = tableWidth / noWidthColumns.length
+      noWidthColumns.forEach((column) => {
+        column.width = String(tableWidth)
+      })
+    }
   }
 }
 

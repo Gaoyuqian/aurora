@@ -26,6 +26,7 @@
   }
 
   td {
+    background-color: $color-white;
     color: $color-black-light-extra;
   }
 
@@ -188,9 +189,12 @@
 }
 
 .au-table-expand-td {
-  border-left-color: transparent !important;
-  border-right-color: transparent !important;
-  background-color: #f8f8f8;
+  border-left-color: #f8f8f8 !important;
+  border-right-color: #f8f8f8 !important;
+  background-color: #f8f8f8 !important;
+  & > .au-table-cell {
+    padding: 0 74px;
+  }
 }
 
 .au-table-expand-icon {
