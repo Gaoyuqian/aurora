@@ -79,6 +79,9 @@ const AuTable = Vue.extend({
   },
   methods: {
     calPosition () {
+      if (this._isDestroyed) {
+        return
+      }
       const scroll = this.$refs.scroll
       const table = scroll.querySelector('table')
       const scrollRect = scroll.getBoundingClientRect()

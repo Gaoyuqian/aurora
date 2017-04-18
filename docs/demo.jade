@@ -27,19 +27,12 @@ block content
 
     au-table(:data="data", style="margin-top: 20px;", max-height="400", bordered)
       au-table-column(
-        type="expand",
-        :expand-rows="expandRows"
+        type="expand"
       )
         template(scope="scope")
-          |{{scope.data.name}}-hello world
-          au-steps(active-index="1", dot, v-if="false")
-            au-step(title="title1", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
-            au-step(title="第二次风控调用", desc="子标题", icon="home")
+          au-table(:data="scope.data.expand")
+            au-table-column(label="Name", attr-name="name")
+
       au-table-column(
         type="checkbox",
         v-model="checkedRow"
@@ -110,7 +103,7 @@ block script
       mixins,
       data () {
         const data = [
-            { id: 1, name: 'kevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevin', age: '28' },
+            { id: 1, name: 'kevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevin', age: '28', expand: [{name: 'a'}, {name: 'b'}] },
             { id: 2, name: 'kevin', age: '27' },
             { id: 3, name: 'kevin', age: '26' },
             { id: 4, name: 'kevin', age: '25' },

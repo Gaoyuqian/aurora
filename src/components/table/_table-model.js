@@ -13,7 +13,7 @@ class TableColumn {
       if (column.defaultExpandAll) {
         this.expandRows = this.tableObj.rows.slice()
       } else {
-        this.expandRows = column.expandRows || []
+        this.expandRowsModel = column.expandRowsModel
       }
     }
 
@@ -42,9 +42,7 @@ class TableColumn {
   }
 
   getTitle (h, table) {
-    if (this.type === 'expand') {
-      return null
-    } else if (this.type === 'checkbox') {
+    if (this.type === 'checkbox') {
       const column = this.originColumn
       const checkedCount = column.getCheckedCount()
       const length = this.tableObj.rows.length
@@ -78,7 +76,7 @@ class TableColumn {
   }
 
   isExpand (data) {
-    return this.expandRows.indexOf(data) > -1
+    return this.expandRowsModel.indexOf(data) > -1
   }
 
   getContent (h, data, index, table) {
@@ -104,7 +102,7 @@ class TableColumn {
         }
       })]
     } else if (column.type === 'expand') {
-      const pos = this.expandRows.indexOf(data)
+      const pos = this.expandRowsModel.indexOf(data)
       content = [
         h(
           'div',
@@ -118,10 +116,10 @@ class TableColumn {
                 var expanded
                 if (pos === -1) {
                   expanded = true
-                  this.expandRows.push(data)
+                  this.expandRowsModel.push(data)
                 } else {
                   expanded = false
-                  this.expandRows.splice(pos, 1)
+                  this.expandRowsModel.splice(pos, 1)
                 }
                 this.tableObj.table.$emit('expand', expanded, data)
               }
