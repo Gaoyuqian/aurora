@@ -9,7 +9,13 @@ const AuForm = Vue.extend({
       type: [Number, String],
       default: ''
     },
-    inline: Boolean
+    inline: Boolean,
+    model: Object
+  },
+  data () {
+    return {
+      items: []
+    }
   },
   computed: {
     cls () {
@@ -19,6 +25,17 @@ const AuForm = Vue.extend({
       }
       return cls
     }
+  },
+  created () {
+    this.$on('register.form.item', (item) => {
+      item.form = this
+      this.items.push(item)
+    })
+
+    this.$on('unregister.form.item', (item) => {
+      item.form = null
+      this.items.splice(this.items.indexOf(item), 1)
+    })
   }
 })
 
