@@ -1,5 +1,6 @@
 import required from './_required.js'
 import email from './_email.js'
+import phone from './_phone.js'
 
 export default class Validator {
   constructor (rules) {
@@ -43,6 +44,7 @@ export default class Validator {
   getValidator (rule) {
     if (rule.validator) {
       return {
+        message: rule.message,
         validate: rule.validator
       }
     }
@@ -54,6 +56,15 @@ export default class Validator {
     switch (rule.type) {
       case 'email':
         return email
+      case 'phone':
+        return phone
+      default:
+        console.error('No validate matched')
+        return {
+          validate: (_, callback) => {
+            callback(true)
+          }
+        }
     }
   }
 }

@@ -39,7 +39,6 @@ const AuInput = Vue.extend({
         return this.value
       },
       set (value) {
-        this.dispatch('change.form', value)
         this.$emit('input', value)
       }
     },
@@ -90,6 +89,11 @@ const AuInput = Vue.extend({
     },
     onMouseOutIcon ($event) {
       this.$emit('mouseout-icon', $event)
+    }
+  },
+  watch: {
+    value () {
+      this.dispatch('change.form', this.value)
     }
   }
 })

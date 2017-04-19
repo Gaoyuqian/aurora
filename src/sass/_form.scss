@@ -166,9 +166,19 @@
   .au-form-item-message {
     color: $color-danger;
   }
-  .au-input-control {
+  .au-input-control, .au-select {
     border-color: $color-danger !important;
   }
+}
+
+.au-form-item-not-label {
+  .au-form-item-content {
+    margin-left: 30%;
+  }
+}
+
+.au-form-item .au-form-item .au-form-item-content {
+  margin-left: 0 !important;
 }
 
 .au-form-inline {

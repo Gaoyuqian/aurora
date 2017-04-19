@@ -1,8 +1,10 @@
+import dispatch from '../../mixins/_dispatch'
 import Popup from '../popup/_popup.js'
 import Option from '../option/_option.js'
 
 const AuSelect = Vue.extend({
   template: require('./_select.jade'),
+  mixins: [dispatch],
   components: {
     Popup
   },
@@ -287,6 +289,7 @@ const AuSelect = Vue.extend({
       this.optionsElem.show()
     },
     hideOptions () {
+      this.dispatch('blur.form', this.value)
       this.optionsElem.hide()
     },
     setOptionActive () {
@@ -444,6 +447,7 @@ const AuSelect = Vue.extend({
     value () {
       this.setOptionActive()
       this.calcText()
+      this.dispatch('change.form', this.value)
     },
     textModel (newValue, oldValue) {
       this.queryOptions()

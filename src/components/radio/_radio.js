@@ -1,7 +1,9 @@
 import AuRadioGroup from '../radio-group/_radio-group.js'
+import dispatch from '../../mixins/_dispatch'
 
 const AuRadio = Vue.extend({
   template: require('./_radio.jade'),
+  mixins: [dispatch],
   model: {
     prop: 'checkedValue',
     event: 'input'
@@ -32,6 +34,8 @@ const AuRadio = Vue.extend({
         } else {
           this.$emit('input', value)
         }
+
+        this.dispatch('blur.form', value)
       }
     }
   },
@@ -42,6 +46,11 @@ const AuRadio = Vue.extend({
       }
 
       this.model = this.value
+    }
+  },
+  watch: {
+    value () {
+      this.dispatch('change.form', this.value)
     }
   }
 })

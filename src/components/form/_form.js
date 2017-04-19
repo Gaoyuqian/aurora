@@ -10,7 +10,8 @@ const AuForm = Vue.extend({
       default: ''
     },
     inline: Boolean,
-    model: Object
+    model: Object,
+    rules: Object
   },
   data () {
     return {
@@ -36,6 +37,38 @@ const AuForm = Vue.extend({
       item.form = null
       this.items.splice(this.items.indexOf(item), 1)
     })
+  },
+  methods: {
+    validate (callback) {
+      var result = true
+      var count = 0
+      this.items.forEach((item) => {
+        count++
+        item.validate(null, (isSuccess) => {
+          count--
+          result &= isSuccess
+          if (count === 0) {
+            callback(result)
+          }
+        })
+      })
+    },
+    onSubmit ($event) {
+      $event.preventDefault()
+      console.log('submit')
+      this.validate((isSuccess) => {
+        if (isSuccess) {
+          this.$emit('submit')
+        }
+      })
+    },
+    onReset ($event) {
+      $event.preventDefault()
+      this.$emit('reset')
+      this.items.forEach((item) => {
+        item.reset()
+      })
+    }
   }
 })
 

@@ -28,27 +28,31 @@ block content
         .docs-panel-row
           au-flex(gutter="30")
             au-item(style="width: 600px;")
-              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form")
+              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form", :rules="{ 'class': [{ required: true, message:'请选择班级' }] }")
                 au-form-item(label="姓名", prop="name", :rules="[{ required: true, message:'请输入姓名' }]")
                   au-input(v-model="form.name", placeholder="请输入姓名")
-                au-form-item(label="邮箱", prop="email", :rules="[{ type: 'email' }]")
+                au-form-item(label="邮箱", prop="email", :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]")
                   au-input(v-model="form.email", placeholder="请输入邮箱")
-                au-form-item(label="性别", :rules="[{ required: true, message:'请选择性别' }]")
+                au-form-item(label="性别", :rules="sexRules", prop="gender")
                   au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
-                au-form-item(label="班级", :rules="[{ required: true, message:'请选择班级' }]")
-                  au-form-item
-                    au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
-                  au-form-item
-                    au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
-                au-form-item(label="描述")
+                au-form-item(label="班级")
+                  au-flex
+                    au-item(span="11")
+                      au-form-item(prop="class")
+                        au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
+                    au-item.text-center(span="2")|-
+                    au-item(span="11")
+                      au-form-item(prop="class")
+                        au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
+                au-form-item(label="描述", prop="desc", :rules="[{ required: true, message:'请输入描述' }]")
                   au-input(type="textarea", v-model="form.desc", rows="5")
                 au-form-item()
                   au-checkbox(v-model="form.confirm", label="我同意账户协议")
 
                 au-form-item
-                  au-button(type="primary")|提交
+                  au-button(type="primary", native-type="submit")|提交
                   |&nbsp;
-                  au-button(type="default")|重置
+                  au-button(type="default", native-type="reset")|重置
             au-item
        template.js(scoped="scoped")
          script.
@@ -66,8 +70,20 @@ block content
                    confirm: false
                  },
                  attrs: [
+                 ],
+                 sexRules: [
+                   { required: true, message:'请选择班级' },
+                   {
+                     message: '不能选择女性',
+                     validator (value, callback) {
+                       callback(value !== '2')
+                     }
+                   }
                  ]
                }
+             },
+             methods: {
+
              }
            }
       .docs-panel

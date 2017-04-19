@@ -1,5 +1,5 @@
 const AuFlex = Vue.extend({
-  template: require('./_flex.tpl'),
+  template: require('./_flex.jade'),
   props: {
     inline: Boolean,
     column: Boolean,
@@ -26,12 +26,11 @@ const AuFlex = Vue.extend({
     }
   },
   computed: {
+    cls () {
+      return this.inline ? 'au-flex-inline' : ''
+    },
     styleObj () {
       const style = {}
-
-      if (this.inline) {
-        style['display'] = 'inline-flex'
-      }
 
       if (this.column) {
         style['flex-direction'] = 'column'
@@ -65,7 +64,7 @@ const AuFlex = Vue.extend({
 
       const gutter = parseFloat(this.gutter)
       if (gutter) {
-        style['margin'] = -(gutter / 2) + 'px'
+        style['margin-left'] = style['margin-right'] = -(gutter / 2) + 'px'
       }
 
       return style

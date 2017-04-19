@@ -30,7 +30,6 @@ const AuFormItem = Vue.extend({
 
     this.$on('blur.form', this.onControlBlur);
     this.$on('change.form', this.onControlChange);
-    this.$nextTick(this.getValue)
   },
   beforeDestroy () {
     this.dispatch('unregister.form.item', this)
@@ -52,6 +51,13 @@ const AuFormItem = Vue.extend({
       }
       return style
     },
+    contentStyle () {
+      const style = {}
+      if (!this.label && !this.isLabelTop && this._labelWidth) {
+        style.marginLeft = this._labelWidth + 'px'
+      }
+      return style
+    },
     cls () {
       const cls = []
       if (this._labelPosition) {
@@ -64,6 +70,10 @@ const AuFormItem = Vue.extend({
 
       if (this.isRequired) {
         cls.push(`au-form-item-required`)
+      }
+
+      if (!this.label) {
+        cls.push(`au-form-item-not-label`)
       }
 
       return cls
@@ -89,10 +99,11 @@ const AuFormItem = Vue.extend({
     getValue () {
       const model = this.form.model
       const path = this.prop
+
       if (model && path) {
         const found = instance.getPropByPath(model, path)
         if (found) {
-          return found.get()
+          return found
         }
       }
       return null
@@ -110,20 +121,32 @@ const AuFormItem = Vue.extend({
     },
     validate (type, callback) {
       const rules = this.getRules()
-
-      if (!rules) {
+      if (!rules || rules.length === 0) {
+        callback && callback(true)
         return
       }
-      this.validator.validate(type, this.getValue(), (messages) => {
+      var value = this.getValue()
+      value = value ? value.get() : null
+      this.validator.setRules(rules)
+      this.validator.validate(type, value, (messages) => {
         if (messages.length > 0) {
           this.hasError = true
           this.message = messages[0]
         } else {
           this.hasError = false
           this.message = ''
-          callback && callback()
         }
+
+        callback && callback(!this.hasError)
       })
+    },
+    reset () {
+      var value = this.getValue()
+      if (value) {
+        value.set('')
+        this.hasError = false
+        this.message = ''
+      }
     },
     getRules () {
       const form = this.form
@@ -133,11 +156,25 @@ const AuFormItem = Vue.extend({
         rules = rules.concat(formRules)
       }
       return rules
+    },
+    onRulesChange () {
+      const rules = this.getRules()
+      if (rules.length === 0) {
+        const model = this.form.model
+        const path = this.prop
+
+        if (!model) {
+          console.error(`form.model not provide in au-form-item: ${this.label}`)
+        } else if (!path) {
+          console.error(`prop not provide in au-form-item: ${this.label}`)
+        }
+      }
+      this.validator.setRules(rules)
     }
   },
   watch: {
     rules () {
-      this.validator.setRules(this.rules)
+      this.onRulesChange()
     }
   }
 })
