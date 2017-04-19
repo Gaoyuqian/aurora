@@ -142,7 +142,8 @@
 .au-form-item-label-top {
   flex-direction: column;
   .au-form-item-label {
-    padding: 10px 0;
+    width: auto;
+    padding: 0;
   }
 }
 
@@ -162,7 +163,7 @@
   }
 }
 
-.au-form-item-has-error {
+.au-form-item-error {
   .au-form-item-message {
     color: $color-danger;
   }

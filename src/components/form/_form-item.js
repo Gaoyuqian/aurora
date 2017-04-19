@@ -20,8 +20,8 @@ const AuFormItem = Vue.extend({
     return {
       form: null, // set by parent au-form
       message: '',
-      hasError: false,
-      validator: new Validator()
+      validator: new Validator(),
+      validateStatus: ''
     }
   },
   mounted () {
@@ -53,7 +53,12 @@ const AuFormItem = Vue.extend({
     },
     contentStyle () {
       const style = {}
-      if (!this.label && !this.isLabelTop && this._labelWidth) {
+      if (this.isLabelTop) {
+        style.marginLeft = '0px'
+        if (!this.label) {
+          style.marginTop = '35px'
+        }
+      } else if (!this.label && this._labelWidth) {
         style.marginLeft = this._labelWidth + 'px'
       }
       return style
@@ -64,8 +69,10 @@ const AuFormItem = Vue.extend({
         cls.push(`au-form-item-label-${this._labelPosition}`)
       }
 
-      if (this.hasError) {
-        cls.push(`au-form-item-has-error`)
+      if (this.validateStatus === 'error') {
+        cls.push(`au-form-item-error`)
+      } else if (this.validateStatus === 'validating') {
+        cls.push(`au-form-item-validating`)
       }
 
       if (this.isRequired) {
@@ -125,26 +132,30 @@ const AuFormItem = Vue.extend({
         callback && callback(true)
         return
       }
+
+      this.validateStatus = 'validating'
+      this.message = ''
+
       var value = this.getValue()
       value = value ? value.get() : null
       this.validator.setRules(rules)
       this.validator.validate(type, value, (messages) => {
         if (messages.length > 0) {
-          this.hasError = true
+          this.validateStatus = 'error'
           this.message = messages[0]
         } else {
-          this.hasError = false
+          this.validateStatus = 'success'
           this.message = ''
         }
 
-        callback && callback(!this.hasError)
+        callback && callback(this.validateStatus === 'success')
       })
     },
     reset () {
       var value = this.getValue()
       if (value) {
         value.set('')
-        this.hasError = false
+        this.validateStatus = ''
         this.message = ''
       }
     },

@@ -78,3 +78,14 @@
   transform: scale(0.1);
   transition: all 0.15s;
 }
+
+
+.au-checkbox-group {
+  .au-checkbox-wrap {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

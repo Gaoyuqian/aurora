@@ -28,8 +28,8 @@ block content
         .docs-panel-row
           au-flex(gutter="30")
             au-item(style="width: 600px;")
-              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form", :rules="{ 'class': [{ required: true, message:'请选择班级' }] }")
-                au-form-item(label="姓名", prop="name", :rules="[{ required: true, message:'请输入姓名' }]")
+              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form", :rules="rules", @submit="onSubmit")
+                au-form-item(label="姓名", prop="name")
                   au-input(v-model="form.name", placeholder="请输入姓名")
                 au-form-item(label="邮箱", prop="email", :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]")
                   au-input(v-model="form.email", placeholder="请输入邮箱")
@@ -39,12 +39,12 @@ block content
                   au-flex
                     au-item(span="11")
                       au-form-item(prop="class")
-                        au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
+                        au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", clearable, placeholder="请选择班级")
                     au-item.text-center(span="2")|-
                     au-item(span="11")
                       au-form-item(prop="class")
                         au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
-                au-form-item(label="描述", prop="desc", :rules="[{ required: true, message:'请输入描述' }]")
+                au-form-item(label="描述", prop="desc")
                   au-input(type="textarea", v-model="form.desc", rows="5")
                 au-form-item()
                   au-checkbox(v-model="form.confirm", label="我同意账户协议")
@@ -71,6 +71,26 @@ block content
                  },
                  attrs: [
                  ],
+                 rules: {
+                   name: [
+                     { required: true, message:'请输入姓名', whitespace: true},
+                     { validator (value, callback) {
+                       setTimeout(() => {
+
+                         const result = value.match(/abc/) != null
+                         console.log('validate', result)
+                         callback(result)
+                       }, 200)
+                     }, message: '内容中需包含abc' }
+                   ],
+                   'class': [
+                     { required: true, message:'请选择班级' }
+                   ],
+                   desc: [
+                     { required: true, message:'请输入描述' },
+                     { max: 8, trigger: 'change, blur' }
+                   ]
+                 },
                  sexRules: [
                    { required: true, message:'请选择班级' },
                    {
@@ -83,7 +103,9 @@ block content
                }
              },
              methods: {
-
+               onSubmit (form) {
+                 console.log('submiting', form)
+               }
              }
            }
       .docs-panel
