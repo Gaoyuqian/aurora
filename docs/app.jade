@@ -19,8 +19,8 @@ block content
         .markdown-body
           :markdown-it
             ## `au-header`
-            `au-header`组件为页面的header。
-            有3个具名`slot`：
+            `au-header`组件为页面的header，直接包含在`au-app`组件中。
+            该组件有3个具名`slot`：
             * `logo` header左侧logo位
             * `content-left` header左边
             * `content-right` header右边
@@ -49,10 +49,10 @@ block content
         .markdown-body
           :markdown-it
             ## `au-content`
-            有2个具名slot
+            直接包含在`au-app`组件中。该组件有2个具名slot
             * `sidebar` 侧边栏
             * `container` 内容
-            > 现在并没有提供API来隐藏`sidebar`，所以请填充`sidebard`的内容
+            > 现在并没有提供API来隐藏`sidebar`，所以请填充`sidebar`的内容
             ### 例子
       template.html(scoped="scoped")
         // style为方便测试添加的样式

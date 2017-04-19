@@ -25,7 +25,8 @@
             "www": {
                 "watch": false,
                 "version": true,
-                "optimize": true
+                "optimize": true,
+                "www": "./__dist"
             }
         },
 
@@ -35,7 +36,9 @@
             "lib/**"
         ],
         "ignore": [
-            "fepack.json"
+            "fepack.json",
+            "__dist",
+            "run.py"
         ],
         "externals": {
         },
@@ -44,6 +47,6 @@
     },
     "deploy": {
         "beRelease": "",
-        "feReleaseGit": ""
+        "feReleaseGit": "git@github.com:MeiliFE/Aurora.git"
     }
 }

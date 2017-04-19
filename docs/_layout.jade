@@ -39,9 +39,9 @@ html.no-js
           span.version|v0.1
 
         au-menu(slot="content-left", menu-trigger="click", :selected="selected")
+          au-menu-item(href="app.html", value="app")|App
           au-menu-item(href="flex.html", value="flex")|Flex
           au-menu-item(href="button.html", value="button")|Button
-          au-menu-item(href="App.html", value="App")|App
 
           au-menu-item|表单
             au-menu
@@ -85,7 +85,7 @@ html.no-js
           au-menu-group(title="基础")
             au-menu(:selected="selected")
               au-menu-item(href="install.html", value="install")|安装
-              au-menu-item(href="App.html", value="App")|App
+              au-menu-item(href="app.html", value="app")|App
               au-menu-item(href="flex.html", value="flex")|Flex
               au-menu-item(href="button.html", value="button")|Button
 
@@ -130,6 +130,8 @@ html.no-js
       const mixins = []
       !function () {
         // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
 
         const sections = document.querySelectorAll('.docs-section')
         ;[].forEach.call(sections, (section) => {
@@ -210,7 +212,7 @@ html.no-js
           props: {
             html: String
           },
-          mounted () {
+          mounted() {
             hljs.highlightBlock(this.$el.querySelector('code'))
           }
         })
