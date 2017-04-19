@@ -13,7 +13,7 @@ block content
             Aurora的栅栏布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
 
       template.html(scoped="scoped")
-        .docs-panel-row
+
           au-flex(justify-content="flex-start", wrap, gutter="2")
             au-item(v-for="i in 24" span="1")
               .flex-item {{i}}
@@ -56,7 +56,7 @@ block content
         .markdown-body
           :markdown-it
             ## `au-flex`
-            `au-flex`组件可以看做是flex父容器，内部需要包含`au-item`组件。组件上的属性很多和`css flex`中的相同，且这些属性大部分就是直接控制`flex`样式，如：`justify-content`、`flex-direction`、`display:inline-flex`等。
+            `au-flex`组件可以看做是flex父容器，内部需要包含`au-item`组件。组件上的属性很多和`css flex`中的相同，且这些属性大部分直接控制`flex`样式。
             `au-flex`组件内部划分为**24**等分，`au-item`组件可设置`span`属性来控制每一个子组件的占用宽度。
 
             ### au-flex 的属性
@@ -72,7 +72,7 @@ block content
 
             #### 详细属性说明
             ##### wrap
-            * 如果为`''`或`true`时，同样式`flex-wrap:wrap`；
+            * 如果为`''`或`true`时，同设置样式`flex-wrap:wrap`；
             * 如果为`false`，则同未设置样式`flex-wrap`；
             * 如果为其他字符串，则将字符串设置为`flex-wrap`的样式属性值。可选值及详细说明[参考](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex-wrap)
             ##### justifyContent
@@ -122,7 +122,7 @@ block content
           :markdown-it
             ### 水平
       template.html(scoped="scoped")
-        .docs-panel-row
+
           au-flex(gutter="10", disabled)
             au-item
               .flex-item|hello world
@@ -139,7 +139,7 @@ block content
           :markdown-it
             ### 垂直
       template.html(scoped="scoped")
-        .docs-panel-row
+
           au-flex(column, gutter="10", align-items="flex-start")
             au-item
               .flex-item|hello world
@@ -258,7 +258,7 @@ block content
             au-option(value="flex-end", label="flex-end")
             au-option(value="center", label="center")
       template.html(scoped="scoped")
-        .docs-panel-row
+
           au-flex(gutter="10", :align-items="flexCustom.alignItems")
             au-item(span="8")
               .flex-item(style="height: 50px;")|50px
@@ -278,7 +278,7 @@ block content
             ### 子元素设置对齐方式
             子元素可覆盖容器的对齐方式
       template.html(scoped="scoped")
-        .docs-panel-row
+
           au-flex(gutter="10", align-items="center")
             au-item(span="8", align-self="flex-start")
               .flex-item(style="height: 50px;")|50px
