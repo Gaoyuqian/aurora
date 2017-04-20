@@ -227,7 +227,6 @@ block content
             :wrap="flexCustom.wrap",
             :gutter="flexCustom.gutter",
             :justify-content="flexCustom.justifyContent",
-            :align-items="flexCustom.alignItems",
             :align-content="flexCustom.alignContent"
           )
             au-item(v-for="i in itemCustom.count",
@@ -240,7 +239,7 @@ block content
             .markdown-body
               :markdown-it
                 ```html
-                  <au-flex wrap="flexCustom.wrap" gutter="flexCustom.gutter" justify-content="flexCustom.justifyContent" align-items="flexCustom.alignItems" align-content="flexCustom.alignContent">
+                  <au-flex wrap="flexCustom.wrap" gutter="flexCustom.gutter" justify-content="flexCustom.justifyContent" align-content="flexCustom.alignContent">
                     <au-item v-for="i in itemCustom.count" span="itemCustom.span", flex="itemCustom.flex"></au-item>
                   </au-flex>
                 ```
