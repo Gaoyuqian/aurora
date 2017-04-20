@@ -45,9 +45,9 @@ block content
           au-item(span="2", offset="4")
             .flex-item
 
-      docs-section
-        div(slot="desc")
-          :markdown-it
+    docs-section
+      div(slot="desc")
+        :markdown-it
             ## `au-flex`
             `au-flex`组件可以看做是flex父容器，内部需要包含`au-item`组件。组件上的属性很多和`css flex`中的相同，且这些属性大部分直接控制`flex`样式。
             `au-flex`组件内部划分为**24**等分，`au-item`组件可设置`span`属性来控制每一个子组件的占用宽度。
@@ -142,7 +142,7 @@ block content
           au-item(span="4")
             au-select(v-model="flexCustom.height")
               au-option(value="", label="不设置")
-              au-option(value="400px", label="400px")
+              au-option(value="200px", label="200px")
 
           au-item.text-right(span="4") wrap：
           au-item(span="4")
@@ -201,15 +201,8 @@ block content
             au-select(v-model="itemCustom.flex")
               au-option(:value="true", label="true")
               au-option(:value="false", label="false")
-        au-flex(gutter="5", wrap)
-          au-item.text-right(span="4") alignItems：
-          au-item(span="4")
-            au-select(v-model="flexCustom.alignItems")
-              au-option(:value="''", label="空")
-              au-option(value="flex-start", label="flex-start")
-              au-option(value="flex-end", label="flex-end")
-              au-option(value="center", label="center")
-      demo(slot="code")
+
+      demo(slot="code", :code="zuheCode")
         au-flex(
             :style="{height: flexCustom.height}",
             :wrap="flexCustom.wrap",
@@ -236,7 +229,7 @@ block content
               au-option(value="flex-start", label="flex-start")
               au-option(value="flex-end", label="flex-end")
               au-option(value="center", label="center")
-      demo(slot="code")
+      demo(slot="code", :code="duiqiCode")
         au-flex(gutter="10", :align-items="flexCustom.alignItems")
           au-item(span="8")
             .flex-item(style="height: 50px;")|50px
@@ -301,6 +294,33 @@ block script
             span: '1',
             offset: '0'
           }
+        }
+      },
+      computed: {
+        zuheCode(){
+          let fc = this.flexCustom;
+          let ic = this.itemCustom;
+          return `
+            <au-flex wrap="${fc.wrap}" gutter="${fc.gutter}" justify-content="${fc.justifyContent}" align-content="${fc.alignContent}">
+              <au-item v-for="i in ${ic.count}" flex="${ic.flex}" span="${ic.span}">
+                <div>{{i}}</div>
+              </au-item>
+            </au-flex>
+          `
+        },
+        duiqiCode(){
+            let fc = this.flexCustom;
+            return `<au-flex gutter="10" align-items="${fc.alignItems}">
+              <au-item span="8">
+                <div style="height: 50px;" class="flex-item">50px</div>
+              </au-item>
+              <au-item flex="8">
+                <div style="height: 100px;" class="flex-item">100px</div>
+              </au-item>
+              <au-item flex="8">
+                <div style="height: 150px;" class="flex-item">150px</div>
+              </au-item>
+            </au-flex>`
         }
       }
     })
