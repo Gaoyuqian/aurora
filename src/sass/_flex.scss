@@ -1,6 +1,5 @@
 .au-flex {
   width: 100%;
-  overflow: hidden;
 }
 
 .au-flex-inner {
@@ -20,6 +19,11 @@
   }
 }
 
-.au-item {
-  overflow: hidden;
+
+.au-flex-inline {
+  width: auto;
+  display: inline-block;
+  .au-flex-inner {
+    display: inline-flex;
+  }
 }

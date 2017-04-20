@@ -1,5 +1,8 @@
+import dispatch from '../../mixins/_dispatch'
+
 const AuInput = Vue.extend({
   template: require('./_input.jade'),
+  mixins: [dispatch],
   props: {
     type: {
       type: String,
@@ -73,6 +76,7 @@ const AuInput = Vue.extend({
     },
     onBlur ($event) {
       this.$emit('blur', $event)
+      this.dispatch('blur.form', this.value)
     },
     onKeyup ($event) {
       this.$emit('input', $event.target.value)
@@ -85,6 +89,11 @@ const AuInput = Vue.extend({
     },
     onMouseOutIcon ($event) {
       this.$emit('mouseout-icon', $event)
+    }
+  },
+  watch: {
+    value () {
+      this.dispatch('change.form', this.value)
     }
   }
 })

@@ -4,6 +4,7 @@ class TableColumn {
     this.originColumn = column
     this.title = column.label
     this.prop = column.attrName
+    this.originWidth = column.width
     this.width = column.width
     this.fixed = column.fixed
     this.type = column.type
@@ -13,15 +14,15 @@ class TableColumn {
       if (column.defaultExpandAll) {
         this.expandRows = this.tableObj.rows.slice()
       } else {
-        this.expandRows = column.expandRows || []
+        this.expandRowsModel = column.expandRowsModel
       }
     }
 
     if (!this.width) {
       if (column.type === 'checkbox' || column.type === 'expand') {
-        this.width = this.width || '56'
+        this.originWidth = this.width = this.width || '56'
       } else {
-        this.width = 80
+        this.width = '80'
       }
     }
   }
@@ -44,7 +45,8 @@ class TableColumn {
   getTitle (h, table) {
     if (this.type === 'expand') {
       return null
-    } else if (this.type === 'checkbox') {
+    }
+    if (this.type === 'checkbox') {
       const column = this.originColumn
       const checkedCount = column.getCheckedCount()
       const length = this.tableObj.rows.length
@@ -78,7 +80,7 @@ class TableColumn {
   }
 
   isExpand (data) {
-    return this.expandRows.indexOf(data) > -1
+    return this.expandRowsModel.indexOf(data) > -1
   }
 
   getContent (h, data, index, table) {
@@ -98,13 +100,13 @@ class TableColumn {
             column.toggleCheckedRow(data, value)
             this.tableObj.table.$nextTick(() => {
               this.tableObj.table.$forceUpdate()
-              table.$emit('select', column.model)
+              this.tableObj.table.$emit('select', column.model)
             })
           }
         }
       })]
     } else if (column.type === 'expand') {
-      const pos = this.expandRows.indexOf(data)
+      const pos = this.expandRowsModel.indexOf(data)
       content = [
         h(
           'div',
@@ -115,11 +117,15 @@ class TableColumn {
             },
             on: {
               click: () => {
+                var expanded
                 if (pos === -1) {
-                  this.expandRows.push(data)
+                  expanded = true
+                  this.expandRowsModel.push(data)
                 } else {
-                  this.expandRows.splice(pos, 1)
+                  expanded = false
+                  this.expandRowsModel.splice(pos, 1)
                 }
+                this.tableObj.table.$emit('expand', expanded, data)
               }
             }
           },
@@ -254,6 +260,25 @@ export class TableModel {
     })
 
     return h('colgroup', cols)
+  }
+
+  updateColumnsWidth () {
+    var tableWidth = this.tableWidth
+    const noWidthColumns = []
+    this.columns.forEach((column) => {
+      if (!column.originWidth) {
+        noWidthColumns.push(column)
+      } else {
+        tableWidth -= parseFloat(column.originWidth)
+      }
+    })
+
+    if (noWidthColumns.length > 0) {
+      tableWidth = tableWidth / noWidthColumns.length
+      noWidthColumns.forEach((column) => {
+        column.width = String(tableWidth)
+      })
+    }
   }
 }
 

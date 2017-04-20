@@ -1,5 +1,5 @@
 const AuFlex = Vue.extend({
-  template: require('./_flex.tpl'),
+  template: require('./_flex.jade'),
   props: {
     inline: Boolean,
     column: Boolean,
@@ -19,18 +19,25 @@ const AuFlex = Vue.extend({
     gutter: {
       type: [String, Number],
       default: 0
+    },
+    direction: {
+      type: String,
+      default: ''
     }
   },
   computed: {
+    cls () {
+      return this.inline ? 'au-flex-inline' : ''
+    },
     styleObj () {
       const style = {}
 
-      if (this.inline) {
-        style['display'] = 'inline-flex'
-      }
-
       if (this.column) {
         style['flex-direction'] = 'column'
+      }
+
+      if (this.direction) {
+        style['flex-direction'] = this.direction
       }
 
       if (this.wrap === true || this.wrap === '') {
@@ -57,7 +64,7 @@ const AuFlex = Vue.extend({
 
       const gutter = parseFloat(this.gutter)
       if (gutter) {
-        style['margin'] = -(gutter / 2) + 'px'
+        style['margin-left'] = style['margin-right'] = -(gutter / 2) + 'px'
       }
 
       return style

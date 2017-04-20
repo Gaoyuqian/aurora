@@ -37,6 +37,9 @@ const AuOption = Vue.extend({
     this.dispatch('unregister.option', this)
   },
   methods: {
+    getLabel () {
+
+    },
     clickHandler () {
       this.dispatch(
         this.active

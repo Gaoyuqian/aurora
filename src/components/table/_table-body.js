@@ -14,32 +14,18 @@ const AuTableBody = Vue.extend({
       const tds = []
       this.model.columns.forEach((column, columnIndex) => {
         if (column.type === 'expand' && addonRow == null && column.isExpand(row)) {
-          const childs = []
-          var count = columnIndex + 1
-
-          childs = [h(
+          addonRow = h('tr', [h(
             'td',
             {
               'class': 'au-table-expand-td',
               attrs: {
-                colspan: columnLength - count
+                colspan: columnLength
               }
             },
             [
               h('div', {'class': 'au-table-cell'}, [column.getCtorContent(row, index)])
             ]
-          )]
-
-          while (count-- > 0) {
-            childs.unshift(h(
-              'td',
-              {
-                'class': 'au-table-expand-td'
-              }
-            ))
-          }
-
-          addonRow = h('tr', childs)
+          )])
         }
 
         const content = column.getContent(h, row, index, this)

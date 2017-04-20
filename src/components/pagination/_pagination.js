@@ -136,7 +136,7 @@ const AuPagination = Vue.extend({
     },
     selfPageSize (pageSize) {
       this.page = this.getValidPage(this.page)
-      this.$emit('change.pageSize', pageSize)
+      this.$emit('page-size-change', pageSize)
     }
   }
 })

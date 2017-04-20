@@ -5,8 +5,5 @@ div.au-option(
   @mouseover="mouseoverHandler",
   @mouseout="mouseoutHandler"
 )
-  div(v-if="label")
-    |{{label}}
-  div(v-else)
-    slot
+  slot|{{label}}
   au-icon(icon="check")

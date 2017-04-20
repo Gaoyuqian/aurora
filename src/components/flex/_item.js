@@ -47,7 +47,7 @@ const AuItem = Vue.extend({
       const gutter = parseFloat(this.$parent.gutter)
 
       if (gutter) {
-        style['padding'] = (gutter / 2) + 'px'
+        style['padding-left'] = style['padding-right'] = (gutter / 2) + 'px'
       }
 
       if (this.flex === true) {

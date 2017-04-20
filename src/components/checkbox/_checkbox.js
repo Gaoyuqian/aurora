@@ -1,5 +1,8 @@
+import dispatch from '../../mixins/_dispatch'
+
 const AuCheckbox = Vue.extend({
   template: require('./_checkbox.jade'),
+  mixins: [dispatch],
   model: {
     prop: 'checkedValue',
     event: 'input'
@@ -53,11 +56,17 @@ const AuCheckbox = Vue.extend({
             value.push(this.value)
           }
         }
-
         this.$emit('input', value)
       } else {
         this.$emit('input', this.checked ? (this.value === true ? false : '') : this.value)
       }
+
+      this.dispatch('blur.form', value)
+    }
+  },
+  watch: {
+    value () {
+      this.dispatch('change.form', this.value)
     }
   }
 })

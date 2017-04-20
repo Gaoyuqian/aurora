@@ -63,6 +63,11 @@
   flex: 1;
 }
 
-.au-radio-group .au-radio-wrap {
-  margin-right: 5px;
+.au-radio-group {
+  .au-radio-wrap {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }

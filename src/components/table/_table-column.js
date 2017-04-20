@@ -18,6 +18,12 @@ const AuTableColumn = Vue.extend({
     expandRows: Array,
     defaultExpandAll: Boolean
   },
+  data () {
+    return {
+      fakeValue: [],
+      fakeExpandRows: []
+    }
+  },
   computed: {
     model: {
       get () {
@@ -30,18 +36,26 @@ const AuTableColumn = Vue.extend({
           this.fakeValue = value
         }
       }
-    }
-  },
-  data () {
-    return {
-      fakeValue: []
+    },
+    expandRowsModel: {
+      get () {
+        return this.expandRows || this.fakeExpandRows
+      },
+      set (value) {
+        if (this.expandRows) {
+          this.expandRows.splice(0)
+          this.expandRows.push.apply(null, value)
+        } else {
+          this.fakeExpandRows = value
+        }
+      }
     }
   },
   mounted () {
-    this.dispatch('update.table')
+    this.$parent.$emit('update.table')
   },
   destroy () {
-    this.dispatch('update.table')
+    this.$parent.$emit('update.table')
   },
   methods: {
     getCheckRowPos (row) {
