@@ -126,12 +126,18 @@ html.no-js
 
     script(src="../lib/vue.js")
     script(src="../src/aurora.js")
+    script(src="./docs.js")
     script.
       const mixins = []
       !function () {
         // Vue.config.silent = true
         // 自动语法高亮
         hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo[slot="code"]').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
 
         const sections = document.querySelectorAll('.docs-section')
         ;[].forEach.call(sections, (section) => {

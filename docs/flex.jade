@@ -5,55 +5,48 @@ block title
 
 block content
   au-panel
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            # 栅栏布局
-            Aurora的栅栏布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          # 栅栏布局
+          Aurora的栅栏布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+      demo(slot="code")
+        au-flex(justify-content="flex-start", wrap, gutter="2")
+          au-item(v-for="i in 24" span="1")
+            .flex-item {{i}}
 
-      template.html(scoped="scoped")
+        au-flex(justify-content="flex-start", wrap, gutter="2")
+          au-item(v-for="i in 12" span="2")
+            .flex-item {{i}}
 
-          au-flex(justify-content="flex-start", wrap, gutter="2")
-            au-item(v-for="i in 24" span="1")
-              .flex-item {{i}}
+        au-flex(justify-content="flex-start", wrap, gutter="2")
+          au-item(span="12")
+            .flex-item
+          au-item(span="12")
+            .flex-item
+          au-item(span="8")
+            .flex-item
+          au-item(span="8")
+            .flex-item
+          au-item(span="8")
+            .flex-item
+          au-item(span="6")
+            .flex-item
+          au-item(span="6")
+            .flex-item
+          au-item(span="6")
+            .flex-item
+          au-item(span="6")
+            .flex-item
+          au-item(span="5", offset="1")
+            .flex-item
+          au-item(span="3", offset="9")
+            .flex-item
+          au-item(span="2", offset="4")
+            .flex-item
 
-          au-flex(justify-content="flex-start", wrap, gutter="2")
-            au-item(v-for="i in 12" span="2")
-              .flex-item {{i}}
-
-          au-flex(justify-content="flex-start", wrap, gutter="2")
-            au-item(span="12")
-              .flex-item
-            au-item(span="12")
-              .flex-item
-            au-item(span="8")
-              .flex-item
-            au-item(span="8")
-              .flex-item
-            au-item(span="8")
-              .flex-item
-            au-item(span="6")
-              .flex-item
-            au-item(span="6")
-              .flex-item
-            au-item(span="6")
-              .flex-item
-            au-item(span="6")
-              .flex-item
-            au-item(span="5", offset="1")
-              .flex-item
-            au-item(span="3", offset="9")
-              .flex-item
-            au-item(span="2", offset="4")
-              .flex-item
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-
-      .docs-desc
-        .markdown-body
+      docs-section
+        div(slot="desc")
           :markdown-it
             ## `au-flex`
             `au-flex`组件可以看做是flex父容器，内部需要包含`au-item`组件。组件上的属性很多和`css flex`中的相同，且这些属性大部分直接控制`flex`样式。
@@ -91,6 +84,7 @@ block content
             ## au-item
             `au-flex`组件内部划分为**24**等分，`au-item`组件可设置`span`属性来控制每一个子组件的占用宽度。
             与`au-flex`类似，大部分的属性都会转为`flex`样式，如：`align-self`、`flex-basis`等。
+            24等分并不总是生效的，如设置`au-item`的`basis`属性，栅栏24等分将失效。设置`grow`或`shrink`伸缩比例时，如果行未填满，将按伸缩比例填充导致24等分失效。
 
             ### au-flex 的属性
             |  属性名   |                                                                             说明                                                                             |           类型          | 默认值 | 必需 |
@@ -116,113 +110,107 @@ block content
 
             > 未提及的属性可参照flex样式属性
 
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            ### 水平
-      template.html(scoped="scoped")
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 垂直
+      demo(slot="code")
+        au-flex(gutter="10", disabled)
+          au-item
+            .flex-item|hello world
+          au-item(flex)
+            .flex-item|hello world
 
-          au-flex(gutter="10", disabled)
-            au-item
-              .flex-item|hello world
-            au-item(flex)
-              .flex-item|hello world
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            ### 垂直
-      template.html(scoped="scoped")
-
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 垂直
+      demo(slot="code")
           au-flex(column, gutter="10", align-items="flex-start")
             au-item
               .flex-item|hello world
             au-item
               .flex-item|hello world
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
 
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            ### 组合
-      h3 au-flex
-      au-flex(gutter="5", wrap)
-        au-item.text-right(span="4") 容器高：
-        au-item(span="4")
-          au-select(v-model="flexCustom.height")
-            au-option(value="", label="不设置")
-            au-option(value="400px", label="400px")
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 组合
+        h3 au-flex
+        au-flex(gutter="5", wrap)
+          au-item.text-right(span="4") 容器高：
+          au-item(span="4")
+            au-select(v-model="flexCustom.height")
+              au-option(value="", label="不设置")
+              au-option(value="400px", label="400px")
 
-        au-item.text-right(span="4") wrap：
-        au-item(span="4")
-          au-select(v-model="flexCustom.wrap")
-            au-option(:value="true", label="true")
-            au-option(:value="false", label="false")
-            au-option(value="nowrap", label="nowrap")
-            au-option(value="wrap", label="wrap")
-            au-option(value="wrap-reverse", label="wrap-reverse")
+          au-item.text-right(span="4") wrap：
+          au-item(span="4")
+            au-select(v-model="flexCustom.wrap")
+              au-option(:value="true", label="true")
+              au-option(:value="false", label="false")
+              au-option(value="nowrap", label="nowrap")
+              au-option(value="wrap", label="wrap")
+              au-option(value="wrap-reverse", label="wrap-reverse")
 
-        au-item.text-right(span="4") justifyContent：
-        au-item(span="4")
-          au-select(v-model="flexCustom.justifyContent")
-            au-option(:value="''", label="空")
-            au-option(value="flex-start", label="flex-start")
-            au-option(value="flex-end", label="flex-end")
-            au-option(value="center", label="center")
-            au-option(value="space-between", label="space-between")
-            au-option(value="space-around", label="space-around")
+          au-item.text-right(span="4") justifyContent：
+          au-item(span="4")
+            au-select(v-model="flexCustom.justifyContent")
+              au-option(:value="''", label="空")
+              au-option(value="flex-start", label="flex-start")
+              au-option(value="flex-end", label="flex-end")
+              au-option(value="center", label="center")
+              au-option(value="space-between", label="space-between")
+              au-option(value="space-around", label="space-around")
 
-        au-item.text-right(span="4") alignContent：
-        au-item(span="4")
-          au-select(v-model="flexCustom.alignContent")
-            au-option(:value="''", label="空")
-            au-option(value="flex-start", label="flex-start")
-            au-option(value="flex-end", label="flex-end")
-            au-option(value="center", label="center")
-            au-option(value="space-between", label="space-between")
-            au-option(value="space-around", label="space-around")
-            au-option(value="space-evenly", label="space-evenly")
-            au-option(value="stretch", label="stretch")
+        au-flex(gutter="5", wrap)
+          au-item.text-right(span="4") alignContent：
+          au-item(span="4")
+            au-select(v-model="flexCustom.alignContent")
+              au-option(:value="''", label="空")
+              au-option(value="flex-start", label="flex-start")
+              au-option(value="flex-end", label="flex-end")
+              au-option(value="center", label="center")
+              au-option(value="space-between", label="space-between")
+              au-option(value="space-around", label="space-around")
+              au-option(value="space-evenly", label="space-evenly")
+              au-option(value="stretch", label="stretch")
 
-        au-item.text-right(span="4") gutter：
-        au-item(span="4")
-          au-select(v-model="flexCustom.gutter")
-            au-option(v-for="i in 11", :value="String(i-1)", :label="String(i-1)")
+          au-item.text-right(span="4") gutter：
+          au-item(span="4")
+            au-select(v-model="flexCustom.gutter")
+              au-option(v-for="i in 11", :value="String(i-1)", :label="String(i-1)")
 
-      h3 au-item
-      au-flex(gutter="5", wrap)
-        au-item.text-right(span="4") 条目数：
-        au-item(span="4")
-          au-select(v-model="itemCustom.count")
-            au-option(:value="10", :label="10")
-            au-option(:value="20", :label="20")
-            au-option(:value="30", :label="30")
-            au-option(:value="40", :label="40")
+        h3 au-item
+        au-flex(gutter="5", wrap)
+          au-item.text-right(span="4") 条目数：
+          au-item(span="4")
+            au-select(v-model="itemCustom.count")
+              au-option(:value="10", :label="10")
+              au-option(:value="20", :label="20")
+              au-option(:value="30", :label="30")
+              au-option(:value="40", :label="40")
 
-        au-item.text-right(span="4") span：
-        au-item(span="4")
-          au-select(v-model="itemCustom.span")
-            au-option(v-for="i in 25", :value="String(i-1)", :label="String(i-1)")
+          au-item.text-right(span="4") span：
+          au-item(span="4")
+            au-select(v-model="itemCustom.span")
+              au-option(v-for="i in 25", :value="String(i-1)", :label="String(i-1)")
 
-        au-item.text-right(span="4") flex
-        au-item(span="4")
-          au-select(v-model="itemCustom.flex")
-            au-option(:value="true", label="true")
-            au-option(:value="false", label="false")
-
-      .docs-panel
-        .docs-panel-content
-          au-flex(
+          au-item.text-right(span="4") flex
+          au-item(span="4")
+            au-select(v-model="itemCustom.flex")
+              au-option(:value="true", label="true")
+              au-option(:value="false", label="false")
+        au-flex(gutter="5", wrap)
+          au-item.text-right(span="4") alignItems：
+          au-item(span="4")
+            au-select(v-model="flexCustom.alignItems")
+              au-option(:value="''", label="空")
+              au-option(value="flex-start", label="flex-start")
+              au-option(value="flex-end", label="flex-end")
+              au-option(value="center", label="center")
+      demo(slot="code")
+        au-flex(
             :style="{height: flexCustom.height}",
             :wrap="flexCustom.wrap",
             :gutter="flexCustom.gutter",
@@ -234,61 +222,43 @@ block content
               :flex="itemCustom.flex"
             )
               .flex-item {{i}}
-        .docs-code
-          .html
-            .markdown-body
-              :markdown-it
-                ```html
-                  <au-flex wrap="flexCustom.wrap" gutter="flexCustom.gutter" justify-content="flexCustom.justifyContent" align-content="flexCustom.alignContent">
-                    <au-item v-for="i in itemCustom.count" span="itemCustom.span", flex="itemCustom.flex"></au-item>
-                  </au-flex>
-                ```
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            ### 对齐
-      au-flex(gutter="5", wrap)
-        au-item.text-right(span="4") alignItems：
-        au-item(span="4")
-          au-select(v-model="flexCustom.alignItems")
-            au-option(:value="''", label="空")
-            au-option(value="flex-start", label="flex-start")
-            au-option(value="flex-end", label="flex-end")
-            au-option(value="center", label="center")
-      template.html(scoped="scoped")
 
-          au-flex(gutter="10", :align-items="flexCustom.alignItems")
-            au-item(span="8")
-              .flex-item(style="height: 50px;")|50px
-            au-item(flex="8")
-              .flex-item(style="height: 100px;")|100px
-            au-item(flex="8")
-              .flex-item(style="height: 150px;")|150px
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
 
-    .docs-section
-      .docs-desc
-        .markdown-body
-          :markdown-it
-            ### 子元素设置对齐方式
-            子元素可覆盖容器的对齐方式
-      template.html(scoped="scoped")
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 对齐
+        au-flex(gutter="5", wrap)
+          au-item.text-right(span="4") alignItems：
+          au-item(span="4")
+            au-select(v-model="flexCustom.alignItems")
+              au-option(:value="''", label="空")
+              au-option(value="flex-start", label="flex-start")
+              au-option(value="flex-end", label="flex-end")
+              au-option(value="center", label="center")
+      demo(slot="code")
+        au-flex(gutter="10", :align-items="flexCustom.alignItems")
+          au-item(span="8")
+            .flex-item(style="height: 50px;")|50px
+          au-item(flex="8")
+            .flex-item(style="height: 100px;")|100px
+          au-item(flex="8")
+            .flex-item(style="height: 150px;")|150px
 
-          au-flex(gutter="10", align-items="center")
-            au-item(span="8", align-self="flex-start")
-              .flex-item(style="height: 50px;")|50px
-            au-item(flex="8")
-              .flex-item(style="height: 100px;")|100px
-            au-item(flex="8")
-              .flex-item(style="height: 150px;")|150px
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 子元素设置对齐方式
+          子元素可覆盖容器的对齐方式
+      demo(slot="code")
+        au-flex(gutter="10", align-items="center")
+          au-item(span="8", align-self="flex-start")
+            .flex-item(style="height: 50px;")|50px
+          au-item(flex="8")
+            .flex-item(style="height: 100px;")|100px
+          au-item(flex="8")
+            .flex-item(style="height: 150px;")|150px
+
 
 block script
   style.
