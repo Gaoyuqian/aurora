@@ -57,7 +57,6 @@ const AuFlex = Vue.extend({
           style['align-items'] = 'center'
         }
       }
-
       if (this.alignContent) {
         style['align-content'] = this.alignContent
       }
