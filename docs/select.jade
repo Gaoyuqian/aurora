@@ -139,6 +139,7 @@ block content
       div(slot="desc")
         :markdown-it
           ### 可清空
+          选中后，鼠标移入，右侧图标变为`X`。点击可清空。
         demo(slot="code")
           au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
           template(type="au-demo")
