@@ -68,7 +68,7 @@ block content
         :markdown-it
           ## demo
           ### 为textarea设置 `rows` `cols`
-          > `cols`现在无法生效，因为宽度被样式设置了`100%`。
+          > `cols`控制textarea的原生属性，因为宽度被样式设置了`100%`，所以不能通过cols改变宽度。
       demo(slot="code")
         au-input(type="textarea", placeholder="placeholder", rows="10", cols="2")
 

@@ -32,6 +32,7 @@ function convertHtml(html) {
     html = html_beautify(html, {
       indent_size: 2
     });
+    html = html.replace(/=""/g, '');
     return htmlEncode(html);
 }
 
