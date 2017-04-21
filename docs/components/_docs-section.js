@@ -3,7 +3,8 @@ const template = `
     <div class="docs-desc markdown-body">
         <slot name="desc"></slot>
     </div>
-    <slot name="code">
+    <slot></slot>
+    <slot name="code"></slot>
 </div>
 `;
 
