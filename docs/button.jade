@@ -15,7 +15,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 按钮类型
+          ## 按钮类型
           按钮可以通过`type`属性控制按钮类型，可选值包含`primary`、`info`、`success`、`danger`、`default`、`warning`、`link` 7种类型。默认为`default`。
 
           通过`size`属性控制按钮大小，可选值包含`large`、`default`、`small`、`mini` 四种大小。默认为`default`。
@@ -61,7 +61,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 不可用状态
+          ## 不可用状态
           按钮可设置`disabled`状态，设置之后按钮不可点击。
       demo(slot="code")
         au-button(@click="alert('click')")|点击出发alert
@@ -70,7 +70,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 加载中
+          ## 加载中
       demo(slot="code")
           au-button(:loading="true")|加载中
           au-button(:loading="loading", @click="startLoading")|点击加载，3秒后恢复
@@ -89,7 +89,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 图标按钮
+          ## 图标按钮
           带图标的按钮可增强辨识度(有文字)或节省空间(无文字)。
           图标来自**fontawesome**，[点击查看更多图标](http://fontawesome.io/icons/)
           > 图标只能加在按钮左边，如果需要加载按钮右边，请使用`au-icon`自行添加
@@ -113,7 +113,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 全宽图标
+          ## 全宽图标
           如果需要按钮变为块级可设置`block`属性。
       demo(slot="code")
         div(style="margin-bottom: 5px")
@@ -124,7 +124,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 点击后禁用按钮
+          ## 点击后禁用按钮
           通过`disable-on-click`可以实现点击后禁用按钮，可以用在防止重复提交等待服务器响应等场景。
       demo(slot="code")
         au-button(type="primary", disable-on-click, @click="disableOnClick")|disableOnClick
@@ -145,7 +145,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### 链接按钮
+          ## 链接按钮
           `au-button`默认使用**html button**标签，如果设置`href`属性，将使用**a**标签，这种情况下可设置`target`属性（同`a`标签）
       demo(slot="code")
           au-button(type="info", href="#")|默认跳转链接
@@ -154,7 +154,7 @@ block content
     docs-section
       div(slot="desc")
         :markdown-it
-          ### button[type]
+          ## button[type]
           在原生html标签中，button按钮的默认` type `是` submit `。本组件库的按钮默认是` button `。可以防止按钮包含在表单中时默认提交表单。
           可以通过设置` native-type="submit" `来实现表单提交
       demo(slot="code")
@@ -198,7 +198,7 @@ block content
             au-button(type="danger")|删除
         template(type="au-demo")
           script.
-            {
+            export default {
               data () {
                 return {
                   active: '2'
