@@ -4,11 +4,12 @@ const template = `
         <slot></slot>
     </div>
     <au-button-group>
-        <au-button type="primary"  v-show="!show" @click="toggle">展开代码</au-button>
-        <au-button type="primary"  v-show="show" @click="toggle">收起代码</au-button>
+        <au-button type="primary" size="small" v-show="!show" @click="toggle">展开代码</au-button>
+        <au-button type="primary" size="small" v-show="show" @click="toggle">收起代码</au-button>
     </au-button-group>
     <div class="docs-code" v-show="show">
-        <pre><code>{{sourceCode}}</code></pre>
+        <pre class="html" v-show="!!sourceCode"><code>{{sourceCode}}</code></pre>
+        <pre class="js" v-show="!!sourceJSCode"><code>{{sourceJSCode}}</code></pre>
     </div>
 </div>
 `;
@@ -26,20 +27,30 @@ function htmlEncode(str){
   return s;
 }
 
-function convert(html) {
+function convertHtml(html) {
     html = html.trim();
     html = html_beautify(html, {
       indent_size: 2
     });
-    html = html.replace(/=""/g, '');
     return htmlEncode(html);
 }
 
+function convertJS(js){
+    const div = document.createElement('div');
+    div.innerHTML = js;
+    js = div.textContent.trim();
+    js = js_beautify(js, {
+      indent_size: 2
+    });
+    return js
+  }
+
 const Codes = {};
+const JSCodes = {};
 
 const demo = Vue.extend({
     template: template,
-    props: ['codeId', 'code'],
+    props: ['codeId', 'code', 'jscode'],
     data(){
         return {show: false}
     },
@@ -47,7 +58,13 @@ const demo = Vue.extend({
         var eles = document.querySelectorAll('demo');
         eles.forEach(_=>{
             if(_.hasAttribute('code-id')){
-                Codes[_.getAttribute('code-id')] = _.innerHTML;
+                let codeId = _.getAttribute('code-id');
+                let jsCodeEle = _.querySelector('template[type=au-demo]');
+                if(jsCodeEle){
+                    JSCodes[codeId] = jsCodeEle.innerHTML;
+                    jsCodeEle.remove();
+                }
+                Codes[codeId] = _.innerHTML;
             }
         });
     },
@@ -59,15 +76,27 @@ const demo = Vue.extend({
             this.show = !this.show;
         },
         updateCode(){
-            let newCode = document.createElement('code');
-            let codeEle = this.$el.querySelector('code');
-            newCode.innerHTML = convert(this.sourceCode);
-            codeEle.replaceWith(newCode);
-            hljs.highlightBlock(newCode);
+            // 处理html
+            if(this.sourceCode){
+                let newCode = document.createElement('code');
+                newCode.innerHTML = convertHtml(this.sourceCode);
+                let codeEle = this.$el.querySelector('pre.html code');
+                codeEle.replaceWith(newCode);
+                hljs.highlightBlock(newCode);
+            }
+            // 处理js
+            if(this.sourceJSCode){
+                let newJSCode = document.createElement('code');
+                newJSCode.innerHTML = convertJS(this.sourceJSCode);
+                let jscodeEle = this.$el.querySelector('pre.js code');
+                jscodeEle.replaceWith(newJSCode);
+                hljs.highlightBlock(newJSCode);
+            }
         }
     },
     computed: {
-        sourceCode(){return this.code || Codes[this.codeId];}
+        sourceCode(){return this.code || Codes[this.codeId];},
+        sourceJSCode(){return this.jscode || JSCodes[this.codeId];}
     },
     watch: {
         code(val){
