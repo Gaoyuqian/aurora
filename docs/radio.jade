@@ -5,115 +5,124 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuRadio
-      .docs-desc
 
-    .docs-section
-      h2|基础选择器
-      .docs-desc
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          # AuRadio
+          radio选择器
+      demo(slot="code")
+        div(style="margin-bottom: 5px")
+          au-radio(label="男", value="male", v-model="form.gender")
+          au-radio(label="女", value="female", v-model="form.gender")
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          div
-            au-radio(label="男", value="male", v-model="form.gender")
-            au-radio(label="女", value="female", v-model="form.gender")
+        div(style="margin-bottom: 5px")
+          au-radio(value="male", v-model="form.gender")|男
+          au-radio(value="female", v-model="form.gender")|女
 
-          div
-            au-radio(value="male", v-model="form.gender")|男
-            au-radio(value="female", v-model="form.gender")|女
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+        p {{form.gender}}
+        template(type="au-demo")
+          script.
+            export default {
+              data: {gender: 'female'}
+            }
 
-    .docs-section
-      h2|禁用状态
-      .docs-desc
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ## 属性
+          |  属性名  |    说明    |          类型          | 默认值 |
+          |----------|------------|------------------------|--------|
+          | v-model  | 绑定的数据 | String, Number         | ''     |
+          | value    | 匹配的数据 | String, Number, Object | true   |
+          | label    | 显示的内容 | String                 | ''     |
+          | disabled | 是否禁用   | Boolean                | false  |
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          div
-            au-radio(label="男", value="male", v-model="form.gender", disabled)
-            au-radio(label="女", value="female", v-model="form.gender", disabled)
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+          ## 例子
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 禁用状态
+      demo(slot="code")
+        au-radio(label="男", value="male", v-model="form.gender", disabled)
+        au-radio(label="女", value="female", v-model="form.gender", disabled)
+        template(type="au-demo")
+          script.
+            export default {
+              data: {gender: 'female'}
+            }
 
-    .docs-section
-      h2|Radiox组
-      .docs-desc
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### Radiox group
+          `au-radio-group`可以快速生成一组radio。
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          div
+          |   属性  |                                    说明                                   |      类型      | 默认值 |
+          |---------|---------------------------------------------------------------------------|----------------|--------|
+          | options | 选项数组。每一项必须包含`labe`与`value`，例：```[{label:'1', value:1}]``` | Array          |        |
+          | v-model | 匹配的数据。只接受`Array`                                                 | String, Number |        |
+      demo(slot="code")
+          div(style="margin-bottom: 5px")
             au-radio-group(:options="options" v-model="form.class")
-          div
+          div(style="margin-bottom: 5px")
             au-radio-group(v-model="form.class")
               au-radio(:value="option.value", v-for="option in options")
                 |{{ option.label }}
 
-      template.js(scoped="scoped")
-        script.
-          {
-            data() {
-              return {
-                options: [
-                  {
-                    value: '1',
-                    label: '三年一班'
-                  },
-                  {
-                    value: '2',
-                    label: '三年二班'
-                  },
-                  {
-                    value: '3',
-                    label: '三年三班'
-                  }
-                ]
+          template(type="au-demo")
+            script.
+              export default {
+                data: {
+                  form: {'class': '3'},
+                  options: [
+                    {value: '1',label: '三年一班'},
+                    {value: '2',label: '三年二班'},
+                    {value: '3',label: '三年三班'}
+                  ]
+                }
+              }
+
+    docs-section
+      div(slot="desc")
+        :markdown-it
+          ### 对象绑定
+      demo(slot="code")
+        au-radio-group(v-model="form.obj")
+          au-radio(:value="option", v-for="option in options")|{{ option.label }}
+        p {{JSON.stringify(form.obj)}}
+        template(type="au-demo")
+          script.
+            const options = [
+              {value: '1',label: '三年一班'},
+              {value: '2',label: '三年二班'},
+              {value: '3',label: '三年三班'}
+            ];
+            export default {
+              data: {
+                form: {obj:options[1]},
+                options: options
               }
             }
-          }
-
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-
-    .docs-section
-      h2|属性
-      au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
+    const opts = [
+      {value: '1',label: '三年一班'},
+      {value: '2',label: '三年二班'},
+      {value: '3',label: '三年三班'}
+    ];
     new Vue({
       el: '#app',
       mixins,
-      created () {
-        console.log(this)
-      },
       data () {
         return {
           form: {
             'class': '3',
-            gender: 'female'
+            gender: 'female',
+            obj: opts[1]
           },
-          options: [
-            {
-              value: '1',
-              label: '三年一班'
-            },
-            {
-              value: '2',
-              label: '三年二班'
-            },
-            {
-              value: '3',
-              label: '三年三班'
-            }
-          ]
+          options: opts
         }
       }
     })

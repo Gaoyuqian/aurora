@@ -135,7 +135,7 @@ html.no-js
         hljs.initHighlightingOnLoad();
         // 给每一个code代码块分配id 用于demo组件
         let codeId = 1;
-        document.querySelectorAll('demo[slot="code"]').forEach(_=>{
+        document.querySelectorAll('demo').forEach(_=>{
           _.setAttribute('code-id', codeId++);
         });
 
