@@ -6,40 +6,135 @@ block title
 block content
   au-panel
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          # AuSelect
-          基础选择器的用法。`au-select`可以通过`options`属性填充选项 或 通过`au-option`子组件填充。
+    .markdown-body
+      :markdown-it
+        # AuSelect
+        基础选择器的用法。`au-select`可以通过`options`属性填充选项 或 通过`au-option`子组件填充。
 
-          `au-option`通过`label`属性指定显示内容，`value`属性指定值。
+        `au-option`通过`label`属性指定显示内容，`value`属性指定值。
 
-          **注意：** 暂不支持对象绑定
+        **注意：** 暂不支持对象绑定
 
-          > 如果通过以下方式设置选项内容：
-          >
-          > ```<au-option label="label" value="value">自定义文本</au-option>```
-          >
-          > 选项将显示**自定义文本**，但选择后的内容依然根据label展示。
-      demo(slot="code")
-        au-flex(gutter="10")
-          au-item(span="8")
-            au-select(v-model="form.class", :options="options", placeholder="请选择班级")
-          au-item(span="8")
-            au-select(v-model="form.class", placeholder="请选择班级")
-              au-option(
-                v-for="option in options",
-                :label="option.label",
-                :value="option.value"
-              )
-          au-item(span="8")
-            au-select(v-model="form.class", placeholder="请选择班级")
-              au-option(
-                v-for="option in options",
-                :label="option.label",
-                :value="option.value"
-              ) 自定义文本-{{option.value}}
-        p 选中的值：{{form.class}}
+        > 如果通过以下方式设置选项内容：
+        >
+        > ```<au-option label="label" value="value">自定义文本</au-option>```
+        >
+        > 选项将显示**自定义文本**，但选择后的内容依然根据label展示。
+    demo
+      au-flex(gutter="10")
+        au-item(span="8")
+          au-select(v-model="form.class", :options="options", placeholder="请选择班级")
+        au-item(span="8")
+          au-select(v-model="form.class", placeholder="请选择班级")
+            au-option(
+              v-for="option in options",
+              :label="option.label",
+              :value="option.value"
+            )
+        au-item(span="8")
+          au-select(v-model="form.class", placeholder="请选择班级")
+            au-option(
+              v-for="option in options",
+              :label="option.label",
+              :value="option.value"
+            ) 自定义文本-{{option.value}}
+      p 选中的值：{{form.class}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              options: [
+                  {label: '三年一班', value: '1'},
+                  {label: '三年二班', value: '2'},
+                  {label: '三年三班', value: '3'},
+                  {label: '三年四班', value: '4'},
+                  {label: '三年五班', value: '5'},
+                  {label: '三年六班', value: '6'}
+              ],
+              form:{
+                class:''
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
+        ## au-select
+        ### 属性
+        |   属性名    |                                          描述                                         |      类型      |  默认值   |
+        |-------------|---------------------------------------------------------------------------------------|----------------|-----------|
+        | v-model     | 绑定的数据                                                                            | String, Number | ''        |
+        | options     | select的option数组, 格式为{ label, value } (可以不传此值, 通过使用AuOption来手动指定) | Array          | null      |
+        | placeholder | 同原生的placeholder                                                                   | String         | '请选择'  |
+        | multiple    | 是否使用多选, 若设置为true, v-model需要绑定数组对象                                   | Boolean        | false     |
+        | size        | 选择器的大小 (可选值: large, default, small, mini)                                    | String         | 'default' |
+        | disabled    | 是否禁用                                                                              | Boolean        | false     |
+        | clearable   | 是否可清空                                                                            | Boolean        | false     |
+        | filter      | 是否支持搜索过滤                                                                      | Boolean        | false     |
+        | readonly    | todo （暂不支持）                                                                     | Boolean        | false     |
+        ## au-option
+        `au-select`的直接子组件
+        ### 属性
+        | 属性名 |                       描述                       |      类型      | 默认值 |
+        |--------|--------------------------------------------------|----------------|--------|
+        | label  | 选择框中出现的文案，如果不设置将无法显示选择结果 | String         |        |
+        | value  | 选择项值                                         | String, Number |        |
+
+        ## 例子
+        ### 多选
+    demo
+      au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级")
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              options: [
+                  {label: '三年一班', value: '1'},
+                  {label: '三年二班', value: '2'},
+                  {label: '三年三班', value: '3'},
+                  {label: '三年四班', value: '4'},
+                  {label: '三年五班', value: '5'},
+                  {label: '三年六班', value: '6'}
+              ],
+              form:{
+                class:''
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 禁用 & 只读
+        > 占时没有对readonly的支持
+    demo
+      div(style="margin-bottom:5px")
+        au-select(disabled, v-model="form.classes", :options="options", multiple, placeholder="请选择班级")
+      div(style="margin-bottom:5px")
+        au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              options: [
+                  {label: '三年一班', value: '1'},
+                  {label: '三年二班', value: '2'},
+                  {label: '三年三班', value: '3'},
+                  {label: '三年四班', value: '4'},
+                  {label: '三年五班', value: '5'},
+                  {label: '三年六班', value: '6'}
+              ],
+              form:{
+                class:''
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 可清空
+        选中后，鼠标移入，右侧图标变为`X`。点击可清空。
+      demo
+        au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
         template(type="au-demo")
           script.
             export default {
@@ -58,39 +153,29 @@ block content
               }
             }
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## au-select
-          ### 属性
-          |   属性名    |                                          描述                                         |      类型      |  默认值   |
-          |-------------|---------------------------------------------------------------------------------------|----------------|-----------|
-          | v-model     | 绑定的数据                                                                            | String, Number | ''        |
-          | options     | select的option数组, 格式为{ label, value } (可以不传此值, 通过使用AuOption来手动指定) | Array          | null      |
-          | placeholder | 同原生的placeholder                                                                   | String         | '请选择'  |
-          | multiple    | 是否使用多选, 若设置为true, v-model需要绑定数组对象                                   | Boolean        | false     |
-          | size        | 选择器的大小 (可选值: large, default, small, mini)                                    | String         | 'default' |
-          | disabled    | 是否禁用                                                                              | Boolean        | false     |
-          | clearable   | 是否可清空                                                                            | Boolean        | false     |
-          | filter      | 是否支持搜索过滤                                                                      | Boolean        | false     |
-          | readonly    | todo （暂不支持）                                                                     | Boolean        | false     |
-          ## au-option
-          `au-select`的直接子组件
-          ### 属性
-          | 属性名 |                       描述                       |      类型      | 默认值 |
-          |--------|--------------------------------------------------|----------------|--------|
-          | label  | 选择框中出现的文案，如果不设置将无法显示选择结果 | String         |        |
-          | value  | 选择项值                                         | String, Number |        |
+    .markdown-body
+      :markdown-it
+        ### 不同大小
+    demo
+      div(style="margin-bottom:5px")
+        au-select(size="large", placeholder="请选择班级")
+      div(style="margin-bottom:5px")
+        au-select(size="default", placeholder="请选择班级")
+      div(style="margin-bottom:5px")
+        au-select(size="small", placeholder="请选择班级")
+      div(style="margin-bottom:5px")
+        au-select(size="mini", placeholder="请选择班级")
 
-          ## 例子
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ### 多选
-      demo(slot="code")
-        au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级")
-        template(type="au-demo")
+    .markdown-body
+      :markdown-it
+        ### 搜索选择器
+    demo
+      au-flex(gutter="10")
+        au-item(span="12")
+          au-select(v-model="form.class", :options="options", placeholder="请选择班级", filter)
+        au-item(span="12")
+          au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级", filter)
+      template(type="au-demo")
           script.
             export default {
               data: {
@@ -107,100 +192,6 @@ block content
                 }
               }
             }
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ### 禁用 & 只读
-          > 占时没有对readonly的支持
-      demo(slot="code")
-        div(style="margin-bottom:5px")
-          au-select(disabled, v-model="form.classes", :options="options", multiple, placeholder="请选择班级")
-        div(style="margin-bottom:5px")
-          au-select(disabled, v-model="form.class", :options="options", placeholder="请选择班级")
-        template(type="au-demo")
-          script.
-            export default {
-              data: {
-                options: [
-                    {label: '三年一班', value: '1'},
-                    {label: '三年二班', value: '2'},
-                    {label: '三年三班', value: '3'},
-                    {label: '三年四班', value: '4'},
-                    {label: '三年五班', value: '5'},
-                    {label: '三年六班', value: '6'}
-                ],
-                form:{
-                  class:''
-                }
-              }
-            }
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ### 可清空
-          选中后，鼠标移入，右侧图标变为`X`。点击可清空。
-        demo(slot="code")
-          au-select(v-model="form.class", :options="options", placeholder="请选择班级", clearable)
-          template(type="au-demo")
-            script.
-              export default {
-                data: {
-                  options: [
-                      {label: '三年一班', value: '1'},
-                      {label: '三年二班', value: '2'},
-                      {label: '三年三班', value: '3'},
-                      {label: '三年四班', value: '4'},
-                      {label: '三年五班', value: '5'},
-                      {label: '三年六班', value: '6'}
-                  ],
-                  form:{
-                    class:''
-                  }
-                }
-              }
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ### 不同大小
-        demo(slot="code")
-          div(style="margin-bottom:5px")
-            au-select(size="large", placeholder="请选择班级")
-          div(style="margin-bottom:5px")
-            au-select(size="default", placeholder="请选择班级")
-          div(style="margin-bottom:5px")
-            au-select(size="small", placeholder="请选择班级")
-          div(style="margin-bottom:5px")
-            au-select(size="mini", placeholder="请选择班级")
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ### 搜索选择器
-      demo(slot="code")
-        au-flex(gutter="10")
-          au-item(span="12")
-            au-select(v-model="form.class", :options="options", placeholder="请选择班级", :filter="true")
-          au-item(span="12")
-            au-select(multiple, v-model="form.classes", :options="options", placeholder="请选择班级", :filter="true")
-        template(type="au-demo")
-            script.
-              export default {
-                data: {
-                  options: [
-                      {label: '三年一班', value: '1'},
-                      {label: '三年二班', value: '2'},
-                      {label: '三年三班', value: '3'},
-                      {label: '三年四班', value: '4'},
-                      {label: '三年五班', value: '5'},
-                      {label: '三年六班', value: '6'}
-                  ],
-                  form:{
-                    class:''
-                  }
-                }
-              }
 
 block script
   script.

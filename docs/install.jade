@@ -5,31 +5,30 @@ block title
 
 block content
   au-panel
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          # 安装
-          Aurora是基于**Vue 2.2.0**版的组件库, 请使用**Vue 2.2.0**以上的版本
+    .markdown-body
+      :markdown-it
+        # 安装
+        Aurora是基于**Vue 2.2.0**版的组件库, 请使用**Vue 2.2.0**以上的版本
 
-          ## Github地址
-          [https://github.com/MeiliFE/Aurora](https://github.com/MeiliFE/Aurora "点击下载")
+        ## Github地址
+        [https://github.com/MeiliFE/Aurora](https://github.com/MeiliFE/Aurora "点击下载")
 
-          ## 安装font-awesome
-          Aurora目前使用了fontawsome图标库, 由于未来会使用自己的图标库, 所以并没有集成fontawsome, 用户需要自行添加fontawesome字体库
-          [http://fontawesome.io/](http://fontawesome.io/ "点击下载")
+        ## 安装font-awesome
+        Aurora目前使用了fontawsome图标库, 由于未来会使用自己的图标库, 所以并没有集成fontawsome, 用户需要自行添加fontawesome字体库
+        [http://fontawesome.io/](http://fontawesome.io/ "点击下载")
 
-          ## 安装Aurora
-          请下载aurora的js, css文件, 并引入进项目中
-          * 下载 [aurora.js](../src/aurora.js "点击下载")
-          * 下载 [aurora.css](../src/sass/aurora.css "点击下载")
-          ```html
-          <!-- 引入样式 -->
-          <link rel="stylesheet" href="/your/path/aurora.css">
-          <!-- 引入组件库 -->
-          <script src="/your/path/aurora.js"></script>
-          ```
+        ## 安装Aurora
+        请下载aurora的js, css文件, 并引入进项目中
+        * 下载 [aurora.js](../src/aurora.js "点击下载")
+        * 下载 [aurora.css](../src/sass/aurora.css "点击下载")
+        ```html
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="/your/path/aurora.css">
+        <!-- 引入组件库 -->
+        <script src="/your/path/aurora.js"></script>
+        ```
 
-          >  确保`vue.js`在`Aurora.js`前引入，Aurora自动执行`Vue.use()`
+        >  确保`vue.js`在`Aurora.js`前引入，Aurora自动执行`Vue.use()`
 
 block script
   script.

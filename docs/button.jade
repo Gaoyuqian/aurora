@@ -6,210 +6,199 @@ block title
 block content
   au-panel
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          # Button
-          标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑
+    .markdown-body
+      :markdown-it
+        # Button
+        标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 按钮类型
-          按钮可以通过`type`属性控制按钮类型，可选值包含`primary`、`info`、`success`、`danger`、`default`、`warning`、`link` 7种类型。默认为`default`。
+    .markdown-body
+      :markdown-it
+        ### 按钮类型
+        按钮可以通过`type`属性控制按钮类型，可选值包含`primary`、`info`、`success`、`danger`、`default`、`warning`、`link` 7种类型。默认为`default`。
 
-          通过`size`属性控制按钮大小，可选值包含`large`、`default`、`small`、`mini` 四种大小。默认为`default`。
+        通过`size`属性控制按钮大小，可选值包含`large`、`default`、`small`、`mini` 四种大小。默认为`default`。
 
-      demo(slot="code")
-        div(style="margin-bottom: 10px")
-          au-button(type="primary")|主要按钮
-          au-button(type="info")|信息按钮
-          au-button(type="success")|审核通过
-          au-button(type="danger")|审核拒绝
-          au-button(type="warning")|警告按钮
-          au-button(type="default")|默认按钮
+    demo
+      div(style="margin-bottom: 10px")
+        au-button(type="primary")|主要按钮
+        au-button(type="info")|信息按钮
+        au-button(type="success")|审核通过
+        au-button(type="danger")|审核拒绝
+        au-button(type="warning")|警告按钮
+        au-button(type="default")|默认按钮
 
-        div(style="margin-bottom: 10px")
-          au-button(type="primary", size="large")|主要按钮
-          au-button(type="info", size="large")|信息按钮
-          au-button(type="success", size="large")|审核通过
-          au-button(type="danger", size="large")|审核拒绝
-          au-button(type="warning", size="large")|警告按钮
-          au-button(type="default", size="large")|默认按钮
+      div(style="margin-bottom: 10px")
+        au-button(type="primary", size="large")|主要按钮
+        au-button(type="info", size="large")|信息按钮
+        au-button(type="success", size="large")|审核通过
+        au-button(type="danger", size="large")|审核拒绝
+        au-button(type="warning", size="large")|警告按钮
+        au-button(type="default", size="large")|默认按钮
 
-        div(style="margin-bottom: 10px")
-          au-button(type="primary", size="small")|主要按钮
-          au-button(type="info", size="small")|信息按钮
-          au-button(type="success", size="small")|审核通过
-          au-button(type="danger", size="small")|审核拒绝
-          au-button(type="warning", size="small")|警告按钮
-          au-button(type="default", size="small")|默认按钮
+      div(style="margin-bottom: 10px")
+        au-button(type="primary", size="small")|主要按钮
+        au-button(type="info", size="small")|信息按钮
+        au-button(type="success", size="small")|审核通过
+        au-button(type="danger", size="small")|审核拒绝
+        au-button(type="warning", size="small")|警告按钮
+        au-button(type="default", size="small")|默认按钮
 
-        div(style="margin-bottom: 10px")
-          au-button(type="primary", size="mini")|主要按钮
-          au-button(type="info", size="mini")|信息按钮
-          au-button(type="success", size="mini")|审核通过
-          au-button(type="danger", size="mini")|审核拒绝
-          au-button(type="warning", size="mini")|警告按钮
-          au-button(type="default", size="mini")|默认按钮
-        div(style="margin-bottom: 10px")
-          au-button(type="link", size="large")|大型按钮
-          au-button(type="link", size="default")|中型按钮
-          au-button(type="link", size="small")|小型按钮
-          au-button(type="link", size="mini")|超小按钮
+      div(style="margin-bottom: 10px")
+        au-button(type="primary", size="mini")|主要按钮
+        au-button(type="info", size="mini")|信息按钮
+        au-button(type="success", size="mini")|审核通过
+        au-button(type="danger", size="mini")|审核拒绝
+        au-button(type="warning", size="mini")|警告按钮
+        au-button(type="default", size="mini")|默认按钮
+      div(style="margin-bottom: 10px")
+        au-button(type="link", size="large")|大型按钮
+        au-button(type="link", size="default")|中型按钮
+        au-button(type="link", size="small")|小型按钮
+        au-button(type="link", size="mini")|超小按钮
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 不可用状态
-          按钮可设置`disabled`状态，设置之后按钮不可点击。
-      demo(slot="code")
-        au-button(@click="alert('click')")|点击出发alert
-        au-button(disabled, @click="alert('click')")|点击出发alert
+    .markdown-body
+      :markdown-it
+        ### 不可用状态
+        按钮可设置`disabled`状态，设置之后按钮不可点击。
+    demo
+      au-button(@click="alert('click')")|点击出发alert
+      au-button(disabled, @click="alert('click')")|点击出发alert
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 加载中
-      demo(slot="code")
-          au-button(:loading="true")|加载中
-          au-button(:loading="loading", @click="startLoading")|点击加载，3秒后恢复
-          template(type="au-demo")
-            script.
-              export default {
-                data: {loading: false},
-                methods: {
-                  startLoading(){
-                    this.loading = true;
-                    setTimeout(()=>this.loading=false, 3000);
-                  }
-                }
-              }
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 图标按钮
-          带图标的按钮可增强辨识度(有文字)或节省空间(无文字)。
-          图标来自**fontawesome**，[点击查看更多图标](http://fontawesome.io/icons/)
-          > 图标只能加在按钮左边，如果需要加载按钮右边，请使用`au-icon`自行添加
-      demo(slot="code")
-        div(style="margin-bottom: 5px")
-          au-button(icon="plus")|添加
-          au-button(icon="search")|添加
-          au-button(icon="battery-three-quarters")
-            |添加
-            au-icon(icon="battery-three-quarters")
-          au-button(type="primary", icon="plus")|添加
-
-        div(style="margin-bottom: 5px")
-          au-button(icon="plus")
-          au-button(icon="search")
-
-        div(style="margin-bottom: 5px")
-          au-button(type="primary", icon="plus")
-          au-button(type="primary", icon="search")
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 全宽按钮
-          如果需要按钮变为块级可设置`block`属性。
-      demo(slot="code")
-        div(style="margin-bottom: 5px")
-          au-button(type="primary", block)|block
-        div(style="margin-bottom: 5px")
-          au-button(type="primary")|未设置 block
-
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 点击后禁用按钮
-          通过`disable-on-click`可以实现点击后禁用按钮，可以用在防止重复提交等待服务器响应等场景。
-      demo(slot="code")
-        au-button(type="primary", disable-on-click, @click="disableOnClick")|disableOnClick
+    .markdown-body
+      :markdown-it
+        ### 加载中
+    demo
+        au-button(:loading="true")|加载中
+        au-button(:loading="loading", @click="startLoading")|点击加载，3秒后恢复
         template(type="au-demo")
           script.
             export default {
+              data: {loading: false},
               methods: {
-                disableOnClick: function(enable){
-                  let closeMessage = this.$message('loading', '提示', '按钮点击')
-                  setTimeout(function(){
-                    closeMessage();
-                    enable();
-                  }, 3000);
+                startLoading(){
+                  this.loading = true;
+                  setTimeout(()=>this.loading=false, 3000);
                 }
               }
             }
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 链接按钮
-          `au-button`默认使用**html button**标签，如果设置`href`属性，将使用**a**标签，这种情况下可设置`target`属性（同`a`标签）
-      demo(slot="code")
-          au-button(type="info", href="#")|默认跳转链接
-          au-button(type="info", href="#", target="_blank")|添加 trget="_blank" 的跳转链接
+    .markdown-body
+      :markdown-it
+        ### 图标按钮
+        带图标的按钮可增强辨识度(有文字)或节省空间(无文字)。
+        图标来自**fontawesome**，[点击查看更多图标](http://fontawesome.io/icons/)
+        > 图标只能加在按钮左边，如果需要加载按钮右边，请使用`au-icon`自行添加
+    demo
+      div(style="margin-bottom: 5px")
+        au-button(icon="plus")|添加
+        au-button(icon="search")|添加
+        au-button(icon="battery-three-quarters")
+          |添加
+          au-icon(icon="battery-three-quarters")
+        au-button(type="primary", icon="plus")|添加
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## button[type]
-          在原生html标签中，button按钮的默认` type `是` submit `。本组件库的按钮默认是` button `。可以防止按钮包含在表单中时默认提交表单。
-          可以通过设置` native-type="submit" `来实现表单提交
-      demo(slot="code")
-          form(method="get", action="#")
-            input(name="test", type="text", value="test")
-            au-button(type="primary", native-type="submit")|可提交
-            au-button(type="default")|不可提交
+      div(style="margin-bottom: 5px")
+        au-button(icon="plus")
+        au-button(icon="search")
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          ## 属性
-          |     属性名     |                                           说明                                           |   类型  |  默认值   |
-          |----------------|------------------------------------------------------------------------------------------|---------|-----------|
-          | type           | 按钮类型。可选值包含`primary`、`info`、`success`、`danger`、`default`、`warning`、`link` | String  | 'default' |
-          | size           | 按钮大小。可选值包含`large`、`default`、`small`、`mini` 四种大小                         | String  | 'default' |
-          | href           | 跳转链接，如果设置链接将使用`a`标签                                                      | String  |           |
-          | target         | a标签的`href`属性a设置`href`后该值才生效。                                               | String  |           |
-          | loading        | 是否开启loading 状态                                                                     | Boolean | false     |
-          | disabled       | 是否禁用按钮                                                                             | Boolean | false     |
-          | icon           | 按钮图标（图标只能加在按钮左边，如果需要加载按钮右边，请使用`au-icon`自行添加）          | String  |           |
-          | nativeType     | 原生按钮`type`属性                                                                       | String  | 'button'  |
-          | block          | 是否是块级按钮，将填满整个父元素宽度                                                     | Boolean | false     |
-          | disableOnClick | 是否在点击之后禁用按钮                                                                   | Boolean | false     |
+      div(style="margin-bottom: 5px")
+        au-button(type="primary", icon="plus")
+        au-button(type="primary", icon="search")
 
+    .markdown-body
+      :markdown-it
+        ### 全宽按钮
+        如果需要按钮变为块级可设置`block`属性。
+    demo
+      div(style="margin-bottom: 5px")
+        au-button(type="primary", block)|block
+      div(style="margin-bottom: 5px")
+        au-button(type="primary")|未设置 block
 
-    docs-section
-      div(slot="desc")
-        :markdown-it
-          # Button group
-          以按钮组的方式出现，常用于多项类似操作
-      demo(slot="code")
-        div(style="margin-bottom: 5px")
-          au-button-group
-            au-button(:type="active == 1 ? 'primary' : 'default'", @click="clickActive(1)")|按钮1
-            au-button(:type="active == 2 ? 'primary' : 'default'", @click="clickActive(2)")|按钮2
-            au-button(:type="active == 3 ? 'primary' : 'default'", @click="clickActive(3)")|按钮3
-        div(style="margin-bottom: 5px")
-          au-button-group
-            au-button(type="primary")|添加
-            au-button(type="danger")|删除
-        template(type="au-demo")
-          script.
-            export default {
-              data () {
-                return {
-                  active: '2'
-                }
-              },
-              methods: {
-                clickActive (value) {
-                  this.active = value
-                }
+    .markdown-body
+      :markdown-it
+        ### 点击后禁用按钮
+        通过`disable-on-click`可以实现点击后禁用按钮，可以用在防止重复提交等待服务器响应等场景。
+    demo
+      au-button(type="primary", disable-on-click, @click="disableOnClick")|disableOnClick
+      template(type="au-demo")
+        script.
+          export default {
+            methods: {
+              disableOnClick: function(enable){
+                let closeMessage = this.$message('loading', '提示', '按钮点击')
+                setTimeout(function(){
+                  closeMessage();
+                  enable();
+                }, 3000);
               }
             }
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 链接按钮
+        `au-button`默认使用**html button**标签，如果设置`href`属性，将使用**a**标签，这种情况下可设置`target`属性（同`a`标签）
+    demo
+        au-button(type="info", href="#")|默认跳转链接
+        au-button(type="info", href="#", target="_blank")|添加 trget="_blank" 的跳转链接
+
+    .markdown-body
+      :markdown-it
+        ### button[type]
+        在原生html标签中，button按钮的默认` type `是` submit `。本组件库的按钮默认是` button `。可以防止按钮包含在表单中时默认提交表单。
+        可以通过设置` native-type="submit" `来实现表单提交
+    demo
+        form(method="get", action="#")
+          input(name="test", type="text", value="test")
+          au-button(type="primary", native-type="submit")|可提交
+          au-button(type="default")|不可提交
+
+    .markdown-body
+      :markdown-it
+        ## Button group
+        以按钮组的方式出现，常用于多项类似操作
+    demo
+      div(style="margin-bottom: 5px")
+        au-button-group
+          au-button(:type="active == 1 ? 'primary' : 'default'", @click="clickActive(1)")|按钮1
+          au-button(:type="active == 2 ? 'primary' : 'default'", @click="clickActive(2)")|按钮2
+          au-button(:type="active == 3 ? 'primary' : 'default'", @click="clickActive(3)")|按钮3
+      div(style="margin-bottom: 5px")
+        au-button-group
+          au-button(type="primary")|添加
+          au-button(type="danger")|删除
+      template(type="au-demo")
+        script.
+          export default {
+            data () {
+              return {
+                active: '2'
+              }
+            },
+            methods: {
+              clickActive (value) {
+                this.active = value
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |     属性名     |                                           说明                                           |   类型  |  默认值   |
+        |----------------|------------------------------------------------------------------------------------------|---------|-----------|
+        | type           | 按钮类型。可选值包含`primary`、`info`、`success`、`danger`、`default`、`warning`、`link` | String  | 'default' |
+        | size           | 按钮大小。可选值包含`large`、`default`、`small`、`mini` 四种大小                         | String  | 'default' |
+        | href           | 跳转链接，如果设置链接将使用`a`标签                                                      | String  |           |
+        | target         | a标签的`href`属性a设置`href`后该值才生效。                                               | String  |           |
+        | loading        | 是否开启loading 状态                                                                     | Boolean | false     |
+        | disabled       | 是否禁用按钮                                                                             | Boolean | false     |
+        | icon           | 按钮图标（图标只能加在按钮左边，如果需要加载按钮右边，请使用`au-icon`自行添加）          | String  |           |
+        | nativeType     | 原生按钮`type`属性                                                                       | String  | 'button'  |
+        | block          | 是否是块级按钮，将填满整个父元素宽度                                                     | Boolean | false     |
+        | disableOnClick | 是否在点击之后禁用按钮                                                                   | Boolean | false     |
+
 
 block script
   script.
