@@ -130,26 +130,23 @@
         </div>
         <div slot="container">
           <au-panel>
-            <docs-section>
-              <div slot="desc"><h1>AuCheckbox</h1>
+            <div class="markdown-body"><h1>AuCheckbox</h1>
 <p>checkbox选择器</p>
 
-              </div>
-              <demo slot="code">
-                <au-checkbox v-for="i in 5" :label="'数字'+i" :value="i" v-model="form.numbers"></au-checkbox>
-                <p>{{JSON.stringify(form.numbers)}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {form: {numbers: []}}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>属性</h2>
+            </div>
+            <demo>
+              <au-checkbox v-for="i in 5" :label="'数字'+i" :value="i" v-model="form.numbers"></au-checkbox>
+              <p>{{JSON.stringify(form.numbers)}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {form: {numbers: []}}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
 <table>
 <thead>
 <tr>
@@ -193,111 +190,99 @@
 </tbody>
 </table>
 <h2>例子</h2>
+<h3>是否选择器</h3>
 
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>是否选择器</h3>
+            </div>
+            <demo>
+              <au-checkbox label="是否同意" v-model="form.isConfirm"></au-checkbox>
+              <au-checkbox label="否" :value="false" v-model="form.isConfirm"></au-checkbox>
+              <au-checkbox label="是" :value="true" v-model="form.isConfirm"></au-checkbox>
+              <p>{{form.isConfirm}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {form: {isConfirm: false}}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>禁用Checkbox</h3>
 
-              </div>
-              <demo slot="code">
-                <au-checkbox label="是否同意" v-model="form.isConfirm"></au-checkbox>
-                <au-checkbox label="否" :value="false" v-model="form.isConfirm"></au-checkbox>
-                <au-checkbox label="是" :value="true" v-model="form.isConfirm"></au-checkbox>
-                <p>{{form.isConfirm}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {form: {isConfirm: false}}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>禁用Checkbox</h3>
-
-              </div>
-              <demo slot="code">
-                <au-checkbox label="男" value="男" v-model="form.genders" disabled></au-checkbox>
-                <au-checkbox label="女" value="女" v-model="form.genders" disabled></au-checkbox>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {form: {genders: ['男']}}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>单选</h3>
+            </div>
+            <demo>
+              <au-checkbox label="男" value="男" v-model="form.genders" disabled></au-checkbox>
+              <au-checkbox label="女" value="女" v-model="form.genders" disabled></au-checkbox>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {form: {genders: ['男']}}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>单选</h3>
 <p>如果<code>v-model</code>绑定的值不是数组，可以实现单选。</p>
 
-              </div>
-              <demo slot="code">
-                <au-checkbox v-for="i in 5" :label="'数字'+i" :value="i" v-model="form.number"></au-checkbox>
-                <p>{{form.number}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {form: {number: 2}}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>全选</h3>
+            </div>
+            <demo>
+              <au-checkbox v-for="i in 5" :label="'数字'+i" :value="i" v-model="form.number"></au-checkbox>
+              <p>{{form.number}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {form: {number: 2}}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>全选</h3>
 
-              </div>
-              <demo slot="code">
-                <au-checkbox label="全选" :indeterminate="indeterminate" v-model="checkAll"></au-checkbox>
-                <au-checkbox-group :options="cityOptions" v-model="form.cities"></au-checkbox-group>
-                <p>{{JSON.stringify(form.cities)}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {
-                        cities: [],
-                        cityOptions: [
-                          {label: '北京', value: '北京'},
-                          {label: '天津',value: '天津'},
-                          {label: '上海',value: '上海'}
-                        ]
-                      },
-                      computed: {
-                        checkAll: { // 是否全部选中
-                          get () {
-                            return this.form.cities.length === this.cityOptions.length
-                          },
-                          set (value) {
-                            if (value) {
-                              this.form.cities = this.cityOptions.map((option) => {
-                                return option.value
-                              })
-                            } else {
-                              this.form.cities = []
-                            }
-                          }
+            </div>
+            <demo>
+              <au-checkbox label="全选" :indeterminate="indeterminate" v-model="checkAll"></au-checkbox>
+              <au-checkbox-group :options="cityOptions" v-model="form.cities"></au-checkbox-group>
+              <p>{{JSON.stringify(form.cities)}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      cities: [],
+                      cityOptions: [
+                        {label: '北京', value: '北京'},
+                        {label: '天津',value: '天津'},
+                        {label: '上海',value: '上海'}
+                      ]
+                    },
+                    computed: {
+                      checkAll: { // 是否全部选中
+                        get () {
+                          return this.form.cities.length === this.cityOptions.length
                         },
-                        indeterminate () {  // 判断是否为部分选中状态
-                          const length = this.form.cities.length
-                          return length > 0 && length < this.cityOptions.length
+                        set (value) {
+                          if (value) {
+                            this.form.cities = this.cityOptions.map((option) => {
+                              return option.value
+                            })
+                          } else {
+                            this.form.cities = []
+                          }
                         }
+                      },
+                      indeterminate () {  // 判断是否为部分选中状态
+                        const length = this.form.cities.length
+                        return length > 0 && length < this.cityOptions.length
                       }
                     }
-                    
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>Checkbox Group</h2>
+                  }
+                  
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h2>Checkbox Group</h2>
 <p><code>Checkbox Group</code> 可以快速生成一组checkbox。</p>
 <p>本质上是<code>&lt;au-checbox v-for=&quot;&quot;&gt;&lt;/au-checkbox&gt;</code></p>
 <table>
@@ -325,29 +310,27 @@
 </tbody>
 </table>
 
-              </div>
-              <demo slot="code">
-                <au-checkbox-group :options="cityOptions" v-model="form.cities"></au-checkbox-group>
-                <p>{{JSON.stringify(form.cities)}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {
-                        cities: [],
-                        cityOptions: [
-                          {label: '北京', value: '北京'},
-                          {label: '天津',value: '天津'},
-                          {label: '上海',value: '上海'}
-                        ]
-                      }
+            </div>
+            <demo>
+              <au-checkbox-group :options="cityOptions" v-model="form.cities"></au-checkbox-group>
+              <p>{{JSON.stringify(form.cities)}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      cities: [],
+                      cityOptions: [
+                        {label: '北京', value: '北京'},
+                        {label: '天津',value: '天津'},
+                        {label: '上海',value: '上海'}
+                      ]
                     }
-                    
-                    
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
+                  }
+                  
+                  
+                </script>
+              </template>
+            </demo>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>

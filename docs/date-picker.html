@@ -130,98 +130,110 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuDatePicker</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuDatePicker</h1>
+<p>日期时间选择器支持 <strong>单时间选择器</strong> 和 <strong>时间范围选择器</strong>，均可精确到年月日时分秒任意级别。</p>
+<h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start-date</td>
+<td>限制可选开始时间</td>
+<td>String, Date</td>
+<td></td>
+</tr>
+<tr>
+<td>end-date</td>
+<td>限制可选结束时间</td>
+<td>String, Date</td>
+<td></td>
+</tr>
+<tr>
+<td>disabled-date</td>
+<td>自定义方法限制可选时间。传入日期，返回<code>true</code>表示禁用该日期</td>
+<td>Function(date)</td>
+<td></td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>绑定的数据。范围选择时传入<code>Array</code>，<code>Array[0]</code>为开始日期,<code>Array[1]</code>为结束日期</td>
+<td>String, Date, Array</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time</td>
+<td>String</td>
+<td>'date'</td>
+</tr>
+<tr>
+<td>format</td>
+<td>日期格式。如果不设置，默认会根据<code>type</code>进行判断。</td>
+<td>String</td>
+<td>根据<code>type</code>进行默认配置</td>
+</tr>
+<tr>
+<td>clearable</td>
+<td>鼠标移入显示清空按钮</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>placeholder</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>基本用法</h2>
+<h3>简单日期选择器</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>日期选择器</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>按日期选择</h4>
-                      <au-date-picker v-model="date" :disabled-date="disabledWeek" clearable placeholder="请选择日期"></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>按日期选择</h4>
-                      <au-date-picker v-model="date" type="date" start-date="2017-03-07" end-date="2017-04-07" placeholder="请选择日期"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>按年选择</h4>
-                      <au-date-picker v-model="year" type="year" clearable></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>按年选择</h4>
-                      <au-date-picker v-model="year" type="year" start-date="2017" end-date="2018"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>按月选择</h4>
-                      <au-date-picker v-model="month" type="month" clearable></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>按月选择</h4>
-                      <au-date-picker v-model="month" type="month" start-date="2017-2" end-date="2017-10"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>选择日期范围</h4>
-                      <au-date-picker v-model="daterange" type="daterange" clearable></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择日期范围</h4>
-                      <au-date-picker v-model="daterange" type="daterange" start-date="2017-2-7" end-date="2017-10-1"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>选择日期时间</h4>
-                      <au-date-picker v-model="datetime" type="datetime" clearable></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择日期时间</h4>
-                      <au-date-picker v-model="datetime" type="datetime" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>选择日期时间范围</h4>
-                      <au-date-picker v-model="datetimerange" type="datetimerange" clearable></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择日期时间范围</h4>
-                      <au-date-picker v-model="datetimerange" type="datetimerange" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+            <demo>
+              <au-date-picker v-model="form1.date" placeholder="请选择日期" clearable></au-date-picker>
+              <p>{{form1.date}}</p>
+              <template type="au-demo">
                 <script>
-                  {
-                    data () {
-                      return {
-                        date: '2017-02-27',
-                        year: '2017-02-27',
-                        month: '2017-02',
-                        daterange: ['2017-02-07', '2017-06-11'],
-                        datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-                        datetime: '2017-02-27 08:11:12',
-                        time: '11:11:11',
-                        attrs: [
-                          {
-                            name: '',
-                            desc: '',
-                            type: '',
-                            default: ''
-                          }
-                        ]
-                      }
+                  export default {
+                    data: {form1: {date: ''}}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>限制开始结束日期</h3>
+<p>如果通过<code>disabled-date</code>属性限制，方法接受一个日期参数进行判端，禁用返回<code>true</code>。</p>
+
+            </div>
+            <demo>
+              <au-flex gutter="20">
+                <au-item span="8">
+                  <au-date-picker v-model="form2.date1" placeholder="请选择日期" :start-date="start" :end-date="end"></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form2.date2" placeholder="请选择日期" :disabled-date="disabledWeek"></au-date-picker>
+                </au-item>
+              </au-flex>
+              <p>{{form1.date}}</p>
+              <template type="au-demo">
+                <script>
+                  let start = new Date();
+                      start.setDate(start.getDate()-5);
+                  let end = new Date();
+                      end.setDate(end.getDate()+5);
+                  export default {
+                    data: {
+                      start: start,
+                      end: end,
+                      form2: {date1: '', date2: ''}
                     },
                     methods: {
                       disabledWeek (date) {
@@ -230,68 +242,174 @@
                       }
                     }
                   }
+                  
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>时间范围选择器</h3>
+<p>支持 <strong>daterange</strong> 和 <strong>datetimerange</strong>。如果使用范围选择，<code>v-model</code>需要绑定数组，数组第一个元素是开始时间，第二个元素是结束时间。</p>
+
             </div>
-            <div class="docs-section">
-              <h2>时间选择器</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>选择时间</h4>
-                      <au-date-picker v-model="time" type="time"></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择时间</h4>
-                      <au-date-picker v-model="time" type="time" start-date="08:08:08"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                </div>
+            <demo>
+              <h4>日期范围</h4>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form3.daterange" type="daterange" clearable></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form3.daterange" type="daterange" start-date="2017-2-7" end-date="2017-10-1"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form3.daterange.join(',')}}</au-item>
+              </au-flex>
+              <h4>日期时间范围</h4>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form3.datetimerange" type="datetimerange" clearable></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form3.datetimerange" type="datetimerange" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form3.datetimerange.join(',')}}</au-item>
+              </au-flex>
+              <p>{{form1.date}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form3: {daterange: [], datetimerange: []}
+                    }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>年选择器</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>控制时间的format</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-flex gutter="20" wrap="wrap">
-                    <au-item span="8">
-                      <h4>选择时间</h4>
-                      <au-date-picker v-model="time" type="time" format="HH:MM"></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择时间</h4>
-                      <au-date-picker v-model="time" type="time" format="ss"></au-date-picker>
-                    </au-item>
-                    <au-item span="8">
-                      <h4>选择时间</h4>
-                      <au-date-picker v-model="datetime" type="datetime" format="yyyy-mm-dd HH:MM"></au-date-picker>
-                    </au-item>
-                  </au-flex>
-                </div>
+            <demo>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form4.year" type="year" clearable></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form4.year" type="year" start-date="2017" end-date="2018"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form4.year}}</au-item>
+              </au-flex>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form4: {
+                        year: '2017'
+                      }
+                    }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>月选择器</h3>
+
             </div>
+            <demo>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form4.month" type="month" clearable></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form4.month" type="month" start-date="2017-2" end-date="2017-10"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form4.month}}</au-item>
+              </au-flex>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form4: {
+                        month: '2017-02',
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>带时间的日期选择</h3>
+
+            </div>
+            <demo>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form4.datetime" type="datetime" clearable></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form4.datetime" type="datetime" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form4.datetime}}</au-item>
+              </au-flex>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form4: {
+                        datetime: ''
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>时间选择</h3>
+
+            </div>
+            <demo>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form4.time" type="time"></au-date-picker>
+                </au-item>
+                <au-item span="8">
+                  <au-date-picker v-model="form4.time" type="time" start-date="08:08:08"></au-date-picker>
+                </au-item>
+                <au-item span="8">{{form4.time}}</au-item>
+              </au-flex>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form4: {
+                        time: '11:11:11'
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>格式设置</h3>
+<blockquote>
+<p>格式设置不要设置成<code>new Date(formatDate)</code>无法解析的格式，否则会无法正常</p>
+</blockquote>
+
+            </div>
+            <demo>
+              <au-flex gutter="20" wrap="wrap">
+                <au-item span="8">
+                  <au-date-picker v-model="form5.date" placeholder="请选择日期" clearable format="yyyy/mm/dd"></au-date-picker>
+                </au-item>
+              </au-flex>
+              <p>{{form5.date}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {form5: {date: ''}}
+                  }
+                  
+                  
+                </script>
+              </template>
+            </demo>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>
@@ -445,26 +563,26 @@
       
     </script>
     <script>
+      let start = new Date();
+          start.setDate(start.getDate()-5);
+      let end = new Date();
+          end.setDate(end.getDate()+5);
       new Vue({
         el: '#app',
         mixins,
         data () {
           return {
-            date: '', // '2017-02-07',
-            year: '2017',
-            month: '2017-02',
-            daterange: ['', ''], // ['2017-02-07', '2017-06-11'],
-            datetimerange: ['', ''], // ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-            datetime: '', // '2017-02-27 08:11:12',
-            time: '11:11:11',
-            attrs: [
-              {
-                name: '',
-                desc: '',
-                type: '',
-                default: ''
-              }
-            ]
+            start, end,
+            form1: {date: ''},
+            form2: {date1: '', date2: ''},
+            form3: {daterange: [], datetimerange: []},
+            form4: {
+              year: '2017',
+              month: '2017-02',
+              datetime: '',
+              time: '11:11:11',
+            },
+            form5: {date: ''},
           }
         },
         methods: {

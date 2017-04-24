@@ -130,227 +130,216 @@
         </div>
         <div slot="container">
           <au-panel>
-            <docs-section>
-              <div slot="desc"><h1>栅栏布局</h1>
+            <div class="markdown-body"><h1>栅栏布局</h1>
 <p>Aurora的栅栏布局基于<code>flex</code>，关于flex的介绍<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">点这里</a></p>
 
-              </div>
-              <demo slot="code">
-                <au-flex justify-content="flex-start" wrap gutter="2">
-                  <au-item v-for="i in 24" span="1">
-                    <div class="flex-item">{{i}}</div>
-                  </au-item>
-                </au-flex>
-                <au-flex justify-content="flex-start" wrap gutter="2">
-                  <au-item v-for="i in 12" span="2">
-                    <div class="flex-item">{{i}}</div>
-                  </au-item>
-                </au-flex>
-                <au-flex justify-content="flex-start" wrap gutter="2">
-                  <au-item span="12">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="12">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="8">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="8">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="8">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="6">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="6">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="6">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="6">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="5" offset="1">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="3" offset="9">
-                    <div class="flex-item"></div>
-                  </au-item>
-                  <au-item span="2" offset="4">
-                    <div class="flex-item"></div>
-                  </au-item>
-                </au-flex>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>水平 &amp; 垂直</h3>
+            </div>
+            <demo>
+              <au-flex justify-content="flex-start" wrap gutter="2">
+                <au-item v-for="i in 24" span="1">
+                  <div class="flex-item">{{i}}</div>
+                </au-item>
+              </au-flex>
+              <au-flex justify-content="flex-start" wrap gutter="2">
+                <au-item v-for="i in 12" span="2">
+                  <div class="flex-item">{{i}}</div>
+                </au-item>
+              </au-flex>
+              <au-flex justify-content="flex-start" wrap gutter="2">
+                <au-item span="12">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="12">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="8">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="8">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="8">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="6">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="6">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="6">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="6">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="5" offset="1">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="3" offset="9">
+                  <div class="flex-item"></div>
+                </au-item>
+                <au-item span="2" offset="4">
+                  <div class="flex-item"></div>
+                </au-item>
+              </au-flex>
+            </demo>
+            <div class="markdown-body"><h3>水平 &amp; 垂直</h3>
 <p>通过<code>column</code>属性控制排列顺序。<code>column</code>通过控制样式flex属性<code>flex-direction</code>改变伸缩盒主轴方向</p>
 
-              </div>
-              <demo slot="code">
-                <h4>水平</h4>
-                <au-flex gutter="10" disabled>
-                  <au-item>
-                    <div class="flex-item">hello world</div>
-                  </au-item>
-                  <au-item flex>
-                    <div class="flex-item">hello world</div>
-                  </au-item>
-                </au-flex>
-                <h4>垂直</h4>
-                <au-flex column gutter="10" align-items="flex-start">
-                  <au-item>
-                    <div class="flex-item">hello world</div>
-                  </au-item>
-                  <au-item>
-                    <div class="flex-item">hello world</div>
-                  </au-item>
-                </au-flex>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>基础flex属性组合</h3>
+            </div>
+            <demo>
+              <h4>水平</h4>
+              <au-flex gutter="10" disabled>
+                <au-item>
+                  <div class="flex-item">hello world</div>
+                </au-item>
+                <au-item flex>
+                  <div class="flex-item">hello world</div>
+                </au-item>
+              </au-flex>
+              <h4>垂直</h4>
+              <au-flex column gutter="10" align-items="flex-start">
+                <au-item>
+                  <div class="flex-item">hello world</div>
+                </au-item>
+                <au-item>
+                  <div class="flex-item">hello world</div>
+                </au-item>
+              </au-flex>
+            </demo>
+            <div class="markdown-body"><h3>基础flex属性组合</h3>
 
-                <h3>au-flex</h3>
-                <au-flex gutter="5" wrap>
-                  <au-item span="4" class="text-right">容器高：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.height">
-                      <au-option value="" label="不设置"></au-option>
-                      <au-option value="200px" label="200px"></au-option>
-                    </au-select>
-                  </au-item>
-                  <au-item span="4" class="text-right">wrap：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.wrap">
-                      <au-option :value="true" label="true"></au-option>
-                      <au-option :value="false" label="false"></au-option>
-                      <au-option value="nowrap" label="nowrap"></au-option>
-                      <au-option value="wrap" label="wrap"></au-option>
-                      <au-option value="wrap-reverse" label="wrap-reverse"></au-option>
-                    </au-select>
-                  </au-item>
-                  <au-item span="4" class="text-right">justifyContent：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.justifyContent">
-                      <au-option :value="''" label="空"></au-option>
-                      <au-option value="flex-start" label="flex-start"></au-option>
-                      <au-option value="flex-end" label="flex-end"></au-option>
-                      <au-option value="center" label="center"></au-option>
-                      <au-option value="space-between" label="space-between"></au-option>
-                      <au-option value="space-around" label="space-around"></au-option>
-                    </au-select>
-                  </au-item>
-                </au-flex>
-                <au-flex gutter="5" wrap>
-                  <au-item span="4" class="text-right">alignContent：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.alignContent">
-                      <au-option :value="''" label="空"></au-option>
-                      <au-option value="flex-start" label="flex-start"></au-option>
-                      <au-option value="flex-end" label="flex-end"></au-option>
-                      <au-option value="center" label="center"></au-option>
-                      <au-option value="space-between" label="space-between"></au-option>
-                      <au-option value="space-around" label="space-around"></au-option>
-                      <au-option value="space-evenly" label="space-evenly"></au-option>
-                      <au-option value="stretch" label="stretch"></au-option>
-                    </au-select>
-                  </au-item>
-                  <au-item span="4" class="text-right">gutter：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.gutter">
-                      <au-option v-for="i in 11" :value="String(i-1)" :label="String(i-1)"></au-option>
-                    </au-select>
-                  </au-item>
-                </au-flex>
-                <h3>au-item</h3>
-                <au-flex gutter="5" wrap>
-                  <au-item span="4" class="text-right">条目数：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="itemCustom.count">
-                      <au-option :value="10" :label="10"></au-option>
-                      <au-option :value="20" :label="20"></au-option>
-                      <au-option :value="30" :label="30"></au-option>
-                      <au-option :value="40" :label="40"></au-option>
-                    </au-select>
-                  </au-item>
-                  <au-item span="4" class="text-right">span：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="itemCustom.span">
-                      <au-option v-for="i in 25" :value="String(i-1)" :label="String(i-1)"></au-option>
-                    </au-select>
-                  </au-item>
-                  <au-item span="4" class="text-right">flex</au-item>
-                  <au-item span="4">
-                    <au-select v-model="itemCustom.flex">
-                      <au-option :value="true" label="true"></au-option>
-                      <au-option :value="false" label="false"></au-option>
-                    </au-select>
-                  </au-item>
-                </au-flex>
-              </div>
-              <demo slot="code" :code="zuheCode">
-                <au-flex :style="{height: flexCustom.height}" :wrap="flexCustom.wrap" :gutter="flexCustom.gutter" :justify-content="flexCustom.justifyContent" :align-content="flexCustom.alignContent">
-                  <au-item v-for="i in itemCustom.count" :span="itemCustom.span" :flex="itemCustom.flex">
-                    <div class="flex-item">{{i}}</div>
-                  </au-item>
-                </au-flex>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>对齐</h3>
+              <h3>au-flex</h3>
+              <au-flex gutter="5" wrap>
+                <au-item span="4" class="text-right">容器高：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.height">
+                    <au-option value="" label="不设置"></au-option>
+                    <au-option value="200px" label="200px"></au-option>
+                  </au-select>
+                </au-item>
+                <au-item span="4" class="text-right">wrap：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.wrap">
+                    <au-option :value="true" label="true"></au-option>
+                    <au-option :value="false" label="false"></au-option>
+                    <au-option value="nowrap" label="nowrap"></au-option>
+                    <au-option value="wrap" label="wrap"></au-option>
+                    <au-option value="wrap-reverse" label="wrap-reverse"></au-option>
+                  </au-select>
+                </au-item>
+                <au-item span="4" class="text-right">justifyContent：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.justifyContent">
+                    <au-option :value="''" label="空"></au-option>
+                    <au-option value="flex-start" label="flex-start"></au-option>
+                    <au-option value="flex-end" label="flex-end"></au-option>
+                    <au-option value="center" label="center"></au-option>
+                    <au-option value="space-between" label="space-between"></au-option>
+                    <au-option value="space-around" label="space-around"></au-option>
+                  </au-select>
+                </au-item>
+              </au-flex>
+              <au-flex gutter="5" wrap>
+                <au-item span="4" class="text-right">alignContent：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.alignContent">
+                    <au-option :value="''" label="空"></au-option>
+                    <au-option value="flex-start" label="flex-start"></au-option>
+                    <au-option value="flex-end" label="flex-end"></au-option>
+                    <au-option value="center" label="center"></au-option>
+                    <au-option value="space-between" label="space-between"></au-option>
+                    <au-option value="space-around" label="space-around"></au-option>
+                    <au-option value="space-evenly" label="space-evenly"></au-option>
+                    <au-option value="stretch" label="stretch"></au-option>
+                  </au-select>
+                </au-item>
+                <au-item span="4" class="text-right">gutter：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.gutter">
+                    <au-option v-for="i in 11" :value="String(i-1)" :label="String(i-1)"></au-option>
+                  </au-select>
+                </au-item>
+              </au-flex>
+              <h3>au-item</h3>
+              <au-flex gutter="5" wrap>
+                <au-item span="4" class="text-right">条目数：</au-item>
+                <au-item span="4">
+                  <au-select v-model="itemCustom.count">
+                    <au-option :value="10" :label="10"></au-option>
+                    <au-option :value="20" :label="20"></au-option>
+                    <au-option :value="30" :label="30"></au-option>
+                    <au-option :value="40" :label="40"></au-option>
+                  </au-select>
+                </au-item>
+                <au-item span="4" class="text-right">span：</au-item>
+                <au-item span="4">
+                  <au-select v-model="itemCustom.span">
+                    <au-option v-for="i in 25" :value="String(i-1)" :label="String(i-1)"></au-option>
+                  </au-select>
+                </au-item>
+                <au-item span="4" class="text-right">flex</au-item>
+                <au-item span="4">
+                  <au-select v-model="itemCustom.flex">
+                    <au-option :value="true" label="true"></au-option>
+                    <au-option :value="false" label="false"></au-option>
+                  </au-select>
+                </au-item>
+              </au-flex>
+            </div>
+            <demo :code="zuheCode">
+              <au-flex :style="{height: flexCustom.height}" :wrap="flexCustom.wrap" :gutter="flexCustom.gutter" :justify-content="flexCustom.justifyContent" :align-content="flexCustom.alignContent">
+                <au-item v-for="i in itemCustom.count" :span="itemCustom.span" :flex="itemCustom.flex">
+                  <div class="flex-item">{{i}}</div>
+                </au-item>
+              </au-flex>
+            </demo>
+            <div class="markdown-body"><h3>对齐</h3>
 
-                <au-flex gutter="5" wrap>
-                  <au-item span="4" class="text-right">alignItems：</au-item>
-                  <au-item span="4">
-                    <au-select v-model="flexCustom.alignItems">
-                      <au-option :value="''" label="空"></au-option>
-                      <au-option value="flex-start" label="flex-start"></au-option>
-                      <au-option value="flex-end" label="flex-end"></au-option>
-                      <au-option value="center" label="center"></au-option>
-                    </au-select>
-                  </au-item>
-                </au-flex>
-              </div>
-              <demo slot="code" :code="duiqiCode">
-                <au-flex gutter="10" :align-items="flexCustom.alignItems">
-                  <au-item span="8">
-                    <div style="height: 50px;" class="flex-item">50px</div>
-                  </au-item>
-                  <au-item span="8">
-                    <div style="height: 100px;" class="flex-item">100px</div>
-                  </au-item>
-                  <au-item span="8">
-                    <div style="height: 150px;" class="flex-item">150px</div>
-                  </au-item>
-                </au-flex>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>子元素设置对齐方式</h3>
+              <au-flex gutter="5" wrap>
+                <au-item span="4" class="text-right">alignItems：</au-item>
+                <au-item span="4">
+                  <au-select v-model="flexCustom.alignItems">
+                    <au-option :value="''" label="空"></au-option>
+                    <au-option value="flex-start" label="flex-start"></au-option>
+                    <au-option value="flex-end" label="flex-end"></au-option>
+                    <au-option value="center" label="center"></au-option>
+                  </au-select>
+                </au-item>
+              </au-flex>
+            </div>
+            <demo :code="duiqiCode">
+              <au-flex gutter="10" :align-items="flexCustom.alignItems">
+                <au-item span="8">
+                  <div style="height: 50px;" class="flex-item">50px</div>
+                </au-item>
+                <au-item span="8">
+                  <div style="height: 100px;" class="flex-item">100px</div>
+                </au-item>
+                <au-item span="8">
+                  <div style="height: 150px;" class="flex-item">150px</div>
+                </au-item>
+              </au-flex>
+            </demo>
+            <div class="markdown-body"><h3>子元素设置对齐方式</h3>
 <p>子元素可覆盖容器的对齐方式</p>
 
-              </div>
-              <demo slot="code">
-                <au-flex gutter="10" align-items="center">
-                  <au-item span="8" align-self="flex-start">
-                    <div style="height: 50px;" class="flex-item">50px</div>
-                  </au-item>
-                  <au-item span="8">
-                    <div style="height: 100px;" class="flex-item">100px</div>
-                  </au-item>
-                  <au-item span="8">
-                    <div style="height: 150px;" class="flex-item">150px</div>
-                  </au-item>
-                </au-flex>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2><code>au-flex</code></h2>
+            </div>
+            <demo>
+              <au-flex gutter="10" align-items="center">
+                <au-item span="8" align-self="flex-start">
+                  <div style="height: 50px;" class="flex-item">50px</div>
+                </au-item>
+                <au-item span="8">
+                  <div style="height: 100px;" class="flex-item">100px</div>
+                </au-item>
+                <au-item span="8">
+                  <div style="height: 150px;" class="flex-item">150px</div>
+                </au-item>
+              </au-flex>
+            </demo>
+            <div class="markdown-body"><h2><code>au-flex</code></h2>
 <p><code>au-flex</code>组件可以看做是flex父容器，内部需要包含<code>au-item</code>组件。组件上的属性很多和<code>css flex</code>中的相同，且这些属性大部分直接控制<code>flex</code>样式。
 <code>au-flex</code>组件内部划分为<strong>24</strong>等分，<code>au-item</code>组件可设置<code>span</code>属性来控制每一个子组件的占用宽度。</p>
 <h3>au-flex 的属性</h3>
@@ -535,8 +524,7 @@
 <p>未提及的属性可参照flex样式属性</p>
 </blockquote>
 
-              </div>
-            </docs-section>
+            </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>

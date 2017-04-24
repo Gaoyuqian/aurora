@@ -130,33 +130,30 @@
         </div>
         <div slot="container">
           <au-panel>
-            <docs-section>
-              <div slot="desc"><h1>AuRadio</h1>
+            <div class="markdown-body"><h1>AuRadio</h1>
 <p>radio选择器</p>
 
+            </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-radio label="男" value="male" v-model="form.gender"></au-radio>
+                <au-radio label="女" value="female" v-model="form.gender"></au-radio>
               </div>
-              <demo slot="code">
-                <div style="margin-bottom: 5px">
-                  <au-radio label="男" value="male" v-model="form.gender"></au-radio>
-                  <au-radio label="女" value="female" v-model="form.gender"></au-radio>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-radio value="male" v-model="form.gender">男</au-radio>
-                  <au-radio value="female" v-model="form.gender">女</au-radio>
-                </div>
-                <p>{{form.gender}}</p>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {gender: 'female'}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>属性</h2>
+              <div style="margin-bottom: 5px">
+                <au-radio value="male" v-model="form.gender">男</au-radio>
+                <au-radio value="female" v-model="form.gender">女</au-radio>
+              </div>
+              <p>{{form.gender}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {gender: 'female'}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
 <table>
 <thead>
 <tr>
@@ -194,28 +191,22 @@
 </tbody>
 </table>
 <h2>例子</h2>
+<h3>禁用状态</h3>
 
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>禁用状态</h3>
-
-              </div>
-              <demo slot="code">
-                <au-radio label="男" value="male" v-model="form.gender" disabled></au-radio>
-                <au-radio label="女" value="female" v-model="form.gender" disabled></au-radio>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {gender: 'female'}
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>Radiox group</h3>
+            </div>
+            <demo>
+              <au-radio label="男" value="male" v-model="form.gender" disabled></au-radio>
+              <au-radio label="女" value="female" v-model="form.gender" disabled></au-radio>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {gender: 'female'}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>Radiox group</h3>
 <p><code>au-radio-group</code>可以快速生成一组radio。</p>
 <table>
 <thead>
@@ -242,60 +233,57 @@
 </tbody>
 </table>
 
+            </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-radio-group :options="options" v-model="form.class"></au-radio-group>
               </div>
-              <demo slot="code">
-                <div style="margin-bottom: 5px">
-                  <au-radio-group :options="options" v-model="form.class"></au-radio-group>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-radio-group v-model="form.class">
-                    <au-radio :value="option.value" v-for="option in options">{{ option.label }}</au-radio>
-                  </au-radio-group>
-                </div>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {
-                        form: {'class': '3'},
-                        options: [
-                          {value: '1',label: '三年一班'},
-                          {value: '2',label: '三年二班'},
-                          {value: '3',label: '三年三班'}
-                        ]
-                      }
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h3>对象绑定</h3>
-
-              </div>
-              <demo slot="code">
-                <au-radio-group v-model="form.obj">
-                  <au-radio :value="option" v-for="option in options">{{ option.label }}</au-radio>
+              <div style="margin-bottom: 5px">
+                <au-radio-group v-model="form.class">
+                  <au-radio :value="option.value" v-for="option in options">{{ option.label }}</au-radio>
                 </au-radio-group>
-                <p>{{JSON.stringify(form.obj)}}</p>
-                <template type="au-demo">
-                  <script>
-                    const options = [
-                      {value: '1',label: '三年一班'},
-                      {value: '2',label: '三年二班'},
-                      {value: '3',label: '三年三班'}
-                    ];
-                    export default {
-                      data: {
-                        form: {obj:options[1]},
-                        options: options
-                      }
+              </div>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form: {'class': '3'},
+                      options: [
+                        {value: '1',label: '三年一班'},
+                        {value: '2',label: '三年二班'},
+                        {value: '3',label: '三年三班'}
+                      ]
                     }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>对象绑定</h3>
+
+            </div>
+            <demo>
+              <au-radio-group v-model="form.obj">
+                <au-radio :value="option" v-for="option in options">{{ option.label }}</au-radio>
+              </au-radio-group>
+              <p>{{JSON.stringify(form.obj)}}</p>
+              <template type="au-demo">
+                <script>
+                  const options = [
+                    {value: '1',label: '三年一班'},
+                    {value: '2',label: '三年二班'},
+                    {value: '3',label: '三年三班'}
+                  ];
+                  export default {
+                    data: {
+                      form: {obj:options[1]},
+                      options: options
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>

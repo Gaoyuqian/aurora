@@ -130,8 +130,7 @@
         </div>
         <div slot="container">
           <au-panel>
-            <docs-section>
-              <div slot="desc"><h1>Form</h1>
+            <div class="markdown-body"><h1>Form</h1>
 <p>支持表单验证，数据收集和提交操作。</p>
 <p>表单组件为<code>au-form</code>, 内部包含<code>au-form-item</code>表单项组件。</p>
 <h2>布局</h2>
@@ -143,81 +142,77 @@
 <p>inline模式下，请设置<code>label-position=&quot;top&quot;</code>否则 label 与 控件 无法对齐。</p>
 </blockquote>
 
-              </div>
-              <div slot="code">
-                <h4>inline表单</h4>
-                <demo style="margin-bottom: 5px">
-                  <au-form inline label-position="top">
-                    <au-form-item label-width="100" label="姓名：">
-                      <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="邮箱：">
-                      <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="性别：">
-                      <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="性别：">
-                      <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
-                    </au-form-item>
-                  </au-form>
-                </demo>
-                <h4>label left 的表单</h4>
-                <demo style="margin-bottom: 5px">
-                  <!-- width:600px  控制表单宽度-->
-                  <au-form label-width="100" label-position="left" style="width:600px">
-                    <au-form-item label="姓名：">
-                      <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                    </au-form-item>
-                    <au-form-item label="邮箱：">
-                      <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
-                    </au-form-item>
-                    <au-form-item label="性别：">
-                      <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="性别：">
-                      <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
-                    </au-form-item>
-                  </au-form>
-                </demo>
-                <h4>label top 的表单</h4>
-                <demo style="margin-bottom: 5px">
-                  <au-form label-width="100" label-position="top" style="width:600px">
-                    <au-form-item label="姓名：">
-                      <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                    </au-form-item>
-                    <au-form-item label="邮箱：">
-                      <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
-                    </au-form-item>
-                    <au-form-item label="性别：">
-                      <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="性别：">
-                      <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
-                    </au-form-item>
-                  </au-form>
-                </demo>
-                <h4>label right 的表单</h4>
-                <demo style="margin-bottom: 5px">
-                  <au-form label-width="100" label-position="right" style="width:600px">
-                    <au-form-item label="姓名：">
-                      <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                    </au-form-item>
-                    <au-form-item label="邮箱：">
-                      <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
-                    </au-form-item>
-                    <au-form-item label="性别：">
-                      <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
-                    </au-form-item>
-                    <au-form-item label-width="100" label="性别：">
-                      <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
-                    </au-form-item>
-                  </au-form>
-                </demo>
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>表单验证</h2>
+            </div>
+            <h4>inline表单</h4>
+            <demo>
+              <au-form inline label-position="top">
+                <au-form-item label-width="100" label="姓名：">
+                  <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                </au-form-item>
+                <au-form-item label-width="100" label="邮箱：">
+                  <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                </au-form-item>
+                <au-form-item label-width="100" label="性别：">
+                  <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
+                </au-form-item>
+                <au-form-item label-width="100" label="性别：">
+                  <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
+                </au-form-item>
+              </au-form>
+            </demo>
+            <h4>label left 的表单</h4>
+            <demo>
+              <!-- width:600px  控制表单宽度-->
+              <au-form label-width="100" label-position="left" style="width:600px">
+                <au-form-item label="姓名：">
+                  <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                </au-form-item>
+                <au-form-item label="邮箱：">
+                  <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                </au-form-item>
+                <au-form-item label="性别：">
+                  <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
+                </au-form-item>
+                <au-form-item label-width="100" label="性别：">
+                  <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
+                </au-form-item>
+              </au-form>
+            </demo>
+            <h4>label top 的表单</h4>
+            <demo>
+              <au-form label-width="100" label-position="top" style="width:600px">
+                <au-form-item label="姓名：">
+                  <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                </au-form-item>
+                <au-form-item label="邮箱：">
+                  <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                </au-form-item>
+                <au-form-item label="性别：">
+                  <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
+                </au-form-item>
+                <au-form-item label-width="100" label="性别：">
+                  <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
+                </au-form-item>
+              </au-form>
+            </demo>
+            <h4>label right 的表单</h4>
+            <demo>
+              <au-form label-width="100" label-position="right" style="width:600px">
+                <au-form-item label="姓名：">
+                  <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                </au-form-item>
+                <au-form-item label="邮箱：">
+                  <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                </au-form-item>
+                <au-form-item label="性别：">
+                  <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>
+                </au-form-item>
+                <au-form-item label-width="100" label="性别：">
+                  <au-select :options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]" v-model="form.class" placeholder="请选择班级"></au-select>
+                </au-form-item>
+              </au-form>
+            </demo>
+            <div class="markdown-body"><h2>表单验证</h2>
 <p>要使用表单验证功能必须设置<code>model</code>和<code>rules</code>属性。</p>
 <ul>
 <li><code>model</code>属性用于表单项组件的数据获取，并在表单提交或表单验证错误时通过<code>submit</code>或<code>error</code>事件抛出。
@@ -230,106 +225,102 @@
 </li>
 </ul>
 
-              </div>
-              <div slot="code">
-                <h4>例子1</h4>
-                <demo>
-                  <au-form style="width: 600px;" label-position="right" :label-width="100" :model="form" :rules="rules" @submit="onSubmit1" @error="onError">
-                    <au-form-item label="姓名" prop="name">
-                      <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                    </au-form-item>
-                    <au-form-item>
-                      <au-button type="primary" native-type="submit">提交</au-button>&nbsp;
-                      <au-button type="default" native-type="reset">重置</au-button>
-                    </au-form-item>
-                  </au-form>
-                  <template type="au-demo">
-                    <script>
-                      //  针对name的验证规则
-                      var nameValidater = [  // 验证配置是一个数组，每一个元素是一种验证规则
-                        {
-                          required: true,
-                          message:'请输入姓名', // 验证不通过时的错误消息
-                          whitespace: true     // whitespace:true 表示空格可通过验证 如： ' '算填写
-                        },
-                        {
-                          validator: function(value, callback) {  // 可通过validator来进行自定义验证
-                            if(value){
-                              setTimeout(() => {
-                                const result = value.match(/abc/) != null
-                                console.log('validate', result)
-                                callback(result)
-                              }, 200)
-                            } else {
-                              callback(true);
-                            }
-                          },
-                          message: '内容中需包含abc'
+            </div>
+            <h4>例子1</h4>
+            <demo>
+              <au-form style="width: 600px;" label-position="right" :label-width="100" :model="form" :rules="rules" @submit="onSubmit1" @error="onError">
+                <au-form-item label="姓名" prop="name">
+                  <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                </au-form-item>
+                <au-form-item>
+                  <au-button type="primary" native-type="submit">提交</au-button>&nbsp;
+                  <au-button type="default" native-type="reset">重置</au-button>
+                </au-form-item>
+              </au-form>
+              <template type="au-demo">
+                <script>
+                  //  针对name的验证规则
+                  var nameValidater = [  // 验证配置是一个数组，每一个元素是一种验证规则
+                    {
+                      required: true,
+                      message:'请输入姓名', // 验证不通过时的错误消息
+                      whitespace: true     // whitespace:true 表示空格可通过验证 如： ' '算填写
+                    },
+                    {
+                      validator: function(value, callback) {  // 可通过validator来进行自定义验证
+                        if(value){
+                          setTimeout(() => {
+                            const result = value.match(/abc/) != null
+                            console.log('validate', result)
+                            callback(result)
+                          }, 200)
+                        } else {
+                          callback(true);
                         }
-                      ];
-                      export default {
-                        data: {
-                          form: {name: ''},
-                          // 名称需要保持一致
-                          rules: {
-                            name: nameValidater  // 验证配置是一个数组，每一个元素是一种验证规则
-                          }
-                        },
-                        methods: {
-                          onSubmit1: function(data){
-                            alert(data.name)
-                          },
-                          onError: function(data){
-                            alert(`${data.name} is error`);
-                          }
-                        }
+                      },
+                      message: '内容中需包含abc'
+                    }
+                  ];
+                  export default {
+                    data: {
+                      form: {name: ''},
+                      // 名称需要保持一致
+                      rules: {
+                        name: nameValidater  // 验证配置是一个数组，每一个元素是一种验证规则
                       }
-                      
-                    </script>
-                  </template>
-                </demo>
-                <h4>例子2</h4>
-                <demo>
-                  <au-form style="width: 600px;" label-position="right" :label-width="100" :model="form" :rules="rules" @submit="onSubmit2">
-                    <au-form-item label="邮箱" prop="email" :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]">
-                      <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
-                    </au-form-item>
-                    <au-form-item label="描述" prop="desc">
-                      <au-input type="textarea" v-model="form.desc" rows="5" placeholder="最大8个字符"></au-input>
-                    </au-form-item>
-                    <au-form-item>
-                      <au-button type="primary" native-type="submit">提交</au-button>&nbsp;
-                      <au-button type="default" native-type="reset">重置</au-button>
-                    </au-form-item>
-                  </au-form>
-                  <template type="au-demo">
-                    <script>
-                      export default {
-                        data: {
-                          form: {
-                            desc: '',
-                            email: '',
-                          },
-                          rules: {
-                            desc: [
-                              { required: true, message:'请输入描述' },
-                              { max: 8, trigger: 'change, blur' }  // 当change blur时候出发验证
-                            ]
-                          }
-                        },
-                        methods: {
-                          onSubmit2: function(data){
-                            alert(data.desc);
-                          }
-                        }
+                    },
+                    methods: {
+                      onSubmit1: function(data){
+                        alert(data.name)
+                      },
+                      onError: function(data){
+                        alert(`${data.name} is error`);
                       }
-                    </script>
-                  </template>
-                </demo>
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>au-form</h2>
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <h4>例子2</h4>
+            <demo>
+              <au-form style="width: 600px;" label-position="right" :label-width="100" :model="form" :rules="rules" @submit="onSubmit2">
+                <au-form-item label="邮箱" prop="email" :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]">
+                  <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                </au-form-item>
+                <au-form-item label="描述" prop="desc">
+                  <au-input type="textarea" v-model="form.desc" rows="5" placeholder="最大8个字符"></au-input>
+                </au-form-item>
+                <au-form-item>
+                  <au-button type="primary" native-type="submit">提交</au-button>&nbsp;
+                  <au-button type="default" native-type="reset">重置</au-button>
+                </au-form-item>
+              </au-form>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {
+                      form: {
+                        desc: '',
+                        email: '',
+                      },
+                      rules: {
+                        desc: [
+                          { required: true, message:'请输入描述' },
+                          { max: 8, trigger: 'change, blur' }  // 当change blur时候出发验证
+                        ]
+                      }
+                    },
+                    methods: {
+                      onSubmit2: function(data){
+                        alert(data.desc);
+                      }
+                    }
+                  }
+                </script>
+              </template>
+            </demo><br>
+            <div class="markdown-body"><h2>au-form</h2>
 <h3>属性</h3>
 <table>
 <thead>
@@ -393,6 +384,7 @@
 </tbody>
 </table>
 <h2>au-form-item</h2>
+<h3>属性</h3>
 <table>
 <thead>
 <tr>
@@ -437,7 +429,7 @@
 </table>
 <h2>验证规则</h2>
 <p>一个验证规则所包含的内容：</p>
-<pre><code class="language-json">  {
+<pre><code class="language-javascript">  {
     trigger: 'event1, event2, ...',     // 验证以何种事件触发
     message: '',                        // 验证错误提示
 
@@ -462,8 +454,7 @@
   }
 </code></pre>
 
-              </div>
-            </docs-section>
+            </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>

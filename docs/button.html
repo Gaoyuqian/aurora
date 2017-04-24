@@ -130,185 +130,202 @@
         </div>
         <div slot="container">
           <au-panel>
-            <docs-section>
-              <div slot="desc"><h1>Button</h1>
+            <div class="markdown-body"><h1>Button</h1>
 <p>标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑</p>
 
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>按钮类型</h2>
+            </div>
+            <div class="markdown-body"><h3>按钮类型</h3>
 <p>按钮可以通过<code>type</code>属性控制按钮类型，可选值包含<code>primary</code>、<code>info</code>、<code>success</code>、<code>danger</code>、<code>default</code>、<code>warning</code>、<code>link</code> 7种类型。默认为<code>default</code>。</p>
 <p>通过<code>size</code>属性控制按钮大小，可选值包含<code>large</code>、<code>default</code>、<code>small</code>、<code>mini</code> 四种大小。默认为<code>default</code>。</p>
 
+            </div>
+            <demo>
+              <div style="margin-bottom: 10px">
+                <au-button type="primary">主要按钮</au-button>
+                <au-button type="info">信息按钮</au-button>
+                <au-button type="success">审核通过</au-button>
+                <au-button type="danger">审核拒绝</au-button>
+                <au-button type="warning">警告按钮</au-button>
+                <au-button type="default">默认按钮</au-button>
               </div>
-              <demo slot="code">
-                <div style="margin-bottom: 10px">
-                  <au-button type="primary">主要按钮</au-button>
-                  <au-button type="info">信息按钮</au-button>
-                  <au-button type="success">审核通过</au-button>
-                  <au-button type="danger">审核拒绝</au-button>
-                  <au-button type="warning">警告按钮</au-button>
-                  <au-button type="default">默认按钮</au-button>
-                </div>
-                <div style="margin-bottom: 10px">
-                  <au-button type="primary" size="large">主要按钮</au-button>
-                  <au-button type="info" size="large">信息按钮</au-button>
-                  <au-button type="success" size="large">审核通过</au-button>
-                  <au-button type="danger" size="large">审核拒绝</au-button>
-                  <au-button type="warning" size="large">警告按钮</au-button>
-                  <au-button type="default" size="large">默认按钮</au-button>
-                </div>
-                <div style="margin-bottom: 10px">
-                  <au-button type="primary" size="small">主要按钮</au-button>
-                  <au-button type="info" size="small">信息按钮</au-button>
-                  <au-button type="success" size="small">审核通过</au-button>
-                  <au-button type="danger" size="small">审核拒绝</au-button>
-                  <au-button type="warning" size="small">警告按钮</au-button>
-                  <au-button type="default" size="small">默认按钮</au-button>
-                </div>
-                <div style="margin-bottom: 10px">
-                  <au-button type="primary" size="mini">主要按钮</au-button>
-                  <au-button type="info" size="mini">信息按钮</au-button>
-                  <au-button type="success" size="mini">审核通过</au-button>
-                  <au-button type="danger" size="mini">审核拒绝</au-button>
-                  <au-button type="warning" size="mini">警告按钮</au-button>
-                  <au-button type="default" size="mini">默认按钮</au-button>
-                </div>
-                <div style="margin-bottom: 10px">
-                  <au-button type="link" size="large">大型按钮</au-button>
-                  <au-button type="link" size="default">中型按钮</au-button>
-                  <au-button type="link" size="small">小型按钮</au-button>
-                  <au-button type="link" size="mini">超小按钮</au-button>
-                </div>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>不可用状态</h2>
+              <div style="margin-bottom: 10px">
+                <au-button type="primary" size="large">主要按钮</au-button>
+                <au-button type="info" size="large">信息按钮</au-button>
+                <au-button type="success" size="large">审核通过</au-button>
+                <au-button type="danger" size="large">审核拒绝</au-button>
+                <au-button type="warning" size="large">警告按钮</au-button>
+                <au-button type="default" size="large">默认按钮</au-button>
+              </div>
+              <div style="margin-bottom: 10px">
+                <au-button type="primary" size="small">主要按钮</au-button>
+                <au-button type="info" size="small">信息按钮</au-button>
+                <au-button type="success" size="small">审核通过</au-button>
+                <au-button type="danger" size="small">审核拒绝</au-button>
+                <au-button type="warning" size="small">警告按钮</au-button>
+                <au-button type="default" size="small">默认按钮</au-button>
+              </div>
+              <div style="margin-bottom: 10px">
+                <au-button type="primary" size="mini">主要按钮</au-button>
+                <au-button type="info" size="mini">信息按钮</au-button>
+                <au-button type="success" size="mini">审核通过</au-button>
+                <au-button type="danger" size="mini">审核拒绝</au-button>
+                <au-button type="warning" size="mini">警告按钮</au-button>
+                <au-button type="default" size="mini">默认按钮</au-button>
+              </div>
+              <div style="margin-bottom: 10px">
+                <au-button type="link" size="large">大型按钮</au-button>
+                <au-button type="link" size="default">中型按钮</au-button>
+                <au-button type="link" size="small">小型按钮</au-button>
+                <au-button type="link" size="mini">超小按钮</au-button>
+              </div>
+            </demo>
+            <div class="markdown-body"><h3>不可用状态</h3>
 <p>按钮可设置<code>disabled</code>状态，设置之后按钮不可点击。</p>
 
-              </div>
-              <demo slot="code">
-                <au-button @click="alert('click')">点击出发alert</au-button>
-                <au-button disabled @click="alert('click')">点击出发alert</au-button>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>加载中</h2>
+            </div>
+            <demo>
+              <au-button @click="alert('click')">点击出发alert</au-button>
+              <au-button disabled @click="alert('click')">点击出发alert</au-button>
+            </demo>
+            <div class="markdown-body"><h3>加载中</h3>
 
-              </div>
-              <demo slot="code">
-                <au-button :loading="true">加载中</au-button>
-                <au-button :loading="loading" @click="startLoading">点击加载，3秒后恢复</au-button>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data: {loading: false},
-                      methods: {
-                        startLoading(){
-                          this.loading = true;
-                          setTimeout(()=>this.loading=false, 3000);
-                        }
+            </div>
+            <demo>
+              <au-button :loading="true">加载中</au-button>
+              <au-button :loading="loading" @click="startLoading">点击加载，3秒后恢复</au-button>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {loading: false},
+                    methods: {
+                      startLoading(){
+                        this.loading = true;
+                        setTimeout(()=>this.loading=false, 3000);
                       }
                     }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>图标按钮</h2>
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>图标按钮</h3>
 <p>带图标的按钮可增强辨识度(有文字)或节省空间(无文字)。
 图标来自<strong>fontawesome</strong>，<a href="http://fontawesome.io/icons/">点击查看更多图标</a></p>
 <blockquote>
 <p>图标只能加在按钮左边，如果需要加载按钮右边，请使用<code>au-icon</code>自行添加</p>
 </blockquote>
 
+            </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-button icon="plus">添加</au-button>
+                <au-button icon="search">添加</au-button>
+                <au-button icon="battery-three-quarters">添加
+                  <au-icon icon="battery-three-quarters"></au-icon>
+                </au-button>
+                <au-button type="primary" icon="plus">添加</au-button>
               </div>
-              <demo slot="code">
-                <div style="margin-bottom: 5px">
-                  <au-button icon="plus">添加</au-button>
-                  <au-button icon="search">添加</au-button>
-                  <au-button icon="battery-three-quarters">添加
-                    <au-icon icon="battery-three-quarters"></au-icon>
-                  </au-button>
-                  <au-button type="primary" icon="plus">添加</au-button>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-button icon="plus"></au-button>
-                  <au-button icon="search"></au-button>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-button type="primary" icon="plus"></au-button>
-                  <au-button type="primary" icon="search"></au-button>
-                </div>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>全宽按钮</h2>
+              <div style="margin-bottom: 5px">
+                <au-button icon="plus"></au-button>
+                <au-button icon="search"></au-button>
+              </div>
+              <div style="margin-bottom: 5px">
+                <au-button type="primary" icon="plus"></au-button>
+                <au-button type="primary" icon="search"></au-button>
+              </div>
+            </demo>
+            <div class="markdown-body"><h3>全宽按钮</h3>
 <p>如果需要按钮变为块级可设置<code>block</code>属性。</p>
 
+            </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-button type="primary" block>block</au-button>
               </div>
-              <demo slot="code">
-                <div style="margin-bottom: 5px">
-                  <au-button type="primary" block>block</au-button>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-button type="primary">未设置 block</au-button>
-                </div>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>点击后禁用按钮</h2>
+              <div style="margin-bottom: 5px">
+                <au-button type="primary">未设置 block</au-button>
+              </div>
+            </demo>
+            <div class="markdown-body"><h3>点击后禁用按钮</h3>
 <p>通过<code>disable-on-click</code>可以实现点击后禁用按钮，可以用在防止重复提交等待服务器响应等场景。</p>
 
-              </div>
-              <demo slot="code">
-                <au-button type="primary" disable-on-click @click="disableOnClick">disableOnClick</au-button>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      methods: {
-                        disableOnClick: function(enable){
-                          let closeMessage = this.$message('loading', '提示', '按钮点击')
-                          setTimeout(function(){
-                            closeMessage();
-                            enable();
-                          }, 3000);
-                        }
+            </div>
+            <demo>
+              <au-button type="primary" disable-on-click @click="disableOnClick">disableOnClick</au-button>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    methods: {
+                      disableOnClick: function(enable){
+                        let closeMessage = this.$message('loading', '提示', '按钮点击')
+                        setTimeout(function(){
+                          closeMessage();
+                          enable();
+                        }, 3000);
                       }
                     }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>链接按钮</h2>
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>链接按钮</h3>
 <p><code>au-button</code>默认使用<strong>html button</strong>标签，如果设置<code>href</code>属性，将使用<strong>a</strong>标签，这种情况下可设置<code>target</code>属性（同<code>a</code>标签）</p>
 
-              </div>
-              <demo slot="code">
-                <au-button type="info" href="#">默认跳转链接</au-button>
-                <au-button type="info" href="#" target="_blank">添加 trget="_blank" 的跳转链接</au-button>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>button[type]</h2>
+            </div>
+            <demo>
+              <au-button type="info" href="#">默认跳转链接</au-button>
+              <au-button type="info" href="#" target="_blank">添加 trget="_blank" 的跳转链接</au-button>
+            </demo>
+            <div class="markdown-body"><h3>button[type]</h3>
 <p>在原生html标签中，button按钮的默认<code>type</code>是<code>submit</code>。本组件库的按钮默认是<code>button</code>。可以防止按钮包含在表单中时默认提交表单。
 可以通过设置<code>native-type=&quot;submit&quot;</code>来实现表单提交</p>
 
+            </div>
+            <demo>
+              <form method="get" action="#">
+                <input name="test" type="text" value="test">
+                <au-button type="primary" native-type="submit">可提交</au-button>
+                <au-button type="default">不可提交</au-button>
+              </form>
+            </demo>
+            <div class="markdown-body"><h2>Button group</h2>
+<p>以按钮组的方式出现，常用于多项类似操作</p>
+
+            </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-button-group>
+                  <au-button :type="active == 1 ? 'primary' : 'default'" @click="clickActive(1)">按钮1</au-button>
+                  <au-button :type="active == 2 ? 'primary' : 'default'" @click="clickActive(2)">按钮2</au-button>
+                  <au-button :type="active == 3 ? 'primary' : 'default'" @click="clickActive(3)">按钮3</au-button>
+                </au-button-group>
               </div>
-              <demo slot="code">
-                <form method="get" action="#">
-                  <input name="test" type="text" value="test">
-                  <au-button type="primary" native-type="submit">可提交</au-button>
-                  <au-button type="default">不可提交</au-button>
-                </form>
-              </demo>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h2>属性</h2>
+              <div style="margin-bottom: 5px">
+                <au-button-group>
+                  <au-button type="primary">添加</au-button>
+                  <au-button type="danger">删除</au-button>
+                </au-button-group>
+              </div>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data () {
+                      return {
+                        active: '2'
+                      }
+                    },
+                    methods: {
+                      clickActive (value) {
+                        this.active = value
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
 <table>
 <thead>
 <tr>
@@ -382,46 +399,7 @@
 </tbody>
 </table>
 
-              </div>
-            </docs-section>
-            <docs-section>
-              <div slot="desc"><h1>Button group</h1>
-<p>以按钮组的方式出现，常用于多项类似操作</p>
-
-              </div>
-              <demo slot="code">
-                <div style="margin-bottom: 5px">
-                  <au-button-group>
-                    <au-button :type="active == 1 ? 'primary' : 'default'" @click="clickActive(1)">按钮1</au-button>
-                    <au-button :type="active == 2 ? 'primary' : 'default'" @click="clickActive(2)">按钮2</au-button>
-                    <au-button :type="active == 3 ? 'primary' : 'default'" @click="clickActive(3)">按钮3</au-button>
-                  </au-button-group>
-                </div>
-                <div style="margin-bottom: 5px">
-                  <au-button-group>
-                    <au-button type="primary">添加</au-button>
-                    <au-button type="danger">删除</au-button>
-                  </au-button-group>
-                </div>
-                <template type="au-demo">
-                  <script>
-                    export default {
-                      data () {
-                        return {
-                          active: '2'
-                        }
-                      },
-                      methods: {
-                        clickActive (value) {
-                          this.active = value
-                        }
-                      }
-                    }
-                    
-                  </script>
-                </template>
-              </demo>
-            </docs-section>
+            </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>
