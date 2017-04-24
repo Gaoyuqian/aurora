@@ -1,0 +1,15 @@
+.au-tree-node
+  .au-tree-item(@click="onClickRow")
+    .au-tree-item-expand(:class="{ 'au-tree-item-expanded': isExpand }", @click.stop="onClickExpand")
+      au-icon(icon="caret-right", v-if="displayExpandIcon && !isLoading")
+      au-icon(icon="spinner", autorotate, v-if="isLoading")
+    .au-tree-checkbox(v-if="checkable", @click.stop="onClickCheckbox")
+      au-checkbox(v-model="isChecked", :indeterminate="indeterminate", @input="onCheckboxChange", :disabled="disableCheckbox")
+    .au-tree-item-content
+      tree-content(:data="data")
+
+  .au-tree-children(v-if="children && children.length > 0", v-show="isExpand")
+    au-tree-node(
+      :data="item",
+      v-for="item in children"
+    )
