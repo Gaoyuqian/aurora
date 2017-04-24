@@ -169,9 +169,10 @@ def releaseDocs():
     #删除原有release目录并且clone最新的
     currPath = os.getcwd()
     os.chdir(os.path.join(currPath, feRelease))
-
-    exeCmd('rm -rf ' + project)
-    exeCmd('git clone ' + feReleaseGit)
+    if not os.path.exists(project):
+        print 'create dir & git clone...'
+        exeCmd('rm -rf ' + project)
+        exeCmd('git clone ' + feReleaseGit)
 
     os.chdir(os.path.join(currPath, feRelease, project))
     exeCmd('git checkout -B gh-pages')

@@ -37,7 +37,7 @@
         ],
         "ignore": [
             "fepack.json",
-            "__dist",
+            "__dist/**/*",
             "run.py"
         ],
         "externals": {
