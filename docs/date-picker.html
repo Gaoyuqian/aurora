@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DatePicker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Aurora/src/sass/aurora.css">
+    <link rel="stylesheet" href="/Aurora/docs/docs.css">
+    <link rel="stylesheet" href="../lib/highlight.github.min.css">
+    <link rel="stylesheet" href="/Aurora/docs/css/markdown.css">
+    <script src="../lib/highlight.min.js"></script>
+    <script src="../lib/beautify.min.js"></script>
+    <script src="../lib/beautify-css.min.js"></script>
+    <script src="../lib/beautify-html.min.js"></script>
+    <style>
+      .browsehappy {
+        height: 40px;
+        line-height: 40px;
+        background-color: #f5ffbd;
+        color: #333;
+        text-align: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body><!--[if lt IE 8]>
+    <p class="browsehappy">
+      您正在使用 <strong>过时</strong> 的浏览器.
+      请 <a href="http://browsehappy.com/">更新您的浏览器</a>
+      来使用此项目
+    </p><![endif]-->
+    <au-app id="app" v-cloak>
+      <au-header>
+        <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
+        <au-menu slot="content-left" menu-trigger="click" :selected="selected">
+          <au-menu-item href="app.html" value="app">App</au-menu-item>
+          <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+          <au-menu-item href="button.html" value="button">Button</au-menu-item>
+          <au-menu-item>表单
+            <au-menu>
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>区块
+            <au-menu>
+              <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+              <au-menu-item href="table.html" value="table">Table</au-menu-item>
+              <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+              <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+              <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+              <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+              <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+              <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+              <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>消息
+            <au-menu>
+              <au-menu-item href="message.html" value="message">Message</au-menu-item>
+              <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+              <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+        </au-menu>
+        <div slot="content-right">
+          <au-menu>
+            <au-menu-item><img src="https://avatars0.githubusercontent.com/u/790296" style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;">Kevin
+              <au-menu>
+                <au-menu-item>我的信息</au-menu-item>
+                <au-menu-item>退出</au-menu-item>
+              </au-menu>
+            </au-menu-item>
+          </au-menu>
+        </div>
+      </au-header>
+      <au-content>
+        <div slot="sidebar">
+          <au-menu-group title="基础">
+            <au-menu :selected="selected">
+              <au-menu-item href="install.html" value="install">安装</au-menu-item>
+              <au-menu-item href="app.html" value="app">App</au-menu-item>
+              <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+              <au-menu-item href="button.html" value="button">Button</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="表单">
+            <au-menu :selected="selected">
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="其他">
+            <au-menu :selected="selected">
+              <au-menu-item icon="clone">区块
+                <au-menu>
+                  <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+                  <au-menu-item href="table.html" value="table">Table</au-menu-item>
+                  <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+                  <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+                  <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+                  <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+                  <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+                  <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+                  <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+              <au-menu-item icon="sticky-note">消息
+                <au-menu>
+                  <au-menu-item href="message.html" value="message">Message</au-menu-item>
+                  <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+                  <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+            </au-menu>
+          </au-menu-group>
+        </div>
+        <div slot="container">
+          <au-panel>
+            <div class="docs-heading">
+              <h1>AuDatePicker</h1>
+              <div class="docs-desc"></div>
+            </div>
+            <div class="docs-section">
+              <h2>日期选择器</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>按日期选择</h4>
+                      <au-date-picker v-model="date" :disabled-date="disabledWeek" clearable placeholder="请选择日期"></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>按日期选择</h4>
+                      <au-date-picker v-model="date" type="date" start-date="2017-03-07" end-date="2017-04-07" placeholder="请选择日期"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>按年选择</h4>
+                      <au-date-picker v-model="year" type="year" clearable></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>按年选择</h4>
+                      <au-date-picker v-model="year" type="year" start-date="2017" end-date="2018"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>按月选择</h4>
+                      <au-date-picker v-model="month" type="month" clearable></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>按月选择</h4>
+                      <au-date-picker v-model="month" type="month" start-date="2017-2" end-date="2017-10"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>选择日期范围</h4>
+                      <au-date-picker v-model="daterange" type="daterange" clearable></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择日期范围</h4>
+                      <au-date-picker v-model="daterange" type="daterange" start-date="2017-2-7" end-date="2017-10-1"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>选择日期时间</h4>
+                      <au-date-picker v-model="datetime" type="datetime" clearable></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择日期时间</h4>
+                      <au-date-picker v-model="datetime" type="datetime" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>选择日期时间范围</h4>
+                      <au-date-picker v-model="datetimerange" type="datetimerange" clearable></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择日期时间范围</h4>
+                      <au-date-picker v-model="datetimerange" type="datetimerange" start-date="2017-2-7 12:31:15" end-date="2017-10-1 12:31:15"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        date: '2017-02-27',
+                        year: '2017-02-27',
+                        month: '2017-02',
+                        daterange: ['2017-02-07', '2017-06-11'],
+                        datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+                        datetime: '2017-02-27 08:11:12',
+                        time: '11:11:11',
+                        attrs: [
+                          {
+                            name: '',
+                            desc: '',
+                            type: '',
+                            default: ''
+                          }
+                        ]
+                      }
+                    },
+                    methods: {
+                      disabledWeek (date) {
+                        const day = date.getDay()
+                        return day === 0 || day === 6
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>时间选择器</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>选择时间</h4>
+                      <au-date-picker v-model="time" type="time"></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择时间</h4>
+                      <au-date-picker v-model="time" type="time" start-date="08:08:08"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                </div>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>控制时间的format</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-flex gutter="20" wrap="wrap">
+                    <au-item span="8">
+                      <h4>选择时间</h4>
+                      <au-date-picker v-model="time" type="time" format="HH:MM"></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择时间</h4>
+                      <au-date-picker v-model="time" type="time" format="ss"></au-date-picker>
+                    </au-item>
+                    <au-item span="8">
+                      <h4>选择时间</h4>
+                      <au-date-picker v-model="datetime" type="datetime" format="yyyy-mm-dd HH:MM"></au-date-picker>
+                    </au-item>
+                  </au-flex>
+                </div>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+              </div>
+            </div>
+          </au-panel>
+          <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
+        </div>
+      </au-content>
+    </au-app>
+    <script src="../lib/vue.js"></script>
+    <script src="/Aurora/src/aurora.js"></script>
+    <script src="/Aurora/docs/docs.js"></script>
+    <script>
+      const mixins = []
+      !function () {
+        // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
+      
+        const sections = document.querySelectorAll('.docs-section')
+        ;[].forEach.call(sections, (section) => {
+          loadHtml(section)
+          loadJs(section)
+        })
+      
+        function loadHtml (section) {
+          const template = section.querySelector('template.html')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.html')
+          if (!code) {
+            return
+          }
+          section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
+          code.setAttribute('html', convert(template.innerHTML))
+      
+          template.parentElement.removeChild(template)
+      
+          function convert(html) {
+            html = html.trim()
+      
+            html = html_beautify(html, {
+              indent_size: 2
+            })
+            html = html.replace(/=""/g, '')
+            return htmlEncode(html)
+          }
+        }
+      
+        function loadJs (section) {
+          const template = section.querySelector('template.js')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.js')
+          if (!code) {
+            return
+          }
+          const html = template.innerHTML
+          const js = convert(html)
+      
+          code.setAttribute('html', 'export default ' + htmlEncode(js))
+          template.parentElement.removeChild(template)
+      
+          var result
+          eval(`result = ${js}`)
+          mixins.push(result)
+      
+          function convert (js) {
+            const div = document.createElement('div')
+            div.innerHTML = js
+            js = div.textContent.trim()
+            js = js_beautify(js, {
+              indent_size: 2
+            })
+            return js
+          }
+        }
+      
+        function htmlEncode (str) {
+          var s = "";
+          if (str.length == 0) return "";
+          s = str.replace(/&/g, "&gt;");
+          s = s.replace(/</g, "&lt;");
+          s = s.replace(/>/g, "&gt;");
+          s = s.replace(/ /g, "&nbsp;");
+          s = s.replace(/\'/g, "&#39;");
+          s = s.replace(/\"/g, "&quot;");
+          s = s.replace(/\n/g, "<br>");
+          return s;
+        }
+      
+        Vue.component('docs-code', {
+          template: '<pre><code v-html="html"></code></pre>',
+          props: {
+            html: String
+          },
+          mounted() {
+            hljs.highlightBlock(this.$el.querySelector('code'))
+          }
+        })
+      
+        mixins.push({
+          data () {
+            return {
+              selected: [],
+              columns: [
+                {
+                  label: '参数',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '类型',
+                  attrName: 'type'
+                },
+                {
+                  label: '默认值',
+                  attrName: 'default'
+                }
+              ],
+              eventColumns: [
+                {
+                  label: '名称',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '回调函数参数',
+                  attrName: 'args'
+                }
+              ]
+            }
+          },
+          created () {
+            const match = window.location.href.match(/\/([-\w]+)\.html/)
+            if (match) {
+              this.selected.push(match[1])
+            }
+          }
+        })
+      }()
+      alert(1)
+    </script>
+    <script>
+      new Vue({
+        el: '#app',
+        mixins,
+        data () {
+          return {
+            date: '', // '2017-02-07',
+            year: '2017',
+            month: '2017-02',
+            daterange: ['', ''], // ['2017-02-07', '2017-06-11'],
+            datetimerange: ['', ''], // ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
+            datetime: '', // '2017-02-27 08:11:12',
+            time: '11:11:11',
+            attrs: [
+              {
+                name: '',
+                desc: '',
+                type: '',
+                default: ''
+              }
+            ]
+          }
+        },
+        methods: {
+          disabledWeek (date) {
+            const day = date.getDay()
+            return day === 0 || day === 6
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

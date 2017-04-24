@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Table</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Aurora/src/sass/aurora.css">
+    <link rel="stylesheet" href="/Aurora/docs/docs.css">
+    <link rel="stylesheet" href="../lib/highlight.github.min.css">
+    <link rel="stylesheet" href="/Aurora/docs/css/markdown.css">
+    <script src="../lib/highlight.min.js"></script>
+    <script src="../lib/beautify.min.js"></script>
+    <script src="../lib/beautify-css.min.js"></script>
+    <script src="../lib/beautify-html.min.js"></script>
+    <style>
+      .browsehappy {
+        height: 40px;
+        line-height: 40px;
+        background-color: #f5ffbd;
+        color: #333;
+        text-align: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body><!--[if lt IE 8]>
+    <p class="browsehappy">
+      您正在使用 <strong>过时</strong> 的浏览器.
+      请 <a href="http://browsehappy.com/">更新您的浏览器</a>
+      来使用此项目
+    </p><![endif]-->
+    <au-app id="app" v-cloak>
+      <au-header>
+        <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
+        <au-menu slot="content-left" menu-trigger="click" :selected="selected">
+          <au-menu-item href="app.html" value="app">App</au-menu-item>
+          <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+          <au-menu-item href="button.html" value="button">Button</au-menu-item>
+          <au-menu-item>表单
+            <au-menu>
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>区块
+            <au-menu>
+              <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+              <au-menu-item href="table.html" value="table">Table</au-menu-item>
+              <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+              <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+              <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+              <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+              <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+              <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+              <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>消息
+            <au-menu>
+              <au-menu-item href="message.html" value="message">Message</au-menu-item>
+              <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+              <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+        </au-menu>
+        <div slot="content-right">
+          <au-menu>
+            <au-menu-item><img src="https://avatars0.githubusercontent.com/u/790296" style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;">Kevin
+              <au-menu>
+                <au-menu-item>我的信息</au-menu-item>
+                <au-menu-item>退出</au-menu-item>
+              </au-menu>
+            </au-menu-item>
+          </au-menu>
+        </div>
+      </au-header>
+      <au-content>
+        <div slot="sidebar">
+          <au-menu-group title="基础">
+            <au-menu :selected="selected">
+              <au-menu-item href="install.html" value="install">安装</au-menu-item>
+              <au-menu-item href="app.html" value="app">App</au-menu-item>
+              <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+              <au-menu-item href="button.html" value="button">Button</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="表单">
+            <au-menu :selected="selected">
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="其他">
+            <au-menu :selected="selected">
+              <au-menu-item icon="clone">区块
+                <au-menu>
+                  <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+                  <au-menu-item href="table.html" value="table">Table</au-menu-item>
+                  <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+                  <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+                  <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+                  <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+                  <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+                  <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+                  <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+              <au-menu-item icon="sticky-note">消息
+                <au-menu>
+                  <au-menu-item href="message.html" value="message">Message</au-menu-item>
+                  <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+                  <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+            </au-menu>
+          </au-menu-group>
+        </div>
+        <div slot="container">
+          <au-panel>
+            <div class="docs-heading">
+              <h1>AuTable</h1>
+              <div class="docs-desc"></div>
+            </div>
+            <div class="docs-section">
+              <h2>固定列表格</h2>
+              <div class="docs-desc">
+                <p>|固定列表格的用法</p>
+              </div>
+              <template class="html">
+                <div class="docs-panel-row">
+                  <au-table :data="data" max-height="400">
+                    <au-table-column label="ID" attr-name="id" fixed></au-table-column>
+                    <au-table-column label="Name" attr-name="name"></au-table-column>
+                    <au-table-column label="Age" attr-name="age" v-if="showAge"></au-table-column>
+                    <au-table-column label="操作" nowrap>
+                      <template scope="scope">
+                        <au-button type="success" size="small" href="#">添加</au-button>
+                        <au-button type="primary" size="small" @click.native="editHandler(scope.index, scope.data)">编辑</au-button>
+                        <au-button type="primary" size="small" @click.native="editHandler(scope.index, scope.data)" v-if="scope.index === 2">发布</au-button>
+                        <au-button type="warning" size="small" @click.native="editHandler(scope.index, scope.data)">更新</au-button>
+                        <au-button type="danger" size="small" @click.native="deleteHandler(scope.index, scope.data)">删除</au-button>
+                      </template>
+                    </au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        isShowLoading: false,
+                        data : [
+                          { id: 1, name: 'kevin', age: '28' },
+                          { id: 2, name: 'kevin', age: '27' },
+                          { id: 3, name: 'kevin', age: '26' },
+                          { id: 4, name: 'kevin', age: '25' }
+                        ]
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>基础表格</h2>
+              <div class="docs-desc">
+                <p>基础表格的用法</p>
+              </div>
+              <template class="html">
+                <div class="docs-panel-row">
+                  <au-checkbox label="显示loading" v-model="isShowLoading"></au-checkbox>
+                </div>
+                <div class="docs-panel-row">
+                  <au-table :data="data" :loading="isShowLoading">
+                    <au-table-column label="ID" attr-name="id"></au-table-column>
+                    <au-table-column label="Name" attr-name="name"></au-table-column>
+                    <au-table-column label="Age" attr-name="age" v-if="showAge"></au-table-column>
+                    <au-table-column label="操作" nowrap>
+                      <template scope="scope">
+                        <au-button type="success" size="small" href="#">添加</au-button>
+                        <au-button type="primary" size="small" @click.native="editHandler(scope.index, scope.data)">编辑</au-button>
+                        <au-button type="primary" size="small" @click.native="editHandler(scope.index, scope.data)" v-if="scope.index === 2">发布</au-button>
+                        <au-button type="warning" size="small" @click.native="editHandler(scope.index, scope.data)">更新</au-button>
+                        <au-button type="danger" size="small" @click.native="deleteHandler(scope.index, scope.data)">删除</au-button>
+                      </template>
+                    </au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        isShowLoading: false,
+                        data : [
+                          { id: 1, name: 'kevin', age: '28' },
+                          { id: 2, name: 'kevin', age: '27' },
+                          { id: 3, name: 'kevin', age: '26' },
+                          { id: 4, name: 'kevin', age: '25' }
+                        ]
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>空表格</h2>
+              <div class="docs-desc">
+                <p>空表格的用法</p>
+              </div>
+              <template class="html">
+                <div class="docs-panel-row">
+                  <au-table :data="data2">
+                    <div slot="empty">还没有数据, 点击
+                      <au-button size="mini" type="primary" @click="addData">添加</au-button>
+                    </div>
+                    <au-table-column label="ID" attr-name="id"></au-table-column>
+                    <au-table-column label="名称" attr-name="name"></au-table-column>
+                    <au-table-column label="年龄" attr-name="age"></au-table-column>
+                    <au-table-column label="操作">
+                      <template scope="scope">
+                        <au-button type="danger" size="mini" @click.native="removeHandler(scope.index)">删除</au-button>
+                        <au-button type="success" size="mini" @click.native="addData" v-if="scope.index === 0 || scope.index + 1 &lt; data2.length">添加</au-button>
+                      </template>
+                    </au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        id: 1,
+                        data2: []
+                      }
+                    },
+                    methods: {
+                      addData () {
+                        this.data2.push({id:this.id++,name:'kevin',age:28})
+                      },
+                      removeHandler (index) {
+                        this.data2.splice(index, 1)
+                        // this.data2 = this.data2.slice()
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>带分页表格</h2>
+              <div class="docs-desc">
+                <p>带分页表格的用法</p>
+              </div>
+              <template class="html">
+                <div class="docs-panel-row">
+                  <au-table :data="data">
+                    <au-table-column label="ID" attr-name="id"></au-table-column>
+                    <au-table-column label="名称" attr-name="name"></au-table-column>
+                    <au-table-column label="年龄" attr-name="age"></au-table-column>
+                  </au-table>
+                  <au-pagination v-model="page" :item-count="itemCount" align="right"></au-pagination>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        page: 1,
+                        itemCount: 200
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>列表格</h2>
+              <div class="docs-desc">
+                <p>基础表格的用法</p>
+              </div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-table :data="keyValues" :show-header="false" bordered>
+                    <au-table-column attr-name="key" highlight></au-table-column>
+                    <au-table-column attr-name="value"></au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        keyValues: [
+                          {
+                            key: '注册手机',
+                            value: '18300001511'
+                          },
+                          {
+                            key: '客户姓名',
+                            value: '叶一'
+                          },
+                          {
+                            key: '身份证号',
+                            value: '420502199001010016'
+                          }
+                        ],
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>checkbox表格</h2>
+              <div class="docs-desc">
+                <p>checkbox表格的用法</p>
+              </div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-table ref="table" :data="data">
+                    <au-table-column type="checkbox" v-model="checkeds"></au-table-column>
+                    <au-table-column label="ID" attr-name="id"></au-table-column>
+                    <au-table-column label="Name" attr-name="name" style="width:200px"></au-table-column>
+                    <au-table-column label="操作" :style="{ width: '200px' }">
+                      <template scope="scope">
+                        <au-button type="primary" size="small" @click.native="editHandler(scope.index, scope.data)">编辑</au-button>
+                        <au-button type="danger" size="small" @click.native="deleteHandler(scope.index, scope.data)">删除</au-button>
+                      </template>
+                    </au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        data : [
+                          { id: 1, name: 'kevin', age: '28' },
+                          { id: 2, name: 'kevin', age: '27' },
+                          { id: 3, name: 'kevin', age: '26' },
+                          { id: 4, name: 'kevin', age: '25' }
+                        ],
+                        checkeds: [
+                          data[1],
+                          data[2]
+                        ]
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>多层级属性</h2>
+              <div class="docs-desc">
+                <p>带分页表格的用法</p>
+              </div>
+              <template class="html">
+                <div class="docs-panel-row">
+                  <au-table :data="deepData">
+                    <au-table-column label="Name" attr-name="name"></au-table-column>
+                    <au-table-column label="Parent name" attr-name="parent.name"></au-table-column>
+                    <au-table-column label="Car Id" attr-name="parent.car.id"></au-table-column>
+                    <au-table-column label="Cat Name" attr-name="cat[1].name"></au-table-column>
+                  </au-table>
+                </div>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        deepData: [
+                          {
+                            name: 'kevin',
+                            parent: {
+                              name: 'kevin\'s father',
+                              car: {
+                                id: '123'
+                              }
+                            },
+                            cat: [
+                              { name: 'katty' }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>AuTable属性</h2>
+              <au-table :data="attrs">
+                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
+            <div class="docs-section">
+              <h2>AuTableColumn属性</h2>
+              <au-table :data="columnAttrs">
+                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
+          </au-panel>
+          <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
+        </div>
+      </au-content>
+    </au-app>
+    <script src="../lib/vue.js"></script>
+    <script src="/Aurora/src/aurora.js"></script>
+    <script src="/Aurora/docs/docs.js"></script>
+    <script>
+      const mixins = []
+      !function () {
+        // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
+      
+        const sections = document.querySelectorAll('.docs-section')
+        ;[].forEach.call(sections, (section) => {
+          loadHtml(section)
+          loadJs(section)
+        })
+      
+        function loadHtml (section) {
+          const template = section.querySelector('template.html')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.html')
+          if (!code) {
+            return
+          }
+          section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
+          code.setAttribute('html', convert(template.innerHTML))
+      
+          template.parentElement.removeChild(template)
+      
+          function convert(html) {
+            html = html.trim()
+      
+            html = html_beautify(html, {
+              indent_size: 2
+            })
+            html = html.replace(/=""/g, '')
+            return htmlEncode(html)
+          }
+        }
+      
+        function loadJs (section) {
+          const template = section.querySelector('template.js')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.js')
+          if (!code) {
+            return
+          }
+          const html = template.innerHTML
+          const js = convert(html)
+      
+          code.setAttribute('html', 'export default ' + htmlEncode(js))
+          template.parentElement.removeChild(template)
+      
+          var result
+          eval(`result = ${js}`)
+          mixins.push(result)
+      
+          function convert (js) {
+            const div = document.createElement('div')
+            div.innerHTML = js
+            js = div.textContent.trim()
+            js = js_beautify(js, {
+              indent_size: 2
+            })
+            return js
+          }
+        }
+      
+        function htmlEncode (str) {
+          var s = "";
+          if (str.length == 0) return "";
+          s = str.replace(/&/g, "&gt;");
+          s = s.replace(/</g, "&lt;");
+          s = s.replace(/>/g, "&gt;");
+          s = s.replace(/ /g, "&nbsp;");
+          s = s.replace(/\'/g, "&#39;");
+          s = s.replace(/\"/g, "&quot;");
+          s = s.replace(/\n/g, "<br>");
+          return s;
+        }
+      
+        Vue.component('docs-code', {
+          template: '<pre><code v-html="html"></code></pre>',
+          props: {
+            html: String
+          },
+          mounted() {
+            hljs.highlightBlock(this.$el.querySelector('code'))
+          }
+        })
+      
+        mixins.push({
+          data () {
+            return {
+              selected: [],
+              columns: [
+                {
+                  label: '参数',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '类型',
+                  attrName: 'type'
+                },
+                {
+                  label: '默认值',
+                  attrName: 'default'
+                }
+              ],
+              eventColumns: [
+                {
+                  label: '名称',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '回调函数参数',
+                  attrName: 'args'
+                }
+              ]
+            }
+          },
+          created () {
+            const match = window.location.href.match(/\/([-\w]+)\.html/)
+            if (match) {
+              this.selected.push(match[1])
+            }
+          }
+        })
+      }()
+      alert(1)
+    </script>
+    <script>
+      const data = [
+        { id: 1, name: 'kevin', age: '28' },
+        { id: 2, name: 'kevin', age: '27' },
+        { id: 3, name: 'kevin', age: '26' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' },
+        { id: 4, name: 'kevin', age: '25' }
+      ]
+      new Vue({
+        el: '#app',
+        mixins,
+        data () {
+          return {
+            showAge: false,
+            attrs: [
+              {
+                name: 'data',
+                desc: '数据内容',
+                type: 'Array',
+                default: '[]'
+              },
+              {
+                name: 'show-header',
+                desc: '是否显示标题',
+                type: 'Boolean',
+                default: 'true'
+              },
+              {
+                name: 'loading',
+                desc: '是否显示加载中样式',
+                type: 'Boolean',
+                default: 'false'
+              }
+            ],
+            columnAttrs: [
+              {
+                name: 'label',
+                desc: '显示的标题',
+                type: 'String',
+                default: ''
+              },
+              {
+                name: 'attr-name',
+                desc: '属性名',
+                type: 'String',
+                default: ''
+              },
+              {
+                name: 'highlight',
+                desc: '高亮显示此列',
+                type: 'Boolean',
+                default: 'false'
+              },
+              {
+                name: 'type',
+                desc: '列类型(可选值: "", checkbox)',
+                type: 'String',
+                default: ''
+              },
+              {
+                name: 'nowrap',
+                desc: '控制此列内容不折行, 会计算出最小的宽度',
+                type: 'Boolean',
+                default: 'false'
+              },
+              {
+                name: 'v-model',
+                desc: 'type:checkbox时的值, 通过和data中的值做全等比较',
+                type: 'Array',
+                default: '[]'
+              }
+            ],
+            data,
+            keyValues: [
+              {
+                key: '注册手机',
+                value: '18300001511'
+              },
+              {
+                key: '客户姓名',
+                value: '叶一'
+              },
+              {
+                key: '身份证号',
+                value: '420502199001010016'
+              }
+            ],
+            checkeds: [
+              data[1],
+              data[2]
+            ]
+          }
+        },
+        mounted () {
+          this.$refs.table.$on('select', (data) => {
+            console.log(data)
+          })
+      
+          setTimeout(() => {
+            this.showAge = true
+          }, 1000)
+        },
+        methods: {
+          editHandler (index, data) {
+            console.log(index, data)
+          },
+          deleteHandler (index, data) {
+            console.log(index, data)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

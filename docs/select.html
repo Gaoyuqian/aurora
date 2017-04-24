@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Select</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Aurora/src/sass/aurora.css">
+    <link rel="stylesheet" href="/Aurora/docs/docs.css">
+    <link rel="stylesheet" href="../lib/highlight.github.min.css">
+    <link rel="stylesheet" href="/Aurora/docs/css/markdown.css">
+    <script src="../lib/highlight.min.js"></script>
+    <script src="../lib/beautify.min.js"></script>
+    <script src="../lib/beautify-css.min.js"></script>
+    <script src="../lib/beautify-html.min.js"></script>
+    <style>
+      .browsehappy {
+        height: 40px;
+        line-height: 40px;
+        background-color: #f5ffbd;
+        color: #333;
+        text-align: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body><!--[if lt IE 8]>
+    <p class="browsehappy">
+      您正在使用 <strong>过时</strong> 的浏览器.
+      请 <a href="http://browsehappy.com/">更新您的浏览器</a>
+      来使用此项目
+    </p><![endif]-->
+    <au-app id="app" v-cloak>
+      <au-header>
+        <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
+        <au-menu slot="content-left" menu-trigger="click" :selected="selected">
+          <au-menu-item href="app.html" value="app">App</au-menu-item>
+          <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+          <au-menu-item href="button.html" value="button">Button</au-menu-item>
+          <au-menu-item>表单
+            <au-menu>
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>区块
+            <au-menu>
+              <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+              <au-menu-item href="table.html" value="table">Table</au-menu-item>
+              <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+              <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+              <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+              <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+              <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+              <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+              <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>消息
+            <au-menu>
+              <au-menu-item href="message.html" value="message">Message</au-menu-item>
+              <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+              <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+        </au-menu>
+        <div slot="content-right">
+          <au-menu>
+            <au-menu-item><img src="https://avatars0.githubusercontent.com/u/790296" style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;">Kevin
+              <au-menu>
+                <au-menu-item>我的信息</au-menu-item>
+                <au-menu-item>退出</au-menu-item>
+              </au-menu>
+            </au-menu-item>
+          </au-menu>
+        </div>
+      </au-header>
+      <au-content>
+        <div slot="sidebar">
+          <au-menu-group title="基础">
+            <au-menu :selected="selected">
+              <au-menu-item href="install.html" value="install">安装</au-menu-item>
+              <au-menu-item href="app.html" value="app">App</au-menu-item>
+              <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+              <au-menu-item href="button.html" value="button">Button</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="表单">
+            <au-menu :selected="selected">
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="其他">
+            <au-menu :selected="selected">
+              <au-menu-item icon="clone">区块
+                <au-menu>
+                  <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+                  <au-menu-item href="table.html" value="table">Table</au-menu-item>
+                  <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+                  <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+                  <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+                  <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+                  <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+                  <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+                  <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+              <au-menu-item icon="sticky-note">消息
+                <au-menu>
+                  <au-menu-item href="message.html" value="message">Message</au-menu-item>
+                  <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+                  <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+            </au-menu>
+          </au-menu-group>
+        </div>
+        <div slot="container">
+          <au-panel>
+            <docs-section>
+              <div slot="desc"><h1>AuSelect</h1>
+<p>基础选择器的用法。<code>au-select</code>可以通过<code>options</code>属性填充选项 或 通过<code>au-option</code>子组件填充。</p>
+<p><code>au-option</code>通过<code>label</code>属性指定显示内容，<code>value</code>属性指定值。</p>
+<p><strong>注意：</strong> 暂不支持对象绑定</p>
+<blockquote>
+<p>如果通过以下方式设置选项内容：</p>
+<p><code>&lt;au-option label=&quot;label&quot; value=&quot;value&quot;&gt;自定义文本&lt;/au-option&gt;</code></p>
+<p>选项将显示<strong>自定义文本</strong>，但选择后的内容依然根据label展示。</p>
+</blockquote>
+
+              </div>
+              <demo slot="code">
+                <au-flex gutter="10">
+                  <au-item span="8">
+                    <au-select v-model="form.class" :options="options" placeholder="请选择班级"></au-select>
+                  </au-item>
+                  <au-item span="8">
+                    <au-select v-model="form.class" placeholder="请选择班级">
+                      <au-option v-for="option in options" :label="option.label" :value="option.value"></au-option>
+                    </au-select>
+                  </au-item>
+                  <au-item span="8">
+                    <au-select v-model="form.class" placeholder="请选择班级">
+                      <au-option v-for="option in options" :label="option.label" :value="option.value">自定义文本-{{option.value}}</au-option>
+                    </au-select>
+                  </au-item>
+                </au-flex>
+                <p>选中的值：{{form.class}}</p>
+                <template type="au-demo">
+                  <script>
+                    export default {
+                      data: {
+                        options: [
+                            {label: '三年一班', value: '1'},
+                            {label: '三年二班', value: '2'},
+                            {label: '三年三班', value: '3'},
+                            {label: '三年四班', value: '4'},
+                            {label: '三年五班', value: '5'},
+                            {label: '三年六班', value: '6'}
+                        ],
+                        form:{
+                          class:''
+                        }
+                      }
+                    }
+                    
+                  </script>
+                </template>
+              </demo>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h2>au-select</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v-model</td>
+<td>绑定的数据</td>
+<td>String, Number</td>
+<td>''</td>
+</tr>
+<tr>
+<td>options</td>
+<td>select的option数组, 格式为{ label, value } (可以不传此值, 通过使用AuOption来手动指定)</td>
+<td>Array</td>
+<td>null</td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>同原生的placeholder</td>
+<td>String</td>
+<td>'请选择'</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td>是否使用多选, 若设置为true, v-model需要绑定数组对象</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>size</td>
+<td>选择器的大小 (可选值: large, default, small, mini)</td>
+<td>String</td>
+<td>'default'</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td>是否禁用</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>clearable</td>
+<td>是否可清空</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>是否支持搜索过滤</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>readonly</td>
+<td>todo （暂不支持）</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2>au-option</h2>
+<p><code>au-select</code>的直接子组件</p>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td>选择框中出现的文案，如果不设置将无法显示选择结果</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>选择项值</td>
+<td>String, Number</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>例子</h2>
+
+              </div>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h3>多选</h3>
+
+              </div>
+              <demo slot="code">
+                <au-select multiple v-model="form.classes" :options="options" placeholder="请选择班级"></au-select>
+                <template type="au-demo">
+                  <script>
+                    export default {
+                      data: {
+                        options: [
+                            {label: '三年一班', value: '1'},
+                            {label: '三年二班', value: '2'},
+                            {label: '三年三班', value: '3'},
+                            {label: '三年四班', value: '4'},
+                            {label: '三年五班', value: '5'},
+                            {label: '三年六班', value: '6'}
+                        ],
+                        form:{
+                          class:''
+                        }
+                      }
+                    }
+                  </script>
+                </template>
+              </demo>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h3>禁用 &amp; 只读</h3>
+<blockquote>
+<p>占时没有对readonly的支持</p>
+</blockquote>
+
+              </div>
+              <demo slot="code">
+                <div style="margin-bottom:5px">
+                  <au-select disabled v-model="form.classes" :options="options" multiple placeholder="请选择班级"></au-select>
+                </div>
+                <div style="margin-bottom:5px">
+                  <au-select disabled v-model="form.class" :options="options" placeholder="请选择班级"></au-select>
+                </div>
+                <template type="au-demo">
+                  <script>
+                    export default {
+                      data: {
+                        options: [
+                            {label: '三年一班', value: '1'},
+                            {label: '三年二班', value: '2'},
+                            {label: '三年三班', value: '3'},
+                            {label: '三年四班', value: '4'},
+                            {label: '三年五班', value: '5'},
+                            {label: '三年六班', value: '6'}
+                        ],
+                        form:{
+                          class:''
+                        }
+                      }
+                    }
+                    
+                  </script>
+                </template>
+              </demo>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h3>可清空</h3>
+<p>选中后，鼠标移入，右侧图标变为<code>X</code>。点击可清空。</p>
+
+                <demo slot="code">
+                  <au-select v-model="form.class" :options="options" placeholder="请选择班级" clearable></au-select>
+                  <template type="au-demo">
+                    <script>
+                      export default {
+                        data: {
+                          options: [
+                              {label: '三年一班', value: '1'},
+                              {label: '三年二班', value: '2'},
+                              {label: '三年三班', value: '3'},
+                              {label: '三年四班', value: '4'},
+                              {label: '三年五班', value: '5'},
+                              {label: '三年六班', value: '6'}
+                          ],
+                          form:{
+                            class:''
+                          }
+                        }
+                      }
+                      
+                    </script>
+                  </template>
+                </demo>
+              </div>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h3>不同大小</h3>
+
+                <demo slot="code">
+                  <div style="margin-bottom:5px">
+                    <au-select size="large" placeholder="请选择班级"></au-select>
+                  </div>
+                  <div style="margin-bottom:5px">
+                    <au-select size="default" placeholder="请选择班级"></au-select>
+                  </div>
+                  <div style="margin-bottom:5px">
+                    <au-select size="small" placeholder="请选择班级"></au-select>
+                  </div>
+                  <div style="margin-bottom:5px">
+                    <au-select size="mini" placeholder="请选择班级"></au-select>
+                  </div>
+                </demo>
+              </div>
+            </docs-section>
+            <docs-section>
+              <div slot="desc"><h3>搜索选择器</h3>
+
+              </div>
+              <demo slot="code">
+                <au-flex gutter="10">
+                  <au-item span="12">
+                    <au-select v-model="form.class" :options="options" placeholder="请选择班级" :filter="true"></au-select>
+                  </au-item>
+                  <au-item span="12">
+                    <au-select multiple v-model="form.classes" :options="options" placeholder="请选择班级" :filter="true"></au-select>
+                  </au-item>
+                </au-flex>
+                <template type="au-demo">
+                  <script>
+                    export default {
+                      data: {
+                        options: [
+                            {label: '三年一班', value: '1'},
+                            {label: '三年二班', value: '2'},
+                            {label: '三年三班', value: '3'},
+                            {label: '三年四班', value: '4'},
+                            {label: '三年五班', value: '5'},
+                            {label: '三年六班', value: '6'}
+                        ],
+                        form:{
+                          class:''
+                        }
+                      }
+                    }
+                    
+                  </script>
+                </template>
+              </demo>
+            </docs-section>
+          </au-panel>
+          <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
+        </div>
+      </au-content>
+    </au-app>
+    <script src="../lib/vue.js"></script>
+    <script src="/Aurora/src/aurora.js"></script>
+    <script src="/Aurora/docs/docs.js"></script>
+    <script>
+      const mixins = []
+      !function () {
+        // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
+      
+        const sections = document.querySelectorAll('.docs-section')
+        ;[].forEach.call(sections, (section) => {
+          loadHtml(section)
+          loadJs(section)
+        })
+      
+        function loadHtml (section) {
+          const template = section.querySelector('template.html')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.html')
+          if (!code) {
+            return
+          }
+          section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
+          code.setAttribute('html', convert(template.innerHTML))
+      
+          template.parentElement.removeChild(template)
+      
+          function convert(html) {
+            html = html.trim()
+      
+            html = html_beautify(html, {
+              indent_size: 2
+            })
+            html = html.replace(/=""/g, '')
+            return htmlEncode(html)
+          }
+        }
+      
+        function loadJs (section) {
+          const template = section.querySelector('template.js')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.js')
+          if (!code) {
+            return
+          }
+          const html = template.innerHTML
+          const js = convert(html)
+      
+          code.setAttribute('html', 'export default ' + htmlEncode(js))
+          template.parentElement.removeChild(template)
+      
+          var result
+          eval(`result = ${js}`)
+          mixins.push(result)
+      
+          function convert (js) {
+            const div = document.createElement('div')
+            div.innerHTML = js
+            js = div.textContent.trim()
+            js = js_beautify(js, {
+              indent_size: 2
+            })
+            return js
+          }
+        }
+      
+        function htmlEncode (str) {
+          var s = "";
+          if (str.length == 0) return "";
+          s = str.replace(/&/g, "&gt;");
+          s = s.replace(/</g, "&lt;");
+          s = s.replace(/>/g, "&gt;");
+          s = s.replace(/ /g, "&nbsp;");
+          s = s.replace(/\'/g, "&#39;");
+          s = s.replace(/\"/g, "&quot;");
+          s = s.replace(/\n/g, "<br>");
+          return s;
+        }
+      
+        Vue.component('docs-code', {
+          template: '<pre><code v-html="html"></code></pre>',
+          props: {
+            html: String
+          },
+          mounted() {
+            hljs.highlightBlock(this.$el.querySelector('code'))
+          }
+        })
+      
+        mixins.push({
+          data () {
+            return {
+              selected: [],
+              columns: [
+                {
+                  label: '参数',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '类型',
+                  attrName: 'type'
+                },
+                {
+                  label: '默认值',
+                  attrName: 'default'
+                }
+              ],
+              eventColumns: [
+                {
+                  label: '名称',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '回调函数参数',
+                  attrName: 'args'
+                }
+              ]
+            }
+          },
+          created () {
+            const match = window.location.href.match(/\/([-\w]+)\.html/)
+            if (match) {
+              this.selected.push(match[1])
+            }
+          }
+        })
+      }()
+      alert(1)
+    </script>
+    <script>
+      const options = [
+        {label: '三年一班', value: '1'},
+        {label: '三年二班', value: '2'},
+        {label: '三年三班', value: '3'},
+        {label: '三年四班', value: '4'},
+        {label: '三年五班', value: '5'},
+        {label: '三年六班', value: '6'}
+      ];
+      new Vue({
+        el: '#app',
+        mixins,
+        data () {
+          return {
+            form: {
+                'class': '',
+                'classes': ['1', '2']
+            },
+            options: []
+          }
+        },
+        created () {
+          setTimeout(() => {
+            this.options = options;
+          }, 0)
+        },
+        methods: {
+          onChange (value) {
+            console.log(value)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
