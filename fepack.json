@@ -24,7 +24,7 @@
             },
             "www": {
                 "watch": false,
-                "version": true,
+                "version": false,
                 "optimize": true,
                 "www": "./__dist"
             }
