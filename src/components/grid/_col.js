@@ -17,7 +17,7 @@ export default AuCol = Vue.extend({
         cls.push(`au-col-offset-${this.offset}`)
       }
       return cls
-    }
+    },
     style () {
       const style = {}
       if (this.$parent instanceof AuRow) {
