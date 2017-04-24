@@ -36,12 +36,12 @@ block content
                 au-form-item(label="性别", :rules="sexRules", prop="gender")
                   au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
                 au-form-item(label="班级")
-                  au-flex
-                    au-item(span="11")
+                  au-row
+                    au-col(span="11")
                       au-form-item(prop="class")
                         au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", clearable, placeholder="请选择班级")
-                    au-item.text-center(span="2")|-
-                    au-item(span="11")
+                    au-col.text-center(span="2")|-
+                    au-col(span="11")
                       au-form-item(prop="class")
                         au-select(:options="[{value: '1', label: '三年一班'}, {value: '2', label: '三年二班'}]", v-model="form.class", placeholder="请选择班级")
                 au-form-item(label="描述", prop="desc")
