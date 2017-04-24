@@ -545,6 +545,10 @@ block content
       h2|属性
       au-table(:data="attrs")
         au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .docs-section
+      h2|事件
+      au-table#table(:data="events")
+        au-table-column(v-for="column in eventColumns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
@@ -554,6 +558,49 @@ block script
       data () {
         return {
           attrs: [
+            {
+              name: 'data',
+              desc: '数据内容(格式为[{label: "", children: []}], label是显示的文字, children是子结点数组)',
+              type: 'Array',
+              default: '[]'
+            },
+            {
+              name: 'default-expand-all',
+              desc: '是否默认展开全部节点',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'loader',
+              desc: '异部加载子节点的函数, 如果children为null时, 展开节点会调用loader, 格式为loader(data, callback)',
+              type: 'Function',
+              default: 'null'
+            },
+            {
+              name: 'click-row-expand',
+              desc: '是否点击整行展开折叠',
+              type: 'Boolean',
+              default: 'true'
+            },
+            {
+              name: 'checkable',
+              desc: '是否使用单选框',
+              type: 'Boolean',
+              default: 'false'
+            },
+            {
+              name: 'expands',
+              desc: '表示展开的元素',
+              type: 'Array',
+              default: '[]'
+            }
+          ],
+          events: [
+            {
+              name: 'check',
+              desc: 'checkbox有修改',
+              args: '(checkeds: Array)'
+            }
           ]
         }
       }
