@@ -196,14 +196,20 @@ const AuDragModal = Vue.extend({
       return parseFloat(this.$el.style.left)
     }
   },
+  updated () {
+    if (this.value) {
+      const style = this.$el.style
+      const html = document.documentElement
+      const maxWidth = html.scrollWidth
+      const maxHeight = html.scrollHeight
+      style.maxWidth = maxWidth + 'px'
+      style.maxHeight = maxHeight + 'px'
+    }
+  },
   watch: {
     value (value) {
       if (value) {
         this.$nextTick(() => {
-          const style = this.$el.style
-          const rect = this.$el.getBoundingClientRect()
-          style.width = rect.width + 'px'
-          style.height = rect.height + 'px'
           this.setPosition()
           addModal(this)
         })
