@@ -35,42 +35,6 @@
     <au-app id="app" v-cloak>
       <au-header>
         <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
-        <au-menu slot="content-left" menu-trigger="click" :selected="selected">
-          <au-menu-item href="app.html" value="app">App</au-menu-item>
-          <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
-          <au-menu-item href="button.html" value="button">Button</au-menu-item>
-          <au-menu-item>表单
-            <au-menu>
-              <au-menu-item href="input.html" value="input">Input</au-menu-item>
-              <au-menu-item href="select.html" value="select">Select</au-menu-item>
-              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
-              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
-              <au-menu-item href="form.html" value="form">Form</au-menu-item>
-              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
-              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
-            </au-menu>
-          </au-menu-item>
-          <au-menu-item>区块
-            <au-menu>
-              <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
-              <au-menu-item href="table.html" value="table">Table</au-menu-item>
-              <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
-              <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
-              <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
-              <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
-              <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
-              <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
-              <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-            </au-menu>
-          </au-menu-item>
-          <au-menu-item>消息
-            <au-menu>
-              <au-menu-item href="message.html" value="message">Message</au-menu-item>
-              <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
-              <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
-            </au-menu>
-          </au-menu-item>
-        </au-menu>
         <div slot="content-right">
           <au-menu>
             <au-menu-item><img src="https://avatars0.githubusercontent.com/u/790296" style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;">Kevin
@@ -372,7 +336,6 @@
           }
         })
       }()
-      alert(1)
     </script>
     <script>
       new Vue({
