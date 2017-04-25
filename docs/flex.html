@@ -134,9 +134,11 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="markdown-body"><h1>栅栏布局</h1>
-<p>Aurora的栅栏布局基于<code>flex</code>，关于flex的介绍<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">点这里</a></p>
-<p><strong>AuFlex (不建议使用, 请使用au-row)</strong></p>
+            <div class="markdown-body"><h1>栅格布局(flex)</h1>
+<p>Aurora的栅格布局基于<code>flex</code>，关于flex的介绍<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">点这里</a></p>
+<blockquote>
+<p>该布局已经<strong>不建议使用, 请使用au-row</strong></p>
+</blockquote>
 
             </div>
             <demo>
@@ -190,7 +192,7 @@
               </au-flex>
             </demo>
             <div class="markdown-body"><h3>水平 &amp; 垂直</h3>
-<p>通过<code>column</code>属性控制排列顺序。<code>column</code>通过控制样式flex属性<code>flex-direction</code>改变伸缩盒主轴方向</p>
+<p>通过<code>column</code>属性控制排列方向。<code>column</code>通过控制样式flex属性<code>flex-direction</code>改变伸缩盒主轴方向</p>
 
             </div>
             <demo>
@@ -439,7 +441,7 @@
 <h2>au-item</h2>
 <p><code>au-flex</code>组件内部划分为<strong>24</strong>等分，<code>au-item</code>组件可设置<code>span</code>属性来控制每一个子组件的占用宽度。
 与<code>au-flex</code>类似，大部分的属性都会转为<code>flex</code>样式，如：<code>align-self</code>、<code>flex-basis</code>等。
-24等分并不总是生效的，如设置<code>au-item</code>的<code>basis</code>属性，栅栏24等分将失效。设置<code>grow</code>或<code>shrink</code>伸缩比例时，如果行未填满，将按伸缩比例填充导致24等分失效。</p>
+24等分并不总是生效的，如设置<code>au-item</code>的<code>basis</code>属性，栅格24等分将失效。设置<code>grow</code>或<code>shrink</code>伸缩比例时，如果行未填满，将按伸缩比例填充导致24等分失效。</p>
 <h3>au-flex 的属性</h3>
 <table>
 <thead>
@@ -519,7 +521,7 @@
 </ul>
 <h5>span</h5>
 <ul>
-<li>值必须大于0，小于等于24，否则栅栏的24等分不生效。</li>
+<li>值必须大于0，小于等于24，否则栅格的24等分不生效。</li>
 </ul>
 <h5>offset</h5>
 <ul>

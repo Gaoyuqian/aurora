@@ -134,36 +134,125 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuUpload</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuUpload</h1>
+<p>上传组件支持大小，图标，文案修改，对文件选取的控制与原生<code>input</code>一致。</p>
+<h2>基础用法</h2>
+<h3>不同大小</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>基础上传组件</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-upload @change="onChange"></au-upload>
-                </div>
-                <div class="docs-panel-row">
-                  <au-upload @change="onChange" button-size="small"></au-upload>
-                </div>
-                <div class="docs-panel-row">
-                  <au-upload @change="onChange" button-size="mini"></au-upload>
-                </div>
+            <demo>
+              <au-row gutter="10">
+                <au-col span="6">
+                  <au-upload button-size="large"></au-upload>
+                </au-col>
+                <au-col span="6">
+                  <!-- 不设置默认为`default`-->
+                  <au-upload></au-upload>
+                </au-col>
+                <au-col span="6">
+                  <au-upload button-size="small"></au-upload>
+                </au-col>
+                <au-col span="6">
+                  <au-upload button-size="mini"></au-upload>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h3>只支持png与jpg</h3>
+<p>与原生input一致</p>
+
+            </div>
+            <demo>
+              <au-upload accept="image/jpeg,image/png"></au-upload>
+            </demo>
+            <div class="markdown-body"><h3>替换按钮文字和图标</h3>
+<p>fontawesome图标</p>
+
+            </div>
+            <demo>
+              <au-row gutter="10">
+                <au-col span="6">
+                  <au-upload button-text="点击选择文件"></au-upload>
+                </au-col>
+                <au-col span="6">
+                  <au-upload button-icon="user"></au-upload>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h3>事件回调</h3>
+<p>支持<code>change</code>事件</p>
+
+            </div>
+            <demo>
+              <au-upload @change="onChange"></au-upload>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    methods: {
+                      onChange ($event) {
+                        const file = $event.target.files[0]
+                        if (file) {
+                          this.$message('info', '提示', `选择了文件${file.name}`);
+                        }
+                      }
+                    }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
-            </div>
-            <div class="docs-section">
-              <h2>属性</h2>
-              <au-table :data="attrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>button-text</td>
+<td>文件选择按钮文案</td>
+<td>String</td>
+<td>'选择文件'</td>
+</tr>
+<tr>
+<td>button-size</td>
+<td>文件选择按钮大小</td>
+<td>String</td>
+<td>'default'</td>
+</tr>
+<tr>
+<td>button-icon</td>
+<td>文件选择按钮图标</td>
+<td>String</td>
+<td>'upload'</td>
+</tr>
+<tr>
+<td>accept</td>
+<td>接受的文件mime</td>
+<td>String</td>
+<td>''</td>
+</tr>
+</tbody>
+</table>
+<h2>事件</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>change</td>
+<td>同原生 <code>&lt;input type=&quot;file&quot;&gt;</code>的change事件</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -352,7 +441,7 @@
           onChange ($event) {
             const file = $event.target.files[0]
             if (file) {
-              console.log(file)
+              this.$message('info', '提示', `选择了文件${file.name}`);
             }
           }
         }

@@ -134,136 +134,249 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuRow</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>栅栏布局(grid)</h1>
+<p>grid布局默认使用类似bootstrap的float做布局，也可改为flex模式。</p>
+<p><code>au-row</code>组件表示一行。一行会划分为24等分</p>
+<p><code>au-col</code>组件表示一列，可控制列宽和左侧偏移量。</p>
+<blockquote>
+<p><code>au-row</code>是 <strong>行</strong> 的概念，所以不要在一行设置超出24栅格的长度。</p>
+</blockquote>
+
             </div>
-            <div class="docs-section">
-              <h2>基本布局</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-row :gutter="10">
-                    <au-col :span="4">
-                      <div class="item">hello</div>
-                    </au-col>
-                    <au-col :span="20">
-                      <div class="item">hello world</div>
-                    </au-col>
-                  </au-row>
-                </div>
-              </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            <demo>
+              <style>
+                .item {
+                  background-color: #eee;
+                  min-height: 40px;
+                  line-height: 40px;
+                  padding: 0 10px;
+                }
+              </style>
+              <au-row :gutter="10">
+                <au-col :span="4">
+                  <div class="item">hello</div>
+                </au-col>
+                <au-col :span="20">
+                  <div class="item">hello world</div>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h3>24等分栅格</h3>
+<p>支持24等分与offset设置</p>
+
             </div>
-            <div class="docs-section">
-              <h2>栅格</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-row :gutter="10">
-                    <au-col v-for="item in list" span="4">
-                      <div class="item">{{ item }}</div>
-                    </au-col>
-                  </au-row>
-                  <au-row gutter="10">
-                    <au-col span="12">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="12">
-                      <div class="item"></div>
-                    </au-col>
-                  </au-row>
-                  <au-row gutter="10">
-                    <au-col span="8">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="8">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="8">
-                      <div class="item"></div>
-                    </au-col>
-                  </au-row>
-                  <au-row gutter="10">
-                    <au-col span="6">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="6">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="6">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="6">
-                      <div class="item"></div>
-                    </au-col>
-                  </au-row>
-                  <au-row gutter="10">
-                    <au-col span="5" offset="1">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="3" offset="9">
-                      <div class="item"></div>
-                    </au-col>
-                    <au-col span="2" offset="4">
-                      <div class="item"></div>
-                    </au-col>
-                  </au-row>
-                </div>
-              </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            <demo>
+              <au-row :gutter="10" style="margin-bottom: 5px">
+                <au-col v-for="item in 6" span="4">
+                  <div class="item">{{ item }}</div>
+                </au-col>
+              </au-row>
+              <au-row gutter="10" style="margin-bottom: 5px">
+                <au-col span="12">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="12">
+                  <div class="item"></div>
+                </au-col>
+              </au-row>
+              <au-row gutter="10" style="margin-bottom: 5px">
+                <au-col span="8">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="8">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="8">
+                  <div class="item"></div>
+                </au-col>
+              </au-row>
+              <au-row gutter="10" style="margin-bottom: 5px">
+                <au-col span="6">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="6">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="6">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="6">
+                  <div class="item"></div>
+                </au-col>
+              </au-row>
+              <au-row gutter="10" style="margin-bottom: 5px">
+                <au-col span="5" offset="1">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="3" offset="9">
+                  <div class="item"></div>
+                </au-col>
+                <au-col span="2" offset="4">
+                  <div class="item"></div>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h2>flex模式</h2>
+<p>支持开启flex模式</p>
+<blockquote>
+<p>由于<code>au-flex</code>组件对flex的支持较全面，某些组合设置情况下会导致24等分失效，所以使用<code>au-row</code>中可避免这种问题。</p>
+</blockquote>
+<p>下面展示了flex模式下控制多余空间分布的例子</p>
+
             </div>
-            <div class="docs-section">
-              <h2>Flex模式</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-row type="flex" justify-content="space-between" :gutter="10">
-                    <au-col :span="4">
-                      <div class="item">hello</div>
-                    </au-col>
-                    <au-col :span="4">
-                      <div class="item">hello world</div>
-                    </au-col>
-                  </au-row>
-                  <au-row type="flex" justify-content="space-around" :gutter="10">
-                    <au-col :span="4">
-                      <div class="item">hello</div>
-                    </au-col>
-                    <au-col :span="4">
-                      <div class="item">hello world</div>
-                    </au-col>
-                  </au-row>
-                </div>
-              </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            <demo>
+              <au-row type="flex" justify-content="space-between" :gutter="10">
+                <au-col :span="4">
+                  <div class="item">hello</div>
+                </au-col>
+                <au-col :span="4">
+                  <div class="item">hello world</div>
+                </au-col>
+              </au-row>
+              <au-row type="flex" justify-content="space-around" :gutter="10">
+                <au-col :span="4">
+                  <div class="item">hello</div>
+                </au-col>
+                <au-col :span="4">
+                  <div class="item">hello world</div>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h2>flex模式与float模式对比</h2>
+
             </div>
-            <div class="docs-section">
-              <h2>AuRow属性</h2>
-              <au-table :data="flexAttrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
-            </div>
-            <div class="docs-section">
-              <h2>AuCol属性</h2>
-              <au-table :data="itemAttrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            <demo>
+              <style>
+                .item1 {
+                  background-color: #eee;
+                  min-height: 50px;
+                  line-height: 40px;
+                  padding: 0 10px;
+                }
+                .item2 {
+                  background-color: #eee;
+                  min-height: 100px;
+                  line-height: 40px;
+                  padding: 0 10px;
+                }
+                .item3 {
+                  background-color: #eee;
+                  min-height: 150px;
+                  line-height: 40px;
+                  padding: 0 10px;
+                }
+              </style>
+              <h4>flex模式可实现对其方式，如：`flex-start`,`flex-end`,`center`</h4>
+              <au-row type="flex" align-items="flex-end" :gutter="30">
+                <au-col :span="8">
+                  <div class="item1">50px</div>
+                </au-col>
+                <au-col :span="8">
+                  <div class="item2">100px</div>
+                </au-col>
+                <au-col :span="8">
+                  <div class="item3">150px</div>
+                </au-col>
+              </au-row>
+              <h4>float模式只能顶部对其</h4>
+              <au-row :gutter="30">
+                <au-col :span="8">
+                  <div class="item1">50px</div>
+                </au-col>
+                <au-col :span="8">
+                  <div class="item2">100px</div>
+                </au-col>
+                <au-col :span="8">
+                  <div class="item3">150px</div>
+                </au-col>
+              </au-row>
+            </demo>
+            <div class="markdown-body"><h2>au-row</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>栅格模式。默认使用 float模式，可以改为flex模式</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>justifyContent</td>
+<td>flex模式下生效，定义如何分配顺着父容器主轴的弹性元素之间及其周围的空间。可选值：flex-start, flex-end, center, space-between, space-around, String</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>alignItems</td>
+<td>侧轴方向上的对其方式。可选值：flex-start , flex-end , center , baseline , stretch</td>
+<td>String</td>
+<td>''</td>
+</tr>
+<tr>
+<td>gutter</td>
+<td>列外间距(像素为单位)</td>
+<td>String, Number</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h2>au-col</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+<th>必需</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>span</td>
+<td>栅格占格数, 每行24格</td>
+<td>Number</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>左侧偏移量</td>
+<td>Number</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>详细属性说明</h4>
+<h5>flex</h5>
+<ul>
+<li>如果为<code>true</code>，同设置样式<code>flex:1</code>；</li>
+<li>如果为<code>false</code>，则同未设置样式属性<code>flex</code>；</li>
+<li>如果为其他字符串，则将字符串设置为<code>flex</code>的样式属性值。可选值及详细说明<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">参考</a></li>
+</ul>
+<h5>span</h5>
+<ul>
+<li>值必须大于0，小于等于24，否则栅栏的24等分不生效。</li>
+</ul>
+<h5>offset</h5>
+<ul>
+<li>值必须大于0，小于等于24，否则偏移量不生效。</li>
+</ul>
+<blockquote>
+<p>未提及的属性可参照flex样式属性</p>
+</blockquote>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -418,12 +531,27 @@
       
     </script>
     <style>
-      .au-row {
-        margin-bottom: 20px;
-      }
       .item {
         background-color: #eee;
         min-height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+      }
+      .item1 {
+        background-color: #eee;
+        min-height: 50px;
+        line-height: 40px;
+        padding: 0 10px;
+      }
+      .item2 {
+        background-color: #eee;
+        min-height: 100px;
+        line-height: 40px;
+        padding: 0 10px;
+      }
+      .item3 {
+        background-color: #eee;
+        min-height: 150px;
         line-height: 40px;
         padding: 0 10px;
       }
@@ -432,52 +560,6 @@
       new Vue({
         el: '#app',
         mixins,
-        data () {
-          return {
-            flexAttrs: [
-              {
-                name: 'justify-content',
-                desc: '同justify-content',
-                type: 'String',
-                default: '""'
-              },
-              {
-                name: 'align-items',
-                desc: '同align-items',
-                type: 'String',
-                default: '""'
-              },
-              {
-                name: 'gutter',
-                desc: '列外间距(像素)',
-                type: 'Number',
-                default: '0'
-              },
-              {
-                name: 'type',
-                desc: '可以选择flex模式',
-                type: 'String',
-                default: ''
-              }
-            ],
-            itemAttrs: [
-              {
-                name: 'span',
-                desc: '栅格占格数, 每行24格',
-                type: 'Number',
-                default: 'null'
-              },
-              {
-                name: 'offset',
-                desc: '栅格左侧偏移占格数',
-                type: 'Number',
-                default: 'null'
-              }
-            ],
-            column: 4,
-            list: [1, 2, 3, 4, 5, 6]
-          }
-        }
       })
     </script>
   </body>
