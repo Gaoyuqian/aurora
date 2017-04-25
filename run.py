@@ -100,54 +100,55 @@ def releaseBackend():
     print 'release to backend end'
 
 def releaseOnline():
-    print 'release to fe-release start...'
-    bakTmp = fedogConfig['release']['cases']['www']['www']
+    print 'can not release online'
+    # print 'release to fe-release start...'
+    # bakTmp = fedogConfig['release']['cases']['www']['www']
 
-    #检测是否在master分支
-    if getGitBranch() != 'master':
-        print 'please merge to master!'
-        return
+    # #检测是否在master分支
+    # if getGitBranch() != 'master':
+    #     print 'please merge to master!'
+    #     return
 
-    #删除遗留的__dist
-    exeCmd('rm -rf ' + bakTmp)
+    # #删除遗留的__dist
+    # exeCmd('rm -rf ' + bakTmp)
 
-    #进行打包编译
-    cmd = 'fepack release www'
-    exeCmd(cmd)
+    # #进行打包编译
+    # cmd = 'fepack release www'
+    # exeCmd(cmd)
 
-    #删除原有release目录并且clone最新的
-    currPath = os.getcwd()
-    os.chdir(os.path.join(currPath, feRelease))
+    # #删除原有release目录并且clone最新的
+    # currPath = os.getcwd()
+    # os.chdir(os.path.join(currPath, feRelease))
 
-    exeCmd('rm -rf ' + project)
-    exeCmd('git clone ' + feReleaseGit)
+    # exeCmd('rm -rf ' + project)
+    # exeCmd('git clone ' + feReleaseGit)
 
-    #将打包编译的文件拷贝到fe-release
-    os.chdir(currPath)
-    exeCmd('rm -rf ' + os.path.join(feRelease, project, "*"))
+    # #将打包编译的文件拷贝到fe-release
+    # os.chdir(currPath)
+    # exeCmd('rm -rf ' + os.path.join(feRelease, project, "*"))
 
-    cmd = 'scp -r ' + os.path.join(bakTmp, project, '*') + ' ' + os.path.join(feRelease, project)
-    exeCmd(cmd)
+    # cmd = 'scp -r ' + os.path.join(bakTmp, project, '*') + ' ' + os.path.join(feRelease, project)
+    # exeCmd(cmd)
 
-    cmd = 'scp -r ' + os.path.join(bakTmp, project, 'page') + ' ' + os.path.join(feRelease, project)
-    exeCmd(cmd)
+    # cmd = 'scp -r ' + os.path.join(bakTmp, project, 'page') + ' ' + os.path.join(feRelease, project)
+    # exeCmd(cmd)
 
-    #切到fe-release git push
-    os.chdir(os.path.join(currPath, feRelease, project))
-    exeCmd('git add .')
-    exeCmd('git commit -m "auto commit" *')
-    exeCmd('git push')
+    # #切到fe-release git push
+    # os.chdir(os.path.join(currPath, feRelease, project))
+    # exeCmd('git add .')
+    # exeCmd('git commit -m "auto commit" *')
+    # exeCmd('git push')
 
-    #打tag
-    exeCmd('git tag www/' + project + '/' + time.strftime('%Y%m%d.%H%M'))
-    exeCmd('git push --tags')
+    # #打tag
+    # exeCmd('git tag www/' + project + '/' + time.strftime('%Y%m%d.%H%M'))
+    # exeCmd('git push --tags')
 
-    #切回到当前目录
-    os.chdir(currPath)
-    cmd = 'rm -rf ' + bakTmp
-    exeCmd(cmd)
+    # #切回到当前目录
+    # os.chdir(currPath)
+    # cmd = 'rm -rf ' + bakTmp
+    # exeCmd(cmd)
 
-    print 'release to fe-release end'
+    # print 'release to fe-release end'
 
 
 def releaseDocs():
