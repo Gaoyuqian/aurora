@@ -149,6 +149,58 @@ def releaseOnline():
 
     print 'release to fe-release end'
 
+
+def releaseDocs():
+    print 'release docs to github page start...'
+    bakTmp = fedogConfig['release']['cases']['www']['www']
+
+    # #检测是否在master分支
+    # if getGitBranch() != 'master':
+    #     print 'please merge to master!'
+    #     return
+
+    #删除遗留的__dist
+    exeCmd('rm -rf ' + bakTmp)
+
+    #进行打包编译
+    cmd = 'fepack release www'
+    exeCmd(cmd)
+
+    #删除原有release目录并且clone最新的
+    currPath = os.getcwd()
+    os.chdir(os.path.join(currPath, feRelease))
+    if not os.path.exists(project):
+        print 'create dir & git clone...'
+        exeCmd('rm -rf ' + project)
+        exeCmd('git clone ' + feReleaseGit)
+
+    os.chdir(os.path.join(currPath, feRelease, project))
+    exeCmd('git checkout -B gh-pages')
+
+    #将打包编译的文件拷贝到fe-release
+    os.chdir(currPath)
+    exeCmd('rm -rf ' + os.path.join(feRelease, project, "*"))
+
+    cmd = 'scp -r ' + os.path.join(bakTmp, project, '*') + ' ' + os.path.join(feRelease, project)
+    exeCmd(cmd)
+
+    cmd = 'scp -r ' + os.path.join(bakTmp, project, 'page') + ' ' + os.path.join(feRelease, project)
+    exeCmd(cmd)
+
+    #切到fe-release git push
+    os.chdir(os.path.join(currPath, feRelease, project))
+    exeCmd('git add .')
+    exeCmd('git commit -m "publish docs"')
+    exeCmd('git push -f origin gh-pages')
+
+    #切回到当前目录
+    os.chdir(currPath)
+    cmd = 'rm -rf ' + bakTmp
+    exeCmd(cmd)
+
+    print 'release docs to github page end'
+
+
 def main():
     initDir()
 
@@ -170,6 +222,9 @@ def main():
 
     elif cmdType == 'backend':
         releaseBackend()
+
+    elif cmdType == 'docs':
+        releaseDocs()
 
     else:
         print 'please choose one : dev,qa,www,backend'

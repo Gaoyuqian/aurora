@@ -5,131 +5,119 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuInput
-      .docs-desc
 
-    .docs-section
-      h2|Text
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuInput
+        支持`text`、`password`、`textarea`，默认`text`。
+    demo
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | 默认
+        au-item(span="8")
+          au-input(v-model="testStr", placeholder="text")
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | text
+        au-item(span="8")
+          au-input(v-model="testStr", type="text", placeholder="text")
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | password
+        au-item(span="8")
+          au-input(v-model="testStr", type="password", placeholder="password")
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | textarea
+        au-item(span="8")
+          au-input(v-model="testStr", type="textarea", placeholder="textarea")
+      p {{testStr}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {testStr: ''}
+          }
 
-      template.html(scoped="scoped")
-        au-flex(column)
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                v-model="form.value",
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                disabled,
-                v-model="form.value",
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |   属性名    |                       描述                       |      类型      |  默认值   |
+        |-------------|--------------------------------------------------|----------------|-----------|
+        | type        | 选择使用`password` `text`或`textarea`            | String         | 'text'    |
+        | placeholder | 占位符                                           | String         | ''        |
+        | v-model     | 绑定的内容                                       | String         | ''        |
+        | rows        | 同原生的textarea rows                            | String, Number | ''        |
+        | cols        | 同原生的textarea cols                            | String, Number | ''        |
+        | readonly    | 是否只读                                         | Boolean        | false     |
+        | disabled    | 是否禁用                                         | Boolean        | false     |
+        | size        | 组件的大小 (可选值: large, default, small, mini) | String         | 'default' |
 
-    .docs-section
-      h2|多种大小
-      .docs-desc
+        ## 事件
+        |      事件      |              描述              |
+        |----------------|--------------------------------|
+        | focus          | 同浏览器                       |
+        | blur           | 同浏览器                       |
+        | input          | 同浏览器                       |
+        | click-icon     | 如果设置了图标，图标点击是触发 |
+        | mouseover-icon | 如果设置了图标，鼠标移入时触发 |
+        | mouseout-icon  | 如果设置了图标，鼠标移除时触发 |
 
-      template.html(scoped="scoped")
-        au-flex(column)
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                v-model="form.value",
-                size="large"
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                v-model="form.value",
-                size="default",
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                v-model="form.value",
-                size="small",
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-          au-item(span="12")
-            .docs-panel-row
-              au-input(
-                v-model="form.value",
-                size="mini",
-                placeholder="请输入名称",
-                @focus="onFocus",
-                @blur="onBlur"
-              )
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ## 例子
+        ### 为textarea设置 `rows` `cols`
+        > `cols`控制textarea的原生属性，因为宽度被样式设置了`100%`，所以不能通过cols改变宽度。
+    demo
+      au-input(type="textarea", placeholder="placeholder", rows="10", cols="2")
 
-    .docs-section
-      h2|Textarea
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        ### 多种大小
+        通过`size`设置多种大小
+    demo
+      div(style="margin-bottom: 5px")
+        au-input(size="large" placeholder="请输入名称")
+      div(style="margin-bottom: 5px")
+        au-input(size="default", placeholder="请输入名称")
+      div(style="margin-bottom: 5px")
+        au-input(size="small", placeholder="请输入名称")
+      div(style="margin-bottom: 5px")
+        au-input(size="mini", placeholder="请输入名称")
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-input(
-            type="textarea",
-            v-model="form.value",
-            placeholder="请输入名称",
-            @focus="onFocus",
-            @blur="onBlur",
-            rows="10",
-            cols="100"
-          )
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ### 只读 & 禁用
+    demo
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | 只读
+        au-item(span="8")
+          au-input(v-model="testStr2", readonly placeholder="请输入名称")
+      au-flex(style="margin-bottom: 5px")
+        au-item(span="4")
+          | 禁用
+        au-item(span="8")
+          au-input(v-model="testStr2", disabled placeholder="请输入名称")
+      template(type="au-demo")
+        script.
+          export default {
+            data: {testStr2: ''}
+          }
 
-    .docs-section
-      h2|图标
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        ### 图标
+    demo
+      div(style="margin-bottom: 5px")
+        au-input(
+          v-model="testStr",
+          placeholder="请输入名称",
+          rows="10",
+          cols="100",
+          icon="close",
+          @click-icon="testStr = ''"
+        )
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-input(
-            v-model="form.value",
-            placeholder="请输入名称",
-            @focus="onFocus",
-            @blur="onBlur",
-            rows="10",
-            cols="100",
-            icon="close",
-            @click-icon="form.value = ''"
-          )
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-
-
-    .docs-section
-      h2|属性
-      au-table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
 block script
   script.
@@ -138,59 +126,8 @@ block script
       mixins,
       data () {
         return {
-          attrs: [
-            {
-              name: 'type',
-              desc: '选择使用text或textarea',
-              type: 'String',
-              default: 'text'
-            },
-            {
-              name: 'placeholder',
-              desc: '占位符',
-              type: 'String',
-              default: '""'
-            },
-            {
-              name: 'v-model',
-              desc: '绑定的内容',
-              type: 'String',
-              default: '""'
-            },
-            {
-              name: 'rows',
-              desc: '同原生的textarea rows',
-              type: 'String, Number',
-              default: '""'
-            },
-            {
-              name: 'cols',
-              desc: '同原生的textarea cols',
-              type: 'String, Number',
-              default: '""'
-            },
-            {
-              name: 'readonly',
-              desc: '是否只读',
-              type: 'Boolean',
-              default: 'false'
-            },
-            {
-              name: 'disabled',
-              desc: '是否禁用',
-              type: 'Boolean',
-              default: 'false'
-            },
-            {
-              name: 'size',
-              desc: '组件的大小 (可选值: large, default, small, mini)',
-              type: 'String',
-              default: 'default'
-            }
-          ],
-          form: {
-            value: 'hello world'
-          }
+          testStr: '',
+          testStr2: 'readonly & disabled'
         }
       },
       methods: {
