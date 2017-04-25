@@ -8,10 +8,10 @@ block content
 
     .markdown-body
       :markdown-it
-        # 栅栏布局
-        Aurora的栅栏布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+        # 栅格布局(flex)
+        Aurora的栅格布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
 
-        **AuFlex (不建议使用, 请使用au-row)**
+        > 该布局已经**不建议使用, 请使用au-row**
     demo
       au-flex(justify-content="flex-start", wrap, gutter="2")
         au-item(v-for="i in 24" span="1")
@@ -50,7 +50,7 @@ block content
     .markdown-body
       :markdown-it
         ### 水平 & 垂直
-        通过`column`属性控制排列顺序。`column`通过控制样式flex属性`flex-direction`改变伸缩盒主轴方向
+        通过`column`属性控制排列方向。`column`通过控制样式flex属性`flex-direction`改变伸缩盒主轴方向
     demo
       h4 水平
       au-flex(gutter="10", disabled)
@@ -221,7 +221,7 @@ block content
         ## au-item
         `au-flex`组件内部划分为**24**等分，`au-item`组件可设置`span`属性来控制每一个子组件的占用宽度。
         与`au-flex`类似，大部分的属性都会转为`flex`样式，如：`align-self`、`flex-basis`等。
-        24等分并不总是生效的，如设置`au-item`的`basis`属性，栅栏24等分将失效。设置`grow`或`shrink`伸缩比例时，如果行未填满，将按伸缩比例填充导致24等分失效。
+        24等分并不总是生效的，如设置`au-item`的`basis`属性，栅格24等分将失效。设置`grow`或`shrink`伸缩比例时，如果行未填满，将按伸缩比例填充导致24等分失效。
 
         ### au-flex 的属性
         |  属性名   |                                                                             说明                                                                             |           类型          | 默认值 | 必需 |
@@ -241,7 +241,7 @@ block content
         * 如果为`false`，则同未设置样式属性`flex`；
         * 如果为其他字符串，则将字符串设置为`flex`的样式属性值。可选值及详细说明[参考](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
         ##### span
-        * 值必须大于0，小于等于24，否则栅栏的24等分不生效。
+        * 值必须大于0，小于等于24，否则栅格的24等分不生效。
         ##### offset
         * 值必须大于0，小于等于24，否则偏移量不生效。
 

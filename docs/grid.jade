@@ -5,111 +5,188 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuRow
-      .docs-desc
 
-    .docs-section
-      h2|基本布局
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # 栅栏布局(grid)
+        grid布局默认使用类似bootstrap的float做布局，也可改为flex模式。
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-row(:gutter="10")
-            au-col(:span="4")
-              .item|hello
-            au-col(:span="20")
-              .item|hello world
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+        `au-row`组件表示一行。一行会划分为24等分
 
-    .docs-section
-      h2|栅格
-      .docs-desc
+        `au-col`组件表示一列，可控制列宽和左侧偏移量。
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-row(:gutter="10")
-            au-col(v-for="item in list", span="4")
-              .item|{{ item }}
+        > `au-row`是 **行** 的概念，所以不要在一行设置超出24栅格的长度。
+    demo
+      style.
+        .item {
+          background-color: #eee;
+          min-height: 40px;
+          line-height: 40px;
+          padding: 0 10px;
+        }
+      au-row(:gutter="10")
+        au-col(:span="4")
+          .item|hello
+        au-col(:span="20")
+          .item|hello world
 
-          au-row(gutter="10")
-            au-col(span="12")
-              .item
-            au-col(span="12")
-              .item
-          au-row(gutter="10")
-            au-col(span="8")
-              .item
-            au-col(span="8")
-              .item
-            au-col(span="8")
-              .item
+    .markdown-body
+      :markdown-it
+        ### 24等分栅格
+        支持24等分与offset设置
+    demo
+      au-row(:gutter="10", style="margin-bottom: 5px")
+        au-col(v-for="item in 6", span="4")
+          .item|{{ item }}
 
-          au-row(gutter="10")
-            au-col(span="6")
-              .item
-            au-col(span="6")
-              .item
-            au-col(span="6")
-              .item
-            au-col(span="6")
-              .item
+      au-row(gutter="10", style="margin-bottom: 5px")
+        au-col(span="12")
+          .item
+        au-col(span="12")
+          .item
+      au-row(gutter="10", style="margin-bottom: 5px")
+        au-col(span="8")
+          .item
+        au-col(span="8")
+          .item
+        au-col(span="8")
+          .item
 
-          au-row(gutter="10")
-            au-col(span="5", offset="1")
-              .item
-            au-col(span="3", offset="9")
-              .item
-            au-col(span="2", offset="4")
-              .item
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+      au-row(gutter="10", style="margin-bottom: 5px")
+        au-col(span="6")
+          .item
+        au-col(span="6")
+          .item
+        au-col(span="6")
+          .item
+        au-col(span="6")
+          .item
 
-    .docs-section
-      h2|Flex模式
-      .docs-desc
+      au-row(gutter="10", style="margin-bottom: 5px")
+        au-col(span="5", offset="1")
+          .item
+        au-col(span="3", offset="9")
+          .item
+        au-col(span="2", offset="4")
+          .item
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-row(type="flex", justify-content="space-between", :gutter="10")
-            au-col(:span="4")
-              .item|hello
-            au-col(:span="4")
-              .item|hello world
+    .markdown-body
+      :markdown-it
+        ## flex模式
+        支持开启flex模式
+        > 由于`au-flex`组件对flex的支持较全面，某些组合设置情况下会导致24等分失效，所以使用`au-row`中可避免这种问题。
 
-          au-row(type="flex", justify-content="space-around", :gutter="10")
-            au-col(:span="4")
-              .item|hello
-            au-col(:span="4")
-              .item|hello world
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-    .docs-section
-      h2|AuRow属性
-      au-table(:data="flexAttrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+        下面展示了flex模式下控制多余空间分布的例子
+    demo
+      au-row(type="flex", justify-content="space-between", :gutter="10")
+        au-col(:span="4")
+          .item|hello
+        au-col(:span="4")
+          .item|hello world
 
-    .docs-section
-      h2|AuCol属性
-      au-table(:data="itemAttrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+      au-row(type="flex", justify-content="space-around", :gutter="10")
+        au-col(:span="4")
+          .item|hello
+        au-col(:span="4")
+          .item|hello world
+
+
+    .markdown-body
+      :markdown-it
+        ## flex模式与float模式对比
+    demo
+      style.
+        .item1 {
+          background-color: #eee;
+          min-height: 50px;
+          line-height: 40px;
+          padding: 0 10px;
+        }
+        .item2 {
+          background-color: #eee;
+          min-height: 100px;
+          line-height: 40px;
+          padding: 0 10px;
+        }
+        .item3 {
+          background-color: #eee;
+          min-height: 150px;
+          line-height: 40px;
+          padding: 0 10px;
+        }
+      h4 flex模式可实现对其方式，如：`flex-start`,`flex-end`,`center`
+      au-row(type="flex", align-items="flex-end", :gutter="30")
+        au-col(:span="8")
+          .item1|50px
+        au-col(:span="8")
+          .item2|100px
+        au-col(:span="8")
+          .item3|150px
+
+      h4 float模式只能顶部对其
+      au-row(:gutter="30")
+        au-col(:span="8")
+          .item1|50px
+        au-col(:span="8")
+          .item2|100px
+        au-col(:span="8")
+          .item3|150px
+
+     .markdown-body
+      :markdown-it
+        ## au-row
+        ### 属性
+        |     属性名     |                                                                        说明                                                                       |      类型      | 默认值 |
+        |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|----------------|--------|
+        | type           | 栅格模式。默认使用 float模式，可以改为flex模式                                                                                                    | String         |        |
+        | justifyContent | flex模式下生效，定义如何分配顺着父容器主轴的弹性元素之间及其周围的空间。可选值：flex-start, flex-end, center, space-between, space-around, String | String         |        |
+        | alignItems     | 侧轴方向上的对其方式。可选值：flex-start , flex-end , center , baseline , stretch                                                                 | String         | ''     |
+        | gutter         | 列外间距(像素为单位)                                                                                                                              | String, Number | 0      |
+
+        ## au-col
+        ### 属性
+        | 属性名 |         说明         |  类型  | 默认值 | 必需 |
+        |--------|----------------------|--------|--------|------|
+        | span   | 栅格占格数, 每行24格 | Number |        |      |
+        | offset | 左侧偏移量           | Number |        |      |
+
+
+        #### 详细属性说明
+        ##### flex
+        * 如果为`true`，同设置样式`flex:1`；
+        * 如果为`false`，则同未设置样式属性`flex`；
+        * 如果为其他字符串，则将字符串设置为`flex`的样式属性值。可选值及详细说明[参考](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+        ##### span
+        * 值必须大于0，小于等于24，否则栅栏的24等分不生效。
+        ##### offset
+        * 值必须大于0，小于等于24，否则偏移量不生效。
+
+        > 未提及的属性可参照flex样式属性
 
 
 block script
   style.
-    .au-row {
-      margin-bottom: 20px;
-    }
     .item {
       background-color: #eee;
       min-height: 40px;
+      line-height: 40px;
+      padding: 0 10px;
+    }
+    .item1 {
+      background-color: #eee;
+      min-height: 50px;
+      line-height: 40px;
+      padding: 0 10px;
+    }
+    .item2 {
+      background-color: #eee;
+      min-height: 100px;
+      line-height: 40px;
+      padding: 0 10px;
+    }
+    .item3 {
+      background-color: #eee;
+      min-height: 150px;
       line-height: 40px;
       padding: 0 10px;
     }
@@ -117,50 +194,4 @@ block script
     new Vue({
       el: '#app',
       mixins,
-      data () {
-        return {
-          flexAttrs: [
-            {
-              name: 'justify-content',
-              desc: '同justify-content',
-              type: 'String',
-              default: '""'
-            },
-            {
-              name: 'align-items',
-              desc: '同align-items',
-              type: 'String',
-              default: '""'
-            },
-            {
-              name: 'gutter',
-              desc: '列外间距(像素)',
-              type: 'Number',
-              default: '0'
-            },
-            {
-              name: 'type',
-              desc: '可以选择flex模式',
-              type: 'String',
-              default: ''
-            }
-          ],
-          itemAttrs: [
-            {
-              name: 'span',
-              desc: '栅格占格数, 每行24格',
-              type: 'Number',
-              default: 'null'
-            },
-            {
-              name: 'offset',
-              desc: '栅格左侧偏移占格数',
-              type: 'Number',
-              default: 'null'
-            }
-          ],
-          column: 4,
-          list: [1, 2, 3, 4, 5, 6]
-        }
-      }
     })

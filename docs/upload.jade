@@ -5,31 +5,76 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuUpload
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuUpload
+        上传组件支持大小，图标，文案修改，对文件选取的控制与原生`input`一致。
 
-    .docs-section
-      h2|基础上传组件
-      .docs-desc
+        ## 基础用法
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-upload(@change="onChange")
-        .docs-panel-row
-          au-upload(@change="onChange", button-size="small")
-        .docs-panel-row
-          au-upload(@change="onChange", button-size="mini")
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+        ### 不同大小
+    demo
+      au-row(gutter="10")
+        au-col(span="6")
+          au-upload(button-size="large")
+        au-col(span="6")
+          // 不设置默认为`default`
+          au-upload
+        au-col(span="6")
+          au-upload(button-size="small")
+        au-col(span="6")
+          au-upload(button-size="mini")
 
-    .docs-section
-      h2|属性
-      au-table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .markdown-body
+      :markdown-it
+        ### 只支持png与jpg
+        与原生input一致
+    demo
+      au-upload(accept="image/jpeg,image/png")
 
+    .markdown-body
+      :markdown-it
+        ### 替换按钮文字和图标
+        fontawesome图标
+    demo
+      au-row(gutter="10")
+        au-col(span="6")
+          au-upload(button-text="点击选择文件")
+        au-col(span="6")
+          au-upload(button-icon="user")
+
+    .markdown-body
+      :markdown-it
+        ### 事件回调
+        支持`change`事件
+    demo
+      au-upload(@change="onChange")
+      template(type="au-demo")
+        script.
+          export default {
+            methods: {
+              onChange ($event) {
+                const file = $event.target.files[0]
+                if (file) {
+                  this.$message('info', '提示', `选择了文件${file.name}`);
+                }
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |   属性名    |       说明       |  类型  |   默认值   |
+        |-------------|------------------|--------|------------|
+        | button-text | 文件选择按钮文案 | String | '选择文件' |
+        | button-size | 文件选择按钮大小 | String | 'default'  |
+        | button-icon | 文件选择按钮图标 | String | 'upload'   |
+        | accept      | 接受的文件mime   | String | ''         |
+        ## 事件
+        |  名称  |                  说明                  |
+        |--------|----------------------------------------|
+        | change | 同原生 `<input type="file">`的change事件 |
 block script
   script.
     new Vue({
@@ -66,7 +111,7 @@ block script
         onChange ($event) {
           const file = $event.target.files[0]
           if (file) {
-            console.log(file)
+            this.$message('info', '提示', `选择了文件${file.name}`);
           }
         }
       }

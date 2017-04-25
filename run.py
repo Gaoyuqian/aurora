@@ -228,7 +228,7 @@ def main():
         releaseDocs()
 
     else:
-        print 'please choose one : dev,qa,www,backend'
+        print 'please choose one : dev,qa,docs,backend'
 
 if __name__ == "__main__":
     main()

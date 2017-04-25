@@ -4,8 +4,8 @@ const template = `
         <slot></slot>
     </div>
     <au-button-group>
-        <au-button type="primary" size="small" v-show="!show" @click="toggle">展开代码</au-button>
-        <au-button type="primary" size="small" v-show="show" @click="toggle">收起代码</au-button>
+        <au-button type="link" v-show="!show" @click="toggle" block icon="toggle-down">展开代码</au-button>
+        <au-button type="link" v-show="show" @click="toggle" block icon="toggle-up">收起代码</au-button>
     </au-button-group>
     <div class="docs-code" v-show="show">
         <pre class="html" v-show="!!sourceCode"><code>{{sourceCode}}</code></pre>
