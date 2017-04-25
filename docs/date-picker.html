@@ -37,6 +37,7 @@
         <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
         <au-menu slot="content-left" menu-trigger="click" :selected="selected">
           <au-menu-item href="app.html" value="app">App</au-menu-item>
+          <au-menu-item href="grid.html" value="grid">Grid</au-menu-item>
           <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
           <au-menu-item href="button.html" value="button">Button</au-menu-item>
           <au-menu-item>表单
@@ -61,6 +62,7 @@
               <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
               <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
               <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
             </au-menu>
           </au-menu-item>
           <au-menu-item>消息
@@ -88,6 +90,7 @@
             <au-menu :selected="selected">
               <au-menu-item href="install.html" value="install">安装</au-menu-item>
               <au-menu-item href="app.html" value="app">App</au-menu-item>
+              <au-menu-item href="grid.html" value="grid">Grid</au-menu-item>
               <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
               <au-menu-item href="button.html" value="button">Button</au-menu-item>
             </au-menu>
@@ -116,6 +119,7 @@
                   <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
                   <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
                   <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
                 </au-menu>
               </au-menu-item>
               <au-menu-item icon="sticky-note">消息
@@ -132,67 +136,6 @@
           <au-panel>
             <div class="markdown-body"><h1>AuDatePicker</h1>
 <p>日期时间选择器支持 <strong>单时间选择器</strong> 和 <strong>时间范围选择器</strong>，均可精确到年月日时分秒任意级别。</p>
-<h2>属性</h2>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>说明</th>
-<th>类型</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>start-date</td>
-<td>限制可选开始时间</td>
-<td>String, Date</td>
-<td></td>
-</tr>
-<tr>
-<td>end-date</td>
-<td>限制可选结束时间</td>
-<td>String, Date</td>
-<td></td>
-</tr>
-<tr>
-<td>disabled-date</td>
-<td>自定义方法限制可选时间。传入日期，返回<code>true</code>表示禁用该日期</td>
-<td>Function(date)</td>
-<td></td>
-</tr>
-<tr>
-<td>v-model</td>
-<td>绑定的数据。范围选择时传入<code>Array</code>，<code>Array[0]</code>为开始日期,<code>Array[1]</code>为结束日期</td>
-<td>String, Date, Array</td>
-<td></td>
-</tr>
-<tr>
-<td>type</td>
-<td>选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time</td>
-<td>String</td>
-<td>'date'</td>
-</tr>
-<tr>
-<td>format</td>
-<td>日期格式。如果不设置，默认会根据<code>type</code>进行判断。</td>
-<td>String</td>
-<td>根据<code>type</code>进行默认配置</td>
-</tr>
-<tr>
-<td>clearable</td>
-<td>鼠标移入显示清空按钮</td>
-<td>Boolean</td>
-<td></td>
-</tr>
-<tr>
-<td>placeholder</td>
-<td>placeholder</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h2>基本用法</h2>
 <h3>简单日期选择器</h3>
 
@@ -389,7 +332,7 @@
             </demo>
             <div class="markdown-body"><h3>格式设置</h3>
 <blockquote>
-<p>格式设置不要设置成<code>new Date(formatDate)</code>无法解析的格式，否则会无法正常</p>
+<p>格式设置不要设置成<code>new Date(formatDateStr)</code>无法解析的格式，否则会报错。</p>
 </blockquote>
 
             </div>
@@ -406,10 +349,72 @@
                     data: {form5: {date: ''}}
                   }
                   
-                  
                 </script>
               </template>
             </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start-date</td>
+<td>限制可选开始时间</td>
+<td>String, Date</td>
+<td></td>
+</tr>
+<tr>
+<td>end-date</td>
+<td>限制可选结束时间</td>
+<td>String, Date</td>
+<td></td>
+</tr>
+<tr>
+<td>disabled-date</td>
+<td>自定义方法限制可选时间。传入日期，返回<code>true</code>表示禁用该日期</td>
+<td>Function(date)</td>
+<td></td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>绑定的数据。范围选择时传入<code>Array</code>，<code>Array[0]</code>为开始日期,<code>Array[1]</code>为结束日期</td>
+<td>String, Date, Array</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time</td>
+<td>String</td>
+<td>'date'</td>
+</tr>
+<tr>
+<td>format</td>
+<td>日期格式。如果不设置，默认会根据<code>type</code>进行判断。</td>
+<td>String</td>
+<td>根据<code>type</code>进行默认配置</td>
+</tr>
+<tr>
+<td>clearable</td>
+<td>鼠标移入显示清空按钮</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>placeholder</td>
+<td>placeholder</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+            </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>
@@ -509,7 +514,7 @@
           props: {
             html: String
           },
-          mounted() {
+          mounted () {
             hljs.highlightBlock(this.$el.querySelector('code'))
           }
         })

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Demo</title>
+    <title>Grid</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -133,63 +133,138 @@
           </au-menu-group>
         </div>
         <div slot="container">
-          <au-panel title="内容">
-            <au-form inline label-position="top">
-              <au-flex>
-                <au-item>
-                  <au-form-group label="姓名">
-                    <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
-                  </au-form-group>
-                  <au-form-group label="密码">
-                    <au-input type="password" v-model="form.password" placeholder="请输入密码"></au-input>
-                  </au-form-group>
-                  <au-form-group label="年龄">
-                    <au-select v-model="form.age" :options="[{label:'28',value:'28'}]" placeholder="请选择年龄" clearable></au-select>
-                  </au-form-group>
-                  <au-form-group label="日期">
-                    <au-date-picker v-model="form.datetimerange" type="datetimerange" clearable placeholder="请选择时间"></au-date-picker>
-                  </au-form-group>
-                </au-item>
-              </au-flex>
-              <au-flex>
-                <au-item>
-                  <au-form-group label="日期">
-                    <au-date-picker v-model="form.datetimerange" type="daterange" clearable placeholder="请选择时间"></au-date-picker>
-                  </au-form-group>
-                  <au-form-group label="日期">
-                    <au-date-picker v-model="form.date" type="month" clearable placeholder="请选择时间"></au-date-picker>
-                  </au-form-group>
-                  <au-form-group>
-                    <au-button native-type="submit" type="primary">搜索</au-button>
-                  </au-form-group>
-                </au-item>
-              </au-flex>
-            </au-form>
-            <au-table :data="data" style="margin-top: 20px;" max-height="400" bordered>
-              <au-table-column type="expand">
-                <template scope="scope">
-                  <au-table :data="scope.data.expand">
-                    <au-table-column label="Name" attr-name="name"></au-table-column>
-                  </au-table>
-                </template>
-              </au-table-column>
-              <au-table-column label="姓名" attr-name="name" width="200"></au-table-column>
-              <au-table-column label="年龄" attr-name="age" width="800"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="年龄" attr-name="age"></au-table-column>
-              <au-table-column label="操作" nowrap width="200" fixed>
-                <template scope="scope">
-                  <au-button type="link" size="mini" @click.native="console.log(scope.index, scope.data)">编辑</au-button>
-                  <au-button type="link" size="mini" @click.native="console.log(scope.index, scope.data)">删除</au-button>
-                </template>
-              </au-table-column>
-            </au-table>
-            <au-pagination v-model="page" :item-count="itemCount" align="right"></au-pagination>
+          <au-panel>
+            <div class="docs-heading">
+              <h1>AuRow</h1>
+              <div class="docs-desc"></div>
+            </div>
+            <div class="docs-section">
+              <h2>基本布局</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-row :gutter="10">
+                    <au-col :span="4">
+                      <div class="item">hello</div>
+                    </au-col>
+                    <au-col :span="20">
+                      <div class="item">hello world</div>
+                    </au-col>
+                  </au-row>
+                </div>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>栅格</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-row :gutter="10">
+                    <au-col v-for="item in list" span="4">
+                      <div class="item">{{ item }}</div>
+                    </au-col>
+                  </au-row>
+                  <au-row gutter="10">
+                    <au-col span="12">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="12">
+                      <div class="item"></div>
+                    </au-col>
+                  </au-row>
+                  <au-row gutter="10">
+                    <au-col span="8">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="8">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="8">
+                      <div class="item"></div>
+                    </au-col>
+                  </au-row>
+                  <au-row gutter="10">
+                    <au-col span="6">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="6">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="6">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="6">
+                      <div class="item"></div>
+                    </au-col>
+                  </au-row>
+                  <au-row gutter="10">
+                    <au-col span="5" offset="1">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="3" offset="9">
+                      <div class="item"></div>
+                    </au-col>
+                    <au-col span="2" offset="4">
+                      <div class="item"></div>
+                    </au-col>
+                  </au-row>
+                </div>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>Flex模式</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <div class="docs-panel-row">
+                  <au-row type="flex" justify-content="space-between" :gutter="10">
+                    <au-col :span="4">
+                      <div class="item">hello</div>
+                    </au-col>
+                    <au-col :span="4">
+                      <div class="item">hello world</div>
+                    </au-col>
+                  </au-row>
+                  <au-row type="flex" justify-content="space-around" :gutter="10">
+                    <au-col :span="4">
+                      <div class="item">hello</div>
+                    </au-col>
+                    <au-col :span="4">
+                      <div class="item">hello world</div>
+                    </au-col>
+                  </au-row>
+                </div>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>AuRow属性</h2>
+              <au-table :data="flexAttrs">
+                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
+            <div class="docs-section">
+              <h2>AuCol属性</h2>
+              <au-table :data="itemAttrs">
+                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>
@@ -342,42 +417,65 @@
       }()
       
     </script>
+    <style>
+      .au-row {
+        margin-bottom: 20px;
+      }
+      .item {
+        background-color: #eee;
+        min-height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+      }
+    </style>
     <script>
       new Vue({
         el: '#app',
         mixins,
         data () {
-          const data = [
-              { id: 1, name: 'kevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevinkevin', age: '28', expand: [{name: 'a'}, {name: 'b'}] },
-              { id: 2, name: 'kevin', age: '27' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' },
-              { id: 3, name: 'kevin', age: '26' },
-              { id: 4, name: 'kevin', age: '25' }
-            ]
           return {
-            form: {
-              name: '',
-              password: '',
-              age: '',
-              date: '',
-              datetimerange: ['', '']
-            },
-            page: 1,
-            itemCount: 300,
-            checkedRow: [],
-            data,
-            expandRows: [data[1], data[2]]
+            flexAttrs: [
+              {
+                name: 'justify-content',
+                desc: '同justify-content',
+                type: 'String',
+                default: '""'
+              },
+              {
+                name: 'align-items',
+                desc: '同align-items',
+                type: 'String',
+                default: '""'
+              },
+              {
+                name: 'gutter',
+                desc: '列外间距(像素)',
+                type: 'Number',
+                default: '0'
+              },
+              {
+                name: 'type',
+                desc: '可以选择flex模式',
+                type: 'String',
+                default: ''
+              }
+            ],
+            itemAttrs: [
+              {
+                name: 'span',
+                desc: '栅格占格数, 每行24格',
+                type: 'Number',
+                default: 'null'
+              },
+              {
+                name: 'offset',
+                desc: '栅格左侧偏移占格数',
+                type: 'Number',
+                default: 'null'
+              }
+            ],
+            column: 4,
+            list: [1, 2, 3, 4, 5, 6]
           }
         }
       })

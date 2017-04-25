@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tree</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Aurora/src/sass/aurora.css">
+    <link rel="stylesheet" href="/Aurora/docs/docs.css">
+    <link rel="stylesheet" href="../lib/highlight.github.min.css">
+    <link rel="stylesheet" href="/Aurora/docs/css/markdown.css">
+    <script src="../lib/highlight.min.js"></script>
+    <script src="../lib/beautify.min.js"></script>
+    <script src="../lib/beautify-css.min.js"></script>
+    <script src="../lib/beautify-html.min.js"></script>
+    <style>
+      .browsehappy {
+        height: 40px;
+        line-height: 40px;
+        background-color: #f5ffbd;
+        color: #333;
+        text-align: center;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body><!--[if lt IE 8]>
+    <p class="browsehappy">
+      您正在使用 <strong>过时</strong> 的浏览器.
+      请 <a href="http://browsehappy.com/">更新您的浏览器</a>
+      来使用此项目
+    </p><![endif]-->
+    <au-app id="app" v-cloak>
+      <au-header>
+        <h1 slot="logo">Aurora<span class="version">v0.1</span></h1>
+        <au-menu slot="content-left" menu-trigger="click" :selected="selected">
+          <au-menu-item href="app.html" value="app">App</au-menu-item>
+          <au-menu-item href="grid.html" value="grid">Grid</au-menu-item>
+          <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+          <au-menu-item href="button.html" value="button">Button</au-menu-item>
+          <au-menu-item>表单
+            <au-menu>
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>区块
+            <au-menu>
+              <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+              <au-menu-item href="table.html" value="table">Table</au-menu-item>
+              <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+              <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+              <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+              <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+              <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+              <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+              <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+          <au-menu-item>消息
+            <au-menu>
+              <au-menu-item href="message.html" value="message">Message</au-menu-item>
+              <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+              <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+            </au-menu>
+          </au-menu-item>
+        </au-menu>
+        <div slot="content-right">
+          <au-menu>
+            <au-menu-item><img src="https://avatars0.githubusercontent.com/u/790296" style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;">Kevin
+              <au-menu>
+                <au-menu-item>我的信息</au-menu-item>
+                <au-menu-item>退出</au-menu-item>
+              </au-menu>
+            </au-menu-item>
+          </au-menu>
+        </div>
+      </au-header>
+      <au-content>
+        <div slot="sidebar">
+          <au-menu-group title="基础">
+            <au-menu :selected="selected">
+              <au-menu-item href="install.html" value="install">安装</au-menu-item>
+              <au-menu-item href="app.html" value="app">App</au-menu-item>
+              <au-menu-item href="grid.html" value="grid">Grid</au-menu-item>
+              <au-menu-item href="flex.html" value="flex">Flex</au-menu-item>
+              <au-menu-item href="button.html" value="button">Button</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="表单">
+            <au-menu :selected="selected">
+              <au-menu-item href="input.html" value="input">Input</au-menu-item>
+              <au-menu-item href="select.html" value="select">Select</au-menu-item>
+              <au-menu-item href="checkbox.html" value="checkbox">Checkbox</au-menu-item>
+              <au-menu-item href="radio.html" value="radio">Radio</au-menu-item>
+              <au-menu-item href="form.html" value="form">Form</au-menu-item>
+              <au-menu-item href="date-picker.html" value="date-picker">DatePicker</au-menu-item>
+              <au-menu-item href="upload.html" value="upload">Upload</au-menu-item>
+            </au-menu>
+          </au-menu-group>
+          <au-menu-group title="其他">
+            <au-menu :selected="selected">
+              <au-menu-item icon="clone">区块
+                <au-menu>
+                  <au-menu-item href="panel.html" value="panel">Panel</au-menu-item>
+                  <au-menu-item href="table.html" value="table">Table</au-menu-item>
+                  <au-menu-item href="tabs.html" value="tabs">Tabs</au-menu-item>
+                  <au-menu-item href="pagination.html" value="pagination">Pagination</au-menu-item>
+                  <au-menu-item href="dropdown.html" value="dropdown">Dropdown</au-menu-item>
+                  <au-menu-item href="modal.html" value="modal">Modal</au-menu-item>
+                  <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
+                  <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
+                  <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+              <au-menu-item icon="sticky-note">消息
+                <au-menu>
+                  <au-menu-item href="message.html" value="message">Message</au-menu-item>
+                  <au-menu-item href="tooltip.html" value="tooltip">Tooltip</au-menu-item>
+                  <au-menu-item href="pop-confirm.html" value="pop-confirm">PopConfirm</au-menu-item>
+                </au-menu>
+              </au-menu-item>
+            </au-menu>
+          </au-menu-group>
+        </div>
+        <div slot="container">
+          <au-panel>
+            <div class="docs-heading">
+              <h1>AuTree</h1>
+              <div class="docs-desc"></div>
+            </div>
+            <div class="docs-section">
+              <h2>Tree</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <au-tree :data="data" :loader="loader" checkable @check="onCheck"></au-tree>
+                <div>------</div>
+                <au-tree :data="data" default-expand-all :click-row-expand="false">
+                  <template scope="scope">
+                    <au-flex>
+                      <au-item flex="1">{{ scope.data.label }}</au-item>
+                      <au-item>
+                        <au-button type="primary" size="mini">编辑</au-button>
+                        <au-button type="danger" size="mini">删除</au-button>
+                      </au-item>
+                    </au-flex>
+                  </template>
+                </au-tree>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        count: 0,
+                        data: [
+                          {
+                            label: '加载更多',
+                            children: null
+                          },
+                          {
+                            label: '第一级',
+                            children: [
+                              {
+                                label: '第二级'
+                              },
+                              {
+                                label: '第三级',
+                                children: [
+                                  {
+                                    label: '第二级',
+                                    children: []
+                                  },
+                                  {
+                                    label: '第三级',
+                                    children: []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    mounted () {
+                      return
+                      setTimeout(() => {
+                        this.data.push({
+                          label: '第二级'
+                        })
+                  
+                        this.data[0].children.push({
+                          label: '第三级',
+                          children: [
+                            {
+                              label: 'abc def'
+                            }
+                          ]
+                        })
+                      }, 1000)
+                    },
+                    methods: {
+                      onCheck (checkeds) {
+                        console.log('--------------------------------------------------------------------------------')
+                        console.log(checkeds)
+                      },
+                      loader (data, callback) {
+                        if ((this.count++) > 1) {
+                          setTimeout(callback, 400)
+                          return
+                        }
+                        setTimeout(() => {
+                          data.children = [{
+                            label: `加载${this.count}-1`,
+                            children: null,
+                            disableCheckbox: true
+                          }, {
+                            label: `加载${this.count}-2`,
+                            children: null
+                          }]
+                          callback()
+                        }, 200)
+                      }
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+                <div class="docs-code">
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>展开树</h2>
+              <div class="docs-desc"></div>
+              <template scoped="scoped" class="html">
+                <au-tree :data="areas" :expands="expands"></au-tree>
+              </template>
+              <template scoped="scoped" class="js">
+                <script>
+                  {
+                    data () {
+                      return {
+                        expands: [],
+                        areas: [
+                          {
+                            label: '北京',
+                            children: [
+                              {
+                                label: '朝阳区'
+                              },
+                              {
+                                label: '海淀区'
+                              },
+                              {
+                                label: '通州区'
+                              },
+                              {
+                                label: '房山区'
+                              },
+                              {
+                                label: '丰台区'
+                              },
+                              {
+                                label: '昌平区'
+                              },
+                              {
+                                label: '大兴区'
+                              },
+                              {
+                                label: '顺义区'
+                              },
+                              {
+                                label: '西城区'
+                              },
+                              {
+                                label: '延庆县'
+                              },
+                              {
+                                label: '石景山区'
+                              },
+                              {
+                                label: '宣武区'
+                              },
+                              {
+                                label: '怀柔区'
+                              },
+                              {
+                                label: '崇文区'
+                              },
+                              {
+                                label: '密云县'
+                              },
+                              {
+                                label: '东城区'
+                              },
+                              {
+                                label: '平谷区'
+                              },
+                              {
+                                label: '门头沟区'
+                              }
+                            ]
+                          },
+                          {
+                            label: '广东省',
+                            children: [
+                              {
+                                label: '东莞市',
+                                children: [
+                                  {
+                                    label: "中堂镇"
+                                  },
+                                  {
+                                    label: "东坑镇"
+                                  },
+                                  {
+                                    label: "道滘镇"
+                                  },
+                                  {
+                                    label: "沙田镇"
+                                  },
+                                  {
+                                    label: "高埗镇"
+                                  },
+                                  {
+                                    label: "石龙镇"
+                                  },
+                                  {
+                                    label: "石排镇"
+                                  },
+                                  {
+                                    label: "企石镇"
+                                  },
+                                  {
+                                    label: "石碣镇"
+                                  },
+                                  {
+                                    label: "洪梅镇"
+                                  },
+                                  {
+                                    label: "麻涌镇"
+                                  },
+                                  {
+                                    label: "桥头镇"
+                                  },
+                                  {
+                                    label: "望牛墩镇"
+                                  },
+                                  {
+                                    label: "茶山镇"
+                                  },
+                                  {
+                                    label: "谢岗镇"
+                                  },
+                                  {
+                                    label: "松山湖"
+                                  },
+                                  {
+                                    label: "莞城区"
+                                  },
+                                  {
+                                    label: "南城区"
+                                  },
+                                  {
+                                    label: "长安镇"
+                                  },
+                                  {
+                                    label: "寮步镇"
+                                  },
+                                  {
+                                    label: "大岭山镇"
+                                  },
+                                  {
+                                    label: "常平镇"
+                                  },
+                                  {
+                                    label: "厚街镇"
+                                  },
+                                  {
+                                    label: "万江区"
+                                  },
+                                  {
+                                    label: "樟木头镇"
+                                  },
+                                  {
+                                    label: "大朗镇"
+                                  },
+                                  {
+                                    label: "塘厦镇"
+                                  },
+                                  {
+                                    label: "凤岗镇"
+                                  },
+                                  {
+                                    label: "清溪镇"
+                                  },
+                                  {
+                                    label: "横沥镇"
+                                  },
+                                  {
+                                    label: "东城区"
+                                  },
+                                  {
+                                    label: "黄江镇"
+                                  },
+                                  {
+                                    label: "虎门镇"
+                                  }
+                                ]
+                              },
+                              {
+                                label: '广州市',
+                                children: [
+                                  {
+                                    label: "天河区"
+                                  },
+                                  {
+                                    label: "海珠区"
+                                  },
+                                  {
+                                    label: "荔湾区"
+                                  },
+                                  {
+                                    label: "越秀区"
+                                  },
+                                  {
+                                    label: "番禺区"
+                                  },
+                                  {
+                                    label: "花都区"
+                                  },
+                                  {
+                                    label: "萝岗区"
+                                  },
+                                  {
+                                    label: "白云区"
+                                  },
+                                  {
+                                    label: "南沙区"
+                                  },
+                                  {
+                                    label: "黄埔区"
+                                  },
+                                  {
+                                    label: "增城区"
+                                  },
+                                  {
+                                    label: "从化区"
+                                  },
+                                  {
+                                    label: "广州大学城"
+                                  }
+                                ]
+                              },
+                              {
+                                label: '中山市',
+                                children: [
+                                  {
+                                    label: "南朗镇"
+                                  },
+                                  {
+                                    label: "小榄镇"
+                                  },
+                                  {
+                                    label: "古镇"
+                                  },
+                                  {
+                                    label: "坦洲镇"
+                                  },
+                                  {
+                                    label: "黄圃镇"
+                                  },
+                                  {
+                                    label: "三乡镇"
+                                  },
+                                  {
+                                    label: "东凤镇"
+                                  },
+                                  {
+                                    label: "横栏镇"
+                                  },
+                                  {
+                                    label: "三角镇"
+                                  },
+                                  {
+                                    label: "南头镇"
+                                  },
+                                  {
+                                    label: "沙溪镇"
+                                  },
+                                  {
+                                    label: "五桂山镇"
+                                  },
+                                  {
+                                    label: "阜沙镇"
+                                  },
+                                  {
+                                    label: "东升镇"
+                                  },
+                                  {
+                                    label: "板芙镇"
+                                  },
+                                  {
+                                    label: "神湾镇"
+                                  },
+                                  {
+                                    label: "港口镇"
+                                  },
+                                  {
+                                    label: "大涌镇"
+                                  },
+                                  {
+                                    label: "火炬开发区"
+                                  },
+                                  {
+                                    label: "民众镇"
+                                  },
+                                  {
+                                    label: "沙朗镇"
+                                  },
+                                  {
+                                    label: "城区"
+                                  }
+                                ]
+                              },
+                              {
+                                label: '深圳市',
+                                children: [
+                                  {
+                                    label: "南山区"
+                                  },
+                                  {
+                                    label: "罗湖区"
+                                  },
+                                  {
+                                    label: "福田区"
+                                  },
+                                  {
+                                    label: "宝安区"
+                                  },
+                                  {
+                                    label: "光明新区"
+                                  },
+                                  {
+                                    label: "坪山新区"
+                                  },
+                                  {
+                                    label: "大鹏新区"
+                                  },
+                                  {
+                                    label: "龙岗区"
+                                  },
+                                  {
+                                    label: "盐田区"
+                                  },
+                                  {
+                                    label: "龙华新区"
+                                  }
+                                ]
+                              },
+                              {
+                                label: '惠州市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '江门市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '珠海市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '汕头市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '佛山市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '湛江市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '河源市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '肇庆市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '清远市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '潮州市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '韶关市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '揭阳市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '阳江市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '梅州市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '云浮市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '茂名市',
+                                children: [
+                                ]
+                              },
+                              {
+                                label: '汕尾市',
+                                children: [
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    mounted () {
+                      setTimeout(() => {
+                        this.expands = [this.areas[1].children[1].children[8]]
+                        console.log(this.expands)
+                      }, 1000)
+                    }
+                  }
+                </script>
+              </template>
+              <div class="docs-panel">
+                <div class="docs-panel-content"></div>
+                <div class="docs-code">
+                  <docs-code class="html"></docs-code>
+                </div>
+                <div class="docs-code">
+                  <docs-code class="js"></docs-code>
+                </div>
+              </div>
+            </div>
+            <div class="docs-section">
+              <h2>属性</h2>
+              <au-table :data="attrs">
+                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
+            <div class="docs-section">
+              <h2>事件</h2>
+              <au-table id="table" :data="events">
+                <au-table-column v-for="column in eventColumns" :label="column.label" :attr-name="column.attrName"></au-table-column>
+              </au-table>
+            </div>
+          </au-panel>
+          <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
+        </div>
+      </au-content>
+    </au-app>
+    <script src="../lib/vue.js"></script>
+    <script src="/Aurora/src/aurora.js"></script>
+    <script src="/Aurora/docs/docs.js"></script>
+    <script>
+      const mixins = []
+      !function () {
+        // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
+      
+        const sections = document.querySelectorAll('.docs-section')
+        ;[].forEach.call(sections, (section) => {
+          loadHtml(section)
+          loadJs(section)
+        })
+      
+        function loadHtml (section) {
+          const template = section.querySelector('template.html')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.html')
+          if (!code) {
+            return
+          }
+          section.querySelector('.docs-panel-content').innerHTML = template.innerHTML
+          code.setAttribute('html', convert(template.innerHTML))
+      
+          template.parentElement.removeChild(template)
+      
+          function convert(html) {
+            html = html.trim()
+      
+            html = html_beautify(html, {
+              indent_size: 2
+            })
+            html = html.replace(/=""/g, '')
+            return htmlEncode(html)
+          }
+        }
+      
+        function loadJs (section) {
+          const template = section.querySelector('template.js')
+          if (!template) {
+            return
+          }
+          const code = section.querySelector('.docs-code docs-code.js')
+          if (!code) {
+            return
+          }
+          const html = template.innerHTML
+          const js = convert(html)
+      
+          code.setAttribute('html', 'export default ' + htmlEncode(js))
+          template.parentElement.removeChild(template)
+      
+          var result
+          eval(`result = ${js}`)
+          mixins.push(result)
+      
+          function convert (js) {
+            const div = document.createElement('div')
+            div.innerHTML = js
+            js = div.textContent.trim()
+            js = js_beautify(js, {
+              indent_size: 2
+            })
+            return js
+          }
+        }
+      
+        function htmlEncode (str) {
+          var s = "";
+          if (str.length == 0) return "";
+          s = str.replace(/&/g, "&gt;");
+          s = s.replace(/</g, "&lt;");
+          s = s.replace(/>/g, "&gt;");
+          s = s.replace(/ /g, "&nbsp;");
+          s = s.replace(/\'/g, "&#39;");
+          s = s.replace(/\"/g, "&quot;");
+          s = s.replace(/\n/g, "<br>");
+          return s;
+        }
+      
+        Vue.component('docs-code', {
+          template: '<pre><code v-html="html"></code></pre>',
+          props: {
+            html: String
+          },
+          mounted () {
+            hljs.highlightBlock(this.$el.querySelector('code'))
+          }
+        })
+      
+        mixins.push({
+          data () {
+            return {
+              selected: [],
+              columns: [
+                {
+                  label: '参数',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '类型',
+                  attrName: 'type'
+                },
+                {
+                  label: '默认值',
+                  attrName: 'default'
+                }
+              ],
+              eventColumns: [
+                {
+                  label: '名称',
+                  attrName: 'name'
+                },
+                {
+                  label: '说明',
+                  attrName: 'desc'
+                },
+                {
+                  label: '回调函数参数',
+                  attrName: 'args'
+                }
+              ]
+            }
+          },
+          created () {
+            const match = window.location.href.match(/\/([-\w]+)\.html/)
+            if (match) {
+              this.selected.push(match[1])
+            }
+          }
+        })
+      }()
+      
+    </script>
+    <script>
+      new Vue({
+        el: '#app',
+        mixins,
+        data () {
+          return {
+            attrs: [
+              {
+                name: 'data',
+                desc: '数据内容(格式为[{label: "", children: []}], label是显示的文字, children是子结点数组)',
+                type: 'Array',
+                default: '[]'
+              },
+              {
+                name: 'default-expand-all',
+                desc: '是否默认展开全部节点',
+                type: 'Boolean',
+                default: 'false'
+              },
+              {
+                name: 'loader',
+                desc: '异部加载子节点的函数, 如果children为null时, 展开节点会调用loader, 格式为loader(data, callback)',
+                type: 'Function',
+                default: 'null'
+              },
+              {
+                name: 'click-row-expand',
+                desc: '是否点击整行展开折叠',
+                type: 'Boolean',
+                default: 'true'
+              },
+              {
+                name: 'checkable',
+                desc: '是否使用单选框',
+                type: 'Boolean',
+                default: 'false'
+              },
+              {
+                name: 'expands',
+                desc: '表示展开的元素',
+                type: 'Array',
+                default: '[]'
+              }
+            ],
+            events: [
+              {
+                name: 'check',
+                desc: 'checkbox有修改',
+                args: '(checkeds: Array)'
+              }
+            ]
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
