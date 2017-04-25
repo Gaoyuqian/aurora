@@ -10,18 +10,6 @@ block content
         # AuDatePicker
         日期时间选择器支持 **单时间选择器** 和 **时间范围选择器**，均可精确到年月日时分秒任意级别。
 
-        ## 属性
-        |      属性     |                                       说明                                      |         类型        |         默认值         |
-        |---------------|---------------------------------------------------------------------------------|---------------------|------------------------|
-        | start-date    | 限制可选开始时间                                                                | String, Date        |                        |
-        | end-date      | 限制可选结束时间                                                                | String, Date        |                        |
-        | disabled-date | 自定义方法限制可选时间。传入日期，返回`true`表示禁用该日期                           | Function(date)      |                        |
-        | v-model       | 绑定的数据。范围选择时传入`Array`，`Array[0]`为开始日期,`Array[1]`为结束日期         | String, Date, Array |                        |
-        | type          | 选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time | String              | 'date'                 |
-        | format        | 日期格式。如果不设置，默认会根据`type`进行判断。                                | String              | 根据`type`进行默认配置 |
-        | clearable     | 鼠标移入显示清空按钮                                                            | Boolean             |                        |
-        | placeholder   | placeholder                                                                     | String              |                        |
-
         ## 基本用法
 
         ### 简单日期选择器
@@ -182,7 +170,7 @@ block content
     .markdown-body
       :markdown-it
         ### 格式设置
-        > 格式设置不要设置成`new Date(formatDate)`无法解析的格式，否则会无法正常
+        > 格式设置不要设置成`new Date(formatDateStr)`无法解析的格式，否则会报错。
     demo
       au-flex(gutter="20", wrap="wrap")
         au-item(span="8")
@@ -193,6 +181,21 @@ block content
           export default {
             data: {form5: {date: ''}}
           }
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |      属性     |                                       说明                                      |         类型        |         默认值         |
+        |---------------|---------------------------------------------------------------------------------|---------------------|------------------------|
+        | start-date    | 限制可选开始时间                                                                | String, Date        |                        |
+        | end-date      | 限制可选结束时间                                                                | String, Date        |                        |
+        | disabled-date | 自定义方法限制可选时间。传入日期，返回`true`表示禁用该日期                           | Function(date)      |                        |
+        | v-model       | 绑定的数据。范围选择时传入`Array`，`Array[0]`为开始日期,`Array[1]`为结束日期         | String, Date, Array |                        |
+        | type          | 选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time | String              | 'date'                 |
+        | format        | 日期格式。如果不设置，默认会根据`type`进行判断。                                | String              | 根据`type`进行默认配置 |
+        | clearable     | 鼠标移入显示清空按钮                                                            | Boolean             |                        |
+        | placeholder   | placeholder                                                                     | String              |                        |
+
 
 
 block script
