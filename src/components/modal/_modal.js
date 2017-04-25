@@ -10,7 +10,15 @@ const AuModal = Vue.extend({
     icon: String,
     value: Boolean,
     noClose: Boolean,
-    width: [String, Number]
+    width: [String, Number],
+    escCloseable: {
+      type: Boolean,
+      default: true
+    },
+    maskCloseable: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -41,12 +49,24 @@ const AuModal = Vue.extend({
     if (this.value) {
       this.show()
     }
+    window.addEventListener('keyup', this.onKeyup)
   },
   beforeDestroy () {
     this.hide()
     this.$el.parentElement.removeChild(this.$el)
+    window.removeEventListener('keyup', this.onKeyup)
   },
   methods: {
+    onKeyup ($event) {
+      if (this.escCloseable && $event.key === 'Escape') {
+        this.$emit('input', false)
+      }
+    },
+    onClick () {
+      if (this.maskCloseable) {
+        this.$emit('input', false)
+      }
+    },
     clear () {
       const pos = modalQueue.indexOf(this)
       if (pos > -1) {

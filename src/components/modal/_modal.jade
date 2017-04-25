@@ -1,5 +1,5 @@
 transition(name="au-modal-wrap")
-  .au-modal-wrapper(v-if="value", :style="style")
+  .au-modal-wrapper(v-if="value", :style="style", @click.capture="onClick")
     .au-modal(v-if="value", :style="modalStyle")
       .au-modal-heading
         .au-modal-heading-left
