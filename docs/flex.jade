@@ -5,10 +5,13 @@ block title
 
 block content
   au-panel
+
     .markdown-body
       :markdown-it
         # 栅栏布局
         Aurora的栅栏布局基于`flex`，关于flex的介绍[点这里](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)
+
+        **AuFlex (不建议使用, 请使用au-row)**
     demo
       au-flex(justify-content="flex-start", wrap, gutter="2")
         au-item(v-for="i in 24" span="1")

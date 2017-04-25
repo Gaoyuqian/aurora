@@ -2,6 +2,7 @@ import dispatch from '../../mixins/_dispatch'
 
 const PADDING = 10
 var showingPopup = null
+var count = 1
 
 const AuPopup = Vue.extend({
   template: require('./_popup.jade'),
@@ -25,7 +26,8 @@ const AuPopup = Vue.extend({
       isShow: false,
       direction: 'bottom',
       minWidth: null,
-      isAutoSyncWidth: false
+      isAutoSyncWidth: false,
+      zIndex: null
     }
   },
   computed: {
@@ -33,7 +35,8 @@ const AuPopup = Vue.extend({
       return {
         top: this.top,
         left: this.left,
-        'minWidth': this.minWidth
+        minWidth: this.minWidth,
+        zIndex: this.zIndex
       }
     },
     classObject () {
@@ -77,6 +80,26 @@ const AuPopup = Vue.extend({
     setRelateElem (relateElem, isAutoSyncWidth) {
       this.relateElem = relateElem
       this.isAutoSyncWidth = isAutoSyncWidth
+      this.setZIndex()
+    },
+    setZIndex () {
+      const elem = this.relateElem
+      var zindex = Number(this._getZIndexByElem(this.$el))
+      do {
+        var _zindex = this._getZIndexByElem(elem)
+        _zindex = Number(_zindex)
+
+        if (_zindex && _zindex > zindex) {
+          zindex = _zindex
+        }
+
+      } while ((elem = elem.parentElement) != null)
+
+      this.zIndex = zindex + (count++)
+    },
+    _getZIndexByElem (elem) {
+      const style = window.getComputedStyle(elem)
+      return style.zIndex
     },
     clickHandler ($event) {
       $event.stopPropagation()
@@ -84,15 +107,6 @@ const AuPopup = Vue.extend({
     calPosition () {
       const top = this.getTop()
       const left = this.getLeft()
-
-      const sidebar = document.querySelector('.au-content-sidebar')
-      const header = document.querySelector('.au-header')
-      if (sidebar) {
-        left = Math.max(sidebar.getBoundingClientRect().width, left)
-      }
-      if (header) {
-        top = Math.max(header.getBoundingClientRect().height, top)
-      }
 
       this.top = `${top}px`
       this.left = `${left}px`

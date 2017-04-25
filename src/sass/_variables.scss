@@ -154,7 +154,7 @@ $transition-during:         0.25s;
 
 // z-index
 // -------------------------
-$zindex-popup:              15000;
+$zindex-popup:              5000;
 $zindex-layout:             6000;
 $zindex-modal:              7000; // 7000~9999 for modal
 $zindex-message:            10000;
@@ -191,21 +191,28 @@ $tabs-badge-padding:        5px;
 
 // Steps
 // -------------------------
-$steps-line-color:         $color-white-dark;
-$steps-icon-color:         $color-gray-light;
-$steps-icon-text-color:    $color-silver-light;
-$steps-color:              $color-silver-light;
-$steps-active-color:       $color-primary;
-$steps-current-color:      $color-silver;
-$steps-current-text-color: $color-black-light;
-$steps-dot-width:          6px;
-$steps-dot-active-width:   $steps-dot-width;
-$steps-dot-current-width:  8px;
+$steps-line-color:          $color-white-dark;
+$steps-icon-color:          $color-gray-light;
+$steps-icon-text-color:     $color-silver-light;
+$steps-color:               $color-silver-light;
+$steps-active-color:        $color-primary;
+$steps-current-color:       $color-silver;
+$steps-current-text-color:  $color-black-light;
+$steps-dot-width:           6px;
+$steps-dot-active-width:    $steps-dot-width;
+$steps-dot-current-width:   8px;
 
 // Modal
 // -------------------------
-$modal-drag-shadow:        0 2px 20px rgba($color-black-light, 0.5);
+$modal-drag-shadow:         0 2px 20px rgba($color-black-light, 0.5);
 
+// Tree
+// -------------------------
+$tree-expand-width:         20px;
+$tree-item-offset:          20px;
+$tree-item-height:          32px;
+$tree-item-fontsize:        $fontsize-default;
+$tree-item-expand-fontsize: $fontsize-large;
 
 // Tag
 // -------------------------

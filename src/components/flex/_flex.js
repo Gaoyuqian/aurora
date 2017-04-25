@@ -63,7 +63,7 @@ const AuFlex = Vue.extend({
 
       const gutter = parseFloat(this.gutter)
       if (gutter) {
-        style['margin-left'] = style['margin-right'] = -(gutter / 2) + 'px'
+        style['margin'] = -(gutter / 2) + 'px'
       }
 
       return style
