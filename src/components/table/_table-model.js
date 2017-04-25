@@ -5,7 +5,7 @@ class TableColumn {
     this.title = column.label
     this.prop = column.attrName
     this.originWidth = column.width
-    this.width = column.width
+
     this.fixed = column.fixed
     this.type = column.type
     this.highlight = column.highlight
@@ -18,6 +18,12 @@ class TableColumn {
       }
     }
 
+    this.initWidth()
+  }
+
+  initWidth () {
+    const column = this.originColumn
+    this.width = column.width
     if (!this.width) {
       if (column.type === 'checkbox' || column.type === 'expand') {
         this.originWidth = this.width = this.width || '56'
@@ -260,6 +266,12 @@ export class TableModel {
     })
 
     return h('colgroup', cols)
+  }
+
+  initColumnsWidth () {
+    this.columns.forEach((column) => {
+      column.initWidth()
+    })
   }
 
   updateColumnsWidth () {

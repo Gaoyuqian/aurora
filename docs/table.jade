@@ -454,7 +454,7 @@ block script
               default: '[]'
             }
           ],
-          data,
+          data: [],
           keyValues: [
             {
               key: '注册手机',
@@ -481,7 +481,8 @@ block script
         })
 
         setTimeout(() => {
-          this.showAge = true
+          this.data = data
+          // this.showAge = true
         }, 1000)
       },
       methods: {
