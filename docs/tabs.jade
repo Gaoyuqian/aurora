@@ -15,7 +15,7 @@ block content
 
       template.html(scoped="scoped")
         .docs-panel-row
-          au-tabs(v-model="value")
+          au-tabs(v-model="value", @tab-click="onClickTab")
             au-tab-panel(:tab="tab.name", :value="tab.value", :disabled="tab.disabled" v-for="tab in tabs")
               |{{tab.name}}
 
@@ -46,6 +46,11 @@ block content
                   }
                 ]
               }, 0)
+            },
+            methods: {
+              onClickTab (tab) {
+                console.log(tab)
+              }
             }
           }
 

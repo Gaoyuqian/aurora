@@ -64,10 +64,12 @@ const AuTabs = Vue.extend({
     },
     clickTab (tab) {
       if (!tab.disabled) {
+        this.$emit('tab-click', tab)
         this.setValue(tab.value)
       }
     },
     setValue (value) {
+
       this.$emit('input', value)
       this.currentValue = value
       this.setChildrenActive()
