@@ -119,6 +119,8 @@ block content
         |---------|---------------------------------------------------------------------------|-------|--------|
         | options | 选项数组。每一项必须包含`labe`与`value`，例：```[{label:'1', value:1}]``` | Array |        |
         | v-model | 匹配的数据。只接受`Array`                                                 | Array | []     |
+
+        ### 例子
     demo
       au-checkbox-group(:options="cityOptions", v-model="form.cities")
       p {{JSON.stringify(form.cities)}}

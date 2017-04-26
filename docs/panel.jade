@@ -5,33 +5,49 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuPanel
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuPanel
+        展示面板组件可以展示一些内容在其中。支持面板收起，设置title等。
 
-    .docs-section
-      h2|基础Panel
-      .docs-desc
+        ## 例子
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-panel(title="新页面", collapse, v-model="isCollapse")
-            div(slot="heading-right")
-              |abc
-            div|哈哈
-            div(slot="footer", style="text-align:right")
-              au-button(type="default", size="small")|取消
-              au-button(type="primary", size="small")|提交
+        ### 带header与footer
+        panel只有两个具名slot，`heading-right` 与 `footer`，分别表示顶部右侧内容和底部内容。
+    demo
+      au-panel(title="新页面", collapse, v-model="isCollapse")
+        div(slot="heading-right")
+          |abc
+        div|哈哈
+        div(slot="footer", style="text-align:right")
+          au-button(type="default", size="small")|取消
+          au-button(type="primary", size="small")|提交
+      template(type="au-demo")
+        script.
+          export default {
+            data: {isCollapse: true}
+          }
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ### 无header与footer
+        如果不设置 `title` 属性将不存在header
+    demo
+      // 没有 title 属性，整个header将不显示
+      au-panel(collapse, v-model="isCollapse")
+        div(slot="heading-right")
+          |abc
+        div|哈哈
 
-    .docs-section
-      h2|属性
-      au-table#table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |  属性名  |       说明       |   类型  | 默认值 |
+        |----------|------------------|---------|--------|
+        | title    | 显示的title      | String  |        |
+        | icon     | 标题左侧的icon   | String  |        |
+        | collapse | 是否折叠         | Boolean | false  |
+        | v-model  | 控制是否折叠的值(只有设置可折叠后才生效) | Boolean | true   |
 
 block script
   script.
@@ -41,32 +57,6 @@ block script
       data () {
         return {
           isCollapse: true,
-          attrs: [
-            {
-              name: 'title',
-              desc: '显示的title',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'icon',
-              desc: '标题左侧的icon',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'collapse',
-              desc: '是否折叠',
-              type: 'Boolean',
-              default: 'false'
-            },
-            {
-              name: 'v-model',
-              desc: '控制是否折叠的值',
-              type: 'Boolean',
-              default: 'true'
-            },
-          ]
         }
       }
     })

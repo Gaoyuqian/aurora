@@ -103,3 +103,18 @@ h1 {
   display: inline-block;
   border-bottom: 1px solid #ddd;
 }
+
+// markdown样式调整
+.markdown-body{
+  font-size: 14px!important;
+  color: #414b56!important;
+  table {
+    display: table!important;
+    tr:nth-child(2n){
+      background-color: transparent!important;
+    }
+    th {
+      background-color: #F2F2F2;
+    }
+  }
+}
