@@ -134,37 +134,80 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuPanel</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuPanel</h1>
+<p>展示面板组件可以展示一些内容在其中。支持面板收起，设置title等。</p>
+<h2>例子</h2>
+<h3>带header与footer</h3>
+<p>panel只有两个具名slot，<code>heading-right</code> 与 <code>footer</code>，分别表示顶部右侧内容和底部内容。</p>
+
             </div>
-            <div class="docs-section">
-              <h2>基础Panel</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-panel title="新页面" collapse v-model="isCollapse">
-                    <div slot="heading-right">abc</div>
-                    <div>哈哈</div>
-                    <div slot="footer" style="text-align:right">
-                      <au-button type="default" size="small">取消</au-button>
-                      <au-button type="primary" size="small">提交</au-button>
-                    </div>
-                  </au-panel>
+            <demo>
+              <au-panel title="新页面" collapse v-model="isCollapse">
+                <div slot="heading-right">abc</div>
+                <div>哈哈</div>
+                <div slot="footer" style="text-align:right">
+                  <au-button type="default" size="small">取消</au-button>
+                  <au-button type="primary" size="small">提交</au-button>
                 </div>
+              </au-panel>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {isCollapse: true}
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>无header与footer</h3>
+<p>如果不设置 <code>title</code> 属性将不存在header</p>
+
             </div>
-            <div class="docs-section">
-              <h2>属性</h2>
-              <au-table id="table" :data="attrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            <demo>
+              <!-- 没有 title 属性，整个header将不显示-->
+              <au-panel collapse v-model="isCollapse">
+                <div slot="heading-right">abc</div>
+                <div>哈哈</div>
+              </au-panel>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>显示的title</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>icon</td>
+<td>标题左侧的icon</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>collapse</td>
+<td>是否折叠</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>控制是否折叠的值(只有设置可折叠后才生效)</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -325,32 +368,6 @@
         data () {
           return {
             isCollapse: true,
-            attrs: [
-              {
-                name: 'title',
-                desc: '显示的title',
-                type: 'String',
-                default: ''
-              },
-              {
-                name: 'icon',
-                desc: '标题左侧的icon',
-                type: 'String',
-                default: ''
-              },
-              {
-                name: 'collapse',
-                desc: '是否折叠',
-                type: 'Boolean',
-                default: 'false'
-              },
-              {
-                name: 'v-model',
-                desc: '控制是否折叠的值',
-                type: 'Boolean',
-                default: 'true'
-              },
-            ]
           }
         }
       })
