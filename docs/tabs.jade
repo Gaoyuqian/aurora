@@ -25,12 +25,7 @@ block content
             data () {
               return {
                 value: '1',
-                tabs: []
-              }
-            },
-            mounted () {
-              setTimeout(() => {
-                this.tabs = [
+                tabs: [
                   {
                     name: '北京',
                     value: '1'
@@ -45,7 +40,24 @@ block content
                     disabled: true
                   }
                 ]
-              }, 0)
+              }
+            },
+            mounted () {
+              //- setTimeout(() => {
+              //-   this.tabs = [
+              //-     {
+              //-       name: '北京',
+              //-       value: '1'
+              //-     },
+              //-     {
+              //-       name: '上海',
+              //-       value: '2'
+              //-     }
+              //-   ]
+              //- }, 0)
+              setTimeout(() => {
+                  this.value = '2'
+                }, 1000)
             },
             methods: {
               onClickTab (tab) {
