@@ -6,490 +6,302 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuTable
-      .docs-desc
 
-    .docs-section
-      h2|固定列表格
-      .docs-desc
-        p||固定列表格的用法
+    .markdown-body
+      :markdown-it
+        # AuTable
+        表格支持固定表头和固定列。
 
-      template.html
-        .docs-panel-row
-          au-table(:data="data", max-height="400", bordered)
-            au-table-column(
-              label="ID",
-              attr-name="id",
-              fixed
-            )
-            au-table-column(
-              label="Name",
-              attr-name="name"
-            )
-            au-table-column(
-              label="Age",
-              attr-name="age",
-              v-if="showAge"
-            )
-            au-table-column(
-              label="操作",
-              nowrap
-            )
-              template(scope="scope")
-                au-button(type="success", size="small", href="#")|添加
-                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
-                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
-                au-button(type="warning", size="small", @click.native="editHandler(scope.index, scope.data)")|更新
-                au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
-      template.js(scoped="scoped")
+        `au-table`表格组件。需要设置属性`data`来填充表格，可设置表格高度，表格是否带分割线，表格loading状态等。
+
+        `au-table-column`列组件，作为`au-table`的直接子组件。
+        属性`label`表示列名，将会出现在表头。属性`attr-name`表格需要展示的内容（对应父组件`data`属性中的列）。
+        可通过vue2的[scoped slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots)实现自定义内容。
+
+        ## 例子
+
+        ### 基础表格
+    demo
+      au-table(:data="data")
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="Name",attr-name="name")
+        au-table-column(label="Age",attr-name="age")
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                isShowLoading: false,
-                data : [
-                  { id: 1, name: 'kevin', age: '28' },
-                  { id: 2, name: 'kevin', age: '27' },
-                  { id: 3, name: 'kevin', age: '26' },
-                  { id: 4, name: 'kevin', age: '25' }
-                ]
-              }
-            }
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+          export default {data:{data}}
 
-    .docs-section
-      h2|基础表格
-      .docs-desc
-        p|基础表格的用法
+    .markdown-body
+      :markdown-it
+        ### 空表格
+        空表格的提示文案可以通过具名slot `empty` 进行设置。
+    demo
+      au-table(:data="emptyList")
+        div(slot="empty")
+          |还没有数据, 点击
+          au-button(size="mini" type="primary" @click="addData")|添加
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="姓名",attr-name="name")
+        au-table-column(label="年龄",attr-name="age")
+        au-table-column(label="操作")
+          template(scope="scope")
+            au-button(type="danger", size="small", @click="removeData")|删除
 
-      template.html
-        .docs-panel-row
-          au-checkbox(label="显示loading", v-model="isShowLoading")
-        .docs-panel-row
-          au-table(:data="data", :loading="isShowLoading")
-            au-table-column(
-              label="ID",
-              attr-name="id"
-            )
-            au-table-column(
-              label="Name",
-              attr-name="name"
-            )
-            au-table-column(
-              label="Age",
-              attr-name="age",
-              v-if="showAge"
-            )
-            au-table-column(
-              label="操作",
-              nowrap
-            )
-              template(scope="scope")
-                au-button(type="success", size="small", href="#")|添加
-                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
-                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)", v-if="scope.index === 2")|发布
-                au-button(type="warning", size="small", @click.native="editHandler(scope.index, scope.data)")|更新
-                au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
-      template.js(scoped="scoped")
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                isShowLoading: false,
-                data : [
-                  { id: 1, name: 'kevin', age: '28' },
-                  { id: 2, name: 'kevin', age: '27' },
-                  { id: 3, name: 'kevin', age: '26' },
-                  { id: 4, name: 'kevin', age: '25' }
-                ]
-              }
-            }
-          }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
-
-    .docs-section
-      h2|空表格
-      .docs-desc
-        p|空表格的用法
-
-      template.html
-        .docs-panel-row
-          au-table(:data="data2")
-            div(slot="empty")
-              |还没有数据, 点击
-              au-button(size="mini", type="primary", @click="addData")|添加
-
-            au-table-column(
-              label="ID",
-              attr-name="id"
-            )
-            au-table-column(
-              label="名称",
-              attr-name="name"
-            )
-            au-table-column(
-              label="年龄",
-              attr-name="age"
-            )
-            au-table-column(
-              label="操作"
-            )
-              template(scope="scope")
-                au-button(type="danger", size="mini", @click.native="removeHandler(scope.index)")|删除
-                au-button(type="success", size="mini", @click.native="addData", v-if="scope.index === 0 || scope.index + 1 < data2.length")|添加
-
-      template.js(scoped="scoped")
-        script.
-          {
-            data () {
-              return {
-                id: 1,
-                data2: []
-              }
+          export default {
+            data:{
+              emptyList:[]
             },
             methods: {
-              addData () {
-                this.data2.push({id:this.id++,name:'kevin',age:28})
+              addData(){
+                this.emptyList.push({id: 1, name: 'kevin', age: 20});
               },
-              removeHandler (index) {
-                this.data2.splice(index, 1)
-                // this.data2 = this.data2.slice()
+              removeData(){
+                this.emptyList = [];
               }
             }
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
 
-
-    .docs-section
-      h2|带分页表格
-      .docs-desc
-        p|带分页表格的用法
-
-      template.html
-        .docs-panel-row
-          au-table(:data="data")
-            au-table-column(
-              label="ID",
-              attr-name="id"
-            )
-            au-table-column(
-              label="名称",
-              attr-name="name"
-            )
-            au-table-column(
-              label="年龄",
-              attr-name="age"
-            )
-          au-pagination(v-model="page", :item-count="itemCount", align="right")
-
-      template.js(scoped="scoped")
+    .markdown-body
+      :markdown-it
+        ### 限制高度
+        不带滚动条的表格将被内容撑开高度，可以通过`max-height`控制表格高度，超出后可滚动。
+    demo
+      au-table(:data="data", max-height="200")
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="姓名",attr-name="name")
+        au-table-column(label="年龄",attr-name="age")
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                page: 1,
-                itemCount: 200
-              }
-            }
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+          export default {data:{data}}
 
-    .docs-section
-      h2|列表格
-      .docs-desc
-        p|基础表格的用法
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-table(:data="keyValues", :show-header="false", bordered)
-            au-table-column(
-              attr-name="key",
-              highlight
-            )
-            au-table-column(
-              attr-name="value"
-            )
-      template.js(scoped="scoped")
+    .markdown-body
+      :markdown-it
+        ### 隐藏header & 带border
+
+        `show-header`属性控制表头是否展示。
+
+        `bordered`属性控制是否展示分割线。
+    demo
+      au-table(:data="data", max-height="200", :show-header="false", bordered)
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="Name",attr-name="name")
+        au-table-column(label="Age",attr-name="age")
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                keyValues: [
-                  {
-                    key: '注册手机',
-                    value: '18300001511'
-                  },
-                  {
-                    key: '客户姓名',
-                    value: '叶一'
-                  },
-                  {
-                    key: '身份证号',
-                    value: '420502199001010016'
-                  }
-                ],
-              }
-            }
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+          export default {data:{data}}
 
-    .docs-section
-      h2|checkbox表格
-      .docs-desc
-        p|checkbox表格的用法
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-table(ref="table", :data="data")
-            au-table-column(
-              type="checkbox",
-              v-model="checkeds"
-            )
-            au-table-column(
-              label="ID",
-              attr-name="id"
-            )
-            au-table-column(
-              label="Name",
-              attr-name="name",
-              style="width:200px"
-            )
-            au-table-column(
-              label="操作",
-              :style="{ width: '200px' }"
-            )
-              template(scope="scope")
-                au-button(type="primary", size="small", @click.native="editHandler(scope.index, scope.data)")|编辑
-                au-button(type="danger", size="small", @click.native="deleteHandler(scope.index, scope.data)")|删除
-      template.js(scoped="scoped")
+    .markdown-body
+      :markdown-it
+        ### 带loading的表格
+    demo
+      div(style="margin-bottom:5px")
+        au-checkbox(v-model="loading", label="是否显示loading")
+      au-table(:data="data", :loading="loading")
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="Name",attr-name="name")
+        au-table-column(label="Age",attr-name="age")
+      template(type="au-demo")
         script.
-          {
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
+          }
+          export default {data:{data, loading: true}}
+
+    .markdown-body
+      :markdown-it
+        ### 列高亮
+        下例展示使用高亮设置 和 无表头 实现列表格
+    demo
+      au-table(:data="data", :show-header="false")
+        au-table-column(label="Name",attr-name="name", highlight)
+        au-table-column(label="Age",attr-name="age")
+      template(type="au-demo")
+        script.
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
+          }
+          export default {data:{data}}
+
+    .markdown-body
+      :markdown-it
+        ### 自定义内容
+        `scoped slots`控制表格显示内容
+    demo
+      au-table(:data="data")
+        au-table-column(label="ID", attr-name="id")
+          template(scope="scope")
+            | id:{{scope.data.id}}
+        au-table-column(label="Name", attr-name="name")
+          template(scope="scope")
+            | name:{{scope.data.name}}
+        au-table-column(label="Age", attr-name="age")
+          template(scope="scope")
+            | age:{{scope.data.age}}
+        au-table-column(label="自定义")
+          template(scope="scope")
+            | 自定义内容
+      template(type="au-demo")
+        script.
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
+          }
+          export default {data:{data}}
+
+    .markdown-body
+      :markdown-it
+        ### 固定列 & 固定列宽
+        通过列属性`fixed`来固定列。通过列属性`width`控制列宽。
+        > 固定列只能在两边固定，如：`|fixed|fixed|col|col|fixed|`, 从左到右，1、2列靠左固定，5列靠右固定。
+        > 如果有隔行设置将不生效。如： `|fixed|col|fixed|col|fixed|`, 从左到右，1列靠左固定，5列靠右固定，3列将被忽略。
+    demo
+      au-table(:data="data", bordered, max-height="200")
+        au-table-column(label="ID", attr-name="id", fixed)
+        au-table-column(label="Name", attr-name="name", width="200")
+        // 这一列的fixed不生效
+        au-table-column(label="Name", attr-name="name", width="300", fixed)
+        au-table-column(label="Name", attr-name="name", width="400")
+        au-table-column(label="Name", attr-name="name", width="500")
+        au-table-column(label="Age", attr-name="age", width="100", fixed)
+        au-table-column(label="操作", fixed)
+          template(scope="scope")
+            au-button(type="success", size="small")|操作
+
+    .markdown-body
+      :markdown-it
+        ### checkbox表格
+        table支持checkbox设置，用来获取选中的行数据。
+
+        给列设置`type="checkbox"`，该列会自动变为checkbox。此时可绑定`v-model`，作为数组，数值中的值为当前选中的行数据。
+
+        可通过事件 `select`， 事件的处理都将传入选中的所有数据。
+        > 事件在**选中**或**反选**后触发
+    demo
+      au-table(ref="table", :data="data", @select="messageSelect")
+        au-table-column(
+          type="checkbox",
+          v-model="checkeds"
+        )
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="Name",attr-name="name")
+        au-table-column(label="Age",attr-name="age")
+      p 当前选中：{{JSON.stringify(checkeds)}}
+      template(type="au-demo")
+        script.
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
+          }
+          export default {
             data () {
               return {
-                data : [
-                  { id: 1, name: 'kevin', age: '28' },
-                  { id: 2, name: 'kevin', age: '27' },
-                  { id: 3, name: 'kevin', age: '26' },
-                  { id: 4, name: 'kevin', age: '25' }
-                ],
+                data,
                 checkeds: [
-                  data[1],
-                  data[2]
+                  data[2],
+                  data[3]
                 ]
               }
             }
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
 
-
-    .docs-section
-      h2|多层级属性
-      .docs-desc
-        p|带分页表格的用法
-
-      template.html
-        .docs-panel-row
-          au-table(:data="deepData")
-            au-table-column(
-              label="Name",
-              attr-name="name"
-            )
-            au-table-column(
-              label="Parent name",
-              attr-name="parent.name"
-            )
-            au-table-column(
-              label="Car Id",
-              attr-name="parent.car.id"
-            )
-            au-table-column(
-              label="Cat Name",
-              attr-name="cat[1].name"
-            )
-
-      template.js(scoped="scoped")
+    .markdown-body
+      :markdown-it
+        ### 展开行
+        table支持展开行。
+        * 通过列属性 `type="expand"` 设置当前列为可展开行按钮。
+        * 如果列设置为展开按钮，该列的自定义内容将作为展开内容
+        * 列属性 `expand-rows="[rowData]"` 控制哪些列默认展开。列属性 `default-expand-all` 控制默认全部展开。
+    demo
+      au-table(:data="data")
+        au-table-column(type="expand")
+          template(scope="scope")
+            div|展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
+        au-table-column(label="ID", attr-name="id")
+        au-table-column(label="Name",attr-name="name")
+        au-table-column(label="Age",attr-name="age")
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                deepData: [
-                  {
-                    name: 'kevin',
-                    parent: {
-                      name: 'kevin\'s father',
-                      car: {
-                        id: '123'
-                      }
-                    },
-                    cat: [
-                      { name: 'katty' }
-                    ]
-                  }
-                ]
-              }
-            }
+          const data = new Array(10);
+          for(let i=data.length-1; i>=0; i--){
+            data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100) };
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+          export default {data:{data}}
 
-    .docs-section
-      h2|AuTable属性
-      au-table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
-    .docs-section
-      h2|AuTableColumn属性
-      au-table(:data="columnAttrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .markdown-body
+      :markdown-it
+        ## au-table
+        ### 属性
+        |     属性    |                      说明                      |      类型     | 默认值 |
+        |-------------|------------------------------------------------|---------------|--------|
+        | data        | 数据内容                                       | Array         | []     |
+        | show-header | 是否显示标题                                   | Boolean       | true   |
+        | loading     | 是否显示加载中样式                             | Boolean       | false  |
+        | max-height  | 设置最大高度。如果内容超出高度，将会出现滚动条 | String,Number |        |
+        | bordered    | 是否显示分割线                                 | Boolean       | false  |
+        ## au-table-column
+        ### 属性
+        |        属性        |                       说明                      |      类型      | 默认值 |
+        |--------------------|-------------------------------------------------|----------------|--------|
+        | label              | 显示的标题                                      | String         | ''     |
+        | attr-name          | 属性名                                          | String         | ''     |
+        | highlight          | 高亮显示此列                                    | Boolean        | false  |
+        | type               | 列类型(可选值: "", "checkbox", "expand")        | String         | ''     |
+        | v-model            | type:checkbox时的值, 通过和data中的值做全等比较 | Array          | []     |
+        | fixed              | 固定列                                          | Boolean        |        |
+        | width              | 固定列宽                                        | String, Number |        |
+        | expand-rows        | 默认展开行。`type="expand"`时有效               | Array          |        |
+        | default-expand-all | 是否默认展开所有。`type="expand"`时有效         | Boolean       false  |
+
 
 
 block script
   script.
-    const data = [
-      { id: 1, name: 'kevin', age: '28' },
-      { id: 2, name: 'kevin', age: '27' },
-      { id: 3, name: 'kevin', age: '26' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' },
-      { id: 4, name: 'kevin', age: '25' }
-    ]
+    const data = new Array(10);
+    for(let i=data.length-1; i>=0; i--){
+      data[i] = { id: i+1, name: 'kevin', age: Math.round(Math.random()*100)};
+    }
     new Vue({
       el: '#app',
       mixins,
       data () {
         return {
-          showAge: false,
-          attrs: [
-            {
-              name: 'data',
-              desc: '数据内容',
-              type: 'Array',
-              default: '[]'
-            },
-            {
-              name: 'show-header',
-              desc: '是否显示标题',
-              type: 'Boolean',
-              default: 'true'
-            },
-            {
-              name: 'loading',
-              desc: '是否显示加载中样式',
-              type: 'Boolean',
-              default: 'false'
-            }
-          ],
-          columnAttrs: [
-            {
-              name: 'label',
-              desc: '显示的标题',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'attr-name',
-              desc: '属性名',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'highlight',
-              desc: '高亮显示此列',
-              type: 'Boolean',
-              default: 'false'
-            },
-            {
-              name: 'type',
-              desc: '列类型(可选值: "", checkbox)',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'nowrap',
-              desc: '控制此列内容不折行, 会计算出最小的宽度',
-              type: 'Boolean',
-              default: 'false'
-            },
-            {
-              name: 'v-model',
-              desc: 'type:checkbox时的值, 通过和data中的值做全等比较',
-              type: 'Array',
-              default: '[]'
-            }
-          ],
           data,
-          keyValues: [
-            {
-              key: '注册手机',
-              value: '18300001511'
-            },
-            {
-              key: '客户姓名',
-              value: '叶一'
-            },
-            {
-              key: '身份证号',
-              value: '420502199001010016'
-            }
-          ],
+          emptyList: [],
+          loading: true,
           checkeds: [
             data[1],
             data[2]
           ]
         }
       },
-      mounted () {
-        this.$refs.table.$on('select', (data) => {
-          console.log(data)
-        })
-
-        setTimeout(() => {
-          this.showAge = true
-        }, 1000)
-      },
       methods: {
-        editHandler (index, data) {
-          console.log(index, data)
+        data:{
+          emptyList:[]
         },
-        deleteHandler (index, data) {
-          console.log(index, data)
-        }
+        addData(){
+          this.emptyList.push({id: 1, name: 'kevin', age: 20});
+        },
+        removeData(){
+          this.emptyList = [];
+        },
+        messageSelect(data){
+          this.$message('info', '选中行');
+        },
       }
     })
