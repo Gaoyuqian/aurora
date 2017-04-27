@@ -11,6 +11,7 @@ html.no-js
     link(rel='stylesheet', href="../src/sass/aurora.css")
     link(rel='stylesheet', href="./docs.css")
     link(rel='stylesheet', href="../lib/highlight.github.min.css")
+    link(rel='stylesheet', href="./css/markdown.css")
     script(src="../lib/highlight.min.js")
     script(src="../lib/beautify.min.js")
     script(src="../lib/beautify-css.min.js")
@@ -38,6 +39,7 @@ html.no-js
           span.version|v0.1
 
         au-menu(slot="content-left", menu-trigger="click", :selected="selected")
+          au-menu-item(href="app.html", value="app")|App
           au-menu-item(href="grid.html", value="grid")|Grid
           au-menu-item(href="flex.html", value="flex")|Flex
           au-menu-item(href="button.html", value="button")|Button
@@ -74,7 +76,7 @@ html.no-js
         div(slot="content-right")
           au-menu
             au-menu-item
-              img(src="http://img05.tooopen.com/images/20150202/sy_80219211654.jpg", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
+              img(src="https://avatars0.githubusercontent.com/u/790296", style="width:40px;height:40px;border-radius:40px;margin-right:10px;border:1px solid #ccc;")
               |Kevin
               au-menu
                 au-menu-item|我的信息
@@ -85,6 +87,7 @@ html.no-js
           au-menu-group(title="基础")
             au-menu(:selected="selected")
               au-menu-item(href="install.html", value="install")|安装
+              au-menu-item(href="app.html", value="app")|App
               au-menu-item(href="grid.html", value="grid")|Grid
               au-menu-item(href="flex.html", value="flex")|Flex
               au-menu-item(href="button.html", value="button")|Button
@@ -127,10 +130,18 @@ html.no-js
 
     script(src="../lib/vue.js")
     script(src="../src/aurora.js")
+    script(src="./docs.js")
     script.
       const mixins = []
       !function () {
         // Vue.config.silent = true
+        // 自动语法高亮
+        hljs.initHighlightingOnLoad();
+        // 给每一个code代码块分配id 用于demo组件
+        let codeId = 1;
+        document.querySelectorAll('demo').forEach(_=>{
+          _.setAttribute('code-id', codeId++);
+        });
 
         const sections = document.querySelectorAll('.docs-section')
         ;[].forEach.call(sections, (section) => {

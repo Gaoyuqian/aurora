@@ -5,88 +5,45 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuDatePicker
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuDatePicker
+        日期时间选择器支持 **单时间选择器** 和 **时间范围选择器**，均可精确到年月日时分秒任意级别。
 
-    .docs-section
-      h2|日期选择器
-      .docs-desc
+        ## 基本用法
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|按日期选择
-              au-date-picker(v-model="date", :disabled-date="disabledWeek", clearable, placeholder="请选择日期")
-            au-item(span="8")
-              h4|按日期选择
-              au-date-picker(v-model="date", type="date", start-date="2017-03-07", end-date="2017-04-07", placeholder="请选择日期")
-
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|按年选择
-              au-date-picker(v-model="year", type="year", clearable)
-            au-item(span="8")
-              h4|按年选择
-              au-date-picker(v-model="year", type="year", start-date="2017", end-date="2018")
-
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|按月选择
-              au-date-picker(v-model="month", type="month", clearable)
-
-            au-item(span="8")
-              h4|按月选择
-              au-date-picker(v-model="month", type="month", start-date="2017-2", end-date="2017-10")
-
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|选择日期范围
-              au-date-picker(v-model="daterange", type="daterange", clearable)
-
-            au-item(span="8")
-              h4|选择日期范围
-              au-date-picker(v-model="daterange", type="daterange", start-date="2017-2-7", end-date="2017-10-1")
-
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|选择日期时间
-              au-date-picker(v-model="datetime", type="datetime", clearable)
-
-            au-item(span="8")
-              h4|选择日期时间
-              au-date-picker(v-model="datetime", type="datetime", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
-
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|选择日期时间范围
-              au-date-picker(v-model="datetimerange", type="datetimerange", clearable)
-
-            au-item(span="8")
-              h4|选择日期时间范围
-              au-date-picker(v-model="datetimerange", type="datetimerange", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
-      template.js(scoped="scoped")
+        ### 简单日期选择器
+    demo
+      au-date-picker(v-model="form1.date", placeholder="请选择日期", clearable)
+      p {{form1.date}}
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                date: '2017-02-27',
-                year: '2017-02-27',
-                month: '2017-02',
-                daterange: ['2017-02-07', '2017-06-11'],
-                datetimerange: ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-                datetime: '2017-02-27 08:11:12',
-                time: '11:11:11',
-                attrs: [
-                  {
-                    name: '',
-                    desc: '',
-                    type: '',
-                    default: ''
-                  }
-                ]
-              }
+          export default {
+            data: {form1: {date: ''}}
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 限制开始结束日期
+        如果通过`disabled-date`属性限制，方法接受一个日期参数进行判端，禁用返回`true`。
+    demo
+      au-flex(gutter="20")
+        au-item(span="8")
+          au-date-picker(v-model="form2.date1", placeholder="请选择日期", :start-date="start", :end-date="end")
+        au-item(span="8")
+          au-date-picker(v-model="form2.date2", placeholder="请选择日期", :disabled-date="disabledWeek")
+      p {{form1.date}}
+      template(type="au-demo")
+        script.
+          let start = new Date();
+              start.setDate(start.getDate()-5);
+          let end = new Date();
+              end.setDate(end.getDate()+5);
+          export default {
+            data: {
+              start: start,
+              end: end,
+              form2: {date1: '', date2: ''}
             },
             methods: {
               disabledWeek (date) {
@@ -95,77 +52,174 @@ block content
               }
             }
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
 
-    .docs-section
-      h2|时间选择器
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        ### 时间范围选择器
+        支持 **daterange** 和 **datetimerange**。如果使用范围选择，`v-model`需要绑定数组，数组第一个元素是开始时间，第二个元素是结束时间。
+    demo
+      h4 日期范围
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form3.daterange", type="daterange", clearable)
+        au-item(span="8")
+          au-date-picker(v-model="form3.daterange", type="daterange", start-date="2017-2-7", end-date="2017-10-1")
+        au-item(span="8")
+          | {{form3.daterange.join(',')}}
+      h4 日期时间范围
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form3.datetimerange", type="datetimerange", clearable)
+        au-item(span="8")
+          au-date-picker(v-model="form3.datetimerange", type="datetimerange", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
+        au-item(span="8")
+          | {{form3.datetimerange.join(',')}}
+      p {{form1.date}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              form3: {daterange: [], datetimerange: []}
+            }
+          }
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|选择时间
-              au-date-picker(v-model="time", type="time")
-            au-item(span="8")
-              h4|选择时间
-              au-date-picker(v-model="time", type="time", start-date="08:08:08")
+    .markdown-body
+      :markdown-it
+        ### 年选择器
+    demo
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form4.year", type="year", clearable)
+        au-item(span="8")
+          au-date-picker(v-model="form4.year", type="year", start-date="2017", end-date="2018")
+        au-item(span="8")
+          | {{form4.year}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              form4: {
+                year: '2017'
+              }
+            }
+          }
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ### 月选择器
+    demo
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form4.month", type="month", clearable)
+        au-item(span="8")
+          au-date-picker(v-model="form4.month", type="month", start-date="2017-2", end-date="2017-10")
+        au-item(span="8")
+          | {{form4.month}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              form4: {
+                month: '2017-02',
+              }
+            }
+          }
 
-    .docs-section
-      h2|控制时间的format
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        ### 带时间的日期选择
+    demo
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form4.datetime", type="datetime", clearable)
+        au-item(span="8")
+          au-date-picker(v-model="form4.datetime", type="datetime", start-date="2017-2-7 12:31:15", end-date="2017-10-1 12:31:15")
+        au-item(span="8")
+          | {{form4.datetime}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              form4: {
+                datetime: ''
+              }
+            }
+          }
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-flex(gutter="20", wrap="wrap")
-            au-item(span="8")
-              h4|选择时间
-              au-date-picker(v-model="time", type="time", format="HH:MM")
-            au-item(span="8")
-              h4|选择时间
-              au-date-picker(v-model="time", type="time", format="ss")
+    .markdown-body
+      :markdown-it
+        ### 时间选择
+    demo
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form4.time", type="time")
+        au-item(span="8")
+          au-date-picker(v-model="form4.time", type="time", start-date="08:08:08")
+        au-item(span="8")
+          | {{form4.time}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {
+              form4: {
+                time: '11:11:11'
+              }
+            }
+          }
 
-            au-item(span="8")
-              h4|选择时间
-              au-date-picker(v-model="datetime", type="datetime", format="yyyy-mm-dd HH:MM")
+    .markdown-body
+      :markdown-it
+        ### 格式设置
+        > 格式设置不要设置成`new Date(formatDateStr)`无法解析的格式，否则会报错。
+    demo
+      au-flex(gutter="20", wrap="wrap")
+        au-item(span="8")
+          au-date-picker(v-model="form5.date", placeholder="请选择日期", clearable, format="yyyy/mm/dd")
+      p {{form5.date}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {form5: {date: ''}}
+          }
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |      属性     |                                       说明                                      |         类型        |         默认值         |
+        |---------------|---------------------------------------------------------------------------------|---------------------|------------------------|
+        | start-date    | 限制可选开始时间                                                                | String, Date        |                        |
+        | end-date      | 限制可选结束时间                                                                | String, Date        |                        |
+        | disabled-date | 自定义方法限制可选时间。传入日期，返回`true`表示禁用该日期                           | Function(date)      |                        |
+        | v-model       | 绑定的数据。范围选择时传入`Array`，`Array[0]`为开始日期,`Array[1]`为结束日期         | String, Date, Array |                        |
+        | type          | 选择器类型。可选值：year, month, date, datetime, daterange, datetimerange, time | String              | 'date'                 |
+        | format        | 日期格式。如果不设置，默认会根据`type`进行判断。                                | String              | 根据`type`进行默认配置 |
+        | clearable     | 鼠标移入显示清空按钮                                                            | Boolean             |                        |
+        | placeholder   | placeholder                                                                     | String              |                        |
 
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
 
 block script
   script.
+    let start = new Date();
+        start.setDate(start.getDate()-5);
+    let end = new Date();
+        end.setDate(end.getDate()+5);
     new Vue({
       el: '#app',
       mixins,
       data () {
         return {
-          date: '', // '2017-02-07',
-          year: '2017',
-          month: '2017-02',
-          daterange: ['', ''], // ['2017-02-07', '2017-06-11'],
-          datetimerange: ['', ''], // ['2017-02-07 11:12:13', '2017-06-11 14:15:16'],
-          datetime: '', // '2017-02-27 08:11:12',
-          time: '11:11:11',
-          attrs: [
-            {
-              name: '',
-              desc: '',
-              type: '',
-              default: ''
-            }
-          ]
+          start, end,
+          form1: {date: ''},
+          form2: {date1: '', date2: ''},
+          form3: {daterange: [], datetimerange: []},
+          form4: {
+            year: '2017',
+            month: '2017-02',
+            datetime: '',
+            time: '11:11:11',
+          },
+          form5: {date: ''},
         }
       },
       methods: {
