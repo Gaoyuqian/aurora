@@ -134,71 +134,102 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuTabs</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuTabs</h1>
+<p><code>au-tabs</code> 的直接子组件为 <code>au-tab-panel</code>。</p>
+<blockquote>
+<p><code>au-tab-panel</code>必须设置value来标识唯一性，否则tab无法正常工作。</p>
+</blockquote>
+<h3>基础用法</h3>
+
             </div>
-            <div class="docs-section">
-              <h2></h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-tabs v-model="value">
-                    <au-tab-panel :tab="tab.name" :value="tab.value" :disabled="tab.disabled" v-for="tab in tabs">{{tab.name}}</au-tab-panel>
-                  </au-tabs>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+            <demo>
+              <au-tabs>
+                <au-tab-panel tab="tab-1" value="tab-1">tab-1-的内容</au-tab-panel>
+                <au-tab-panel tab="tab-2" value="tab-2">tab-2-的内容</au-tab-panel>
+                <au-tab-panel tab="tab-3" value="tab-3">tab-3-的内容</au-tab-panel>
+                <au-tab-panel tab="tab-4" value="tab-4" :disabled="true">tab-4-的内容</au-tab-panel>
+              </au-tabs>
+            </demo>
+            <div class="markdown-body"><h3>绑定当前tab值</h3>
+<p>可以用来绑定默认active，获取当前tab标识等。</p>
+
+            </div>
+            <demo>
+              <au-tabs v-model="current">
+                <au-tab-panel v-for="i in 4" :tab="'tab-'+i" :value="i">当前active的tab为： {{current}}</au-tab-panel>
+              </au-tabs>
+              <template type="au-demo">
                 <script>
-                  {
-                    data () {
-                      return {
-                        value: '1',
-                        tabs: []
-                      }
-                    },
-                    mounted () {
-                      setTimeout(() => {
-                        this.tabs = [
-                          {
-                            name: '北京',
-                            value: '1'
-                          },
-                          {
-                            name: '上海',
-                            value: '2'
-                          },
-                          {
-                            name: '广州',
-                            value: '3',
-                            disabled: true
-                          }
-                        ]
-                      }, 0)
-                    }
+                  export default {
+                    data: {current: 3}
                   }
                   
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>带badge</h3>
+<p>可以用来绑定默认active，获取当前tab标识等。</p>
+
             </div>
-            <div class="docs-section">
-              <h2>AuTabs属性</h2>
-              <au-table :data="attrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
-            </div>
-            <div class="docs-section">
-              <h2>AuTabPanel属性</h2>
-              <au-table :data="panelAttrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            <demo>
+              <au-tabs>
+                <au-tab-panel tab="未读" value="1" badge="99+">tab-1-的内容</au-tab-panel>
+                <au-tab-panel tab="已读" value="2">tab-2-的内容</au-tab-panel>
+              </au-tabs>
+            </demo>
+            <div class="markdown-body"><h2>au-tabs</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v-model</td>
+<td>绑定当前 tab 标识</td>
+<td>String, Number</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>au-tab-panel</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>tab的值</td>
+<td>String, Number</td>
+<td>''</td>
+</tr>
+<tr>
+<td>tab</td>
+<td>tab的名称</td>
+<td>String</td>
+<td>''</td>
+</tr>
+<tr>
+<td>badge</td>
+<td>显示的badge</td>
+<td>String, Number</td>
+<td>''</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -358,34 +389,7 @@
         mixins,
         data () {
           return {
-            attrs: [
-              {
-                name: 'v-model',
-                desc: '显示某个tab的值',
-                type: 'String, Number',
-                default: ''
-              }
-            ],
-            panelAttrs: [
-              {
-                name: 'value',
-                desc: 'tab的值',
-                type: 'String, Number',
-                default: ''
-              },
-              {
-                name: 'tab',
-                desc: 'tab的名称',
-                type: 'String',
-                default: ''
-              },
-              {
-                name: 'badge',
-                desc: '显示的badge',
-                type: 'String, Number',
-                default: ''
-              }
-            ]
+            current: 3
           }
         }
       })

@@ -134,46 +134,160 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuPagination</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuPagination</h1>
+<p>分页组件</p>
+<h2>例子</h2>
+<h3>基础使用方法</h3>
+<p>分页组件默认每页10条数据</p>
+
             </div>
-            <div class="docs-section">
-              <h2>基础分页</h2>
-              <div class="docs-desc">
-                <p>基础分页的用法</p>
-              </div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-pagination v-model="page" :item-count="itemCount"></au-pagination>
-                </div>
-                <div class="docs-panel-row">
-                  <au-pagination v-model="page" :item-count="itemCount" :show-page-size-control="true"></au-pagination>
-                </div>
-                <div class="docs-panel-row">
-                  <au-pagination v-model="page" :item-count="itemCount" :show-page-control="true"></au-pagination>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+            <demo>
+              <au-pagination v-model="page" :item-count="itemCount"></au-pagination>
+              <p>page={{page}}   itemCount={{itemCount}}</p>
+              <template type="au-demo">
                 <script>
-                  {
-                    data () {
-                      return {
-                        page: 1,
-                        itemCount: 200
-                      }
-                    }
+                  export default {
+                    page: 1,
+                    itemCount: 200
                   }
                   
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
+            </demo>
+            <div class="markdown-body"><h3>位置控制</h3>
+
+            </div>
+            <demo>
+              <div style="margin-bottom:10px">
+                <au-pagination :item-count="100" align="left"></au-pagination>
               </div>
+              <div style="margin-bottom:10px">
+                <au-pagination :item-count="100" align="center"></au-pagination>
+              </div>
+              <div style="margin-bottom:10px">
+                <au-pagination :item-count="100" align="right"></au-pagination>
+              </div>
+            </demo>
+            <div class="markdown-body"><h3>显示更多分页控制</h3>
+
+            </div>
+            <demo>
+              <au-pagination v-model="page" :item-count="itemCount" show-page-size-control show-page-control></au-pagination>
+              <p>page={{page}}   itemCount={{itemCount}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    page: 1,
+                    itemCount: 200
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>覆盖原有pagesize选项</h3>
+
+            </div>
+            <demo>
+              <au-pagination v-model="page" :item-count="itemCount" show-page-size-control :page-size-options="[5, 10]"></au-pagination>
+              <p>page={{page}}   itemCount={{itemCount}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    page: 1,
+                    itemCount: 200
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>pageSize控制</h3>
+
+            </div>
+            <demo>
+              <au-pagination v-model="page" :item-count="itemCount" show-page-size-control :page-size-options="[5, 10, 15]" :page-size="pageSize" @page-size-change="_pagesize=&gt;pageSize=_pagesize"></au-pagination>
+              <p>page={{page}}   itemCount={{itemCount}}  pageSize={{pageSize}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    page: 1,
+                    itemCount: 200,
+                    pageSize: 10
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>align</td>
+<td>可选值：'left','center','right'</td>
+<td>String</td>
+<td>'left'</td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>绑定的当前页</td>
+<td>Number</td>
+<td>1</td>
+</tr>
+<tr>
+<td>item-count</td>
+<td>总条目数</td>
+<td>Number</td>
+<td>0</td>
+</tr>
+<tr>
+<td>page-size-options</td>
+<td>每页可显示的数量</td>
+<td>Array</td>
+<td>[10, 20, 50]</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>绑定每页可显示的数量。发生变化时，将触发 <code>page-size-change</code> 事件</td>
+<td>Number</td>
+<td><code>page-size-options</code>属性的第一个元素值 或 10</td>
+</tr>
+<tr>
+<td>show-page-size-control</td>
+<td>pagesize是否可改变</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>show-page-control</td>
+<td>是否显示页数控制输入框</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2>事件</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>page-size-change</td>
+<td>page-size 改变时触发</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -334,7 +448,14 @@
         data () {
           return {
             page: 1,
-            itemCount: 200
+            itemCount: 200,
+            pageSize: 10
+          }
+        },
+        methods: {
+          pageSizeChange(size){
+          debugger
+            this.pageSize = size;
           }
         }
       })
