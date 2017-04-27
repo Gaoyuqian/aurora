@@ -5,39 +5,92 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuPagination
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuPagination
+        分页组件
 
-    .docs-section
-      h2|基础分页
-      .docs-desc
-        p|基础分页的用法
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-pagination(v-model="page", :item-count="itemCount")
-        .docs-panel-row
-          au-pagination(v-model="page", :item-count="itemCount", :show-page-size-control="true")
-        .docs-panel-row
-          au-pagination(v-model="page", :item-count="itemCount", :show-page-control="true")
+        ## 例子
 
-      template.js(scoped="scoped")
+        ### 基础使用方法
+        分页组件默认每页10条数据
+    demo
+      au-pagination(v-model="page", :item-count="itemCount")
+      p page={{page}}   itemCount={{itemCount}}
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                page: 1,
-                itemCount: 200
-              }
-            }
+          export default {
+            page: 1,
+            itemCount: 200
           }
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+    .markdown-body
+      :markdown-it
+        ### 位置控制
+    demo
+      div(style="margin-bottom:10px")
+        au-pagination(:item-count="100", align="left")
+      div(style="margin-bottom:10px")
+        au-pagination(:item-count="100", align="center")
+      div(style="margin-bottom:10px")
+        au-pagination(:item-count="100", align="right")
 
+    .markdown-body
+      :markdown-it
+        ### 显示更多分页控制
+    demo
+      au-pagination(v-model="page", :item-count="itemCount", show-page-size-control, show-page-control)
+      p page={{page}}   itemCount={{itemCount}}
+      template(type="au-demo")
+        script.
+          export default {
+            page: 1,
+            itemCount: 200
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 覆盖原有pagesize选项
+    demo
+      au-pagination(v-model="page", :item-count="itemCount", show-page-size-control, :page-size-options="[5, 10]")
+      p page={{page}}   itemCount={{itemCount}}
+      template(type="au-demo")
+        script.
+          export default {
+            page: 1,
+            itemCount: 200
+          }
+
+    .markdown-body
+      :markdown-it
+        ### pageSize控制
+    demo
+      au-pagination(v-model="page", :item-count="itemCount", show-page-size-control, :page-size-options="[5, 10, 15]", :page-size="pageSize", @page-size-change="_pagesize=>pageSize=_pagesize")
+      p page={{page}}   itemCount={{itemCount}}  pageSize={{pageSize}}
+      template(type="au-demo")
+        script.
+          export default {
+            page: 1,
+            itemCount: 200,
+            pageSize: 10
+          }
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |          属性          |                               说明                               |   类型  |                   默认值                    |
+        |------------------------|------------------------------------------------------------------|---------|---------------------------------------------|
+        | align                  | 可选值：'left','center','right'                                  | String  | 'left'                                      |
+        | v-model                | 绑定的当前页                                                     | Number  | 1                                           |
+        | item-count             | 总条目数                                                         | Number  | 0                                           |
+        | page-size-options      | 每页可显示的数量                                                 | Array   | [10, 20, 50]                                |
+        | pageSize               | 绑定每页可显示的数量。发生变化时，将触发 `page-size-change` 事件 | Number  | `page-size-options`属性的第一个元素值 或 10 |
+        | show-page-size-control | pagesize是否可改变                                               | Boolean | false                                       |
+        | show-page-control      | 是否显示页数控制输入框                                           | Boolean | false                                       |
+        ## 事件
+        |       名称       |         说明         |
+        |------------------|----------------------|
+        | page-size-change | page-size 改变时触发 |
 block script
   script.
     new Vue({
@@ -46,7 +99,14 @@ block script
       data () {
         return {
           page: 1,
-          itemCount: 200
+          itemCount: 200,
+          pageSize: 10
+        }
+      },
+      methods: {
+        pageSizeChange(size){
+        debugger
+          this.pageSize = size;
         }
       }
     })

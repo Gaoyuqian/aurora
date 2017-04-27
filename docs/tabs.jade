@@ -5,65 +5,57 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuTabs
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuTabs
+        `au-tabs` 的直接子组件为 `au-tab-panel`。
+        > `au-tab-panel`必须设置value来标识唯一性，否则tab无法正常工作。
+        ### 基础用法
+    demo
+      au-tabs
+        au-tab-panel(tab="tab-1", value="tab-1")|tab-1-的内容
+        au-tab-panel(tab="tab-2", value="tab-2")|tab-2-的内容
+        au-tab-panel(tab="tab-3", value="tab-3")|tab-3-的内容
+        au-tab-panel(tab="tab-4", value="tab-4", :disabled="true")|tab-4-的内容
 
-    .docs-section
-      h2
-      .docs-desc
-
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-tabs(v-model="value")
-            au-tab-panel(:tab="tab.name", :value="tab.value", :disabled="tab.disabled" v-for="tab in tabs")
-              |{{tab.name}}
-
-      template.js(scoped="scoped")
+    .markdown-body
+      :markdown-it
+        ### 绑定当前tab值
+        可以用来绑定默认active，获取当前tab标识等。
+    demo
+      au-tabs(v-model="current")
+        au-tab-panel(v-for="i in 4", :tab="'tab-'+i", :value="i")|当前active的tab为： {{current}}
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                value: '1',
-                tabs: []
-              }
-            },
-            mounted () {
-              setTimeout(() => {
-                this.tabs = [
-                  {
-                    name: '北京',
-                    value: '1'
-                  },
-                  {
-                    name: '上海',
-                    value: '2'
-                  },
-                  {
-                    name: '广州',
-                    value: '3',
-                    disabled: true
-                  }
-                ]
-              }, 0)
-            }
+          export default {
+            data: {current: 3}
           }
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+    .markdown-body
+      :markdown-it
+        ### 带badge
+        可以用来绑定默认active，获取当前tab标识等。
+    demo
+      au-tabs
+        au-tab-panel(tab="未读", value="1", badge="99+")|tab-1-的内容
+        au-tab-panel(tab="已读", value="2")|tab-2-的内容
 
-    .docs-section
-      h2|AuTabs属性
-      au-table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
 
-    .docs-section
-      h2|AuTabPanel属性
-      au-table(:data="panelAttrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .markdown-body
+      :markdown-it
+        ## au-tabs
+        ### 属性
+        | 属性名  |        说明       |      类型      | 默认值 |
+        |---------|-------------------|----------------|--------|
+        | v-model | 绑定当前 tab 标识 | String, Number |        |
+
+        ## au-tab-panel
+        ### 属性
+        | 属性名 |     说明    |      类型      | 默认值 |
+        |--------|-------------|----------------|--------|
+        | value  | tab的值     | String, Number | ''     |
+        | tab    | tab的名称   | String         | ''     |
+        | badge  | 显示的badge | String, Number | ''     |
 
 
 block script
@@ -73,34 +65,7 @@ block script
       mixins,
       data () {
         return {
-          attrs: [
-            {
-              name: 'v-model',
-              desc: '显示某个tab的值',
-              type: 'String, Number',
-              default: ''
-            }
-          ],
-          panelAttrs: [
-            {
-              name: 'value',
-              desc: 'tab的值',
-              type: 'String, Number',
-              default: ''
-            },
-            {
-              name: 'tab',
-              desc: 'tab的名称',
-              type: 'String',
-              default: ''
-            },
-            {
-              name: 'badge',
-              desc: '显示的badge',
-              type: 'String, Number',
-              default: ''
-            }
-          ]
+          current: 3
         }
       }
     })
