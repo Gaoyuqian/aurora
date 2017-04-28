@@ -5,72 +5,109 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuMessage
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuMessage
+        消息提示。可通过全局`Aurora.message()`调用（**不推荐**）。
+        Aurora在初始运行时自动 install。对Vue实例添加`$message()`方法（**推荐**）。
 
-    .docs-section
-      h2|提示信息
-      .docs-desc
-        p|提示信息的用法
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-input(v-model="message")
-        .docs-panel-row
-          au-button(size="small", @click="showInfo")|信息
-          au-button(size="small", @click="showSuccess")|成功
-          au-button(size="small", @click="showDanger")|失败
-          au-button(size="small", @click="showWarning")|警告
-          au-button(size="small", @click="showLoading")|加载中
-      template.js(scoped="scoped")
+        ## 调用方法
+        $message接受参数
+        ```javascript
+          $message(type, title, message, options)
+        ```
+        |   参数  |                          说明                         |   默认值   |
+        |---------|-------------------------------------------------------|------------|
+        | type    | 类型。可选值: info, success, danger, warning, loading |            |
+        | title   | 标题                                                  | '提示信息' |
+        | message | 消息内容                                              |            |
+        | options | 其他选项。                                              | {}         |
+        * 当`type=loading`时，返回close方法用于关闭message。
+
+        ### options
+        options现阶段只支持自定义按钮
+        ```javascript
+          let options = {
+            buttons: [ // buttons 为数组，支持多个按钮
+              title: 'title',         // 按钮标题
+              callback: function(){}  // 按钮点击回调函数
+            ]
+          }
+        ```
+
+        ### 基础用法
+    demo
+      au-button(size="small", type="info", @click="$message('info', '标题', '提示内容')")|信息
+      au-button(size="small", type="success", @click="$message('success', '标题', '提示内容')")|成功
+      au-button(size="small", type="danger", @click="$message('danger', '标题', '提示内容')")|失败
+      au-button(size="small", type="warning", @click="$message('warning', '标题', '提示内容')")|警告
+      au-button(size="small", type="default", @click="showLoadingMessage")|加载中
+      template(type="au-demo")
         script.
-          {
-            data () {
-              return {
-                title: '',
-                message: '提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息',
-                func: null
-              }
-            },
+          export default {
             methods: {
-              showInfo () {
-                this.$message('info', this.title, this.message, {
-                  buttons: [{
-                    title: '确定',
-                    callback: () => {
-                      console.log('fuck you')
-                    }
-                  }]
-                })
-              },
-              showDanger () {
-                this.$message('error', this.title, this.message)
-              },
-              showSuccess () {
-                this.$message('success', this.title, this.message)
-              },
-              showWarning () {
-                this.$message('warning', this.title, this.message)
-              },
-              showLoading () {
-                if (this.func) {
-                  this.func()
-                  this.func = null
-                } else {
-                  this.func = this.$message('loading', this.title, this.message)
-                }
+              showLoadingMessage(){
+                let close = this.$message('loading', '标题', '提示内容');
+                setTimeout(close, 3000);
               }
             }
           }
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+
+    .markdown-body
+      :markdown-it
+        ### 自定义按钮
+    demo
+      au-button(size="small", type="info", @click="showMessage")|信息
+      template(type="au-demo")
+        script.
+          export default {
+            methods: {
+              showMessage () {
+                let buttons = [
+                  {
+                    title: '按钮1',
+                    callback: ()=>{
+                      this.$message('info', '点击按钮1');
+                    }
+                  },
+                  {
+                    title: '按钮2',
+                    callback: ()=>{
+                      this.$message('info', '点击按钮2');
+                    }
+                  }
+                ];
+                this.$message('info', '标题', '提示内容', {buttons});
+              }
+            }
+          }
 
 block script
   script.
     new Vue({
       el: '#app',
-      mixins
+      mixins,
+      methods: {
+        showLoadingMessage () {
+          let close = this.$message('loading', '标题', '提示内容');
+          setTimeout(close, 3000);
+        },
+        showMessage () {
+          let buttons = [
+            {
+              title: '按钮1',
+              callback: ()=>{
+                this.$message('info', '点击按钮1');
+              }
+            },
+            {
+              title: '按钮2',
+              callback: ()=>{
+                this.$message('info', '点击按钮2');
+              }
+            }
+          ];
+          this.$message('info', '标题', '提示内容', {buttons});
+        }
+      }
     })
