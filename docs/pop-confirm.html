@@ -62,7 +62,7 @@
               <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
               <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
               <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
             </au-menu>
           </au-menu-item>
           <au-menu-item>消息
@@ -119,7 +119,7 @@
                   <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
                   <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
                   <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
                 </au-menu>
               </au-menu-item>
               <au-menu-item icon="sticky-note">消息
@@ -134,74 +134,67 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuPopConfrim</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>Tooltip</h1>
+<p>再次确认信息提示。</p>
+<p>默认触发行为是<code>hover</code>，默认位置为<code>top</code></p>
+
             </div>
-            <div class="docs-section">
-              <h2>基础选择器</h2>
-              <div class="docs-desc">
-                <p>基础选择器的用法</p>
-              </div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-flex wrap="wrap">
-                    <au-item offset="4" span="16">
-                      <au-flex gutter="20">
-                        <au-item style="text-align: center" span="8" offset="8">
-                          <au-pop-confirm position="topLeft" message="这是一段内容确定要删除吗？" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                          <au-pop-confirm position="top" message="这是一段内容确定要删除吗？" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                          <au-pop-confirm position="topRight" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                        </au-item>
-                      </au-flex>
-                      <au-flex gutter="20">
-                        <au-item style="text-align: right" span="8">
-                          <au-pop-confirm position="leftTop" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm><br>
-                          <au-pop-confirm position="left" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm><br>
-                          <au-pop-confirm position="leftBottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                        </au-item>
-                        <au-item style="text-align: left" span="8" offset="8">
-                          <au-pop-confirm position="rightTop" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm><br>
-                          <au-pop-confirm position="right" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm><br>
-                          <au-pop-confirm position="rightBottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                        </au-item>
-                      </au-flex>
-                      <au-flex gutter="20">
-                        <au-item style="text-align: center" span="8" offset="8">
-                          <au-pop-confirm position="bottomLeft" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                          <au-pop-confirm position="bottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                          <au-pop-confirm position="bottomRight" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
-                            <au-button>提交</au-button>
-                          </au-pop-confirm>
-                        </au-item>
-                      </au-flex>
+            <demo>
+              <au-flex wrap="wrap">
+                <au-item offset="4" span="16">
+                  <au-flex gutter="20">
+                    <au-item style="text-align: center" span="8" offset="8">
+                      <au-pop-confirm position="topLeft" message="这是一段内容确定要删除吗？" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                      <au-pop-confirm position="top" message="这是一段内容确定要删除吗？" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                      <au-pop-confirm position="topRight" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
                     </au-item>
                   </au-flex>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+                  <au-flex gutter="20">
+                    <au-item style="text-align: right" span="8">
+                      <au-pop-confirm position="leftTop" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm><br>
+                      <au-pop-confirm position="left" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm><br>
+                      <au-pop-confirm position="leftBottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                    </au-item>
+                    <au-item style="text-align: left" span="8" offset="8">
+                      <au-pop-confirm position="rightTop" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm><br>
+                      <au-pop-confirm position="right" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm><br>
+                      <au-pop-confirm position="rightBottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                    </au-item>
+                  </au-flex>
+                  <au-flex gutter="20">
+                    <au-item style="text-align: center" span="8" offset="8">
+                      <au-pop-confirm position="bottomLeft" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                      <au-pop-confirm position="bottom" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                      <au-pop-confirm position="bottomRight" message="确定要提交吗?" @confirm="confirmHandler" @cancel="cancelHandler">
+                        <au-button>提交</au-button>
+                      </au-pop-confirm>
+                    </au-item>
+                  </au-flex>
+                </au-item>
+              </au-flex>
+              <template type="au-demo">
                 <script>
                   {
                     methods: {
@@ -213,27 +206,61 @@
                       }
                     }
                   }
+                  
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
-            </div>
-            <div class="docs-section">
-              <h2>属性</h2>
-              <au-table id="table" :data="attrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
-            </div>
-            <div class="docs-section">
-              <h2>事件</h2>
-              <au-table id="table" :data="events">
-                <au-table-column v-for="column in eventColumns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>message</td>
+<td>显示的内容。</td>
+<td>String</td>
+<td>''</td>
+</tr>
+<tr>
+<td>position</td>
+<td>显示的位置。可选值包含<code>top</code>, <code>left</code>, <code>right</code>, <code>bottom</code>, <code>topLeft</code>, <code>topRight</code>, <code>leftTop</code>, <code>leftBottom</code>, <code>bottomLeft</code>, <code>bottomRight</code>, <code>rightTop</code>, <code>rightBottom</code></td>
+<td>String</td>
+<td>'top'</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>触发的方式。可选值包含<code>click</code>, <code>hover</code>, <code>focus</code></td>
+<td>String</td>
+<td>'hover'</td>
+</tr>
+</tbody>
+</table>
+<h2>事件</h2>
+<table>
+<thead>
+<tr>
+<th>事件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>confirm</td>
+<td>用户点击确认事件。</td>
+</tr>
+<tr>
+<td>cancel</td>
+<td>用户点击取消事件。</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -391,42 +418,6 @@
       new Vue({
         el: '#app',
         mixins,
-        data () {
-          return {
-            attrs: [
-              {
-                name: 'message',
-                desc: '显示的内容',
-                type: 'String',
-                default: ''
-              },
-              {
-                name: 'position',
-                desc: '显示的位置(可选值: top, left, right, bottom, topLeft, topRight, leftTop, leftBottom, bottomLeft, bottomRight, rightTop, rightBottom)',
-                type: 'String',
-                default: 'top'
-              },
-              {
-                name: 'trigger',
-                desc: '触发的方式(可选值: click, hover, focus)',
-                type: 'String',
-                default: 'hover'
-              }
-            ],
-            events: [
-              {
-                name: 'confirm',
-                desc: '用户点击确认事件',
-                args: '($event: Event)'
-              },
-              {
-                name: 'cancel',
-                desc: '用户点击取消事件',
-                args: '($event: Event)'
-              }
-            ]
-          }
-        },
         methods: {
           confirmHandler () {
             console.log('confirm')

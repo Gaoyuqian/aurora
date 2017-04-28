@@ -62,7 +62,7 @@
               <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
               <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
               <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
             </au-menu>
           </au-menu-item>
           <au-menu-item>消息
@@ -119,7 +119,7 @@
                   <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
                   <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
                   <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
                 </au-menu>
               </au-menu-item>
               <au-menu-item icon="sticky-note">消息
@@ -134,61 +134,193 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuModal</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuModal</h1>
+<p><code>au-modal</code> 组件嵌套的内容默认成为content。支持具名slot <code>footer</code> 作为footer。</p>
+<h2>使用</h2>
+<h3>基础使用</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>基础Modal</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-button type="primary" size="small" @click="isShow = true">显示</au-button>
-                  <au-modal title="新页面" v-model="isShow">
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>
-                      <au-select v-model="select">
-                        <au-option value="1" label="哈哈"></au-option>
-                        <au-option value="2" label="呵呵"></au-option>
-                      </au-select>
-                    </div>
-                    <div slot="footer">
-                      <au-button type="default" @click="isShow = false">取消</au-button>
-                      <au-button type="primary" @click="step2 = true">提交</au-button>
-                    </div>
-                  </au-modal>
-                  <au-modal title="第二步" v-model="step2">
-                    <div>这里是第二步</div>
-                    <div slot="footer">
-                      <au-button type="primary" size="small">提交</au-button>
-                      <au-button type="default" size="small" @click="step2 = false">取消</au-button>
-                    </div>
-                  </au-modal>
+            <demo>
+              <au-button type="primary" size="small" @click="isShow = true">显示</au-button>
+              <au-modal title="标题" v-model="isShow">
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div slot="footer">
+                  <au-button type="default" @click="isShow = false">取消</au-button>
+                  <au-button type="primary" @click="isShow = false || $message('info', '确定点击')">确定</au-button>
                 </div>
-              </template>
-              <template scoped="scoped" class="js">
+              </au-modal>
+              <template type="au-demo">
                 <script>
-                  {
+                  export default {
+                    data: {isShow: false}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>带图标的title &amp; 不包含footer</h3>
+
+            </div>
+            <demo>
+              <au-button type="primary" size="small" @click="isShow2 = true">显示</au-button>
+              <au-modal title="标题" v-model="isShow2" icon="chrome">
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+              </au-modal>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {isShow2: false}
+                  }
+                  
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>禁止点击背景区域关闭弹框</h3>
+
+            </div>
+            <demo>
+              <au-button type="primary" size="small" @click="isShow3 = true">显示</au-button>
+              <au-modal title="标题" v-model="isShow3" :mask-closeable="false">
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+              </au-modal>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {isShow3: false}
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>表单弹框</h3>
+
+            </div>
+            <demo>
+              <au-button type="primary" size="small" @click="isShow4 = true">显示</au-button>
+              <au-modal title="标题" v-model="isShow4" width="600">
+                <au-form label-width="100" label-position="right" :model="form" @submit="$message('success', '提交成功！')">
+                  <au-form-item label="姓名：" :rules="[{required:true, message:'请录入姓名'}]" prop="name">
+                    <au-input v-model="form.name" placeholder="请输入姓名"></au-input>
+                  </au-form-item>
+                  <au-form-item label="邮箱：" :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]" prop="email">
+                    <au-input v-model="form.email" placeholder="请输入邮箱"></au-input>
+                  </au-form-item>
+                  <au-form-item label="性别：" :rules="[{required:true, message:'请录入性别'}]" prop="gender">
+                    <au-radio-group :options="[{value: '1', label: '男'}, {value: '2', label: '女'}]" v-model="form.gender"></au-radio-group>{{form.gender}}
+                  </au-form-item>
+                  <au-form-item>
+                    <au-button type="primary" size="small" native-type="submit">提交</au-button>
+                    <au-button type="default" size="small" @click="isShow4 = false">取消</au-button>
+                  </au-form-item>
+                </au-form>
+              </au-modal>
+              <template type="au-demo">
+                <script>
+                  export default {
                     data () {
                       return {
-                        select: '1',
-                        isShow: false,
-                        step2: false
+                        isShow4: false,
+                        form: {
+                          name: '',
+                          gender: '',
+                          class: '',
+                          email: ''
+                        }
                       }
                     }
                   }
                   
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
+            </demo>
+            <div class="markdown-body"><h3>多级弹框</h3>
+<p>多个modal弹出时可自动处理层级关系。</p>
+
+            </div>
+            <demo>
+              <au-button type="primary" size="small" @click="isShow5=true">显示</au-button>
+              <au-modal title="标题" v-model="isShow5" width="800">
+                <div>这里是第一步</div>
+                <div slot="footer">
+                  <au-button type="primary" size="small" @click="isShow6=true">下一个</au-button>
                 </div>
-              </div>
+              </au-modal>
+              <au-modal title="标题" v-model="isShow6" width="600">
+                <div>这里是第二步</div>
+                <div slot="footer">
+                  <au-button type="primary" size="small" @click="isShow7=true">下一个</au-button>
+                </div>
+              </au-modal>
+              <au-modal title="标题" v-model="isShow7" width="400">
+                <div>这里是第三步</div>
+                <div slot="footer">
+                  <au-button type="primary" size="small" @click="isShow7=false">关闭</au-button>
+                </div>
+              </au-modal>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>icon</td>
+<td>标题前的图标</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>是否展示的绑定变量。<code>true</code> 为显示。<code>false</code> 为隐藏。</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>no-close</td>
+<td>是否隐藏右上角关闭按钮</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>width</td>
+<td>宽度。px单位</td>
+<td>String, Number</td>
+<td>400</td>
+</tr>
+<tr>
+<td>esc-closeable</td>
+<td><code>esc</code>是否支持按键可关闭弹框</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+<tr>
+<td>mask-closeable</td>
+<td>点击其他区域是否可关闭弹框</td>
+<td>Boolean</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -348,16 +480,19 @@
         mixins,
         data () {
           return {
-            attrs: [
-              {
-                name: 'column',
-                desc: '列信息',
-                type: 'Array',
-                default: 'null'
-              }
-            ],
+            isShow7: false,
+            isShow6: false,
+            isShow5: false,
+            isShow4: false,
+            isShow3: false,
+            isShow2: false,
             isShow: false,
-            step2: false
+            form: {
+              name: '',
+              gender: '',
+              class: '',
+              email: ''
+            },
           }
         }
       })

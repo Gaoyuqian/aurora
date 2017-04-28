@@ -62,7 +62,7 @@
               <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
               <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
               <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
             </au-menu>
           </au-menu-item>
           <au-menu-item>消息
@@ -119,7 +119,7 @@
                   <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
                   <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
                   <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
                 </au-menu>
               </au-menu-item>
               <au-menu-item icon="sticky-note">消息
@@ -138,11 +138,11 @@
 <p>分页组件</p>
 <h2>例子</h2>
 <h3>基础使用方法</h3>
-<p>分页组件默认每页10条数据</p>
+<p>分页组件默认每页10条数据。<code>show-total</code>控制是否显示总数。</p>
 
             </div>
             <demo>
-              <au-pagination v-model="page" :item-count="itemCount"></au-pagination>
+              <au-pagination v-model="page" :item-count="itemCount" show-total></au-pagination>
               <p>page={{page}}   itemCount={{itemCount}}</p>
               <template type="au-demo">
                 <script>
@@ -159,20 +159,20 @@
             </div>
             <demo>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="left"></au-pagination>
+                <au-pagination :item-count="100" align="left" show-total></au-pagination>
               </div>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="center"></au-pagination>
+                <au-pagination :item-count="100" align="center" show-total></au-pagination>
               </div>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="right"></au-pagination>
+                <au-pagination :item-count="100" align="right" show-total></au-pagination>
               </div>
             </demo>
             <div class="markdown-body"><h3>显示更多分页控制</h3>
 
             </div>
             <demo>
-              <au-pagination v-model="page" :item-count="itemCount" show-page-size-control show-page-control></au-pagination>
+              <au-pagination v-model="page" :item-count="itemCount" show-page-size-control show-page-control show-total></au-pagination>
               <p>page={{page}}   itemCount={{itemCount}}</p>
               <template type="au-demo">
                 <script>
@@ -267,6 +267,12 @@
 <tr>
 <td>show-page-control</td>
 <td>是否显示页数控制输入框</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>show-total</td>
+<td>是否显示总页数</td>
 <td>Boolean</td>
 <td>false</td>
 </tr>

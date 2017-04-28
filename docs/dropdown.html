@@ -62,7 +62,7 @@
               <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
               <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
               <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-              <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+              <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
             </au-menu>
           </au-menu-item>
           <au-menu-item>消息
@@ -119,7 +119,7 @@
                   <au-menu-item href="drag-modal.html" value="drag-modal">DragModal</au-menu-item>
                   <au-menu-item href="menu.html" value="menu">Menu</au-menu-item>
                   <au-menu-item href="tag.html" value="tag">Tag</au-menu-item>
-                  <au-menu-item href="tree.html" value="tree">tree</au-menu-item>
+                  <au-menu-item href="tree.html" value="tree">Tree</au-menu-item>
                 </au-menu>
               </au-menu-item>
               <au-menu-item icon="sticky-note">消息
@@ -134,42 +134,57 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuDropdown</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuDropdown</h1>
+<p><code>au-dropdown</code> 支持 'click' 或 'hover' 触发。</p>
+<h2>用法</h2>
+<h3>基础用法</h3>
+<p><code>au-dropdown</code> 检测所有子元素。第一个<code>au-menu</code>组件，将做为下拉菜单显示。其他元素正常显示并作为可触发下拉菜单的元素。默认使用<code>hover</code>触发。</p>
+<p>关于<a href="menu.html"><code>au-menu</code></a></p>
+
             </div>
-            <div class="docs-section">
-              <h2>基础下拉菜单</h2>
-              <div class="docs-desc">
-                <p>基础下拉菜单的用法</p>
-              </div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-dropdown>
-                    <au-button>打开打开</au-button>
-                    <au-menu>
-                      <au-menu-item href="http://www.baidu.com" target="_blank">选项1</au-menu-item>
-                      <au-menu-item>选项2</au-menu-item>
-                      <au-menu-item>选项3</au-menu-item>
-                    </au-menu>
-                  </au-dropdown>
-                  <au-dropdown trigger="click">
-                    <au-button>打开打开</au-button>
-                    <au-menu>
-                      <au-menu-item href="http://www.baidu.com">选项1</au-menu-item>
-                      <au-menu-item>选项2</au-menu-item>
-                      <au-menu-item>选项3</au-menu-item>
-                    </au-menu>
-                  </au-dropdown>
-                </div>
-              </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            <demo>
+              <au-dropdown>
+                <au-button>鼠标覆盖触发</au-button>
+                <au-menu>
+                  <au-menu-item href="http://www.baidu.com" target="_blank">选项1</au-menu-item>
+                  <au-menu-item>选项2</au-menu-item>
+                  <au-menu-item>选项3</au-menu-item>
+                </au-menu>
+              </au-dropdown>
+            </demo>
+            <div class="markdown-body"><h3>click触发</h3>
+
+            </div>
+            <demo>
+              <au-dropdown trigger="click">
+                <au-button>点击触发</au-button>
+                <au-menu>
+                  <au-menu-item href="http://www.baidu.com" target="_blank">选项1</au-menu-item>
+                  <au-menu-item>选项2</au-menu-item>
+                  <au-menu-item>选项3</au-menu-item>
+                </au-menu>
+              </au-dropdown>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trigger</td>
+<td>下拉菜单触发方式。可选值：hover, click</td>
+<td>String</td>
+<td>'hover'</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
