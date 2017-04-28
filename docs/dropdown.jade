@@ -5,35 +5,40 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuDropdown
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuDropdown
+        `au-dropdown` 支持 'click' 或 'hover' 触发。
+        ## 用法
+        ### 基础用法
+        `au-dropdown` 检测所有子元素。第一个`au-menu`组件，将做为下拉菜单显示。其他元素正常显示并作为可触发下拉菜单的元素。默认使用`hover`触发。
 
-    .docs-section
-      h2|基础下拉菜单
-      .docs-desc
-        p|基础下拉菜单的用法
+        关于[`au-menu`](menu.html)
+    demo
+      au-dropdown
+        au-button|鼠标覆盖触发
+        au-menu
+          au-menu-item(href="http://www.baidu.com", target="_blank")|选项1
+          au-menu-item|选项2
+          au-menu-item|选项3
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-dropdown
-            au-button|打开打开
-            au-menu
-              au-menu-item(href="http://www.baidu.com", target="_blank")|选项1
-              au-menu-item|选项2
-              au-menu-item|选项3
-          au-dropdown(trigger="click")
-            au-button|打开打开
-            au-menu
-              au-menu-item(href="http://www.baidu.com")|选项1
-              au-menu-item|选项2
-              au-menu-item|选项3
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
+    .markdown-body
+      :markdown-it
+        ### click触发
+    demo
+      au-dropdown(trigger="click")
+        au-button|点击触发
+        au-menu
+          au-menu-item(href="http://www.baidu.com", target="_blank")|选项1
+          au-menu-item|选项2
+          au-menu-item|选项3
 
+    .markdown-body
+      :markdown-it
+        ## 属性
+        | 属性名  |                  说明                  |  类型  | 默认值  |
+        |---------|----------------------------------------|--------|---------|
+        | trigger | 下拉菜单触发方式。可选值：hover, click | String | 'hover' |
 
 block script
   script.

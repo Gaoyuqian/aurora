@@ -5,53 +5,132 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuModal
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuModal
+        `au-modal` 组件嵌套的内容默认成为content。支持具名slot `footer` 作为footer。
+        ## 使用
+        ### 基础使用
+    demo
+      au-button(type="primary", size="small", @click="isShow = true")|显示
 
-    .docs-section
-      h2|基础Modal
-      .docs-desc
+      au-modal(title="标题", v-model="isShow")
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div(slot="footer")
+          au-button(type="default", @click="isShow = false")|取消
+          au-button(type="primary", @click="isShow = false || $message('info', '确定点击')")|确定
 
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-button(type="primary", size="small", @click="isShow = true")|显示
-          au-modal(title="新页面", v-model="isShow")
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div
-              au-select(v-model="select")
-                au-option(value="1", label="哈哈")
-                au-option(value="2", label="呵呵")
-            div(slot="footer")
-              au-button(type="default", @click="isShow = false")|取消
-              au-button(type="primary", @click="step2 = true")|提交
-
-          au-modal(title="第二步", v-model="step2")
-            div|这里是第二步
-            div(slot="footer")
-              au-button(type="primary", size="small")|提交
-              au-button(type="default", size="small", @click="step2 = false")|取消
-      template.js(scoped="scoped")
+      template(type="au-demo")
         script.
-          {
+          export default {
+            data: {isShow: false}
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 带图标的title & 不包含footer
+    demo
+      au-button(type="primary", size="small", @click="isShow2 = true")|显示
+
+      au-modal(title="标题", v-model="isShow2", icon="chrome")
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+
+      template(type="au-demo")
+        script.
+          export default {
+            data: {isShow2: false}
+          }
+
+
+    .markdown-body
+      :markdown-it
+        ### 禁止点击背景区域关闭弹框
+    demo
+      au-button(type="primary", size="small", @click="isShow3 = true")|显示
+
+      au-modal(title="标题", v-model="isShow3", :mask-closeable="false")
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+
+      template(type="au-demo")
+        script.
+          export default {
+            data: {isShow3: false}
+          }
+
+    .markdown-body
+      :markdown-it
+        ### 表单弹框
+    demo
+      au-button(type="primary", size="small", @click="isShow4 = true")|显示
+
+      au-modal(title="标题", v-model="isShow4", width="600")
+        au-form(label-width="100", label-position="right", :model="form", @submit="$message('success', '提交成功！')")
+          au-form-item(label="姓名：", :rules="[{required:true, message:'请录入姓名'}]", prop="name")
+            au-input(v-model="form.name", placeholder="请输入姓名")
+          au-form-item(label="邮箱：", :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]", prop="email")
+            au-input(v-model="form.email", placeholder="请输入邮箱")
+          au-form-item(label="性别：", :rules="[{required:true, message:'请录入性别'}]", prop="gender")
+            au-radio-group(:options="[{value: '1', label: '男'}, {value: '2', label: '女'}]", v-model="form.gender")
+            | {{form.gender}}
+          au-form-item
+            au-button(type="primary", size="small", native-type="submit")|提交
+            au-button(type="default", size="small", @click="isShow4 = false")|取消
+      template(type="au-demo")
+        script.
+          export default {
             data () {
               return {
-                select: '1',
-                isShow: false,
-                step2: false
+                isShow4: false,
+                form: {
+                  name: '',
+                  gender: '',
+                  class: '',
+                  email: ''
+                }
               }
             }
           }
 
-      .docs-panel
-        .docs-panel-content
+    .markdown-body
+      :markdown-it
+        ### 多级弹框
+        多个modal弹出时可自动处理层级关系。
+    demo
+      au-button(type="primary", size="small", @click="isShow5=true")|显示
 
-        .docs-code
-          docs-code.html
-          docs-code.js
+      au-modal(title="标题", v-model="isShow5", width="800")
+        div|这里是第一步
+        div(slot="footer")
+          au-button(type="primary", size="small", @click="isShow6=true")|下一个
 
+      au-modal(title="标题", v-model="isShow6",  width="600")
+        div|这里是第二步
+        div(slot="footer")
+          au-button(type="primary", size="small", @click="isShow7=true")|下一个
+
+      au-modal(title="标题", v-model="isShow7", width="400")
+        div|这里是第三步
+        div(slot="footer")
+          au-button(type="primary", size="small", @click="isShow7=false")|关闭
+
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |     属性名     |             说明            |      类型      | 默认值 |
+        |----------------|-----------------------------|----------------|--------|
+        | title          | 标题                        | String         |        |
+        | icon           | 标题前的图标                | String         |        |
+        | v-model        | 是否展示的绑定变量。`true` 为显示。`false` 为隐藏。          | Boolean        | false  |
+        | no-close       | 是否隐藏右上角关闭按钮      | Boolean        | false  |
+        | width          | 宽度。px单位                | String, Number | 400    |
+        | esc-closeable  | `esc`是否支持按键可关闭弹框 | Boolean        | true   |
+        | mask-closeable | 点击其他区域是否可关闭弹框  | Boolean        | true   |
 
 block script
   script.
@@ -60,16 +139,19 @@ block script
       mixins,
       data () {
         return {
-          attrs: [
-            {
-              name: 'column',
-              desc: '列信息',
-              type: 'Array',
-              default: 'null'
-            }
-          ],
+          isShow7: false,
+          isShow6: false,
+          isShow5: false,
+          isShow4: false,
+          isShow3: false,
+          isShow2: false,
           isShow: false,
-          step2: false
+          form: {
+            name: '',
+            gender: '',
+            class: '',
+            email: ''
+          },
         }
       }
     })
