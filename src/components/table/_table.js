@@ -82,62 +82,65 @@ const AuTable = Vue.extend({
       if (this._isDestroyed) {
         return
       }
-      const scroll = this.$refs.scroll
-      const table = scroll.querySelector('table')
-      const scrollRect = scroll.getBoundingClientRect()
-      const rect = table.getBoundingClientRect()
 
-      const leftFixed = this.$refs.leftFixed
-      const rightFixed = this.$refs.rightFixed
-      const headScroll = this.$refs.headScroll
-
-      const scrollWidth = this.getScrollWidth()
-      const scrollWidthPx = `${scrollWidth}px`
-
-      this.model.tableWidth = rect.width
-      this.model.updateColumnsWidth()
-
+      this.model.initColumnsWidth()
       this.$nextTick(() => {
-        if (scrollRect.height < rect.height - scrollWidth) {
-          if (headScroll) {
-            headScroll.$el.style.paddingRight = scrollWidthPx
+        const scroll = this.$refs.scroll
+        const table = scroll.querySelector('table')
+        const scrollRect = scroll.getBoundingClientRect()
+        const rect = table.getBoundingClientRect()
+
+        const leftFixed = this.$refs.leftFixed
+        const rightFixed = this.$refs.rightFixed
+        const headScroll = this.$refs.headScroll
+
+        const scrollWidth = this.getScrollWidth()
+        const scrollWidthPx = `${scrollWidth}px`
+
+        this.model.tableWidth = rect.width
+        this.model.updateColumnsWidth()
+
+        this.$nextTick(() => {
+          if (scrollRect.height < rect.height) {
+            if (headScroll) {
+              headScroll.$el.style.paddingRight = scrollWidthPx
+            }
+
+            if (rightFixed) {
+              rightFixed.$el.style.right = scrollWidthPx
+            }
+          } else {
+            if (headScroll) {
+              headScroll.$el.style.paddingRight = 0
+            }
+            if (rightFixed) {
+              rightFixed.$el.style.right = '0'
+            }
           }
 
-          if (rightFixed) {
-            rightFixed.$el.style.right = scrollWidthPx
+          if (scrollRect.width < rect.width) {
+            if (leftFixed) {
+              leftFixed.$el.style.bottom = scrollWidthPx
+            }
+            if (rightFixed) {
+              rightFixed.$el.style.bottom = scrollWidthPx
+            }
+          } else {
+            if (leftFixed) {
+              leftFixed.$el.style.bottom = 0
+            }
+            if (rightFixed) {
+              rightFixed.$el.style.bottom = 0
+            }
           }
-        } else {
-          if (headScroll) {
-            headScroll.$el.style.paddingRight = 0
-          }
-          if (rightFixed) {
-            rightFixed.$el.style.right = '0'
-          }
-        }
+        })
 
-        if (scrollRect.width < rect.width - scrollWidth) {
-          if (leftFixed) {
-            leftFixed.$el.style.bottom = scrollWidthPx
-          }
-          if (rightFixed) {
-            rightFixed.$el.style.bottom = scrollWidthPx
-          }
-        } else {
-          if (leftFixed) {
-            leftFixed.$el.style.bottom = 0
-          }
-          if (rightFixed) {
-            rightFixed.$el.style.bottom = 0
-          }
+        if (headScroll) {
+          const headRect = headScroll.$el.getBoundingClientRect()
+          this.model.tableHeadHeight = headRect.height
         }
+        this.onScroll()
       })
-
-      if (headScroll) {
-        const headRect = headScroll.$el.getBoundingClientRect()
-        this.model.tableHeadHeight = headRect.height
-      }
-
-      this.onScroll()
     },
     onScroll () {
       const target = this.$refs.scroll
@@ -148,6 +151,7 @@ const AuTable = Vue.extend({
       this.timestamp = new Date()
       this.updateColumns()
       this.model = new TableModel(this)
+      this.$nextTick(this.calPosition)
     },
     updateColumns () {
       this.columns = (this.$slots.default || []).filter((slot) => {
@@ -157,28 +161,27 @@ const AuTable = Vue.extend({
       })
     },
     getScrollWidth () {
-      var outer = document.createElement("div");
-      outer.style.visibility = "hidden";
-      outer.style.width = "100px";
-      outer.style.msOverflowStyle = "scrollbar"; // needed for WinJS apps
+      var outer = document.createElement("div")
+      outer.style.visibility = "hidden"
+      outer.style.width = "100px"
+      outer.style.msOverflowStyle = "scrollbar" // needed for WinJS apps
 
-      document.body.appendChild(outer);
+      document.body.appendChild(outer)
 
-      var widthNoScroll = outer.offsetWidth;
+      var widthNoScroll = outer.offsetWidth
       // force scrollbars
-      outer.style.overflow = "scroll";
+      outer.style.overflow = "scroll"
 
       // add innerdiv
-      var inner = document.createElement("div");
-      inner.style.width = "100%";
-      outer.appendChild(inner);
+      var inner = document.createElement("div")
+      inner.style.width = "100%"
+      outer.appendChild(inner)
 
-      var widthWithScroll = inner.offsetWidth;
+      var widthWithScroll = inner.offsetWidth
 
       // remove divs
-      outer.parentNode.removeChild(outer);
-
-      return widthNoScroll - widthWithScroll;
+      outer.parentNode.removeChild(outer)
+      return widthNoScroll - widthWithScroll
     }
   },
   watch: {
