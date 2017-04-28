@@ -22,9 +22,10 @@ block content
         | title   | 标题                                                  | '提示信息' |
         | message | 消息内容                                              |            |
         | options | 其他选项。                                              | {}         |
-        * 当`type=loading`时，返回close方法用于关闭message。
+        #### loading
+        当`type=loading`时，返回close方法用于关闭message。
 
-        ### options
+        #### options
         options现阶段只支持自定义按钮
         ```javascript
           let options = {
