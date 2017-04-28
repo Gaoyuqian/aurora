@@ -5,46 +5,59 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuDragModal
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuDragModal
+        支持拖拽的modal。
+        ### 基本使用
+        使用上与 [`au-modal`](modal.html) 无太多区别。
+    demo
+      au-button-group
+        au-button(type="primary", size="small", @click="showModals")|显示全部
+      au-drag-modal(v-for="(value, $index) in modals", :title="'title区域可拖拽的弹框-' + ($index+1)", v-model="value.isShow", :top="($index+1)*100", :left="($index+1)*100", style="width:500px;")
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div|这里是正文内容
+        div(slot="footer")
+          au-button(type="primary", size="small")|提交
+          au-button(type="default", size="small", @click="value.isShow = false")|取消
+      template(type="au-demo")
+        script.
+          export default {
+          data: {
+            modals: [
+              { isShow: false },
+              { isShow: false },
+              { isShow: false },
+              { isShow: false },
+            ]
+          },
+          methods: {
+            showModals () {
+              this.modals = this.modals.map((item) => {
+                item.isShow = !item.isShow
+                return item
+              })
+            }
+          }
+          }
 
-    .docs-section
-      h2|基础DragModal
-      .docs-desc
-
-      template.html(scoped="scoped")
-        .docs-panel-row
-          au-button-group
-            au-button(@click="showRed=!showRed")|Toggle Red
-            au-button(type="primary", size="small", @click="showModals")|显示全部
-            au-button(type="info", size="small", @click="value.isShow = !value.isShow", v-for="value in modals")|显示Modal
-          au-drag-modal(title="新页面", v-model="value.isShow", :top="top", :left="left", style="width:500px;", v-for="value in modals")
-            div(style="background-color:red;height:2000px", v-if="showRed")
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div|这里是正文内容
-            div(slot="footer")
-              au-button(type="primary", size="small")|提交
-              au-button(type="default", size="small", @click="value.isShow = false")|取消
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
-          docs-code.js
-
+    .markdown-body
+      :markdown-it
+        ## 属性
+        |  属性名  |                         说明                        |      类型     | 默认值 |
+        |----------|-----------------------------------------------------|---------------|--------|
+        | title    | 标题                                                | String        |        |
+        | icon     | 标题前的图标                                        | String        |        |
+        | v-model  | 是否展示的绑定变量。`true` 为显示。`false` 为隐藏。 | Boolean       | false  |
+        | no-close | 是否隐藏右上角关闭按钮                              | Boolean       | false  |
+        | left     | 初始位置 left                                       | String,Number |        |
+        | top      | 初始位置 top                                        | String,Number |        |
 
 block script
   script.
@@ -53,32 +66,18 @@ block script
       mixins,
       data () {
         return {
-          showRed: false,
-          attrs: [
-            {
-              name: 'column',
-              desc: '列信息',
-              type: 'Array',
-              default: 'null'
-            }
-          ],
-          top: null,
-          left: null,
           modals: [
             { isShow: false },
             { isShow: false },
             { isShow: false },
             { isShow: false },
-            { isShow: false },
-            { isShow: false },
-            { isShow: false }
           ]
         }
       },
       methods: {
         showModals () {
           this.modals = this.modals.map((item) => {
-            item.isShow = !item.isShow
+            item.isShow = true;
             return item
           })
         }

@@ -5,59 +5,128 @@ block title
 
 block content
   au-panel
-    .docs-heading
-      h1|AuMenu
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        # AuMenu
+        菜单组件包含 `au-menu`、 `au-menu-item`、`au-menu-group` 三个组件。可设置为水平或垂直的菜单。支持二级子菜单嵌套。
 
-    .docs-section
-      h2|水平菜单
-      .docs-desc
+        ## 基础用法
+        默认为水平菜单，通过`selected`属性控制选中的菜单（支持多选）。
+        ### 单选
+    demo
+      au-menu(:selected="single")
+        au-menu-item|菜单1
+          au-menu
+            au-menu-item(value="1-1", @click="toogleSingleSelected('1-1')")|菜单1-1
+            au-menu-item(value="1-2", @click="toogleSingleSelected('1-2')")|菜单1-2
+            au-menu-item(value="1-3", @click="toogleSingleSelected('1-3')")|菜单1-3
+        au-menu-item(value="2", @click="toogleSingleSelected('2')")|菜单2
+        au-menu-item(value="3", @click="toogleSingleSelected('3')")|菜单3
+      P 当前选中： {{single}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {single: ''},
+            methods: {
+              toogleSingleSelected (value) {
+                this.single = value;
+              }
+            }
+          }
 
-      template.html(scoped="scoped")
-        au-flex(column)
-          au-item(span="12")
-            .docs-panel-row
-              .docs-menu-wrapper
-                au-menu(:selected="selected")
-                  au-menu-item|首页
-                    au-menu
-                      au-menu-item(value="sub1", @click="toggle('sub1')")|子项目1
-                      au-menu-item(value="sub2", @click="toggle('sub2')")|子项目2
-                      au-menu-item(value="sub3", @click="toggle('sub3')")|子项目3
-                  au-menu-item(value="content", @click="toggle('content')")|内容
-                  au-menu-item(value="list", @click="toggle('list')")|列表
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ### 多选
+    demo
+      au-menu(:selected="mSelected")
+        au-menu-item|菜单1
+          au-menu
+            au-menu-item(value="1-1", @click="toogleSelected('1-1')")|菜单1-1
+            au-menu-item(value="1-2", @click="toogleSelected('1-2')")|菜单1-2
+            au-menu-item(value="1-3", @click="toogleSelected('1-3')")|菜单1-3
+        au-menu-item(value="2", @click="toogleSelected('2')")|菜单2
+        au-menu-item(value="3", @click="toogleSelected('3')")|菜单3
+      P 当前选中： {{JSON.stringify(mSelected)}}
+      template(type="au-demo")
+        script.
+          export default {
+            data: {mSelected: []},
+            methods: {
+              toogleSelected (value) {
+                const pos = this.mSelected.indexOf(value)
+                if (pos > -1) {
+                  this.mSelected.splice(pos, 1)
+                } else {
+                  this.mSelected.push(value)
+                }
+              }
+            }
+          }
 
-    .docs-section
-      h2|垂直菜单
-      .docs-desc
+    .markdown-body
+      :markdown-it
+        ### 触发方式 & 图标展示
+    demo
+      // 默认click 改为 hover
+      au-menu(menu-trigger="hover")
+        au-menu-item(icon="github")|菜单1
+          au-menu
+            au-menu-item(icon="github")|菜单1-1
+            au-menu-item(icon="github")|菜单1-2
+            au-menu-item(icon="github")|菜单1-3
+        au-menu-item(icon="firefox")|菜单2
+        au-menu-item(icon="chrome")|菜单3
 
-      template.html(scoped="scoped")
-        au-flex(column)
-          au-item(span="12")
-            .docs-panel-row
-              .docs-menu-wrapper
-                au-menu(vertical, :selected="selected")
-                  au-menu-item|首页
-                    au-menu
-                      au-menu-item(value="sub1", @click="toggle('sub1')")|子项目1
-                      au-menu-item(value="sub2", @click="toggle('sub2')")|子项目2
-                      au-menu-item(value="sub3", @click="toggle('sub3')")|子项目3
-                  au-menu-item(value="content", @click="toggle('content')")|内容
-                  au-menu-item(value="list", @click="toggle('list')")|列表
+    .markdown-body
+      :markdown-it
+        ### 纵向 & 分组
+    demo
+      au-menu-group(title="组1")
+        au-menu(vertical)
+          au-menu-item|菜单1
+          au-menu-item|菜单2
+      au-menu-group(title="组2")
+        au-menu(vertical)
+          au-menu-item|菜单1
+            au-menu
+              au-menu-item|菜单1-1
+              au-menu-item|菜单1-2
+              au-menu-item|菜单1-3
+          au-menu-item|菜单2
+          au-menu-item|菜单3
 
-      .docs-panel
-        .docs-panel-content
-        .docs-code
-          docs-code.html
+    .markdown-body
+      :markdown-it
+        ### 链接配置
+    demo
+      au-menu(vertical)
+        au-menu-item(href="#")|菜单1
+        au-menu-item(href="#", target="_blank")|菜单2
 
-    .docs-section
-      h2|属性
-      au-table(:data="attrs")
-        au-table-column(v-for="column in columns", :label="column.label", :attr-name="column.attrName")
+    .markdown-body
+      :markdown-it
+        ## au-menu
+        ### 属性
+        |    属性名    |                       说明                      |     类型     | 默认值  |
+        |--------------|-------------------------------------------------|--------------|---------|
+        | menu-trigger | 子菜单触发方式。可选值： 'click'、'hover'       | String       | 'click' |
+        | vertical     | 是否为纵向模式                                  | Boolean      | false   |
+        | selected     | 绑定的当前选中项（与`au-menu-item`的value一致） | String,Array |         |
+
+        ## au-menu-item
+        ### 属性
+        | 属性名 |         说明        |  类型  | 默认值  |
+        |--------|---------------------|--------|---------|
+        | href   | 跳转链接            | String |         |
+        | target | 同原生a标签 target  | String | '_self' |
+        | icon   | 图标                | String |         |
+        | value  | 标识唯一性的value值 | String       |         |
+
+        ## au-menu-group
+        ### 属性
+        | 属性名 | 说明 |  类型  | 默认值 |
+        |--------|------|--------|--------|
+        | title  | 标题 | String |        |
 
 block script
   script.
@@ -66,18 +135,21 @@ block script
       mixins,
       data () {
         return {
-          attrs: [],
-          selected: []
+          mSelected: [],
+          single: ''
         }
       },
       methods: {
-        toggle (value) {
-          const pos = this.selected.indexOf(value)
+        toogleSelected (value) {
+          const pos = this.mSelected.indexOf(value)
           if (pos > -1) {
-            this.selected.splice(pos, 1)
+            this.mSelected.splice(pos, 1)
           } else {
-            this.selected.push(value)
+            this.mSelected.push(value)
           }
+        },
+        toogleSingleSelected (value) {
+          this.single = value;
         }
       }
     })
