@@ -134,77 +134,111 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuMessage</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuMessage</h1>
+<p>消息提示。可通过全局<code>Aurora.message()</code>调用（<strong>不推荐</strong>）。
+Aurora在初始运行时自动 install。对Vue实例添加<code>$message()</code>方法（<strong>推荐</strong>）。</p>
+<h2>调用方法</h2>
+<p>$message接受参数</p>
+<pre><code class="language-javascript">  $message(type, title, message, options)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>类型。可选值: info, success, danger, warning, loading</td>
+<td></td>
+</tr>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td>'提示信息'</td>
+</tr>
+<tr>
+<td>message</td>
+<td>消息内容</td>
+<td></td>
+</tr>
+<tr>
+<td>options</td>
+<td>其他选项。</td>
+<td>{}</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当<code>type=loading</code>时，返回close方法用于关闭message。</li>
+</ul>
+<h3>options</h3>
+<p>options现阶段只支持自定义按钮</p>
+<pre><code class="language-javascript">  let options = {
+    buttons: [ // buttons 为数组，支持多个按钮
+      title: 'title',         // 按钮标题
+      callback: function(){}  // 按钮点击回调函数
+    ]
+  }
+</code></pre>
+<h3>基础用法</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>提示信息</h2>
-              <div class="docs-desc">
-                <p>提示信息的用法</p>
-              </div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-input v-model="message"></au-input>
-                </div>
-                <div class="docs-panel-row">
-                  <au-button size="small" @click="showInfo">信息</au-button>
-                  <au-button size="small" @click="showSuccess">成功</au-button>
-                  <au-button size="small" @click="showDanger">失败</au-button>
-                  <au-button size="small" @click="showWarning">警告</au-button>
-                  <au-button size="small" @click="showLoading">加载中</au-button>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+            <demo>
+              <au-button size="small" type="info" @click="$message('info', '标题', '提示内容')">信息</au-button>
+              <au-button size="small" type="success" @click="$message('success', '标题', '提示内容')">成功</au-button>
+              <au-button size="small" type="danger" @click="$message('danger', '标题', '提示内容')">失败</au-button>
+              <au-button size="small" type="warning" @click="$message('warning', '标题', '提示内容')">警告</au-button>
+              <au-button size="small" type="default" @click="showLoadingMessage">加载中</au-button>
+              <template type="au-demo">
                 <script>
-                  {
-                    data () {
-                      return {
-                        title: '',
-                        message: '提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息提示信息',
-                        func: null
-                      }
-                    },
+                  export default {
                     methods: {
-                      showInfo () {
-                        this.$message('info', this.title, this.message, {
-                          buttons: [{
-                            title: '确定',
-                            callback: () => {
-                              console.log('fuck you')
-                            }
-                          }]
-                        })
-                      },
-                      showDanger () {
-                        this.$message('error', this.title, this.message)
-                      },
-                      showSuccess () {
-                        this.$message('success', this.title, this.message)
-                      },
-                      showWarning () {
-                        this.$message('warning', this.title, this.message)
-                      },
-                      showLoading () {
-                        if (this.func) {
-                          this.func()
-                          this.func = null
-                        } else {
-                          this.func = this.$message('loading', this.title, this.message)
-                        }
+                      showLoadingMessage(){
+                        let close = this.$message('loading', '标题', '提示内容');
+                        setTimeout(close, 3000);
                       }
                     }
                   }
+                  
                 </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>自定义按钮</h3>
+
             </div>
+            <demo>
+              <au-button size="small" type="info" @click="showMessage">信息</au-button>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    methods: {
+                      showMessage () {
+                        let buttons = [
+                          {
+                            title: '按钮1',
+                            callback: ()=>{
+                              this.$message('info', '点击按钮1');
+                            }
+                          },
+                          {
+                            title: '按钮2',
+                            callback: ()=>{
+                              this.$message('info', '点击按钮2');
+                            }
+                          }
+                        ];
+                        this.$message('info', '标题', '提示内容', {buttons});
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
         </div>
@@ -360,7 +394,30 @@
     <script>
       new Vue({
         el: '#app',
-        mixins
+        mixins,
+        methods: {
+          showLoadingMessage () {
+            let close = this.$message('loading', '标题', '提示内容');
+            setTimeout(close, 3000);
+          },
+          showMessage () {
+            let buttons = [
+              {
+                title: '按钮1',
+                callback: ()=>{
+                  this.$message('info', '点击按钮1');
+                }
+              },
+              {
+                title: '按钮2',
+                callback: ()=>{
+                  this.$message('info', '点击按钮2');
+                }
+              }
+            ];
+            this.$message('info', '标题', '提示内容', {buttons});
+          }
+        }
       })
     </script>
   </body>
