@@ -14,7 +14,7 @@ block content
         ## 例子
 
         ### 基础使用方法
-        分页组件默认每页10条数据
+        分页组件默认每页10条数据。`show-total`控制是否显示总数。
     demo
       au-pagination(v-model="page", :item-count="itemCount", show-total)
       p page={{page}}   itemCount={{itemCount}}
@@ -30,17 +30,17 @@ block content
         ### 位置控制
     demo
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="left")
+        au-pagination(:item-count="100", align="left", show-total)
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="center")
+        au-pagination(:item-count="100", align="center", show-total)
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="right")
+        au-pagination(:item-count="100", align="right", show-total)
 
     .markdown-body
       :markdown-it
         ### 显示更多分页控制
     demo
-      au-pagination(v-model="page", :item-count="itemCount", show-page-size-control, show-page-control)
+      au-pagination(v-model="page", :item-count="itemCount", show-page-size-control, show-page-control, show-total)
       p page={{page}}   itemCount={{itemCount}}
       template(type="au-demo")
         script.
