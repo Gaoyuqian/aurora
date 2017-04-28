@@ -134,51 +134,104 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuDragModal</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuDragModal</h1>
+<p>支持拖拽的modal。</p>
+<h3>基本使用</h3>
+<p>使用上与 <a href="modal.html"><code>au-modal</code></a> 无太多区别。</p>
+
             </div>
-            <div class="docs-section">
-              <h2>基础DragModal</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-button-group>
-                    <au-button @click="showRed=!showRed">Toggle Red</au-button>
-                    <au-button type="primary" size="small" @click="showModals">显示全部</au-button>
-                    <au-button type="info" size="small" @click="value.isShow = !value.isShow" v-for="value in modals">显示Modal</au-button>
-                  </au-button-group>
-                  <au-drag-modal title="新页面" v-model="value.isShow" :top="top" :left="left" style="width:500px;" v-for="value in modals">
-                    <div style="background-color:red;height:2000px" v-if="showRed"></div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div>这里是正文内容</div>
-                    <div slot="footer">
-                      <au-button type="primary" size="small">提交</au-button>
-                      <au-button type="default" size="small" @click="value.isShow = false">取消</au-button>
-                    </div>
-                  </au-drag-modal>
+            <demo>
+              <au-button-group>
+                <au-button type="primary" size="small" @click="showModals">显示全部</au-button>
+              </au-button-group>
+              <au-drag-modal v-for="(value, $index) in modals" :title="'title区域可拖拽的弹框-' + ($index+1)" v-model="value.isShow" :top="($index+1)*100" :left="($index+1)*100" style="width:500px;">
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div>这里是正文内容</div>
+                <div slot="footer">
+                  <au-button type="primary" size="small">提交</au-button>
+                  <au-button type="default" size="small" @click="value.isShow = false">取消</au-button>
                 </div>
+              </au-drag-modal>
+              <template type="au-demo">
+                <script>
+                  export default {
+                  data: {
+                    modals: [
+                      { isShow: false },
+                      { isShow: false },
+                      { isShow: false },
+                      { isShow: false },
+                    ]
+                  },
+                  methods: {
+                    showModals () {
+                      this.modals = this.modals.map((item) => {
+                        item.isShow = !item.isShow
+                        return item
+                      })
+                    }
+                  }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>icon</td>
+<td>标题前的图标</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>是否展示的绑定变量。<code>true</code> 为显示。<code>false</code> 为隐藏。</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>no-close</td>
+<td>是否隐藏右上角关闭按钮</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>left</td>
+<td>初始位置 left</td>
+<td>String,Number</td>
+<td></td>
+</tr>
+<tr>
+<td>top</td>
+<td>初始位置 top</td>
+<td>String,Number</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -338,32 +391,18 @@
         mixins,
         data () {
           return {
-            showRed: false,
-            attrs: [
-              {
-                name: 'column',
-                desc: '列信息',
-                type: 'Array',
-                default: 'null'
-              }
-            ],
-            top: null,
-            left: null,
             modals: [
               { isShow: false },
               { isShow: false },
               { isShow: false },
               { isShow: false },
-              { isShow: false },
-              { isShow: false },
-              { isShow: false }
             ]
           }
         },
         methods: {
           showModals () {
             this.modals = this.modals.map((item) => {
-              item.isShow = !item.isShow
+              item.isShow = true;
               return item
             })
           }

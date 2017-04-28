@@ -134,97 +134,103 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuTag</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuTag</h1>
+<p>标签支持多种颜色</p>
+<h3>多种颜色</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>颜色选择</h2>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-tag color="red">标签</au-tag>
-                  <au-tag color="orange">标签</au-tag>
-                  <au-tag color="yellow">标签</au-tag>
-                  <au-tag color="green">标签</au-tag>
-                  <au-tag color="cyan">标签</au-tag>
-                  <au-tag color="sky">标签</au-tag>
-                  <au-tag color="blue">标签</au-tag>
-                  <au-tag color="purple">标签</au-tag>
-                  <au-tag color="pink">标签</au-tag>
-                  <au-tag color="light">标签</au-tag>
-                  <au-tag color="gray">标签</au-tag>
-                  <au-tag color="dark">标签</au-tag>
-                </div>
-                <div class="docs-panel-row">
-                  <au-tag color="red" bordered>标签</au-tag>
-                  <au-tag color="orange" bordered>标签</au-tag>
-                  <au-tag color="yellow" bordered>标签</au-tag>
-                  <au-tag color="green" bordered>标签</au-tag>
-                  <au-tag color="cyan" bordered>标签</au-tag>
-                  <au-tag color="sky" bordered>标签</au-tag>
-                  <au-tag color="blue" bordered>标签</au-tag>
-                  <au-tag color="purple" bordered>标签</au-tag>
-                  <au-tag color="pink" bordered>标签</au-tag>
-                  <au-tag color="light" bordered>标签</au-tag>
-                  <au-tag color="gray" bordered>标签</au-tag>
-                  <au-tag color="dark" bordered>标签</au-tag>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
-                <script>
-                  {
-                    methods: {
-                  
-                    }
-                  }
-                </script>
-              </template>
-              <div class="docs-desc"></div>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
+            <demo>
+              <div style="margin-bottom: 5px">
+                <au-tag color="red">标签</au-tag>
+                <au-tag color="orange">标签</au-tag>
+                <au-tag color="yellow">标签</au-tag>
+                <au-tag color="green">标签</au-tag>
+                <au-tag color="cyan">标签</au-tag>
+                <au-tag color="sky">标签</au-tag>
+                <au-tag color="blue">标签</au-tag>
+                <au-tag color="purple">标签</au-tag>
+                <au-tag color="pink">标签</au-tag>
+                <au-tag color="light">标签</au-tag>
+                <au-tag color="gray">标签</au-tag>
+                <au-tag color="dark">标签</au-tag>
               </div>
+              <div style="margin-bottom: 5px">
+                <au-tag color="red" bordered>标签</au-tag>
+                <au-tag color="orange" bordered>标签</au-tag>
+                <au-tag color="yellow" bordered>标签</au-tag>
+                <au-tag color="green" bordered>标签</au-tag>
+                <au-tag color="cyan" bordered>标签</au-tag>
+                <au-tag color="sky" bordered>标签</au-tag>
+                <au-tag color="blue" bordered>标签</au-tag>
+                <au-tag color="purple" bordered>标签</au-tag>
+                <au-tag color="pink" bordered>标签</au-tag>
+                <au-tag color="light" bordered>标签</au-tag>
+                <au-tag color="gray" bordered>标签</au-tag>
+                <au-tag color="dark" bordered>标签</au-tag>
+              </div>
+            </demo>
+            <div class="markdown-body"><h3>带关闭按钮</h3>
+<p>按钮图标点击后将发出<code>close</code>事件</p>
+
             </div>
-            <div class="docs-section">
-              <h2>关闭按钮</h2>
-              <template scoped="scoped" class="html">
-                <div class="docs-panel-row">
-                  <au-tag color="red" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="orange" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="yellow" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="green" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="cyan" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="sky" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="blue" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="purple" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="pink" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="light" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="gray" closeable @close="onClose">标签</au-tag>
-                  <au-tag color="dark" closeable @close="onClose">标签</au-tag>
-                </div>
-              </template>
-              <template scoped="scoped" class="js">
+            <demo>
+              <au-tag color="red" closeable @close="onClose">标签</au-tag>
+              <au-tag color="orange" closeable @close="onClose">标签</au-tag>
+              <au-tag color="yellow" closeable @close="onClose">标签</au-tag>
+              <au-tag color="green" closeable @close="onClose">标签</au-tag>
+              <au-tag color="cyan" closeable @close="onClose">标签</au-tag>
+              <au-tag color="sky" closeable @close="onClose">标签</au-tag>
+              <au-tag color="blue" closeable @close="onClose">标签</au-tag>
+              <au-tag color="purple" closeable @close="onClose">标签</au-tag>
+              <au-tag color="pink" closeable @close="onClose">标签</au-tag>
+              <au-tag color="light" closeable @close="onClose">标签</au-tag>
+              <au-tag color="gray" closeable @close="onClose">标签</au-tag>
+              <au-tag color="dark" closeable @close="onClose">标签</au-tag>
+              <template type="au-demo">
                 <script>
-                  {
+                  export default {
                     methods: {
                       onClose () {
-                        console.log('On close')
+                        this.$message('info', '点击关闭');
                       }
                     }
                   }
+                  
                 </script>
               </template>
-              <div class="docs-desc"></div>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                  <docs-code class="js"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h2>属性</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>color</td>
+<td>颜色。可选值参见例子代码。</td>
+<td>String</td>
+<td>''</td>
+</tr>
+<tr>
+<td>bordered</td>
+<td>是否有边框</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>closeable</td>
+<td>是否展示关闭按钮</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -384,6 +390,11 @@
         mixins,
         data () {
           return {
+          }
+        },
+        methods: {
+          onClose () {
+            this.$message('info', '点击关闭');
           }
         }
       })

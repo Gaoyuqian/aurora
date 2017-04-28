@@ -134,77 +134,216 @@
         </div>
         <div slot="container">
           <au-panel>
-            <div class="docs-heading">
-              <h1>AuMenu</h1>
-              <div class="docs-desc"></div>
+            <div class="markdown-body"><h1>AuMenu</h1>
+<p>菜单组件包含 <code>au-menu</code>、 <code>au-menu-item</code>、<code>au-menu-group</code> 三个组件。可设置为水平或垂直的菜单。支持二级子菜单嵌套。</p>
+<h2>基础用法</h2>
+<p>默认为水平菜单，通过<code>selected</code>属性控制选中的菜单（支持多选）。</p>
+<h3>单选</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>水平菜单</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <au-flex column>
-                  <au-item span="12">
-                    <div class="docs-panel-row">
-                      <div class="docs-menu-wrapper">
-                        <au-menu :selected="selected">
-                          <au-menu-item>首页
-                            <au-menu>
-                              <au-menu-item value="sub1" @click="toggle('sub1')">子项目1</au-menu-item>
-                              <au-menu-item value="sub2" @click="toggle('sub2')">子项目2</au-menu-item>
-                              <au-menu-item value="sub3" @click="toggle('sub3')">子项目3</au-menu-item>
-                            </au-menu>
-                          </au-menu-item>
-                          <au-menu-item value="content" @click="toggle('content')">内容</au-menu-item>
-                          <au-menu-item value="list" @click="toggle('list')">列表</au-menu-item>
-                        </au-menu>
-                      </div>
-                    </div>
-                  </au-item>
-                </au-flex>
+            <demo>
+              <au-menu :selected="single">
+                <au-menu-item>菜单1
+                  <au-menu>
+                    <au-menu-item value="1-1" @click="toogleSingleSelected('1-1')">菜单1-1</au-menu-item>
+                    <au-menu-item value="1-2" @click="toogleSingleSelected('1-2')">菜单1-2</au-menu-item>
+                    <au-menu-item value="1-3" @click="toogleSingleSelected('1-3')">菜单1-3</au-menu-item>
+                  </au-menu>
+                </au-menu-item>
+                <au-menu-item value="2" @click="toogleSingleSelected('2')">菜单2</au-menu-item>
+                <au-menu-item value="3" @click="toogleSingleSelected('3')">菜单3</au-menu-item>
+              </au-menu>
+              <P>当前选中： {{single}}</P>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {single: ''},
+                    methods: {
+                      toogleSingleSelected (value) {
+                        this.single = value;
+                      }
+                    }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>多选</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>垂直菜单</h2>
-              <div class="docs-desc"></div>
-              <template scoped="scoped" class="html">
-                <au-flex column>
-                  <au-item span="12">
-                    <div class="docs-panel-row">
-                      <div class="docs-menu-wrapper">
-                        <au-menu vertical :selected="selected">
-                          <au-menu-item>首页
-                            <au-menu>
-                              <au-menu-item value="sub1" @click="toggle('sub1')">子项目1</au-menu-item>
-                              <au-menu-item value="sub2" @click="toggle('sub2')">子项目2</au-menu-item>
-                              <au-menu-item value="sub3" @click="toggle('sub3')">子项目3</au-menu-item>
-                            </au-menu>
-                          </au-menu-item>
-                          <au-menu-item value="content" @click="toggle('content')">内容</au-menu-item>
-                          <au-menu-item value="list" @click="toggle('list')">列表</au-menu-item>
-                        </au-menu>
-                      </div>
-                    </div>
-                  </au-item>
-                </au-flex>
+            <demo>
+              <au-menu :selected="mSelected">
+                <au-menu-item>菜单1
+                  <au-menu>
+                    <au-menu-item value="1-1" @click="toogleSelected('1-1')">菜单1-1</au-menu-item>
+                    <au-menu-item value="1-2" @click="toogleSelected('1-2')">菜单1-2</au-menu-item>
+                    <au-menu-item value="1-3" @click="toogleSelected('1-3')">菜单1-3</au-menu-item>
+                  </au-menu>
+                </au-menu-item>
+                <au-menu-item value="2" @click="toogleSelected('2')">菜单2</au-menu-item>
+                <au-menu-item value="3" @click="toogleSelected('3')">菜单3</au-menu-item>
+              </au-menu>
+              <P>当前选中： {{JSON.stringify(mSelected)}}</P>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    data: {mSelected: []},
+                    methods: {
+                      toogleSelected (value) {
+                        const pos = this.mSelected.indexOf(value)
+                        if (pos > -1) {
+                          this.mSelected.splice(pos, 1)
+                        } else {
+                          this.mSelected.push(value)
+                        }
+                      }
+                    }
+                  }
+                  
+                </script>
               </template>
-              <div class="docs-panel">
-                <div class="docs-panel-content"></div>
-                <div class="docs-code">
-                  <docs-code class="html"></docs-code>
-                </div>
-              </div>
+            </demo>
+            <div class="markdown-body"><h3>触发方式 &amp; 图标展示</h3>
+
             </div>
-            <div class="docs-section">
-              <h2>属性</h2>
-              <au-table :data="attrs">
-                <au-table-column v-for="column in columns" :label="column.label" :attr-name="column.attrName"></au-table-column>
-              </au-table>
+            <demo>
+              <!-- 默认click 改为 hover-->
+              <au-menu menu-trigger="hover">
+                <au-menu-item icon="github">菜单1
+                  <au-menu>
+                    <au-menu-item icon="github">菜单1-1</au-menu-item>
+                    <au-menu-item icon="github">菜单1-2</au-menu-item>
+                    <au-menu-item icon="github">菜单1-3</au-menu-item>
+                  </au-menu>
+                </au-menu-item>
+                <au-menu-item icon="firefox">菜单2</au-menu-item>
+                <au-menu-item icon="chrome">菜单3</au-menu-item>
+              </au-menu>
+            </demo>
+            <div class="markdown-body"><h3>纵向 &amp; 分组</h3>
+
+            </div>
+            <demo>
+              <au-menu-group title="组1">
+                <au-menu vertical>
+                  <au-menu-item>菜单1</au-menu-item>
+                  <au-menu-item>菜单2</au-menu-item>
+                </au-menu>
+              </au-menu-group>
+              <au-menu-group title="组2">
+                <au-menu vertical>
+                  <au-menu-item>菜单1
+                    <au-menu>
+                      <au-menu-item>菜单1-1</au-menu-item>
+                      <au-menu-item>菜单1-2</au-menu-item>
+                      <au-menu-item>菜单1-3</au-menu-item>
+                    </au-menu>
+                  </au-menu-item>
+                  <au-menu-item>菜单2</au-menu-item>
+                  <au-menu-item>菜单3</au-menu-item>
+                </au-menu>
+              </au-menu-group>
+            </demo>
+            <div class="markdown-body"><h3>链接配置</h3>
+
+            </div>
+            <demo>
+              <au-menu vertical>
+                <au-menu-item href="#">菜单1</au-menu-item>
+                <au-menu-item href="#" target="_blank">菜单2</au-menu-item>
+              </au-menu>
+            </demo>
+            <div class="markdown-body"><h2>au-menu</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>menu-trigger</td>
+<td>子菜单触发方式。可选值： 'click'、'hover'</td>
+<td>String</td>
+<td>'click'</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>是否为纵向模式</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>绑定的当前选中项（与<code>au-menu-item</code>的value一致）</td>
+<td>String,Array</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>au-menu-item</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>href</td>
+<td>跳转链接</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>target</td>
+<td>同原生a标签 target</td>
+<td>String</td>
+<td>'_self'</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>图标</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>标识唯一性的value值</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>au-menu-group</h2>
+<h3>属性</h3>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>说明</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
             </div>
           </au-panel>
           <au-footer>Copyright © 2017 美利金融 Aurora项目</au-footer>
@@ -364,18 +503,21 @@
         mixins,
         data () {
           return {
-            attrs: [],
-            selected: []
+            mSelected: [],
+            single: ''
           }
         },
         methods: {
-          toggle (value) {
-            const pos = this.selected.indexOf(value)
+          toogleSelected (value) {
+            const pos = this.mSelected.indexOf(value)
             if (pos > -1) {
-              this.selected.splice(pos, 1)
+              this.mSelected.splice(pos, 1)
             } else {
-              this.selected.push(value)
+              this.mSelected.push(value)
             }
+          },
+          toogleSingleSelected (value) {
+            this.single = value;
           }
         }
       })
