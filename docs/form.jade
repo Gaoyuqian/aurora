@@ -190,13 +190,13 @@ block content
         一个验证规则所包含的内容：
         ```javascript
           {
-            trigger: 'event1, event2, ...',     // 验证以何种事件触发
+            trigger: 'trigger, hover',         // 验证以何种事件触发， 只支持 trigger 或 hover
             message: '',                        // 验证错误提示
 
             // 下面是组件自带验证规则 一个验证规则只能有一种验证方式，下方规则只能选择一种进行设置。
 
             // 自定义验证方法
-            validator: function(){callback},    // callback(true)验证成功；callback(false)验证失败；
+            validator: function(callback){},    // callback(true)验证成功；callback(false)验证失败；
 
             // 必填
             required: true,                     // 是否必填
