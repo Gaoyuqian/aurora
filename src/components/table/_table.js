@@ -32,7 +32,8 @@ const AuTable = Vue.extend({
     return {
       columns: [],
       model: null,
-      timestamp: new Date()
+      timestamp: new Date(),
+      isInitColumnWidth: false
     }
   },
   computed: {
@@ -82,8 +83,11 @@ const AuTable = Vue.extend({
       if (this._isDestroyed) {
         return
       }
+      if (!this.isInitColumnWidth) {
+        this.model.initColumnsWidth()
+        this.isInitColumnWidth = true
+      }
 
-      this.model.initColumnsWidth()
       this.$nextTick(() => {
         const scroll = this.$refs.scroll
         const table = scroll.querySelector('table')
