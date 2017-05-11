@@ -26,7 +26,8 @@ const AuPagination = Vue.extend({
       }
     },
     showPageSizeControl: Boolean,
-    showPageControl: Boolean
+    showPageControl: Boolean,
+    showTotal: Boolean
   },
   computed: {
     classObj () {
