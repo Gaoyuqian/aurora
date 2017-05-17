@@ -39,7 +39,7 @@ const AuTable = Vue.extend({
   computed: {
     style () {
       this.timestamp
-      const maxHeight = String(this.maxHeight) || 'auto'
+      const maxHeight = this.maxHeight != null ? String(this.maxHeight) : 'auto'
 
       if (maxHeight.match(/^\d+$/)) {
         maxHeight += 'px'
@@ -67,6 +67,7 @@ const AuTable = Vue.extend({
   },
   created () {
     this.$on('update.table', this.onUpdateTable)
+    this.$on('tab-panel-show', this.calPosition)
     this.onUpdateTable()
   },
   mounted () {
@@ -90,7 +91,7 @@ const AuTable = Vue.extend({
 
       this.$nextTick(() => {
         const scroll = this.$refs.scroll
-        const table = scroll.querySelector('table')
+        const table = scroll.querySelector('.au-table-body')
         const scrollRect = scroll.getBoundingClientRect()
         const rect = table.getBoundingClientRect()
 

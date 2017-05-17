@@ -12,7 +12,7 @@ class TableColumn {
     this.fixedType = ''
     if (column.type === 'expand') {
       if (column.defaultExpandAll) {
-        this.expandRows = this.tableObj.rows.slice()
+        this.expandRowsModel = this.tableObj.rows.slice()
       } else {
         this.expandRowsModel = column.expandRowsModel
       }
@@ -286,7 +286,7 @@ export class TableModel {
     })
 
     if (noWidthColumns.length > 0) {
-      tableWidth = tableWidth / noWidthColumns.length
+      tableWidth = Math.max(tableWidth / noWidthColumns.length, 80)
       noWidthColumns.forEach((column) => {
         column.width = String(tableWidth)
       })

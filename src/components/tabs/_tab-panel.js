@@ -18,6 +18,15 @@ const AuTabPanel = Vue.extend({
   },
   beforeDestroy () {
     this.dispatch('remove-tab-panel', this)
+  },
+  watch: {
+    active () {
+      if (this.active) {
+        this.broadcast('tab-panel-show')
+      } else {
+        this.broadcast('tab-panel-hide')
+      }
+    }
   }
 })
 
