@@ -159,14 +159,24 @@
             </div>
             <demo>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="left" show-total></au-pagination>
+                <au-pagination v-model="page" :item-count="itemCount" align="left" show-total></au-pagination>
               </div>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="center" show-total></au-pagination>
+                <au-pagination v-model="page" :item-count="itemCount" align="center" show-total></au-pagination>
               </div>
               <div style="margin-bottom:10px">
-                <au-pagination :item-count="100" align="right" show-total></au-pagination>
+                <au-pagination v-model="page" :item-count="itemCount" align="right" show-total></au-pagination>
               </div>
+              <p>page={{page}}   itemCount={{itemCount}}</p>
+              <template type="au-demo">
+                <script>
+                  export default {
+                    page: 1,
+                    itemCount: 200
+                  }
+                  
+                </script>
+              </template>
             </demo>
             <div class="markdown-body"><h3>显示更多分页控制</h3>
 
