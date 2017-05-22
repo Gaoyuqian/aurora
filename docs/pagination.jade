@@ -30,11 +30,18 @@ block content
         ### 位置控制
     demo
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="left", show-total)
+        au-pagination(v-model="page", :item-count="itemCount", align="left", show-total)
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="center", show-total)
+        au-pagination(v-model="page", :item-count="itemCount", align="center", show-total)
       div(style="margin-bottom:10px")
-        au-pagination(:item-count="100", align="right", show-total)
+        au-pagination(v-model="page", :item-count="itemCount", align="right", show-total)
+      p page={{page}}   itemCount={{itemCount}}
+      template(type="au-demo")
+        script.
+          export default {
+            page: 1,
+            itemCount: 200
+          }
 
     .markdown-body
       :markdown-it
