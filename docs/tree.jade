@@ -113,7 +113,6 @@ block content
         通过vue的 [`scopeSlots`](http://vuejs.org/v2/guide/components.html#Scoped-Slots) 实现自定义内容。
 
         `checkable` 属性展示一个checkbox用于数据选择。通过check事件通知选中数据变化，传入的数据只包含最后一级节点。
-        > 暂不支持默认选中
     demo
       au-tree(:data="treeData", checkable, :click-row-expand="false", @check="checked")
         template(scope="scope")
@@ -158,6 +157,53 @@ block content
 
     .markdown-body
       :markdown-it
+        ### 默认选中 & 默认展开
+    demo
+      au-tree(:data="treeData", checkable, :click-row-expand="false", :expands="expands", :default-checkeds="defaultCheckeds", @check="checked2")
+        template(scope="scope")
+          au-flex
+            au-item(flex="1")|自定义-{{ scope.data.label }}
+            au-item
+              au-button(type="primary", size="mini")|编辑
+              au-button(type="danger", size="mini")|删除
+      h4 当前选中的数据：
+      pre {{JSON.stringify(checkedData2, '', '  ')}}
+      template(type="au-demo")
+        script.
+          const treeData = [
+            {
+              label: '中国',
+              children: [
+                {label: '山西', children: [{label: '长治'}],
+                {label: '山东'},
+                {label: '广州'},
+              ]
+            },
+            {
+              label: '美国',
+              children: [
+                {label: '加州', children: [{label: '洛杉矶'}, {label: '旧金山'}],
+                {label: '这个州'},
+                {label: '那个州'},
+              ]
+            },
+          ];
+          export default {
+            data: {
+              treeData: treeData,
+              checkedData2: [],
+              expands: [treeData[0].children[0].children[0]],
+              defaultCheckeds: [treeData[0].children[0].children[0]]
+            },
+            methods: {
+              checked(data){
+                this.checkedData = data;
+              }
+            }
+          }
+
+    .markdown-body
+      :markdown-it
         ## 属性
         |        属性        |                                              说明                                              |   类型   | 默认值 |
         |--------------------|------------------------------------------------------------------------------------------------|----------|--------|
@@ -167,6 +213,7 @@ block content
         | click-row-expand   | 是否点击整行展开折叠                                                                           | Boolean  | true   |
         | checkable          | 是否使用单选框                                                                                 | Boolean  | false  |
         | expands            | 表示展开的元素                                                                                 | Array    | []     |
+        | default-checkeds   | 默认选中的元素                                                                                 | Array    |        |
 
         ## 事件
         |  名称 |         说明         |
@@ -201,7 +248,10 @@ block script
         return {
           treeData,
           treeData2,
-          checkedData: []
+          checkedData: [],
+          checkedData2: [treeData[0].children[0].children[0]],
+          expands: [treeData[0]],
+          defaultCheckeds: [treeData[0].children[0].children[0]]
         }
       },
       methods: {
@@ -220,6 +270,9 @@ block script
         },
         checked(data){
           this.checkedData = data;
+        },
+        checked2(data){
+          this.checkedData2 = data;
         }
       }
     })
