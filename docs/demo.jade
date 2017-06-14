@@ -27,12 +27,12 @@ block content
 
     au-table(:data="data", style="margin-top: 20px;", max-height="400", bordered)
       au-table-column(
-        type="expand"
+        type="expand",
+        default-expand-all
       )
         template(scope="scope")
           au-table(:data="scope.data.expand")
             au-table-column(label="Name", attr-name="name")
-
 
       au-table-column(
         label='姓名',
@@ -84,8 +84,7 @@ block content
       au-table-column(
         label='操作',
         nowrap,
-        width="200",
-        fixed
+        width="200"
       )
         template(scope="scope")
           au-button(type="link", size="mini", @click.native="console.log(scope.index, scope.data)")|编辑

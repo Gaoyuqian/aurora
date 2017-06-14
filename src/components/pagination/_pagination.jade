@@ -1,7 +1,7 @@
 .au-pagination(:class="classObj")
   .au-pagination-item(v-if="showTotal")
     .au-pagination-text
-      共 {{ itemCount }} 条
+      |共 {{ itemCount }} 条
   .au-pagination-item
     .au-pagination-link(
       :class="{'au-pagination-disabled': isLeftOut(page) }",
