@@ -14,7 +14,7 @@ block content
       .docs-desc
 
       template.html(scoped="scoped")
-        au-tree(:data="data", :loader="loader", checkable, @check="onCheck")
+        au-tree(:data="data", :loader="loader", checkable, @check="onCheck", :default-checkeds="defaultCheckeds")
         div|------
         au-tree(:data="data", default-expand-all, :click-row-expand="false")
           template(scope="scope")
@@ -29,6 +29,7 @@ block content
           {
             data () {
               return {
+                defaultCheckeds: [],
                 count: 0,
                 data: [
                   {
@@ -60,6 +61,8 @@ block content
               }
             },
             mounted () {
+              this.defaultCheckeds = [this.data[1].children[1].children[0]]
+              console.log(this.defaultCheckeds)
               return
               setTimeout(() => {
                 this.data.push({
