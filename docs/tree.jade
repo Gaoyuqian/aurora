@@ -14,7 +14,7 @@ block content
       .docs-desc
 
       template.html(scoped="scoped")
-        au-tree(:data="data", :loader="loader", checkable, @check="onCheck", :default-checkeds="defaultCheckeds")
+        au-tree(:data="data", :loader="loader", checkable, @check="onCheck", :expands="expands1", :default-checkeds="defaultCheckeds")
         div|------
         au-tree(:data="data", default-expand-all, :click-row-expand="false")
           template(scope="scope")
@@ -28,41 +28,41 @@ block content
         script.
           {
             data () {
+              const data = [
+                {
+                  label: '加载更多',
+                  children: null
+                },
+                {
+                  label: '第一级',
+                  children: [
+                    {
+                      label: '第二级'
+                    },
+                    {
+                      label: '第三级',
+                      children: [
+                        {
+                          label: '第二级',
+                          children: []
+                        },
+                        {
+                          label: '第三级',
+                          children: []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
               return {
-                defaultCheckeds: [],
+                defaultCheckeds: [data[1].children[1].children[0]],
+                expands1: [data[1]],
                 count: 0,
-                data: [
-                  {
-                    label: '加载更多',
-                    children: null
-                  },
-                  {
-                    label: '第一级',
-                    children: [
-                      {
-                        label: '第二级'
-                      },
-                      {
-                        label: '第三级',
-                        children: [
-                          {
-                            label: '第二级',
-                            children: []
-                          },
-                          {
-                            label: '第三级',
-                            children: []
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
+                data
               }
             },
             mounted () {
-              this.defaultCheckeds = [this.data[1].children[1].children[0]]
-              console.log(this.defaultCheckeds)
               return
               setTimeout(() => {
                 this.data.push({
