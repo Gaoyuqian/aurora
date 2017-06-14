@@ -192,7 +192,7 @@ block content
             data: {
               treeData: treeData,
               checkedData2: [],
-              expands: [treeData[0].children[0].children[0]],
+              expands: [treeData[0], treeData[1]],
               defaultCheckeds: [treeData[0].children[0].children[0]]
             },
             methods: {
@@ -250,7 +250,7 @@ block script
           treeData2,
           checkedData: [],
           checkedData2: [treeData[0].children[0].children[0]],
-          expands: [treeData[0]],
+          expands: [treeData[0], treeData[1]],
           defaultCheckeds: [treeData[0].children[0].children[0]]
         }
       },

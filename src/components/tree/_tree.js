@@ -43,6 +43,9 @@ export default AuTree = Vue.extend({
   },
   mounted () {
     this.addDefaultCheckes()
+    if (this.expands) {
+      this.setExpands(this.expands)
+    }
   },
   methods: {
     isChecked (data) {// return true, false, indeterminate
@@ -116,11 +119,10 @@ export default AuTree = Vue.extend({
       return Ctor ? Ctor({ data }) : data.label
     },
     setExpands (value) {
+      console.log('setExpands')
       this.$emit('change.expands', value)
     },
     addDefaultCheckes () {
-      console.log('--------------------------------------------------------------------------------')
-      console.log(this.defaultCheckeds)
       if (this.defaultCheckeds != null) {
         this.checkeds.push.apply(this.checkeds, this.defaultCheckeds)
         this.broadcast('checkout.checked')
