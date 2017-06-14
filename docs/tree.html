@@ -246,9 +246,6 @@
             <div class="markdown-body"><h3>自定义内容 &amp; checkable</h3>
 <p>通过vue的 <a href="http://vuejs.org/v2/guide/components.html#Scoped-Slots"><code>scopeSlots</code></a> 实现自定义内容。</p>
 <p><code>checkable</code> 属性展示一个checkbox用于数据选择。通过check事件通知选中数据变化，传入的数据只包含最后一级节点。</p>
-<blockquote>
-<p>暂不支持默认选中</p>
-</blockquote>
 
             </div>
             <demo>
@@ -289,6 +286,60 @@
                     data: {
                       treeData: treeData,
                       checkedData: []
+                    },
+                    methods: {
+                      checked(data){
+                        this.checkedData = data;
+                      }
+                    }
+                  }
+                  
+                </script>
+              </template>
+            </demo>
+            <div class="markdown-body"><h3>默认选中 &amp; 默认展开</h3>
+
+            </div>
+            <demo>
+              <au-tree :data="treeData" checkable :click-row-expand="false" :expands="expands" :default-checkeds="defaultCheckeds" @check="checked2">
+                <template scope="scope">
+                  <au-flex>
+                    <au-item flex="1">自定义-{{ scope.data.label }}</au-item>
+                    <au-item>
+                      <au-button type="primary" size="mini">编辑</au-button>
+                      <au-button type="danger" size="mini">删除</au-button>
+                    </au-item>
+                  </au-flex>
+                </template>
+              </au-tree>
+              <h4>当前选中的数据：</h4>
+              <pre>{{JSON.stringify(checkedData2, '', '  ')}}</pre>
+              <template type="au-demo">
+                <script>
+                  const treeData = [
+                    {
+                      label: '中国',
+                      children: [
+                        {label: '山西', children: [{label: '长治'}],
+                        {label: '山东'},
+                        {label: '广州'},
+                      ]
+                    },
+                    {
+                      label: '美国',
+                      children: [
+                        {label: '加州', children: [{label: '洛杉矶'}, {label: '旧金山'}],
+                        {label: '这个州'},
+                        {label: '那个州'},
+                      ]
+                    },
+                  ];
+                  export default {
+                    data: {
+                      treeData: treeData,
+                      checkedData2: [],
+                      expands: [treeData[0], treeData[1]],
+                      defaultCheckeds: [treeData[0].children[0].children[0]]
                     },
                     methods: {
                       checked(data){
@@ -346,6 +397,12 @@
 <td>表示展开的元素</td>
 <td>Array</td>
 <td>[]</td>
+</tr>
+<tr>
+<td>default-checkeds</td>
+<td>默认选中的元素</td>
+<td>Array</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -545,7 +602,10 @@
           return {
             treeData,
             treeData2,
-            checkedData: []
+            checkedData: [],
+            checkedData2: [treeData[0].children[0].children[0]],
+            expands: [treeData[0], treeData[1]],
+            defaultCheckeds: [treeData[0].children[0].children[0]]
           }
         },
         methods: {
@@ -564,6 +624,9 @@
           },
           checked(data){
             this.checkedData = data;
+          },
+          checked2(data){
+            this.checkedData2 = data;
           }
         }
       })
