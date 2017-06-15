@@ -36,7 +36,9 @@ const AuSelect = Vue.extend({
       default: 'default'
     },
     filter: Boolean,
-    clearable: Boolean
+    clearable: Boolean,
+    remote: Boolean,
+    remoteMethod: Function
   },
   data () {
     return {
@@ -220,7 +222,7 @@ const AuSelect = Vue.extend({
         this.text = label
       }
 
-      if (this.filter) {
+      if (!this.active && this.filter) {
         if (!this.isEmptyValue()) {
           this.textModel = this.text
         } else {
@@ -285,11 +287,11 @@ const AuSelect = Vue.extend({
           this.calcText()
         })
       }
-
       this.optionsElem.show()
     },
     hideOptions () {
       this.dispatch('blur.form', this.value)
+
       this.optionsElem.hide()
     },
     setOptionActive () {
@@ -410,16 +412,20 @@ const AuSelect = Vue.extend({
     },
     queryOptions () {
       const text = this.textModel.trim()
-      for (let key in this.registeredChild) {
-        child = this.registeredChild[key]
-        child.isHide = (
-          text &&
-          child.label.toLowerCase().indexOf(text.toLowerCase()) === -1
-        )
-      }
+      if (this.remote && this.remoteMethod) {
+        this.remoteMethod(text)
+      } else {
+        for (let key in this.registeredChild) {
+          child = this.registeredChild[key]
+          child.isHide = (
+            text &&
+            child.label.toLowerCase().indexOf(text.toLowerCase()) === -1
+          )
+        }
 
-      this.clearFocusOption()
-      this.getNextFocusOption()
+        this.clearFocusOption()
+        this.getNextFocusOption()
+      }
 
       this.$nextTick(() => {
         if (this.$refs.popup) {
