@@ -28,11 +28,12 @@ function htmlEncode(str){
 }
 
 function convertHtml(html) {
-    html = html.trim();
+    html = html.replace(/template/g, 'template-placeholder');
     html = html_beautify(html, {
       indent_size: 2
     });
     html = html.replace(/=""/g, '');
+    html = html.replace(/template-placeholder/g, 'template');
     return htmlEncode(html);
 }
 
