@@ -9,7 +9,7 @@ const AuTableBody = Vue.extend({
     }
     const columnLength = this.model.columns.length
     const rows = []
-    this.model.rows.forEach((row, index) => {
+    this.model.sortedRows.forEach((row, index) => {
       var addonRow = null
       const tds = []
       this.model.columns.forEach((column, columnIndex) => {

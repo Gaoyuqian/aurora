@@ -16,7 +16,9 @@ const AuTableColumn = Vue.extend({
     fixed: Boolean,
     width: [String, Number],
     expandRows: Array,
-    defaultExpandAll: Boolean
+    defaultExpandAll: Boolean,
+    sortable: [Boolean, String],
+    sortMethod: Function
   },
   data () {
     return {

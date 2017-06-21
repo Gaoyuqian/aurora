@@ -13,24 +13,27 @@ block content
     .docs-section
       h2|固定列表格
       .docs-desc
-        p||固定列表格的用法
+        p|固定列表格的用法
 
       template.html
         .docs-panel-row
-          au-table(:data="data", max-height="400", bordered)
+          au-table(:data="data1", max-height="400", :loading="isShowLoading", bordered, @sort-change="sortChange")
             au-table-column(
               label="ID",
               attr-name="id",
-              fixed
+              fixed,
+              :sortable="true"
             )
             au-table-column(
               label="Name",
-              attr-name="name"
+              attr-name="name",
+              :sortable="true",
+              :sort-method="sortName"
             )
             au-table-column(
               label="Age",
               attr-name="age",
-              v-if="showAge"
+              sortable="custom"
             )
             au-table-column(
               label="操作",
@@ -48,12 +51,34 @@ block content
             data () {
               return {
                 isShowLoading: false,
-                data : [
+                data1 : [
                   { id: 1, name: 'kevin', age: '28' },
-                  { id: 2, name: 'kevin', age: '27' },
-                  { id: 3, name: 'kevin', age: '26' },
-                  { id: 4, name: 'kevin', age: '25' }
+                  { id: 3, name: 'lucy', age: '26' },
+                  { id: 2, name: 'peter', age: '27' },
+                  { id: 4, name: 'lily', age: '25' }
                 ]
+              }
+            },
+            methods: {
+              sortName (type, a, b) {
+                console.log(type)
+                let result = a.name.match(/^k/) != null ? 1 : -1
+                if (type === 'desc') {
+                  result = -1 * result
+                }
+                return result
+              },
+              sortChange (obj) {
+                console.log('sortChange', obj)
+                if (obj.prop === 'age') {
+                  this.isShowLoading = true
+                  setTimeout(() => {
+                    const data = this.data1.slice()
+                    data.push(this.data1[this.data1.length - 1])
+                    this.data1 = data
+                    this.isShowLoading = false
+                  }, 1000)
+                }
               }
             }
           }

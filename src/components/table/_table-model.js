@@ -10,6 +10,10 @@ class TableColumn {
     this.type = column.type
     this.highlight = column.highlight
     this.fixedType = ''
+    this.sortable = column.sortable
+    this.sortMethod = column.sortMethod
+    this.sortName = 'sort'
+
     if (column.type === 'expand') {
       if (column.defaultExpandAll) {
         this.expandRowsModel = this.tableObj.rows.slice()
@@ -69,9 +73,50 @@ class TableColumn {
         }
       })])
     }
+    const childs = [
+      this.title
+    ]
+
+    if (this.sortable) {
+      childs.push(
+        h('au-icon', {
+          class: 'au-table-sort-icon',
+          props: {
+            icon: this.sortName
+          }
+        })
+      )
+    }
+
     return h('div', {
-      'class': 'au-table-cell'
-    }, this.title)
+      'class': {
+        'au-table-cell': true,
+        'au-table-cell-sort': this.sortable
+      },
+      on: {
+        click: () => {
+          this.clickHead()
+        }
+      }
+    }, childs)
+  }
+
+  clickHead () {
+    if (this.sortable) {
+      let sortName = this.sortName === 'sort' ? 'sort-desc' : this.sortName === 'sort-desc' ? 'sort-asc' : 'sort'
+      this.tableObj.clearSort()
+      this.sortName = sortName
+
+      if (this.sortable === true) {
+        this.tableObj.updateSortedRows()
+      }
+
+      this.tableObj.table.$emit('sort-change', {
+        column: this.originColumn,
+        prop: this.prop,
+        order: sortName === 'sort-desc' ? 'desc' : sortName === 'sort-asc' ? 'asc' : ''
+      })
+    }
   }
 
   getCtorContent (data, index) {
@@ -196,6 +241,7 @@ export class TableModel {
   constructor (table) {
     this.table = table
     this.rows = table.data
+    this.sortedRows = this.rows
     this.initColumns()
     this.updateModel()
     this.showHeader = table.showHeader
@@ -203,6 +249,51 @@ export class TableModel {
     this.tableScrollLeft = null
     this.tableScrollTop = null
     this.tableHeadHeight = null
+    this.updateSortedRows()
+  }
+
+  updateSortedRows () {
+    this.columns.some((column) => {
+      if (column.sortName !== 'sort') {
+        let prop = column.prop
+        this.sortedRows = this.rows.slice().sort(
+          typeof column.sortMethod === 'function'
+          ? (a, b) => {
+            let type = column.sortName === 'sort-desc' ? 'desc' : 'asc'
+            return column.sortMethod(type, a, b)
+          }
+          : (a, b) => {
+            a = a[prop]
+            b = b[prop]
+
+            if (typeof a === 'number') {
+              a = String(a)
+            }
+            if (typeof b === 'number') {
+              b = String(b)
+            }
+
+            if (typeof a === 'string' && typeof b === 'string') {
+              let result = a > b ? 1 : a === b ? 0 : -1
+              if (column.sortName === 'sort-desc') {
+                result = -1 * result
+              }
+              return result
+            }
+
+            return 0
+          }
+        )
+        return true
+      }
+      return false
+    }) || (this.sortedRows = this.rows)
+  }
+
+  clearSort () {
+    this.columns.forEach((column) => {
+      column.sortName = 'sort'
+    })
   }
 
   updateModel () {
