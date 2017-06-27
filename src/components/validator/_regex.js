@@ -9,7 +9,7 @@ export default function (regex) {
   }
 
   return {
-    message: '输入的内容格式有误',
+    message: `输入的内容格式有误`,
     validate (value, callback) {
       callback(regex.test(value) != null)
     }

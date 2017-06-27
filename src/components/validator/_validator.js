@@ -71,7 +71,7 @@ export default class Validator {
       case 'phone':
         return phone
       default:
-        console.error('No validate matched: ', rule.type)
+        console.error(`No validate matched: `, rule.type)
         return {
           validate: (_, callback) => {
             callback(true)

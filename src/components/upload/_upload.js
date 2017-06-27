@@ -3,7 +3,7 @@ const AuUpload = Vue.extend({
   props: {
     buttonText: {
       type: String,
-      default: '选择文件'
+      default: `选择文件`
     },
     buttonSize: {
       type: String,

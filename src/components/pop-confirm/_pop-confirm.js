@@ -9,11 +9,11 @@ const AuPopConfirm = Vue.extend({
     message: String,
     confirmMessage: {
       type: String,
-      default: '确定'
+      default: `确定`
     },
     cancelmMessage: {
       type: String,
-      default: '取消'
+      default: `取消`
     },
     position: {
       type: String,

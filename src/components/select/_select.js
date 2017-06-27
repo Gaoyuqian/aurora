@@ -27,7 +27,7 @@ const AuSelect = Vue.extend({
     },
     placeholder: {
       type: String,
-      default: '请选择'
+      default: `请选择`
     },
     multiple: Boolean,
     disabled: Boolean,
