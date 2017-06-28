@@ -91,7 +91,7 @@ const AuTable = Vue.extend({
 
       this.$nextTick(() => {
         const scroll = this.$refs.scroll
-        const table = scroll.querySelector('.au-table-body')
+        const table = scroll.querySelector('.au-table-body table')
         const scrollRect = scroll.getBoundingClientRect()
         const rect = table.getBoundingClientRect()
 
