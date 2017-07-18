@@ -62,7 +62,7 @@ class TableColumn {
       const length = this.tableObj.rows.length
 
       return h('div', {'class':'au-table-cell'}, [h('au-checkbox', {
-        domProps: {
+        props: {
           checkedValue: checkedCount === length,
           indeterminate: checkedCount > 0 && checkedCount < length
         },
@@ -143,7 +143,7 @@ class TableColumn {
 
     if (column.type === 'checkbox') {
       content = [h('au-checkbox', {
-        domProps: {
+        props: {
           checkedValue: column.isCheckedRow(data)
         },
         on: {
@@ -181,7 +181,7 @@ class TableColumn {
             }
           },
           [h('au-icon', {
-            domProps: {
+            props: {
               icon: 'caret-right'
             }
           })])
