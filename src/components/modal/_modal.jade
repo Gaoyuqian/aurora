@@ -1,6 +1,6 @@
 transition(name="au-modal-wrap")
   .au-modal-wrapper(v-if="value", :style="style", @click="onClick")
-    .au-modal(v-if="value", :style="modalStyle", @click.stop="")
+    .au-modal(v-if="value", :style="modalStyle")
       .au-modal-heading
         .au-modal-heading-left
           .au-modal-label

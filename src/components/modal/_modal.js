@@ -62,8 +62,20 @@ const AuModal = Vue.extend({
         this.$emit('input', false)
       }
     },
-    onClick () {
-      if (this.maskCloseable) {
+    onClick ($event) {
+      const $srcEle = $event.srcElement
+      const $modal = this.$el.querySelector('.au-modal')
+      const clickWindow = true
+
+      while ($srcEle){
+        if ($srcEle === $modal){
+          clickWindow = false
+        }
+
+        $srcEle = $srcEle.parentElement
+      }
+
+      if (this.maskCloseable && clickWindow) {
         this.$emit('input', false)
       }
     },

@@ -16,12 +16,12 @@ block content
       template.html(scoped="scoped")
         .docs-panel-row
           au-button(type="primary", size="small", @click="isShow = true")|显示
-          au-modal(title="新页面", v-model="isShow")
+          au-modal(title="新页面", v-model="isShow" ,:mask-closeable="true")
             div|这里是正文内容
             div|这里是正文内容
             div|这里是正文内容
             div
-              au-select(v-model="select")
+              au-select(v-model="select", multiple, filter)
                 au-option(value="1", label="哈哈")
                 au-option(value="2", label="呵呵")
             div(slot="footer")
@@ -38,7 +38,7 @@ block content
           {
             data () {
               return {
-                select: '1',
+                select: ['1'],
                 isShow: false,
                 step2: false
               }
