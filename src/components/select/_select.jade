@@ -38,6 +38,7 @@ div.au-select(
       au-option(
         v-if="options != null",
         v-for="option in options",
+        key="option.value",
         :label="option.label",
         :value="option.value"
       )

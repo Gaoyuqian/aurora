@@ -63,7 +63,12 @@ const AuModal = Vue.extend({
       }
     },
     onClick ($event) {
-      const $srcEle = $event.srcElement
+      //if this have beed destroyed
+      if (this.value === false){
+        return 
+      }
+
+      let $srcEle = $event.srcElement
       const $modal = this.$el.querySelector('.au-modal')
       const clickWindow = true
 
