@@ -4,20 +4,79 @@ html
         title Aurora Design
         meta(charset="utf-8")
         link(href="index.css" rel="stylesheet")
-        link(href="src/sass/main.css" rel="stylesheet")
+        //- link(href="src/sass/main.css" rel="stylesheet")
         link(href="lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        script(src="lib/vue.js")
+        script(src="src/aurora.js")
     body
         div#app(v-cloak)
-            h1| Aurora Design Demos
-            hr
-            au-button(
-                size="large",
-                heading-icon="plus")| 添加
-            au-button(
-                heading-icon="plus")| 添加
-            au-button(
-                size="small"
-                heading-icon="plus")| 添加
+            au-tree(:data="treeData",:checkable="true",:expands="expands",:default-expand-all="false",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked")
+        
+        script.
+            const data =  [{
+                label: '加载更多',
+                children: null
+                },
+                {
+                label: '第一级',
+                children: [{
+                    label: '第二级'
+                    },
+                    {
+                    label: '第三级',
+                    children: [{
+                        label: '第二级',
+                        children: []
+                        },
+                        {
+                        label: '第三级',
+                        children: []
+                        }
+                    ]
+                    }
+                ]
+                }
+            ]
 
-        script(src="lib/vue.js")
-        script(src="index.js")
+            var num = 0
+            vm = new Vue({
+                el: "#app",
+                data: {
+                    treeData: data,
+
+                    // 要选中的节点数据 (单项数据流)（老api，不建议）
+                    defaultCheckeds: [data[1].children[1].children[0]],
+                    
+                    // 要展开的节点 (单项数据流)
+                    expands: [data[1]],
+                    
+                    // 选中的节点数据（双向数据流，v-model设置）
+                    //- checks: [], //[data[0].children[0].children[0]],
+                    
+                    // 要选中的节点id (单项数据流) 
+                    defaultCheckedKeys: [3, 100, 1009],
+                    count: 0
+                },
+                methods: {
+                    checked: function (data, isChecked, $node){
+                    console.log(JSON.stringify(data), isChecked, $node)
+                    },
+                    loader: function (data, callback){
+                        if ((this.count++) > 1) {
+                            setTimeout(callback, 400)
+                            return
+                        }
+                        setTimeout(() => {
+                            data.children = [{
+                                label: `加载${this.count}-1`,
+                                children: null,
+                                disableCheckbox: true
+                            }, {
+                                label: `加载${this.count}-2`,
+                                children: null
+                            }]
+                            callback()
+                        }, 200)
+                    }
+                }
+            })

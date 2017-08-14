@@ -75,6 +75,7 @@ const AuModal = Vue.extend({
       while ($srcEle){
         if ($srcEle === $modal){
           clickWindow = false
+          break
         }
 
         $srcEle = $srcEle.parentElement

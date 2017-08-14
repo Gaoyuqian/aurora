@@ -1,3 +1,5 @@
+import './sass/aurora.css'
+
 import './components/button/_button.js'
 import './components/button-group/_button-group.js'
 import './components/icon/_icon.js'

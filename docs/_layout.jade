@@ -8,7 +8,11 @@ html.no-js
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href="../lib/font-awesome-4.7.0/css/font-awesome.min.css")
-    link(rel='stylesheet', href="../src/sass/aurora.css")
+    //- link(rel='stylesheet', href="../src/sass/aurora.css")
+    
+    script(src="http://s1.mljr.com/aurora-official/static/lib/vue.js")
+    script(src="../src/aurora.js")
+
     link(rel='stylesheet', href="./docs.css")
     link(rel='stylesheet', href="../lib/highlight.github.min.css")
     script(src="../lib/highlight.min.js")
@@ -126,8 +130,6 @@ html.no-js
             |Copyright © 2017 美利金融 Aurora项目
 
     //- script(src="../lib/vue.js")
-    script(src="https://unpkg.com/vue@2.4.1")
-    script(src="../src/aurora.js")
     script.
       const mixins = []
       !function () {
