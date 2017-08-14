@@ -62,26 +62,25 @@ export default AuTreeNode = Vue.extend({
       else {
         if ((me.loadStatus === -1) && me.tree.loader){
           me.loadStatus = 0
-          me.tree.loader(me.data, ()=>{
+          me.tree.loader(me.data, (children)=>{
             me.loadStatus = 1
             me.isExpand = true
 
-            if (isArray(me.data.children)){
-              var children = me.data.children
-              // Vue.set(me.data, 'children', children)
+            if (isArray(children)){
+              Vue.set(me.data, 'children', children)
 
               var commits = []
               
-              // 如果此节点选中状态，则强制触发选中事件
+              // 如果此节点选中状态，则所有子节点强制触发选中事件，注意disable和defaultCheckedKey情况
               if (me.isChecked){
-                commits = children
+                commits = children.filter(child=>{
+                  return !child.disabled || me.tree.isInDefaultCheckedKeys(child)
+                })
               }
               // 否则查一下children有没有和defaultCheckedKeys 匹配的
               else {
-                children.forEach(child=>{
-                  if (me.tree.isInDefaultCheckedKeys(child)){
-                    commits.push(child)
-                  }
+                commits = children.filter(child=>{
+                  return me.tree.isInDefaultCheckedKeys(child)
                 })
               }
               me.tree.commitChecks(commits)
@@ -119,11 +118,12 @@ export default AuTreeNode = Vue.extend({
         on: {
           input: function (value){
             // 有个特殊情况，除了disabled的节点，全部选中，那么处于indeterminate的节点的value会一直保持false导致value一直未true
-            if (me.tree.getChildrenStatus(me.data) === 2){
+            var status = me.tree.getChildrenStatus(me.data)
+
+            if (status === 2){
               value = false
             }
 
-            me.tree.$emit('check', me.data, value, me)
             me.tree.emitNodeChange(me, value)
           }
         }

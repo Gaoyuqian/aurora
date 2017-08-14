@@ -1,11 +1,6 @@
-import dispatch from '../../mixins/_dispatch.js'
 import {isArray, hasChildren} from '../../utils/_tools.js'
 
 export default AuTree = Vue.extend({
-  model: {
-    prop: 'checks',
-    event: 'change'
-  },
   props: {
     data: {
       type: Array,
@@ -15,10 +10,6 @@ export default AuTree = Vue.extend({
       type: Boolean,
       default: false
     },
-    // checks: {
-    //   type: Array,
-    //   default: []
-    // },
      defaultCheckeds: {
       type: Array,
       default: []
@@ -67,11 +58,13 @@ export default AuTree = Vue.extend({
     },
     defaultCheckedKeys: function (){
       this.addDefaultCheckedKeys()
+    },
+    checks: function (){
+      this.$emit('check', this.checks)
     }
   },
   methods: {
     addDefaultChecks: function (){
-      //console.warn(`Aurora au-tree: 'default-checks' is not recommended, use 'checks' instead of`)
       this.commitChecks(this.defaultCheckeds)
     },
 
@@ -102,7 +95,6 @@ export default AuTree = Vue.extend({
       var checks = this.checks.slice()
       checks.push(...commits)
       this.checks = this.cleanChecks(checks)
-      // this.$emit('change', this.cleanChecks(checks))
     },
 
     isInDefaultCheckedKeys: function (data){
@@ -112,15 +104,26 @@ export default AuTree = Vue.extend({
     setExpands: function (){
       var me = this
 
-      var getNodes = function ($nodes){
+      var loopNodes = function ($nodes){
         $nodes.forEach($node=>{
-          $node.isExpand = me.defaultExpandAll || me.getIsExpand($node.data)
+          var isExpand = me.defaultExpandAll || me.getIsExpand($node.data)
+          
+          // 如果已经是展开状态
+          if ($node.isExpand){
+            $node.isExpand = isExpand
+          }
+          else {
+            if (isExpand){
+              $node.clickExpand()
+            }
+          }
+
           if (hasChildren($node)){
-            getNodes($node.children)
+            loopNodes($node.children)
           }
         })
       }
-      getNodes(this.children)
+      loopNodes(this.children)
     },
 
     // 得到此节点的子节点选中情况
@@ -129,13 +132,20 @@ export default AuTree = Vue.extend({
       var status = -1 // -1表示没有任何选中，0表示有选中，1表示所有都选中，2表示除了disabled之外都选中
       var checkedSum = 0
       var disabledSum = 0
+      var disabledCheckedSum = 0
 
       datas.forEach(data=>{
+        var idx = this.checks.indexOf(data)
+        
         if (data.disabled){
           disabledSum ++
         }
-        if (this.checks.indexOf(data) !== -1){
+        if (idx !== -1){
           checkedSum ++
+        }
+
+        if (data.disabled && idx !== -1){
+          disabledCheckedSum ++
         }
       })
 
@@ -144,7 +154,7 @@ export default AuTree = Vue.extend({
         if (checkedSum === datas.length){
           status = 1
         }
-        else if (checkedSum + disabledSum === datas.length){
+        else if (checkedSum + disabledSum === datas.length && disabledCheckedSum != checkedSum){
           status = 2
         }
       }
@@ -236,7 +246,6 @@ export default AuTree = Vue.extend({
         }
       })
       this.checks = this.cleanChecks(checks)
-      // this.$emit('change', this.cleanChecks(checks))
     },
 
     // 去掉所有不是子节点的节点

@@ -10,7 +10,7 @@ html
         script(src="src/aurora.js")
     body
         div#app(v-cloak)
-            au-tree(:data="treeData",:checkable="true",:expands="expands",:default-expand-all="false",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked")
+            au-tree(ref="tree",:data="treeData",:checkable="true",:expands="expands",:default-expand-all="false",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked")
         
         script.
             const data =  [{
@@ -20,7 +20,8 @@ html
                 {
                 label: '第一级',
                 children: [{
-                    label: '第二级'
+                    label: '第二级',
+                    children: []
                     },
                     {
                     label: '第三级',
@@ -54,12 +55,12 @@ html
                     //- checks: [], //[data[0].children[0].children[0]],
                     
                     // 要选中的节点id (单项数据流) 
-                    defaultCheckedKeys: [3, 100, 1009],
+                    defaultCheckedKeys: [3, 100, 1000],
                     count: 0
                 },
                 methods: {
-                    checked: function (data, isChecked, $node){
-                    console.log(JSON.stringify(data), isChecked, $node)
+                    checked: function (datas, $node){
+                        console.log(JSON.stringify(datas), $node)
                     },
                     loader: function (data, callback){
                         if ((this.count++) > 1) {
@@ -67,15 +68,16 @@ html
                             return
                         }
                         setTimeout(() => {
-                            data.children = [{
+                            var children = [{
                                 label: `加载${this.count}-1`,
                                 children: null,
-                                disableCheckbox: true
+                                disabled: true,
+                                id: 1000
                             }, {
                                 label: `加载${this.count}-2`,
                                 children: null
                             }]
-                            callback()
+                            callback(children)
                         }, 200)
                     }
                 }
