@@ -11,7 +11,7 @@ export default function (max, min) {
       message = `输入内容长度不能超过${max}`
     }
   } else if (min != null) {
-    message = `输入内容长度必须大于${max}`
+    message = `输入内容长度必须大于${min}`
   }
 
   return {
