@@ -27,6 +27,11 @@ export default AuTreeNode = Vue.extend({
       loadStatus: -1, // -1未请求，0请求中，1请求结束
     }
   },
+  watch: {
+    isChecked: function (){
+      this.tree.$emit('node-check-change', this)
+    }
+  },
   computed: {
     tree: function (){
       return getParent(this, AuTree)
@@ -62,7 +67,7 @@ export default AuTreeNode = Vue.extend({
       else {
         if ((me.loadStatus === -1) && me.tree.loader){
           me.loadStatus = 0
-          me.tree.loader(me.data, (children)=>{
+          me.tree.loader(me, (children)=>{
             me.loadStatus = 1
             me.isExpand = true
 

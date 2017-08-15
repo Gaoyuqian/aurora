@@ -18,6 +18,10 @@ export default AuTree = Vue.extend({
       type: Array,
       default: []
     },
+    nodeKey: {
+      type: String,
+      default: 'id'
+    },
     expands: {
       type: Array,
       default: []
@@ -64,6 +68,14 @@ export default AuTree = Vue.extend({
     }
   },
   methods: {
+    getChecks: function (){
+      return this.checks
+    },
+
+    clearChecks: function (){
+      this.checks = []
+    },
+
     addDefaultChecks: function (){
       this.commitChecks(this.defaultCheckeds)
     },
@@ -98,7 +110,7 @@ export default AuTree = Vue.extend({
     },
 
     isInDefaultCheckedKeys: function (data){
-      return this.defaultCheckedKeys.indexOf(data['id']) != -1
+      return this.defaultCheckedKeys.indexOf(data[this.nodeKey]) != -1
     },
 
     setExpands: function (){

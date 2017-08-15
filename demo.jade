@@ -10,7 +10,7 @@ html
         script(src="src/aurora.js")
     body
         div#app(v-cloak)
-            au-tree(ref="tree",:data="treeData",:checkable="true",:expands="expands",:default-expand-all="false",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked")
+            au-tree(ref="tree",:data="treeData",:checkable="true",:expands="expands",:default-expand-all="true",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked",:click-row-expand="false", node-key="idd", @node-check-change="nodeCheckChange")
         
         script.
             const data =  [{
@@ -72,13 +72,16 @@ html
                                 label: `加载${this.count}-1`,
                                 children: null,
                                 disabled: true,
-                                id: 1000
+                                idd: 1000
                             }, {
                                 label: `加载${this.count}-2`,
                                 children: null
                             }]
                             callback(children)
                         }, 200)
+                    },
+                    nodeCheckChange: function ($node){
+                        console.log('node-check-change', $node)
                     }
                 }
             })
