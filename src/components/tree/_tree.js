@@ -6,11 +6,8 @@ export default AuTree = Vue.extend({
       type: Array,
       default: []
     },
-    checkable: {
-      type: Boolean,
-      default: false
-    },
-     defaultCheckeds: {
+    checkable: Boolean,
+    defaultCheckeds: {
       type: Array,
       default: []
     },
@@ -26,10 +23,7 @@ export default AuTree = Vue.extend({
       type: Array,
       default: []
     },
-    defaultExpandAll: {
-      tpye: Boolean,
-      default: false
-    },
+    defaultExpandAll: Boolean,
     loader: {
       type: Function
     },

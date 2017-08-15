@@ -10,7 +10,7 @@ html
         script(src="src/aurora.js")
     body
         div#app(v-cloak)
-            au-tree(ref="tree",:data="treeData",:checkable="true",:expands="expands",:default-expand-all="true",:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked",:click-row-expand="false", node-key="idd", @node-check-change="nodeCheckChange")
+            au-tree(ref="tree",:data="treeData",checkable,:expands="expands", default-expand-all,:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked",:click-row-expand="false", node-key="idd", @node-check-change="nodeCheckChange")
         
         script.
             const data =  [{
@@ -62,7 +62,8 @@ html
                     checked: function (datas, $node){
                         console.log(JSON.stringify(datas), $node)
                     },
-                    loader: function (data, callback){
+                    loader: function ($node, callback){
+                        console.log('load more', $node.data.label)
                         if ((this.count++) > 1) {
                             setTimeout(callback, 400)
                             return
