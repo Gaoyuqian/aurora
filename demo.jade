@@ -10,7 +10,11 @@ html
         script(src="src/aurora.js")
     body
         div#app(v-cloak)
-            au-tree(ref="tree",:data="treeData",checkable,:expands="expands", default-expand-all,:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked",:click-row-expand="false", node-key="idd", @node-check-change="nodeCheckChange")
+            //- au-tree(ref="tree",:data="treeData",checkable,:expands="expands", default-expand-all,:default-checkeds="defaultCheckeds",:default-checked-keys="defaultCheckedKeys",:loader="loader",@check="checked",:click-row-expand="false", node-key="idd", @node-check-change="nodeCheckChange")
+
+            au-drag-modal(title="test", style="width:500px", v-model="dragShow")
+                au-select
+                    au-option(label="test",value="test")
         
         script.
             const data =  [{
@@ -43,6 +47,7 @@ html
             vm = new Vue({
                 el: "#app",
                 data: {
+                    dragShow: true,
                     treeData: data,
 
                     // 要选中的节点数据 (单项数据流)（老api，不建议）

@@ -38,7 +38,7 @@ const AuDragModal = Vue.extend({
   },
   data () {
     return {
-      zIndex: 0,
+      zIndex: firstZIndex,
       isMoving: false,
       originPoints: null,
       clickPoints: null,
