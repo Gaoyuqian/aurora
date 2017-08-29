@@ -4,16 +4,22 @@ export default AuTree = Vue.extend({
   props: {
     data: {
       type: Array,
-      default: []
+      default: function (){
+        return []
+      }
     },
     checkable: Boolean,
     defaultCheckeds: {
       type: Array,
-      default: []
+      default: function (){
+        return []
+      }
     },
     defaultCheckedKeys: {
       type: Array,
-      default: []
+      default: function (){
+        return []
+      }
     },
     nodeKey: {
       type: String,
@@ -21,7 +27,9 @@ export default AuTree = Vue.extend({
     },
     expands: {
       type: Array,
-      default: []
+      default: function (){
+        return []
+      }
     },
     defaultExpandAll: Boolean,
     loader: {
