@@ -45,6 +45,7 @@ import './components/app/_app.js'
 import './components/header/_header.js'
 import './components/content/_content.js'
 import './components/footer/_footer.js'
+import './components/transfer/_transfer.js'
 
 import ticker from './_ticker.js'
 
