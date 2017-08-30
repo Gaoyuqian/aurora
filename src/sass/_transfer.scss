@@ -16,6 +16,11 @@
     .au-transfer-panel__body{
       padding-bottom: 36px;
 
+      .au-transfer-panel__filter{
+        margin-top: 10px;
+        padding: 0 10px;
+      }
+
       .au-transfer-panel__list{
         margin: 0;
         padding: 6px 0;
@@ -24,8 +29,9 @@
         box-sizing: border-box;
 
         .au-transfer-panel__item{
-          height: 32px;
-          line-height: 32px;
+          // height: 32px;
+          // line-height: 32px;
+          padding: 6px;
           padding-left: 20px;
         }
 

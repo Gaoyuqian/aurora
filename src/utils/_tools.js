@@ -32,13 +32,23 @@ class VVNode{
       this.children.push(...vnode)
     }
     else {
-      this.children.push(vnode)
+      if (vnode){
+        this.children.push(vnode)
+      }
     }
     
     return this
   }
   resolve(h) {
-    return h(this.tag, this.props, this.children)
+    var children = this.children.map(child=>{
+      if (child instanceof VVNode){
+        return child.resolve(h)
+      }
+      else {
+        return child
+      }
+    })
+    return h(this.tag, this.props, children)
   }
 }
 function hx(tag, props={}, children=[]){

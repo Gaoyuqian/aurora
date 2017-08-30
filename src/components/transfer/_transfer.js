@@ -19,6 +19,11 @@ var AuTransferItem = Vue.extend({
     },
     dir: String
   },
+  data: function (){
+    return {
+      query: ''
+    }
+  },
   computed: {
     transfer: function (){
       return getParent(this, AuTransfer)
@@ -52,16 +57,32 @@ var AuTransferItem = Vue.extend({
 
       return 0
 
+    },
+    getFilterData: function (){
+      return this.data.filter(data=>{
+        if (this.transfer.filterFunc){
+          return this.transfer.filterFunc(this.query, data)
+        }
+
+        var showLabel = me.transfer.renderFunc ? me.transfer.renderFunc(data) : data.label
+
+        if (showLabel.indexOf(this.query) !== -1){
+          return true
+        }
+        return false
+      })
     }
   },
   render: function (h){
-    console.log('transferItem render')
+    console.log('transferItem render', this.dir)
     var me = this
 
     var allCheckedStatus = this.getAllCheckedStatus()
 
+    var filterData = this.getFilterData()
+
     // get items
-    var $items = this.data.map(data=>{
+    var $items = filterData.map(data=>{
       return hx('div.au-transfer-panel__item')
         .push(
           hx('au-checkbox', {
@@ -76,22 +97,40 @@ var AuTransferItem = Vue.extend({
               }
             }
           })
-          .resolve(h)
         )
-        .resolve(h)
     })
 
     return hx('div.au-transfer-panel')
     .push(
       hx('div.au-transfer-panel__header', {
         domProps: {
-          'innerHTML': this.dir === 'left' ? this.transfer.buttonTexts[0] : this.transfer.buttonTexts[1]
+          'innerHTML': this.dir === 'left' ? this.transfer.titles[0] : this.transfer.titles[1]
         }
       })
-      .resolve(h)
     )
     .push(
       hx('div.au-transfer-panel__body')
+      .push(
+        me.transfer.filterable ? hx('div.au-transfer-panel__filter')
+        .push(
+          hx('au-input', {
+            props: {
+              size: 'mini',
+              icon: me.query.length > 0 ? 'close' : 'search',
+              value: me.query,
+              placeholder: me.transfer.filterPlaceholder
+            },
+            on: {
+              input: function (val){
+                me.query = val
+              },
+              'click-icon': function (){
+                me.query = ''
+              }
+            }
+          })
+        ) : null
+      )
       .push(
         hx('div.au-transfer-panel__list')
         .push(
@@ -103,11 +142,8 @@ var AuTransferItem = Vue.extend({
               display: $items.length === 0 ? 'block': 'none'
             }
           }, ['无数据'])
-          .resolve(h)
         )
-        .resolve(h)
       )
-      .resolve(h)
     )
     .push(
       hx('div.au-transfer-panel__footer')
@@ -120,17 +156,14 @@ var AuTransferItem = Vue.extend({
           },
           on: {
             input: function (value){
-              console.log(allCheckedStatus)
               if (allCheckedStatus === 2){
                 value = false
               }
-              me.transfer.updateLeftRightAllCheckeds(me.dir, value)
+              me.transfer.updateLeftRightAllCheckeds(me.dir, value, filterData)
             }
           }
         })
-        .resolve(h)
       )
-      .resolve(h)
     )
     .resolve(h)
   }
@@ -173,10 +206,22 @@ export default AuTransfer = Vue.extend({
     buttonTexts: {
       type: Array,
       default: function (){
-        return ['Source', 'Target']
+        return ['到左边', '到右边']
       }
     },
-    renderFunc: Function
+    titles: {
+      type: Array,
+      default: function (){
+        return ['列表1', '列表2']
+      }
+    },
+    renderFunc: Function,
+    filterFunc: Function,
+    filterable: Boolean,
+    filterPlaceholder: {
+      type: String,
+      default: '请输入搜索内容'
+    }
   },
   data: function (){
     return {
@@ -234,15 +279,12 @@ export default AuTransfer = Vue.extend({
         }
       }
     },
-    updateLeftRightAllCheckeds: function (dir, isChecked){
+    updateLeftRightAllCheckeds: function (dir, isChecked, filterData){
       var isLeft = dir === 'left'
-      var [leftItems, rightItems] = this.getLeftRightItems()
-      var leftRightItems = isLeft ? leftItems : rightItems
-
       var checkeds = []
 
       if (isChecked){
-        leftRightItems.forEach(_=>{
+        filterData.forEach(_=>{
           if (!_.disabled){
             checkeds.push(_[this.dataKey])
           }
@@ -255,8 +297,10 @@ export default AuTransfer = Vue.extend({
       var me = this
 
       var checkeds = [...this.checkeds]
+      var moveCheckeds = []
 
       if (dir === 'left'){
+        moveCheckeds = [...this.rightCheckeds]
         this.rightCheckeds.forEach(_=>{
           var idx = checkeds.indexOf(_)
           if (idx !== -1){
@@ -266,11 +310,12 @@ export default AuTransfer = Vue.extend({
         this.rightCheckeds = []
       }
       else {
+        moveCheckeds = [...this.leftCheckeds]
         checkeds.push(...this.leftCheckeds)
         this.leftCheckeds = []
       }
 
-      this.$emit('change', checkeds)
+      this.$emit('change', checkeds, dir, moveCheckeds)
     },
 
     clearLeftCheckeds: function (){
@@ -298,9 +343,7 @@ export default AuTransfer = Vue.extend({
           hx('au-transfer-item', {
             props:{data:leftItems, checkeds:this.leftCheckeds, dir:'left'}}
           )
-          .resolve(h)
         )
-        .resolve(h)
       )
 
       // buttons
@@ -312,6 +355,7 @@ export default AuTransfer = Vue.extend({
             hx('au-button', {
               props:{
                 icon: 'chevron-left',
+                size: 'small',
                 type: me.rightCheckeds.length === 0 ? 'default' : 'primay', 
                 block: true, 
                 disabled: me.rightCheckeds.length === 0
@@ -321,13 +365,13 @@ export default AuTransfer = Vue.extend({
                   me.updateLeftRightItems('left')
                 }
               }
-            }, ['向左'])
-            .resolve(h)
+            }, [me.buttonTexts[0]])
           )
           .push(
             hx('au-button', {
               props:{
                 icon: 'chevron-right',
+                size: 'small',
                 type: me.leftCheckeds.length === 0 ? 'default' : 'primay', 
                 block: true,
                 disabled: me.leftCheckeds.length === 0
@@ -337,12 +381,9 @@ export default AuTransfer = Vue.extend({
                   me.updateLeftRightItems('right')
                 }
               }
-            }, ['向右'])
-            .resolve(h)
+            }, [me.buttonTexts[1]])
           )
-          .resolve(h)
         )
-        .resolve(h)
       )
 
       // right transfer item
@@ -352,12 +393,8 @@ export default AuTransfer = Vue.extend({
           hx('au-transfer-item', {
             props:{data:rightItems, checkeds:this.rightCheckeds, dir:'right'}}
           )
-          .resolve(h)
         )
-        .resolve(h)
       )
-
-      .resolve(h)
     )
     .resolve(h)
   }
