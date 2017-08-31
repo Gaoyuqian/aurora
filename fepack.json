@@ -11,7 +11,7 @@
             "dev": {
                 "watch": true,
                 "version": false,
-                "optimize": false,
+                "optimize": true,
                 "env": {
                     "ENV": "LOCAL"
                 }
