@@ -39,7 +39,7 @@ const AuForm = Vue.extend({
     })
   },
   methods: {
-    validate (callback) {
+    _validate (callback) {
       var result = true
       var count = this.items.length
       this.items.forEach((item) => {
@@ -52,15 +52,18 @@ const AuForm = Vue.extend({
         })
       })
     },
-    onSubmit ($event) {
-      $event.preventDefault()
-      this.validate((isSuccess) => {
+    validate (){
+      this._validate((isSuccess) => {
         if (isSuccess) {
           this.$emit('submit', this.model)
         } else {
           this.$emit('error', this.model)
         }
       })
+    },
+    onSubmit ($event) {
+      $event.preventDefault()
+      this.validate()
     },
     onReset ($event) {
       $event.preventDefault()

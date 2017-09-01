@@ -28,7 +28,7 @@ block content
         .docs-panel-row
           au-flex(gutter="30")
             au-item(style="width: 600px;")
-              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form", :rules="rules", @submit="onSubmit")
+              au-form(:label-position="labelPosition", :label-width="labelWidth", :model="form", :rules="rules", @submit="onSubmit", @error="onError", ref="myForm")
                 au-form-item(label="姓名", prop="name")
                   au-input(v-model="form.name", placeholder="请输入姓名")
                 au-form-item(label="邮箱", prop="email", :rules="[{ required: true, message:'请输入邮箱' }, { type: 'email' }]")
@@ -50,7 +50,8 @@ block content
                   au-checkbox(v-model="form.confirm", label="我同意账户协议")
 
                 au-form-item
-                  au-button(type="primary", native-type="submit")|提交
+                  au-pop-confirm(position="leftBottom", message="确定要提交吗?", @confirm="confirmHandler")
+                    au-button(type="primary")|提交
                   |&nbsp;
                   au-button(type="default", native-type="reset")|重置
             au-item
@@ -103,8 +104,14 @@ block content
                }
              },
              methods: {
-               onSubmit (form) {
-                 console.log('submiting', form)
+               confirmHandler (){
+                 this.$refs.myForm.validate()
+               },
+               onSubmit (formData) {
+                 console.log('submiting', formData)
+               },
+               onError (formData){
+                 console.log('validate error', formData)
                }
              }
            }

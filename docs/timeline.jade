@@ -44,40 +44,18 @@ html
                 au-timeline-item(color="green")| Network problems being solved   2015-09-01
                 au-timeline-item(pending)
                   a(href="#") see more
+              
+              h4(style="margin:10px 0")| 循环
+              au-timeline()
+                au-timeline-item(v-for="city in cities")| {{city}}
         
         script.
             const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
             const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
 
-            var datas = []
-            cities.forEach((city, index) => {
-                datas.push({
-                    label: city,
-                    id: index,
-                    pinyin: pinyin[index],
-                    disabled: index == 2
-                })
-            })
-
             vm = new Vue({
                 el: "#app",
                 data: {
-                    transferData: datas,
-                    checkeds: [0],
-                    leftCheckeds: [],
-                    rightCheckeds: [],
-                    titles: ['源','目标'],
-                    buttonTexts: ['左边边', '右边边']
-                },
-                methods: {
-                    renderFunc: function (data){
-                        return `${data.id}-${data.label}----`
-                    },
-                    onchange: function (checkeds, dir, moveKeys){
-                        console.log(checkeds, dir, moveKeys)
-                    },
-                    filterFunc: function (query, data){
-                        return data.pinyin.indexOf(query) > -1 || data.label.indexOf(query) > -1
-                    }
+                    cities: cities
                 }
             })
