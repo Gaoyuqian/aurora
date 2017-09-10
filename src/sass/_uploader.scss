@@ -1,0 +1,113 @@
+.au-uploader{
+  .au-uploader-tip{
+    font-size: $fontsize-small;
+    margin-top: 7px;
+    color: $color-silver;
+  }
+
+  .au-uploader-btn{
+    input{
+      display: none;
+    }
+  }
+
+  .au-uploader-list{
+    list-style: none;
+    margin-top: 10px;
+
+    .au-uploader-list__item{
+      transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+
+      &:hover{
+        cursor: pointer;
+        background: $color-white-dark;
+      }
+
+      .au-uploader-list__item-name{
+        padding-left: 5px;
+      }
+
+      .au-uploader-list__item-status-label{
+        cursor: pointer;
+      }
+
+      list-style: none;
+      line-height: 1.8;
+
+      color: $color-silver;
+
+      .fa-file-o{
+        margin-right: 7px;
+      }
+
+      .fa-check{
+        color: $color-success;
+      }
+    }
+  }
+}
+
+// picture card
+.au-uploader-pc{
+  .au-uploader-pc-list{
+    display: inline;
+    vertical-align: top;
+  }
+  .au-uploader-pc-list__item{
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #c0ccda;
+    width: 148px;
+    height: 148px;
+    margin: 0 8px 8px 0;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .au-uploader-pc-list__item-close-label{
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: $color-white;
+      cursor: pointer;
+      background-color: $color-black;
+      opacity: 0.3;
+      padding: 2px;
+    }
+
+    .au-uploader-pc-list__item--percent{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: $color-success;
+      height: 3px;
+      // width: 50%;
+    }
+  }
+  .au-uploader-pc-btn{
+    background-color: #fbfdff;
+    border: 1px dashed #c0ccda;
+    box-sizing: border-box;
+    width: 148px;
+    height: 148px;
+    cursor: pointer;
+    line-height: 146px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+
+    input{
+      display: none;
+    }
+
+    .fa-plus{
+      font-size: 28px;
+      color: $color-silver-light;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+doctype html
+html
+    head
+        title uploader
+        meta(charset="utf-8")
+        //- link(href="src/sass/main.css" rel="stylesheet")
+        link(href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        script(src="../lib/vue.dev.js")
+        script(src="../src/aurora.js")
+    body
+        div#app(v-cloak)
+            div(style="padding: 50px; width: 500px; border:1px solid #000")
+              au-uploader(
+                ref="uploader",
+                :file-list="fileList",
+                :accept="accept",
+                action="https://jsonplaceholder.typicode.com/posts/",
+                :multiple="true",
+                :on-preview="onPreview",
+                :on-error="onError",
+              )
+            
+            div(style="padding: 50px; width: 800px; border:1px solid #000; margin-top: 10px;")
+              au-uploader(
+                ref="uploader2",
+                :file-list="fileList",
+                :accept="accept",
+                action="https://jsonplaceholder.typicode.com/posts/",
+                :multiple="true",
+                list-type="picture-card",
+                :on-preview="onPreview",
+                :on-error="onError",
+              )
+            
+            au-modal(v-model="imgShow")
+              img(width="100%", :src="imgUrl")
+
+        
+        script.
+            vm = new Vue({
+                el: "#app",
+                data: {
+                    fileList: [
+                      {name:'food.jpg', url:'http://y.gtimg.cn/music/photo/radio/track_radio_199_10_7.jpg'},
+                      {name:'banner.jpg', url:'http://y.gtimg.cn/music/photo/radio/track_radio_199_10_7.jpg'}
+                    ],
+                    accept: 'image/jpeg,image/png',
+                    imgShow: false,
+                    imgUrl: ''
+                   
+                },
+                methods: {
+                   onPreview: function (file){
+                      console.log(file)
+                      this.imgShow = true
+                      this.imgUrl = file.url
+                  },
+                  onError: function (err, file){
+                    this.$message('danger', '失败', `${file.name}上传失败`)
+                  }
+                }
+            })
