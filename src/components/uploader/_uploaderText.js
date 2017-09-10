@@ -47,7 +47,7 @@ export default AuUploaderText = Vue.extend({
           .push(
             hx('label.au-uploader-list__item-status-label', {
               on: {
-                click: function (){
+                click: function (e){
                   if (file.mouseIn){
                     $uploader.removeFile(file)
                   }
