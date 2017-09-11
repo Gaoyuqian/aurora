@@ -16,11 +16,8 @@ export default AuUploaderText = Vue.extend({
     var $files = $uploader.files.map(file=>{
       return hx('li.au-uploader-list__item', {
         on: {
-          mouseover: function (){
-            file.mouseIn = true
-          },
-          mouseout: function (){
-            file.mouseIn = false
+          click: function (){
+            $uploader.onPreview(file)
           }
         }
       })
@@ -48,35 +45,33 @@ export default AuUploaderText = Vue.extend({
             hx('label.au-uploader-list__item-status-label', {
               on: {
                 click: function (e){
-                  if (file.mouseIn){
                     $uploader.removeFile(file)
-                  }
-
-                  e.stopPropagation()
+                    e.stopPropagation()
                 }
               }
             })
-
             .push(
-              file.mouseIn ? hx('au-icon', {
+              (!file.isPost && file.isSuccess) ? hx('au-icon', {
                 props: {
-                  icon: 'close'
+                  icon: 'check'
                 }
               }) : null
             )
-            
             .push(
-              (file.mouseIn || file.isPost) ? null : hx('au-icon', {
+              hx('au-icon', {
                 props: {
-                  icon: file.isSuccess === false ? 'warning' : 'check'
+                  icon: 'close'
                 }
               })
             )
-
-            .push(
-              (!file.mouseIn && file.isPost) ? parseInt(file.percent) : null
-            )
           )
+        )
+        .push(
+          file.isPost ? hx('div.au-uploader-list__item--percent', {
+            style: {
+              width: parseInt(file.percent) + '%'
+            }
+          }) : null
         )
       )
     })

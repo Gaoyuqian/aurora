@@ -14,15 +14,8 @@ export default AuUploaderPictureCard = Vue.extend({
     var $uploader = this.uploader
 
     var $files = $uploader.files.map(file=>{
-      console.log(file.percent/100 * 148)
       return hx('li.au-uploader-pc-list__item', {
         on: {
-          mouseover: function (){
-            file.mouseIn = true
-          },
-          mouseout: function (){
-            file.mouseIn = false
-          },
           click: function (){
             $uploader.onPreview(file)
           }
@@ -36,7 +29,7 @@ export default AuUploaderPictureCard = Vue.extend({
         })
       )
       .push(
-        hx('label.au-uploader-pc-list__item-close-label', {
+        hx('label.au-uploader-pc-list__item-status-label', {
           on: {
             click: function (e){
               $uploader.removeFile(file)
@@ -44,6 +37,13 @@ export default AuUploaderPictureCard = Vue.extend({
             }
           }
         })
+        .push(
+          (!file.isPost && file.isSuccess) ? hx('au-icon', {
+            props: {
+              icon: 'check'
+            }
+          }) : null
+        )
         .push(
           hx('au-icon', {
             props: {
@@ -55,7 +55,7 @@ export default AuUploaderPictureCard = Vue.extend({
       .push(
         file.isPost ? hx('div.au-uploader-pc-list__item--percent', {
           style: {
-            width: parseInt(file.percent/100 * 148) + 'px'
+            width: parseInt(file.percent) + '%'
           }
         }) : null
       )

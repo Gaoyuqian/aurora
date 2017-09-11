@@ -16,11 +16,21 @@
     margin-top: 10px;
 
     .au-uploader-list__item{
+      position: relative;
       // transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 
       &:hover{
         cursor: pointer;
         background: $color-white-dark;
+
+        .au-uploader-list__item-status-label{
+          .fa-close{
+            display: block;
+          }
+          .fa-check{
+            display: none;
+          }
+        }
       }
 
       .au-uploader-list__item-name{
@@ -29,6 +39,14 @@
 
       .au-uploader-list__item-status-label{
         cursor: pointer;
+      }
+
+      .au-uploader-list__item--percent{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: $color-success;
+        height: 3px;
       }
 
       list-style: none;
@@ -45,6 +63,7 @@
       }
       .fa-close{
         color: $color-danger;
+        display: none;
       }
     }
   }
@@ -73,12 +92,17 @@
     }
 
     &:hover{
-      .au-uploader-pc-list__item-close-label{
-        display: block;
+      .au-uploader-pc-list__item-status-label{
+        .fa-close{
+          display: block;
+        }
+        .fa-check{
+          display: none;
+        }
       }
     }
 
-    .au-uploader-pc-list__item-close-label{
+    .au-uploader-pc-list__item-status-label{
       position: absolute;
       top: 0;
       right: 0;
@@ -87,7 +111,15 @@
       // background-color: $color-black;
       // opacity: 0.3;
       padding: 2px;
-      display: none;
+      // display: none;
+
+      .fa-close{
+        display: none;
+        color: $color-danger;
+      }
+      .fa-check{
+        color: $color-success;
+      }
     }
 
     .au-uploader-pc-list__item--percent{
@@ -96,7 +128,6 @@
       left: 0;
       background-color: $color-success;
       height: 3px;
-      // width: 50%;
     }
   }
   .au-uploader-pc-btn{
