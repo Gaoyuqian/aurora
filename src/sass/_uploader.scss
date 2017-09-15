@@ -75,8 +75,13 @@
     display: inline;
     vertical-align: top;
   }
+
+  .au-uploader-pc-list__item-isposting{
+    cursor: auto!important;
+  }
+
   .au-uploader-pc-list__item{
-    overflow: hidden;
+    // overflow: hidden;
     background-color: #fff;
     border: 1px solid #c0ccda;
     width: 148px;
@@ -85,6 +90,15 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
+    padding: 5px;
+    vertical-align: bottom;
+    text-align: center;
+
+    .au-uploader-list__item-loading{
+      position: relative;
+      top: 30px;
+      font-size: $fontsize-small;
+    }
 
     img{
       width: 100%;
@@ -104,8 +118,8 @@
 
     .au-uploader-pc-list__item-status-label{
       position: absolute;
-      top: 0;
-      right: 0;
+      top: -12px;
+      right: -10px;
       color: $color-danger;
       cursor: pointer;
       // background-color: $color-black;

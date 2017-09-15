@@ -3,8 +3,10 @@ div.au-select(
   :class="classObj"
 )
   .au-select-content
-    .au-select-text(v-if="text && !filter")
-      |{{ text }}
+    //- .au-select-text(v-if="text && !filter")
+    //-   |{{ text }}
+    .au-select-text(v-if="!filter")
+      |{{ text || this.placeholder }}
 
     div.au-select-item(
       v-if="multiple",

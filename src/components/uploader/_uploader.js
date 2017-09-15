@@ -79,7 +79,7 @@ export default AuUploader = Vue.extend({
         url: '',
         rawFile: null,
         isSuccess: true,
-        isPost: false,
+        isPosting: false,
         percent: 100,
         mouseIn: false
       }
@@ -97,7 +97,7 @@ export default AuUploader = Vue.extend({
           url: URL.createObjectURL(rawFile),
           rawFile: rawFile,
           isSuccess: false,
-          isPost: true,
+          isPosting: true,
           percent: 0
         })
         this.upload(fileObj)
@@ -127,7 +127,7 @@ export default AuUploader = Vue.extend({
         },
         
         onSuccess: function (res){
-          file.isPost = false
+          file.isPosting = false
           file.isSuccess = true
 
           if (res.name){
@@ -141,7 +141,7 @@ export default AuUploader = Vue.extend({
         },
         
         onError: function (err){
-          file.isPost = false
+          file.isPosting = false
           file.isSuccess = false
 
           me.removeFile(file)

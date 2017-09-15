@@ -15,18 +15,24 @@ export default AuUploaderPictureCard = Vue.extend({
 
     var $files = $uploader.files.map(file=>{
       return hx('li.au-uploader-pc-list__item', {
+        'class': {
+          'au-uploader-pc-list__item-isposting':  file.isPosting,
+        },
         on: {
           click: function (){
+            if (file.isPosting){
+              return
+            }
             $uploader.onPreview(file)
           }
         }
       })
       .push(
-        hx('img', {
+        !file.isPosting ? hx('img', {
           domProps: {
             src: file.url
           }
-        })
+        }) : hx('span.au-uploader-list__item-loading', {}, ['上传中...'])
       )
       .push(
         hx('label.au-uploader-pc-list__item-status-label', {
@@ -38,7 +44,7 @@ export default AuUploaderPictureCard = Vue.extend({
           }
         })
         .push(
-          (!file.isPost && file.isSuccess) ? hx('au-icon', {
+          (!file.isPosting && file.isSuccess) ? hx('au-icon', {
             props: {
               icon: 'check'
             }
@@ -53,7 +59,7 @@ export default AuUploaderPictureCard = Vue.extend({
         )
       )
       .push(
-        file.isPost ? hx('div.au-uploader-pc-list__item--percent', {
+        file.isPosting ? hx('div.au-uploader-pc-list__item--percent', {
           style: {
             width: parseInt(file.percent) + '%'
           }

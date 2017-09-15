@@ -51,7 +51,7 @@ export default AuUploaderText = Vue.extend({
               }
             })
             .push(
-              (!file.isPost && file.isSuccess) ? hx('au-icon', {
+              (!file.isPosting && file.isSuccess) ? hx('au-icon', {
                 props: {
                   icon: 'check'
                 }
@@ -67,7 +67,7 @@ export default AuUploaderText = Vue.extend({
           )
         )
         .push(
-          file.isPost ? hx('div.au-uploader-list__item--percent', {
+          file.isPosting ? hx('div.au-uploader-list__item--percent', {
             style: {
               width: parseInt(file.percent) + '%'
             }
