@@ -179,6 +179,8 @@ export default AuTreeNode = Vue.extend({
             return
           }
 
+          this.tree.$emit('node-click', this)
+
           if (me.tree.clickRowExpand){
             me.clickExpand()
           }
