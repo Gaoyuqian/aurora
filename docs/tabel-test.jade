@@ -1,0 +1,69 @@
+doctype html
+html
+    head
+        title uploader
+        meta(charset="utf-8")
+        //- link(href="src/sass/main.css" rel="stylesheet")
+        link(href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        script(src="../lib/vue.dev.js")
+        script(src="../src/aurora.js")
+    body
+        div#app(v-cloak)
+            div(style="padding: 50px; width: 500px; border:1px solid #000")
+              au-table(:data="data1", :loading="isShowLoading", bordered, @sort-change="sortChange")
+                au-table-column(label="Age", attr-name="age", sortable="custom", :sort-name="ageSortName")
+        script.
+            vm = new Vue({
+                el: "#app",
+                data: {
+                    isShowLoading: false,
+                    ageSortName: 'sort',
+                    data1: [{
+                        id: 1,
+                        name: 'kevin',
+                        age: '28'
+                      },
+                      {
+                        id: 3,
+                        name: 'lucy',
+                        age: '26'
+                      },
+                      {
+                        id: 2,
+                        name: 'peter',
+                        age: '27'
+                      },
+                      {
+                        id: 4,
+                        name: 'lily',
+                        age: '25'
+                      }
+                    ]
+                },
+                methods: {
+                   sortChange(obj) {console.log(obj)
+                    this.ageSortName = 'sort' + (obj.order ? `-${obj.order}` : '')
+
+                    console.log('sortChange', obj)
+                    if (obj.prop === 'age') {
+                      this.isShowLoading = true
+                      setTimeout(() => {
+                        const data = this.data1.slice().sort((a,b)=>{
+                          if (obj.order === 'asc'){
+                            return 1
+                          }
+                          else if (obj.order == 'desc'){
+                            return -1
+                          }
+                          else {
+                            return 0
+                          }
+                        })
+
+                        this.data1 = data
+                        this.isShowLoading = false
+                      }, 1000)
+                    }
+                  }
+                }
+            })

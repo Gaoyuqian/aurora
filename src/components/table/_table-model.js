@@ -12,7 +12,7 @@ class TableColumn {
     this.fixedType = ''
     this.sortable = column.sortable
     this.sortMethod = column.sortMethod
-    this.sortName = 'sort'
+    this.sortName = column.sortName
 
     if (column.type === 'expand') {
       if (column.defaultExpandAll) {
