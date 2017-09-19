@@ -124,6 +124,7 @@ class TableColumn {
     if (!Ctor) {
       return null
     }
+    console.log(Ctor)
     return Ctor({
       data,
       index

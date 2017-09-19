@@ -47,6 +47,7 @@ import './components/content/_content.js'
 import './components/footer/_footer.js'
 import './components/transfer/_transfer.js'
 import './components/timeline/_timeline.js'
+import './components/ttable/_ttable.js'
 
 import ticker from './_ticker.js'
 

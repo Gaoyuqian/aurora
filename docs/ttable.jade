@@ -1,0 +1,46 @@
+doctype html
+html
+    head
+        title ttable
+        meta(charset="utf-8")
+        //- link(href="src/sass/main.css" rel="stylesheet")
+        link(href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        script(src="../lib/vue.dev.js")
+        script(src="../src/aurora.js")
+    body
+        div#app(v-cloak)
+            div(style="padding: 50px; width: 600px;")
+              au-ttable(:data="data")
+                au-ttable-column(type="checkbox", v-model="checkeds")
+                au-ttable-column(type="expand", :expand-rows="rows")
+                  template(scope="scope")
+                    div
+                      | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
+                au-ttable-column(label="ID", attr-name="id")
+                  template(scope="scope")
+                    |id:{{scope.data.id}}
+
+                au-ttable-column(label="Name", attr-name="name")
+                au-ttable-column(label="Age", attr-name="age")
+                      
+        script.
+            const data = new Array(10);
+            for (let i = data.length - 1; i >= 0; i--) {
+              data[i] = {
+                id: i + 1,
+                name: 'kevin',
+                age: Math.round(Math.random() * 100)
+              };
+            }
+
+            vm = new Vue({
+                el: "#app",
+                data: {
+                    data: data,
+                    checkeds: [
+                      data[2],
+                      data[3]
+                    ],
+                    rows: []
+                }
+            })
