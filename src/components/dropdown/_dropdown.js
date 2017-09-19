@@ -1,5 +1,6 @@
 import Popup from '../popup/_popup.js'
 import Menu from '../menu/_menu.js'
+import Button from '../button/_button.js'
 
 const TIMEOUT = 200
 
@@ -9,7 +10,8 @@ const AuDropdown = Vue.extend({
     trigger: {
       type: String,
       default: 'hover'
-    }
+    },
+    disabled: Boolean
   },
   data () {
     return {
@@ -19,6 +21,10 @@ const AuDropdown = Vue.extend({
   },
   mounted () {
     this.$children.some((component) => {
+      if (component instanceof Button){
+        this.button = component
+      }
+
       if (component instanceof Menu) {
         this.menu = component
 
@@ -62,6 +68,10 @@ const AuDropdown = Vue.extend({
       }
     },
     show (immediately) {
+      if (this.button && this.button.disabled){
+        return
+      }
+
       if (this.timer) {
         clearTimeout(this.timer)
       }
@@ -78,6 +88,13 @@ const AuDropdown = Vue.extend({
         this.popup.hide()
         this.timer = null
       }, immediately ? 0 : TIMEOUT)
+    }
+  },
+  watch: {
+    disabled: function (){
+      if (this.button){
+        this.button.disabled = this.disabled
+      }
     }
   }
 })

@@ -1,5 +1,4 @@
-
-Vue.component('au-button', {
+export default AuButton = Vue.extend({
   props: {
     type: {
       type: String,
@@ -173,3 +172,5 @@ Vue.component('au-button', {
     }
   }
 })
+
+Vue.component('au-button', AuButton)
