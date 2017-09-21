@@ -5,7 +5,7 @@ import resizer from '../../utils/_resizer.js'
 // checkbox, expand 宽度56
 var SMALL_WIDTH = 56
 // th最小宽度
-var MIN_WIDTH = 100
+var MIN_WIDTH = 120
 // 行高
 var TR_HEIGHT = 41
 // 滚动条宽度
@@ -256,7 +256,12 @@ var AuTable = Vue.extend({
         return false
       }
 
-      return this.maxHeight < this.data.length * TR_HEIGHT
+      if (!this.$el){
+        return false
+      }
+
+      var $$tableBody = this.$el.querySelector('.au-table-body')
+      return this.maxHeight < $$tableBody.getBoundingClientRect().height
     },
 
     _getTHead: function($colgroup, flag){
@@ -626,13 +631,23 @@ var AuTable = Vue.extend({
     this._getColumnsConf()
     this._listenScroll()
 
+    // 第三次render，为了拿到高度
+    this.$nextTick(_=>{
+      me.renderTime = +new Date
+    })
+
     // 监听根层元素变化
     resizer.add(this.$el, function (){
       me.renderTime = +new Date
     })
   },
   render: function (h){
-    console.log('ttable render')
+    // 首次一共会有三次render
+    // 第一次render columns slots
+    // 第二次根据columns slots instance 得到cols集合相关信息，render 表格
+    // 第三次根据表格实际情况获取表格高度，用来判断是否需要纵向滚动条
+
+    console.log('table render')
     var me = this
 
     this.renderTime
