@@ -9,27 +9,38 @@ html
         script(src="../src/aurora.js")
     body
         div#app(v-cloak)
-            div(style="padding: 50px; width: 600px;")
-              au-ttable(:data="data")
-                au-ttable-column(type="checkbox", v-model="checkeds")
-                au-ttable-column(type="expand", :expand-rows="rows")
+            div(style="padding: 50px;width:800px;")
+              au-ttable(:data="data", ref="tt", bordered, @sort-change="sortChange", :max-height="200", :show-header="true", :loading="false")
+
+                au-ttable-column(type="checkbox", v-model="checkeds", fixed, highlight)
+                au-ttable-column(type="expand", fixed)
                   template(scope="scope")
                     div
                       | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
-                au-ttable-column(label="ID", attr-name="id")
+                au-ttable-column(label="ID", attr-name="idAge.id", :width="200", :sortable="true", fixed)
                   template(scope="scope")
-                    |id:{{scope.data.id}}
+                    |{{scope.data.id}}:id
 
-                au-ttable-column(label="Name", attr-name="name")
-                au-ttable-column(label="Age", attr-name="age")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+                au-ttable-column(label="Name", attr-name="name", sortable="custom")
+
+                au-ttable-column(label="Age", attr-name="idAge.age", fixed)
                       
         script.
-            const data = new Array(10);
+            const data = new Array(30);
             for (let i = data.length - 1; i >= 0; i--) {
               data[i] = {
                 id: i + 1,
                 name: 'kevin',
-                age: Math.round(Math.random() * 100)
+                age: Math.round(Math.random() * 100),
+                idAge: {
+                  id: i+1,
+                  age: Math.round(Math.random() * 100),
+                }
               };
             }
 
@@ -38,9 +49,23 @@ html
                 data: {
                     data: data,
                     checkeds: [
-                      data[2],
-                      data[3]
+                      data[0],
+                      data[1]
                     ],
                     rows: []
+                },
+                methods: {
+                  sortChange: function (obj){
+                    console.log('sortChange', obj)
+                    if (obj.prop === 'name') {
+                      this.isShowLoading = true
+                      setTimeout(() => {
+                        const data = this.data.slice()
+                        data.push(this.data[this.data.length - 1])
+                        this.data = data
+                        this.isShowLoading = false
+                      }, 1000)
+                    }
+                  }
                 }
             })

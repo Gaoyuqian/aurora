@@ -98,7 +98,7 @@
 }
 
 .au-table-empty {
-  border: 1px solid $color-border;
+  // border: 1px solid $color-border;
   border-top: none;
   min-height: 180px;
   @include flex-center-center();
