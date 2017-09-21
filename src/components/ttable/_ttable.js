@@ -63,15 +63,14 @@ var AuTTable = Vue.extend({
   },
   data: function (){
     return {
-      columnsConf: [],
-      checkeds: [],
-      expandRows: [],
+      columnsConf: [],            // 列信息汇总
+      checkeds: [],               // 选中的数据
+      expandRows: [],             // 展开的数据
       sortCol: {                  // 当前排序的字段
         prop: '',
         order: '',                // asc, desc, ''
         sortMethod: null,
       },
-      headScrollLeft: 0,          // 头部横向滚动距离
       renderTime: 0,              // 用来触发render
     }
   },
@@ -111,7 +110,7 @@ var AuTTable = Vue.extend({
           }
 
           if (componentOptions.propsData.type === 'expand'){
-            colConf.width = SMALL_WIDTH
+            colConf.width = colConf.width || SMALL_WIDTH
             me.expandRows = componentOptions.propsData.expandRows || []
 
             if ($instance.defaultExpandAll === true){
@@ -147,7 +146,7 @@ var AuTTable = Vue.extend({
 
     },
 
-    // 得到列宽信息
+    // 得到列宽元素
     _getColgroup: function (){
       var $group = hx('colgroup')
 
@@ -638,7 +637,7 @@ var AuTTable = Vue.extend({
 
     this.renderTime
 
-    // 每次重汇时候获取
+    // 每次重绘时候获取
     SCROLL_WIDTH = getScrollWidth()
 
     // colgroup

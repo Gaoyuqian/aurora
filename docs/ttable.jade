@@ -13,7 +13,7 @@ html
               au-ttable(:data="data", ref="tt", bordered, @sort-change="sortChange", :max-height="200", :show-header="true", :loading="false")
 
                 au-ttable-column(type="checkbox", v-model="checkeds", fixed, highlight)
-                au-ttable-column(type="expand", fixed)
+                au-ttable-column(type="expand", fixed, :expand-rows="rows")
                   template(scope="scope")
                     div
                       | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
@@ -52,7 +52,9 @@ html
                       data[0],
                       data[1]
                     ],
-                    rows: []
+                    rows: [
+                      data[0]
+                    ]
                 },
                 methods: {
                   sortChange: function (obj){
