@@ -250,20 +250,6 @@ var AuTable = Vue.extend({
       return obj
     },
 
-    // 是否需要纵向滚动条
-    _isYSCroll: function (){
-      if (!this.maxHeight){
-        return false
-      }
-
-      if (!this.$el){
-        return false
-      }
-
-      var $$tableBody = this.$el.querySelector('.au-table-body')
-      return this.maxHeight < $$tableBody.getBoundingClientRect().height
-    },
-
     _getTHead: function($colgroup, flag){
       if (!this.showHeader){
         return null
@@ -273,8 +259,8 @@ var AuTable = Vue.extend({
       var $thsAndTrs = this._getThsAndTrs()
 
       return hx('div.au-table-head', {
-        style: {
-          'padding-right': (flag && this._isYSCroll()) ? SCROLL_WIDTH + 'px' : 0
+        'class': {
+          'au-table-head-top': flag ? true: false
         }
       })
       // au-table-head-inner
@@ -385,7 +371,6 @@ var AuTable = Vue.extend({
       return hx('div.au-table-fixed + au-table-fixed-right', {
         style: {
           width: widthCount + 'px',
-          right: this._isYSCroll() ? SCROLL_WIDTH + 'px' : 0,
           bottom: SCROLL_WIDTH + 'px',
         }
       })
@@ -623,6 +608,49 @@ var AuTable = Vue.extend({
           $$fixedRight.scrollTop = $$scroll.scrollTop
         }
       })
+    },
+
+    // 计算各种偏移
+    _calOffset: function (){
+      if (!this.data.length){
+        return
+      }
+
+      // 根据头部高度，计算fixed left right body的向上偏移
+      if (this.showHeader){
+        var $$headTop = this._getEle('.au-table-head-top')
+        var height = $$headTop.getBoundingClientRect().height
+        var $$fixedLeftBody = this._getEle('.au-table-fixed-left-body')
+        var $$fixedRightBody = this._getEle('.au-table-fixed-right-body')
+
+        if ($$fixedLeftBody){
+          $$fixedLeftBody.style.top = height + 'px'
+          $$fixedRightBody.style.top = height + 'px'
+        }
+      }
+
+      // 因为纵向滚动条引发的偏移
+      if (this.maxHeight){
+        var $$tableScroll = this._getEle('.au-table-scroll')
+        var isYScroll = $$tableScroll.scrollHeight > $$tableScroll.clientHeight
+
+        var $$fixedRight = this._getEle('.au-table-fixed-right')
+  
+        if ($$headTop){
+          $$headTop.style.paddingRight = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+        }
+  
+        if ($$fixedRight){
+          $$fixedRight.style.right = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+        }
+      }
+    },
+
+    _getEle: function (selector){
+      if (!this.$el){
+        return null
+      }
+      return this.$el.querySelector(selector)
     }
   },
   mounted: function (){
@@ -631,22 +659,12 @@ var AuTable = Vue.extend({
     this._getColumnsConf()
     this._listenScroll()
 
-    // 第三次render，为了拿到高度
-    this.$nextTick(_=>{
-      me.renderTime = +new Date
-    })
-
-    // 监听根层元素变化
-    resizer.add(this.$el, function (){
-      me.renderTime = +new Date
+    // 定时器监听表格高度变化，判断是否显示纵向滚动条，用来设置头部偏移、fixed-right偏移
+    setInterval(_=>{
+      this._calOffset()
     })
   },
   render: function (h){
-    // 首次一共会有三次render
-    // 第一次render columns slots
-    // 第二次根据columns slots instance 得到cols集合相关信息，render 表格
-    // 第三次根据表格实际情况获取表格高度，用来判断是否需要纵向滚动条
-
     console.log('table render')
     var me = this
 
