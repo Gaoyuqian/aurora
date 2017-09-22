@@ -29,11 +29,11 @@ html
                 au-table-column(label="Name", attr-name="name", sortable="custom")
 
                 au-table-column(label="Age", attr-name="idAge.age", fixed)
-                //- au-table-column(label="操作")
-                //-   template(scope="scope")
-                //-     au-button() 确定
-                //-     au-button() 取消
-                //-     au-button() 不定
+                au-table-column(label="操作")
+                  template(scope="scope")
+                    au-button() 确定
+                    au-button() 取消
+                    au-button() 不定
                       
         script.
             const data = new Array(10);

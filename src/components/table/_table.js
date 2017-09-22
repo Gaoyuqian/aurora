@@ -596,27 +596,40 @@ var AuTable = Vue.extend({
       return {ths: $ths, trs: $trs}
     },
 
-    _listenScroll: function (){
+    _calScroll: function (){
       // 监听滚动
       var $$scroll = this._getEle('.au-table-scroll')
       var $$headInner = this._getEle('.au-table-head-inner')
       var $$fixedLeft = this._getEle('.au-table-fixed-left-body')
       var $$fixedRight = this._getEle('.au-table-fixed-right-body')
 
-      
-      ;[$$scroll, $$fixedLeft, $$fixedRight].forEach($$dom=>{
+      var $$currDom = null
+      var $$domArr = [$$scroll, $$fixedLeft, $$fixedRight]
+
+      $$domArr.forEach($$dom=>{
         if (!$$dom){
           return
         }
 
         $$dom.addEventListener('scroll', _=>{
-          if ($$dom === $$scroll){
-            if ($$headInner){
-              $$headInner.scrollLeft = $$dom.scrollLeft
-            }
-          }
+          $$currDom = $$dom
 
-          $$scroll.scrollTop = $$fixedLeft.scrollTop = $$fixedRight.scrollTop = $$dom.scrollTop
+          if ($$headInner && ($$dom === $$scroll) ){
+            $$headInner.scrollLeft = $$scroll.scrollLeft
+          }
+        })
+      })
+
+      // 使用定时器同步滚动
+      setInterval(_=>{
+        if (!$$currDom){
+          return
+        }
+        $$domArr.forEach($$dom=>{
+          if (!$$dom){
+            return
+          }
+          $$dom.scrollTop = $$currDom.scrollTop
         })
       })
     },
@@ -680,8 +693,7 @@ var AuTable = Vue.extend({
     this._getColumnsConf()
 
     this.$nextTick(_=>{
-      this._listenScroll()
-      
+      this._calScroll()
     })
     
     // 定时器监听表格高度变化，判断是否显示纵向滚动条，用来设置头部偏移、fixed-right偏移
