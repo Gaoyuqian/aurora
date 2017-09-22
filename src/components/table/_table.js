@@ -5,7 +5,7 @@ import resizer from '../../utils/_resizer.js'
 // checkbox, expand 宽度56
 var SMALL_WIDTH = 56
 // th最小宽度
-var MIN_WIDTH = 120
+var MIN_WIDTH = 80
 // 行高
 var TR_HEIGHT = 41
 // 滚动条宽度
