@@ -82,7 +82,7 @@ var AuTable = Vue.extend({
         var componentOptions = $slot.componentOptions
 
         if (componentOptions && componentOptions.tag === 'au-table-column'){
-          console.log($slot)
+          // console.log($slot)
 
           var $instance = $slot.componentInstance
 
@@ -348,10 +348,7 @@ var AuTable = Vue.extend({
       )
     },
 
-    _getTFixedRight: function ($colgroup, $ths, $trs){
-      var $thead = this._getTHead($colgroup)
-      var $tbody = this._getTBody($colgroup)
-
+    _getFixedRightWidth: function (){
       // 得到右侧fixed列的宽度总和
       var widthCount = 0
       for (var i=this.columnsConf.length-1, colConf; i>=0; i--){
@@ -362,6 +359,16 @@ var AuTable = Vue.extend({
         }
         widthCount += colConf.width
       }
+
+      return widthCount
+    },
+
+    _getTFixedRight: function ($colgroup, $ths, $trs){
+      var $thead = this._getTHead($colgroup)
+      var $tbody = this._getTBody($colgroup)
+
+      // 得到右侧fixed列的宽度总和
+      var widthCount = this._getFixedRightWidth()
 
       // 没有right fixed的列
       if (widthCount === 0){
@@ -591,22 +598,26 @@ var AuTable = Vue.extend({
 
     _listenScroll: function (){
       // 监听滚动
-      var $$scroll = this.$el.querySelector('.au-table-scroll')
+      var $$scroll = this._getEle('.au-table-scroll')
+      var $$headInner = this._getEle('.au-table-head-inner')
+      var $$fixedLeft = this._getEle('.au-table-fixed-left-body')
+      var $$fixedRight = this._getEle('.au-table-fixed-right-body')
 
-      $$scroll.addEventListener('scroll', _=>{
-        var $$headInner = this.$el.querySelector('.au-table-head-inner')
-        var $$fixedLeft = this.$el.querySelector('.au-table-fixed-left-body')
-        var $$fixedRight = this.$el.querySelector('.au-table-fixed-right-body')
+      
+      ;[$$scroll, $$fixedLeft, $$fixedRight].forEach($$dom=>{
+        if (!$$dom){
+          return
+        }
 
-        if ($$headInner){
-          $$headInner.scrollLeft = $$scroll.scrollLeft
-        }
-        if ($$fixedLeft){
-          $$fixedLeft.scrollTop = $$scroll.scrollTop
-        }
-        if ($$fixedRight){
-          $$fixedRight.scrollTop = $$scroll.scrollTop
-        }
+        $$dom.addEventListener('scroll', _=>{
+          if ($$dom === $$scroll){
+            if ($$headInner){
+              $$headInner.scrollLeft = $$dom.scrollLeft
+            }
+          }
+
+          $$scroll.scrollTop = $$fixedLeft.scrollTop = $$fixedRight.scrollTop = $$dom.scrollTop
+        })
       })
     },
 
@@ -643,7 +654,15 @@ var AuTable = Vue.extend({
         }
   
         if ($$fixedRight){
-          $$fixedRight.style.right = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+          $$fixedRight.querySelector('.au-table-head-inner').style.paddingRight = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+          
+          // 如果有滚动条，那么fixed right宽度要加SCROLL_WIDTH
+          var rightWidth = this._getFixedRightWidth()
+          if (isYScroll){
+            rightWidth += SCROLL_WIDTH
+          }
+
+          $$fixedRight.style.width = rightWidth + 'px'
         }
       }
     },
@@ -659,8 +678,12 @@ var AuTable = Vue.extend({
     var me = this
 
     this._getColumnsConf()
-    this._listenScroll()
 
+    this.$nextTick(_=>{
+      this._listenScroll()
+      
+    })
+    
     // 定时器监听表格高度变化，判断是否显示纵向滚动条，用来设置头部偏移、fixed-right偏移
     setInterval(_=>{
       this._calOffset()
