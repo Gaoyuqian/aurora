@@ -1,0 +1,78 @@
+doctype html
+html
+    head
+        title table
+        meta(charset="utf-8")
+        //- link(href="src/sass/main.css" rel="stylesheet")
+        link(href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        script(src="../lib/vue.dev.js")
+        script(src="../src/aurora.js")
+    body
+        div#app(v-cloak)
+            div(style="padding: 50px;width:800px;")
+              au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :max-height="600", :show-header="true", :loading="false")
+
+                au-table-column(type="checkbox", v-model="checkeds", fixed, highlight)
+                au-table-column(type="expand", fixed, :expand-rows="rows")
+                  template(scope="scope")
+                    div
+                      | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
+                au-table-column(label="ID", attr-name="idAge.id", :width="200", :sortable="true", fixed)
+                  template(scope="scope")
+                    |{{scope.data.id}}:id
+
+                au-table-column(label="Name", attr-name="name", sortable="custom", :width="40")
+                au-table-column(label="Name", attr-name="name", sortable="custom")
+                au-table-column(label="Name", attr-name="name", sortable="custom")
+                au-table-column(label="Name", attr-name="name", sortable="custom")
+                au-table-column(label="Name", attr-name="name", sortable="custom")
+                au-table-column(label="Name", attr-name="name", sortable="custom")
+
+                au-table-column(label="Age", attr-name="idAge.age")
+                au-table-column(label="操作")
+                  template(scope="scope")
+                    au-button() 确定
+                    au-button() 取消
+                    au-button() 不定
+                      
+        script.
+            const data = new Array(4);
+            for (let i = data.length - 1; i >= 0; i--) {
+              data[i] = {
+                id: i + 1,
+                name: 'kevin',
+                age: Math.round(Math.random() * 100),
+                idAge: {
+                  id: i+1,
+                  age: Math.round(Math.random() * 100),
+                }
+              };
+            }
+
+            vm = new Vue({
+                el: "#app",
+                data: {
+                    data: data,
+                    checkeds: [
+                      data[0],
+                      data[1]
+                    ],
+                    rows: [
+                      data[0]
+                    ]
+                },
+                methods: {
+                  sortChange: function (obj){
+                    console.log('sortChange', obj)
+                    if (obj.prop === 'name') {
+                      this.isShowLoading = true
+                      setTimeout(() => {
+                        const data = this.data.slice()
+                        data.push(this.data[this.data.length - 1])
+                        this.data = data
+                        this.isShowLoading = false
+                      }, 1000)
+                    }
+                  }
+                }
+            })

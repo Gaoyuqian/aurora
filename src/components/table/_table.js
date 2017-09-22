@@ -506,7 +506,7 @@ var AuTable = Vue.extend({
                 checkedValue: inArray(data, me.checkeds)
               },
               on: {
-                input: function (val){console.log('tr' + val)
+                input: function (val){
                   var idx = me.checkeds.indexOf(data)
                   if (val === true){
                     if (idx === -1){
@@ -625,6 +625,8 @@ var AuTable = Vue.extend({
 
         if ($$fixedLeftBody){
           $$fixedLeftBody.style.top = height + 'px'
+        }
+        if ($$fixedRightBody){
           $$fixedRightBody.style.top = height + 'px'
         }
       }
