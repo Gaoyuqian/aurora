@@ -148,6 +148,15 @@ var AuTable = Vue.extend({
 
     },
 
+    // 得到所有col宽度综合
+    getColWidthCount: function (){
+      var colWidthCount = 0
+      this.columnsConf.forEach(colConf=>{
+        colWidthCount += colConf.width
+      })
+      return colWidthCount
+    },
+
     // 得到列宽元素
     _getColgroup: function (){
       var $group = hx('colgroup')
@@ -173,15 +182,9 @@ var AuTable = Vue.extend({
     _getEmpty: function (){
       var $slot = this.$slots['empty']
 
-      // 所有列总宽度
-      var colWidthCount = 0
-      this.columnsConf.forEach(colConf=>{
-        colWidthCount += colConf.width
-      })
-
       return hx('div.au-table-empty', {
         style: {
-          width: colWidthCount + 'px'
+          width: Math.max(this.getColWidthCount(), this.$el ? this.$el.clientWidth : 0) + 'px'
         }
       }, [$slot || '暂无数据'])
     },
@@ -317,7 +320,7 @@ var AuTable = Vue.extend({
       )
     },
 
-    _getTFixedLeft: function ($colgroup, $ths, $trs){
+    _getTFixedLeft: function ($colgroup){
       var $thead = this._getTHead($colgroup)
       var $tbody = this._getTBody($colgroup)
 
@@ -340,7 +343,7 @@ var AuTable = Vue.extend({
       return hx('div.au-table-fixed + au-table-fixed-left', {
         style:  {
           width: widthCount + 'px',
-          bottom: SCROLL_WIDTH + 'px'
+          bottom: SCROLL_WIDTH + 'px',
         }
       })
       .push(
@@ -376,7 +379,7 @@ var AuTable = Vue.extend({
       return widthCount
     },
 
-    _getTFixedRight: function ($colgroup, $ths, $trs){
+    _getTFixedRight: function ($colgroup){
       var $thead = this._getTHead($colgroup)
       var $tbody = this._getTBody($colgroup)
 
