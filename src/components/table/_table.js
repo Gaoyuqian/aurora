@@ -19,7 +19,7 @@ var AuTableColumn = Vue.extend({
     },
     label: String,
     attrName: String,
-    width: Number,
+    width: [Number, String],
     highlight: Boolean,     // 是否高亮列
 
     // 排序相关
@@ -92,7 +92,7 @@ var AuTable = Vue.extend({
             type: $instance.type,
             label: $instance.label,
             attrName: $instance.attrName,
-            width: $instance.width,
+            width: parseFloat($instance.width) || 0,
             expandRows: $instance.expandRows,
             defaultExpandAll: $instance.defaultExpandAll,
             sortable: $instance.sortable,
@@ -123,7 +123,7 @@ var AuTable = Vue.extend({
       })
 
       // 计算列宽信息
-      var boxWidth = this.$el.getBoundingClientRect().width - 2
+      var boxWidth = this.$el.getBoundingClientRect().width - 2 - SCROLL_WIDTH
       
       // 已经设置width的列的width总和
       var widthCount = 0
@@ -139,6 +139,7 @@ var AuTable = Vue.extend({
       var perWidth = Math.max(MIN_WIDTH, 
         (boxWidth-widthCount) / (this.columnsConf.length-colCount)
       )
+      perWidth = parseInt(perWidth)
 
       this.columnsConf.forEach(colConf=>{
         colConf.width = colConf.width || perWidth

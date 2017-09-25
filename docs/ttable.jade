@@ -10,30 +10,43 @@ html
     body
         div#app(v-cloak)
             div(style="padding: 50px;width:800px;")
-              au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :max-height="400", :show-header="true", :loading="false")
-
-                au-table-column(type="radio", v-model="checkeds", fixed, highlight)
-                au-table-column(type="expand", fixed, :expand-rows="rows")
-                  template(scope="scope")
-                    div
-                      | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
-                au-table-column(label="ID", attr-name="idAge.id", :width="200", :sortable="true", fixed)
-                  template(scope="scope")
-                    |{{scope.data.id}}:id
-
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-                au-table-column(label="Name", attr-name="name", sortable="custom")
-
-                au-table-column(label="Age", attr-name="idAge.age", fixed)
+              au-table(:data="data", bordered, :max-height="200")
+                au-table-column(label="ID", attr-name="id")
+                au-table-column(label="Name", attr-name="name")
+                // 这一列的fixed不生效
+                au-table-column(label="Name", attr-name="name")
+                //- au-table-column(label="Name", attr-name="name", :width="400")
+                //- au-table-column(label="Name", attr-name="name", :width="500")
+                //- au-table-column(label="Age", attr-name="age", :width="100", fixed)
                 //- au-table-column(label="操作")
                 //-   template(scope="scope")
-                //-     au-button() 确定
-                //-     au-button() 取消
-                //-     au-button() 不定
+                //-     au-button(type="success", size="small")|操作
+
+              //- au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :max-height="400", :show-header="true", :loading="false")
+
+              //-   au-table-column(type="radio", v-model="checkeds", fixed, highlight)
+              //-   au-table-column(type="expand", fixed, :expand-rows="rows")
+              //-     template(scope="scope")
+              //-       div
+              //-         | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
+              //-   au-table-column(label="ID", attr-name="idAge.id", :width="200", :sortable="true", fixed)
+              //-     template(scope="scope")
+              //-       |{{scope.data.id}}:id
+
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+              //-   au-table-column(label="Name", attr-name="name", sortable="custom")
+
+              //-   au-table-column(label="Age", attr-name="idAge.age", fixed)
+              //-   //- au-table-column(label="操作")
+              //-   //-   template(scope="scope")
+              //-   //-     au-button() 确定
+              //-   //-     au-button() 取消
+              //-   //-     au-button() 不定
+
                       
         script.
             const data = new Array(10);
