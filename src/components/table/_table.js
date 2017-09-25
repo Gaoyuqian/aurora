@@ -15,7 +15,7 @@ var AuTableColumn = Vue.extend({
   props: {
     type: {
       type: String,
-      default: '',          // '',checkbox,expend
+      default: '',          // '',checkbox,expend,radio
     },
     label: String,
     attrName: String,
@@ -104,7 +104,7 @@ var AuTable = Vue.extend({
           }
           me.columnsConf.push(colConf)
 
-          if (componentOptions.propsData.type === 'checkbox'){
+          if (inArray(componentOptions.propsData.type, ['checkbox', 'radio'])){
             colConf.width = colConf.width || SMALL_WIDTH
             me.checkeds = $slot.data.props.value
           }
@@ -437,6 +437,9 @@ var AuTable = Vue.extend({
             }
           })
         }
+        else if (colConf.type === 'radio'){
+          $cellChild = null
+        }
         else if (colConf.type === 'expand'){
           $cellChild = null
           expandScopedSlot = colConf.scopedSlot
@@ -525,6 +528,19 @@ var AuTable = Vue.extend({
                       me.checkeds.splice(idx, 1)
                     }
                   }
+                }
+              }
+            })
+          }
+          else if (colConf.type === 'radio'){
+            $cellChild = hx('au-radio', {
+              props: {
+                value: data,
+                checkedValue: me.checkeds[0]
+              },
+              on: {
+                input: function (val){
+                  Vue.set(me.checkeds, 0, data)
                 }
               }
             })
