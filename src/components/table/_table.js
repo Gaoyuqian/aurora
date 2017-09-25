@@ -71,7 +71,8 @@ var AuTable = Vue.extend({
         order: '',                // asc, desc, ''
         sortMethod: null,
       },
-      renderTime: 0,              // 用来触发render
+      // renderTime: 0,              // 用来触发render
+      mouseCurrIdx: -1,
     }
   },
   methods: {
@@ -171,7 +172,18 @@ var AuTable = Vue.extend({
     // 当无数据时候展示
     _getEmpty: function (){
       var $slot = this.$slots['empty']
-      return hx('div.au-table-empty', {}, [$slot || '暂无数据'])
+
+      // 所有列总宽度
+      var colWidthCount = 0
+      this.columnsConf.forEach(colConf=>{
+        colWidthCount += colConf.width
+      })
+
+      return hx('div.au-table-empty', {
+        style: {
+          width: colWidthCount + 'px'
+        }
+      }, [$slot || '暂无数据'])
     },
 
     // 根据排序方法得到新的数据
@@ -586,7 +598,19 @@ var AuTable = Vue.extend({
           )
         })
   
-        var $tr = hx('tr').push($tds)
+        var $tr = hx('tr', {
+          'class': {
+            'au-table-row-hover':  me.mouseCurrIdx === index
+          },
+          on: {
+            mouseenter: function (){
+              me.mouseCurrIdx = index
+            },
+            mouseleave: function (){
+              me.mouseCurrIdx = -1
+            }
+          }
+        }).push($tds)
         $trs.push($tr)
   
         // 如果扩展行，增加扩展行
@@ -722,7 +746,7 @@ var AuTable = Vue.extend({
     console.log('table render')
     var me = this
 
-    this.renderTime
+    // this.renderTime
 
     // 每次重绘时候获取
     SCROLL_WIDTH = getScrollWidth()
