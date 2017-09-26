@@ -67,45 +67,48 @@ export default AuUploaderPictureCard = Vue.extend({
       )
     })
 
-    return hx('div.au-uploader-pc')
+    var $render = hx('div.au-uploader-pc')
     .push(
       hx('ul.au-uploader-pc-list')
       .push($files)
     )
+
+    var $uploaderBtn = hx('div.au-uploader-pc-btn', {
+      style: {
+        display: $uploader.isShowAddBtn ? 'inline-block' : 'none'
+      },
+      on: {
+        click: function (){
+          me.$refs.fileInput.value = null
+          me.$refs.fileInput.click()
+        }
+      }
+    })
     .push(
-      hx('div.au-uploader-pc-btn', {
-        on: {
-          click: function (){
-            me.$refs.fileInput.value = null
-            me.$refs.fileInput.click()
-          }
+      hx('au-icon', {
+        props: {
+          icon: 'plus'
         }
       })
-      .push(
-        hx('au-icon', {
-          props: {
-            icon: 'plus'
-          }
-        })
-      )
-      .push(
-        hx('input', {
-          domProps: {
-            type: 'file',
-            accept: $uploader.accept || '',
-            multiple: $uploader.multiple || false
-          },
-          on: {
-            change: function ($event){
-              var files = $event.target.files
-              $uploader.uploadFiles(files)
-            }
-          },
-          ref: 'fileInput'
-        })
-      )
     )
-    .resolve(h)
+    .push(
+      hx('input', {
+        domProps: {
+          type: 'file',
+          accept: $uploader.accept || '',
+          multiple: $uploader.multiple || false
+        },
+        on: {
+          change: function ($event){
+            var files = $event.target.files
+            $uploader.uploadFiles(files)
+          }
+        },
+        ref: 'fileInput'
+      })
+    )
+
+    return $render.push($uploaderBtn).resolve(h)
   }
 })
 

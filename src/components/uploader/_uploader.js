@@ -59,8 +59,12 @@ export default AuUploader = Vue.extend({
     },
     listType: {
       type: String,
-      default: 'text' // text,picture-card
-    }
+      default: 'text',          // text,picture-card
+    },
+    limit: {
+      type: Number,
+      default: -1
+    },                         // 最大上传数量，-1表示无限
   },
   data: function (){
     return {
@@ -71,6 +75,11 @@ export default AuUploader = Vue.extend({
     this.files = this.fileList.map(file=>{
       return this.mergeObj(file)
     })
+  },
+  computed: {
+    isShowAddBtn: function (){
+      return (this.limit === -1) || (this.limit > this.files.length)
+    }
   },
   methods: {
     mergeObj: function (obj){

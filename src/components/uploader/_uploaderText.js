@@ -81,6 +81,9 @@ export default AuUploaderText = Vue.extend({
       hx('div.au-uploader-btn')
       .push(
         hx('au-button', {
+          style: {
+            display: $uploader.isShowAddBtn ? 'inline-block' : 'none'
+          },
           props: {
             type:'primay', 
             size:'small'

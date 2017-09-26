@@ -71,8 +71,8 @@ var AuTable = Vue.extend({
         order: '',                // asc, desc, ''
         sortMethod: null,
       },
-      // renderTime: 0,              // 用来触发render
-      mouseCurrIdx: -1,
+      // renderTime: 0,           // 用来触发render
+      mouseCurrIdx: -1,           // 鼠标hover索引  
     }
   },
   methods: {
