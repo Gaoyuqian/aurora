@@ -71,7 +71,7 @@ var AuTable = Vue.extend({
         order: '',                // asc, desc, ''
         sortMethod: null,
       },
-      // renderTime: 0,           // 用来触发render
+      renderTime: 0,           // 用来触发render
       mouseCurrIdx: -1,           // 鼠标hover索引  
     }
   },
@@ -149,7 +149,7 @@ var AuTable = Vue.extend({
     },
 
     // 得到所有col宽度综合
-    getColWidthCount: function (){
+    _getColWidthCount: function (){
       var colWidthCount = 0
       this.columnsConf.forEach(colConf=>{
         colWidthCount += colConf.width
@@ -184,7 +184,7 @@ var AuTable = Vue.extend({
 
       return hx('div.au-table-empty', {
         style: {
-          width: Math.max(this.getColWidthCount(), this.$el ? this.$el.clientWidth : 0) + 'px'
+          width: Math.max(this._getColWidthCount(), this.$el ? this.$el.clientWidth : 0) + 'px'
         }
       }, [$slot || '暂无数据'])
     },
@@ -345,6 +345,7 @@ var AuTable = Vue.extend({
         style:  {
           width: widthCount + 'px',
           bottom: SCROLL_WIDTH + 'px',
+          display: this._isXScroll() ? 'block' : 'none',
         }
       })
       .push(
@@ -391,6 +392,7 @@ var AuTable = Vue.extend({
         style: {
           width: widthCount + 'px',
           bottom: SCROLL_WIDTH + 'px',
+          display: this._isXScroll() ? 'block' : 'none', 
         }
       })
       .push(
@@ -409,6 +411,15 @@ var AuTable = Vue.extend({
           ) 
         )
       )
+    },
+
+    _isXScroll: function (){
+      if (!this.$el){
+        return false
+      }
+      else {
+        return this._getColWidthCount() > this.$el.clientWidth
+      }
     },
 
     _getThsAndTrs: function (){
@@ -740,8 +751,6 @@ var AuTable = Vue.extend({
     }
   },
   mounted: function (){
-    var me = this
-
     this._getColumnsConf()
     this._calXScroll()
     this._calYScroll()
@@ -750,10 +759,16 @@ var AuTable = Vue.extend({
     setInterval(_=>{
       this._calOffset()
     })
+
+    resizer.add(this.$el, _=>{
+      this.renderTime = +new Date
+    })
   },
   render: function (h){
     console.log('table render')
     var me = this
+
+    this.renderTime
 
     // 每次重绘时候获取
     SCROLL_WIDTH = getScrollWidth()

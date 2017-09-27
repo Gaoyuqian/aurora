@@ -9,7 +9,7 @@ html
         script(src="../src/aurora.js")
     body
         div#app(v-cloak)
-            div(style="padding: 50px;width:800px;")
+            div(style="padding: 50px;width:900px;")
               //- au-table(:data="data", bordered, :max-height="200")
               //-   au-table-column(label="ID", attr-name="id", fixed)
               //-   au-table-column(label="Name", attr-name="name")
@@ -34,7 +34,7 @@ html
                 //-   template(scope="scope")
                 //-     au-button(type="success", size="small")|操作
 
-              au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :show-header="true", :loading="false")
+              au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :show-header="true", :loading="false", :max-height="400")
 
                 //- au-table-column(type="radio", v-model="checkeds", fixed, highlight)
                 //- au-table-column(type="expand", fixed, :expand-rows="rows")
