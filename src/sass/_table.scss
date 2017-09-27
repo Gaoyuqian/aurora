@@ -49,6 +49,14 @@
       border-bottom: none;
     }
   }
+
+  tr{
+    &:hover{
+      th, td{
+        background: $color-white-light!important;
+      }
+    }
+  }
 }
 
 .au-table-row-hover{

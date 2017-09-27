@@ -320,13 +320,10 @@ var AuTable = Vue.extend({
       )
     },
 
-    _getTFixedLeft: function ($colgroup){
-      var $thead = this._getTHead($colgroup)
-      var $tbody = this._getTBody($colgroup)
-
+    _getFixedLeftWidth: function (){
       // 得到左侧fixed列的宽度总和
       var widthCount = 0
-
+      
       this.columnsConf.every(colConf=>{
         if (colConf.fixed !== true){
           return false
@@ -334,6 +331,15 @@ var AuTable = Vue.extend({
         widthCount += colConf.width
         return true
       })
+
+      return widthCount
+    },
+
+    _getTFixedLeft: function ($colgroup){
+      var $thead = this._getTHead($colgroup)
+      var $tbody = this._getTBody($colgroup)
+
+      var widthCount = this._getFixedLeftWidth()
 
       // 没有left fixed的列
       if (widthCount === 0){
@@ -600,20 +606,28 @@ var AuTable = Vue.extend({
             hx('div.au-table-cell', {}, [$cellChild])
           )
         })
-  
-        var $tr = hx('tr', {
-          'class': {
-            'au-table-row-hover':  me.mouseCurrIdx === index
-          },
-          on: {
-            mouseenter: function (){
-              me.mouseCurrIdx = index
+
+        // 是否有fixed，如果有，需要记录mouseCurrIdx来同步hover
+        var hasFixed = (me._getFixedLeftWidth() !== 0) || (me._getFixedRightWidth() !== 0)
+        var trObj = {}
+
+        if (hasFixed){
+          trObj = {
+            'class': {
+              'au-table-row-hover':  me.mouseCurrIdx === index
             },
-            mouseleave: function (){
-              me.mouseCurrIdx = -1
+            on: {
+              mouseenter: function (){
+                me.mouseCurrIdx = index
+              },
+              mouseleave: function (){
+                me.mouseCurrIdx = -1
+              }
             }
           }
-        }).push($tds)
+        }
+  
+        var $tr = hx('tr', trObj).push($tds)
         $trs.push($tr)
   
         // 如果扩展行，增加扩展行
