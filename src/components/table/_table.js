@@ -341,11 +341,6 @@ var AuTable = Vue.extend({
 
       var widthCount = this._getFixedLeftWidth()
 
-      // 没有left fixed的列
-      if (widthCount === 0){
-        return null
-      }
-
       return hx('div.au-table-fixed + au-table-fixed-left', {
         style:  {
           width: widthCount + 'px',
@@ -391,11 +386,6 @@ var AuTable = Vue.extend({
 
       // 得到右侧fixed列的宽度总和
       var widthCount = this._getFixedRightWidth()
-
-      // 没有right fixed的列
-      if (widthCount === 0){
-        return null
-      }
 
       return hx('div.au-table-fixed + au-table-fixed-right', {
         style: {
@@ -654,14 +644,23 @@ var AuTable = Vue.extend({
       return {ths: $ths, trs: $trs}
     },
 
-    _calScroll: function (){
-      // 监听滚动
+    // 处理横向滚动
+    _calXScroll: function (){
       var $$scroll = this._getEle('.au-table-scroll')
       var $$headInner = this._getEle('.au-table-head-inner')
+
+      $$scroll.addEventListener('scroll', _=>{
+        $$headInner.scrollLeft = $$scroll.scrollLeft
+      })
+    },
+
+    // 处理纵向滚动
+    _calYScroll: function (){
+      var $$scroll = this._getEle('.au-table-scroll')
       var $$fixedLeft = this._getEle('.au-table-fixed-left-body')
       var $$fixedRight = this._getEle('.au-table-fixed-right-body')
 
-      var $$currDom = null
+      var $$currDom
       var $$domArr = [$$scroll, $$fixedLeft, $$fixedRight]
 
       $$domArr.forEach($$dom=>{
@@ -671,14 +670,9 @@ var AuTable = Vue.extend({
 
         $$dom.addEventListener('scroll', _=>{
           $$currDom = $$dom
-
-          if ($$headInner && ($$dom === $$scroll) ){
-            $$headInner.scrollLeft = $$scroll.scrollLeft
-          }
         })
       })
 
-      // 使用定时器同步滚动
       setInterval(_=>{
         if (!$$currDom){
           return
@@ -749,10 +743,8 @@ var AuTable = Vue.extend({
     var me = this
 
     this._getColumnsConf()
-
-    this.$nextTick(_=>{
-      this._calScroll()
-    })
+    this._calXScroll()
+    this._calYScroll()
     
     // 定时器监听表格高度变化，判断是否显示纵向滚动条，用来设置头部偏移、fixed-right偏移
     setInterval(_=>{
@@ -762,8 +754,6 @@ var AuTable = Vue.extend({
   render: function (h){
     console.log('table render')
     var me = this
-
-    // this.renderTime
 
     // 每次重绘时候获取
     SCROLL_WIDTH = getScrollWidth()
@@ -795,16 +785,13 @@ var AuTable = Vue.extend({
       me.$slots.default
     )
 
-    // 如果有数据再检查是否有fixed列
-    if (this.data.length > 0){
-      $table
-      .push(
-        me._getTFixedLeft($colgroup)
-      )
-      .push(
-        me._getTFixedRight($colgroup)
-      )
-    }
+    $table
+    .push(
+      me._getTFixedLeft($colgroup)
+    )
+    .push(
+      me._getTFixedRight($colgroup)
+    )
 
     // 是否显示loading
     if (this.loading){
