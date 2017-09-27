@@ -418,7 +418,7 @@ var AuTable = Vue.extend({
         return false
       }
       else {
-        return this._getColWidthCount() > this.$el.clientWidth
+        return (this._getColWidthCount() > this.$el.clientWidth) && (this.$el.clientWidth !== 0)
       }
     },
 

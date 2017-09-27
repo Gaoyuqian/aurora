@@ -36,14 +36,14 @@ html
 
               au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :show-header="true", :loading="false", :max-height="400")
 
-                //- au-table-column(type="radio", v-model="checkeds", fixed, highlight)
-                //- au-table-column(type="expand", fixed, :expand-rows="rows")
-                //-   template(scope="scope")
-                //-     div
-                //-       | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
-                //- au-table-column(label="ID", attr-name="idAge.id", :width="200", :sortable="true", fixed)
-                //-   template(scope="scope")
-                //-     |{{scope.data.id}}:id
+                au-table-column(type="radio", v-model="checkeds", fixed, highlight)
+                au-table-column(type="expand", fixed, :expand-rows="rows")
+                  template(scope="scope")
+                    div
+                      | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
+                au-table-column(label="ID", attr-name="idAge.id", :sortable="true", fixed)
+                  template(scope="scope")
+                    |{{scope.data.id}}:id
 
                 au-table-column(label="Name", attr-name="name", sortable="custom", width="100", fixed)
                 au-table-column(label="Name", attr-name="name", sortable="custom", width="100")
