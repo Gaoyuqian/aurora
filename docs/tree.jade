@@ -16,7 +16,7 @@ block content
       template.html(scoped="scoped")
         au-tree(:data="data", :loader="loader", checkable, @check="onCheck", :expands="expands1", :default-checkeds="defaultCheckeds")
         div|------
-        au-tree(:data="data", default-expand-all, :click-row-expand="false")
+        au-tree(:data="data", default-expand-all, :click-row-expand="false", :node-click="nodeClick")
           template(scope="scope")
             au-flex
               au-item(flex="1")|{{ scope.data.label }}
@@ -195,99 +195,6 @@ block content
                           {
                             label: "东坑镇"
                           },
-                          {
-                            label: "道滘镇"
-                          },
-                          {
-                            label: "沙田镇"
-                          },
-                          {
-                            label: "高埗镇"
-                          },
-                          {
-                            label: "石龙镇"
-                          },
-                          {
-                            label: "石排镇"
-                          },
-                          {
-                            label: "企石镇"
-                          },
-                          {
-                            label: "石碣镇"
-                          },
-                          {
-                            label: "洪梅镇"
-                          },
-                          {
-                            label: "麻涌镇"
-                          },
-                          {
-                            label: "桥头镇"
-                          },
-                          {
-                            label: "望牛墩镇"
-                          },
-                          {
-                            label: "茶山镇"
-                          },
-                          {
-                            label: "谢岗镇"
-                          },
-                          {
-                            label: "松山湖"
-                          },
-                          {
-                            label: "莞城区"
-                          },
-                          {
-                            label: "南城区"
-                          },
-                          {
-                            label: "长安镇"
-                          },
-                          {
-                            label: "寮步镇"
-                          },
-                          {
-                            label: "大岭山镇"
-                          },
-                          {
-                            label: "常平镇"
-                          },
-                          {
-                            label: "厚街镇"
-                          },
-                          {
-                            label: "万江区"
-                          },
-                          {
-                            label: "樟木头镇"
-                          },
-                          {
-                            label: "大朗镇"
-                          },
-                          {
-                            label: "塘厦镇"
-                          },
-                          {
-                            label: "凤岗镇"
-                          },
-                          {
-                            label: "清溪镇"
-                          },
-                          {
-                            label: "横沥镇"
-                          },
-                          {
-                            label: "东城区"
-                          },
-                          {
-                            label: "黄江镇"
-                          },
-                          {
-                            label: "虎门镇"
-                          }
                         ]
                       },
                       {
@@ -299,39 +206,6 @@ block content
                           {
                             label: "海珠区"
                           },
-                          {
-                            label: "荔湾区"
-                          },
-                          {
-                            label: "越秀区"
-                          },
-                          {
-                            label: "番禺区"
-                          },
-                          {
-                            label: "花都区"
-                          },
-                          {
-                            label: "萝岗区"
-                          },
-                          {
-                            label: "白云区"
-                          },
-                          {
-                            label: "南沙区"
-                          },
-                          {
-                            label: "黄埔区"
-                          },
-                          {
-                            label: "增城区"
-                          },
-                          {
-                            label: "从化区"
-                          },
-                          {
-                            label: "广州大学城"
-                          }
                         ]
                       },
                       {
@@ -343,66 +217,7 @@ block content
                           {
                             label: "小榄镇"
                           },
-                          {
-                            label: "古镇"
-                          },
-                          {
-                            label: "坦洲镇"
-                          },
-                          {
-                            label: "黄圃镇"
-                          },
-                          {
-                            label: "三乡镇"
-                          },
-                          {
-                            label: "东凤镇"
-                          },
-                          {
-                            label: "横栏镇"
-                          },
-                          {
-                            label: "三角镇"
-                          },
-                          {
-                            label: "南头镇"
-                          },
-                          {
-                            label: "沙溪镇"
-                          },
-                          {
-                            label: "五桂山镇"
-                          },
-                          {
-                            label: "阜沙镇"
-                          },
-                          {
-                            label: "东升镇"
-                          },
-                          {
-                            label: "板芙镇"
-                          },
-                          {
-                            label: "神湾镇"
-                          },
-                          {
-                            label: "港口镇"
-                          },
-                          {
-                            label: "大涌镇"
-                          },
-                          {
-                            label: "火炬开发区"
-                          },
-                          {
-                            label: "民众镇"
-                          },
-                          {
-                            label: "沙朗镇"
-                          },
-                          {
-                            label: "城区"
-                          }
+                         
                         ]
                       },
                       {
@@ -414,30 +229,7 @@ block content
                           {
                             label: "罗湖区"
                           },
-                          {
-                            label: "福田区"
-                          },
-                          {
-                            label: "宝安区"
-                          },
-                          {
-                            label: "光明新区"
-                          },
-                          {
-                            label: "坪山新区"
-                          },
-                          {
-                            label: "大鹏新区"
-                          },
-                          {
-                            label: "龙岗区"
-                          },
-                          {
-                            label: "盐田区"
-                          },
-                          {
-                            label: "龙华新区"
-                          }
+                         
                         ]
                       },
                       {
@@ -450,81 +242,7 @@ block content
                         children: [
                         ]
                       },
-                      {
-                        label: '珠海市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '汕头市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '佛山市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '湛江市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '河源市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '肇庆市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '清远市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '潮州市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '韶关市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '揭阳市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '阳江市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '梅州市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '云浮市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '茂名市',
-                        children: [
-                        ]
-                      },
-                      {
-                        label: '汕尾市',
-                        children: [
-                        ]
-                      }
+                      
                     ]
                   }
                 ]
@@ -558,6 +276,11 @@ block script
     new Vue({
       el: '#app',
       mixins,
+      methods: {
+        nodeClick: function (node){console.log('node-click')
+          console.log(node)
+        }
+      },
       data () {
         return {
           attrs: [

@@ -36,10 +36,25 @@ html
                 div| -----------
                 {{JSON.stringify(checkeds)}}
                 //- {{JSON.stringify(transferData)}}
+
+            div(style="padding:10px; width:600px")
+                au-tree(:data="treeData", @node-click="nodeClick", ref="myTree", :expands="expands")
         
         script.
             const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
             const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
+            var treeData = [
+                        {
+                            'label': '北京', 
+                            children: [
+                                {
+                                    'label': '北京村1'
+                                }
+                            ]
+                        },
+                        {'label': '北京2'},
+                        {'label': '北京3'},
+                    ]
 
             var datas = []
             cities.forEach((city, index) => {
@@ -59,7 +74,10 @@ html
                     leftCheckeds: [],
                     rightCheckeds: [],
                     titles: ['源','目标'],
-                    buttonTexts: ['左边边', '右边边']
+                    buttonTexts: ['左边边', '右边边'],
+
+                    treeData: treeData,
+                    expands: [],
                 },
                 methods: {
                     renderFunc: function (data){
@@ -70,6 +88,10 @@ html
                     },
                     filterFunc: function (query, data){
                         return data.pinyin.indexOf(query) > -1 || data.label.indexOf(query) > -1
+                    },
+
+                    nodeClick: function (node){
+                        console.log(node.data)
                     }
                 }
             })
