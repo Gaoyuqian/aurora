@@ -12,7 +12,7 @@ const AuInput = Vue.extend({
       }
     },
     placeholder: String,
-    value: String,
+    value: [String, Number],
     rows: [String, Number],
     cols: [String, Number],
     readonly: Boolean,
