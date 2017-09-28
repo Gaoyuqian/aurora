@@ -657,6 +657,10 @@ var AuTable = Vue.extend({
 
     // 处理横向滚动
     _calXScroll: function (){
+      if (!this.showHeader){
+        return false
+      }
+      
       var $$scroll = this._getEle('.au-table-scroll')
       var $$headInner = this._getEle('.au-table-head-inner')
 
@@ -730,7 +734,9 @@ var AuTable = Vue.extend({
         }
   
         if ($$fixedRight){
-          $$fixedRight.querySelector('.au-table-head-inner').style.paddingRight = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+          if (this.showHeader){
+            $$fixedRight.querySelector('.au-table-head-inner').style.paddingRight = isYScroll ? (SCROLL_WIDTH + 'px') : 0
+          }
           
           // 如果有滚动条，那么fixed right宽度要加SCROLL_WIDTH
           var rightWidth = this._getFixedRightWidth()
