@@ -10,6 +10,10 @@
   }
 }
 
+.au-tree-item-current{
+  color: $color-info;
+}
+
 .au-tree-item-expand {
   width: $tree-expand-width;
   text-align: center;

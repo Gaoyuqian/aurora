@@ -21,11 +21,18 @@ export default AuTree = Vue.extend({
         return []
       }
     },
+    defaultCurrentNodeKey: [String, Number],
     nodeKey: {
       type: String,
       default: 'id'
     },
     expands: {
+      type: Array,
+      default: function (){
+        return []
+      }
+    },
+    expandKeys: {
       type: Array,
       default: function (){
         return []
@@ -37,12 +44,13 @@ export default AuTree = Vue.extend({
     },
     clickRowExpand: {
       type: Boolean,
-      default: true
+      default: false,
     }
   },
   data: function (){
     return {
-      checks: []
+      checks: [],
+      currentNodeKey: this.defaultCurrentNodeKey,
     }
   },
   computed: {
@@ -67,6 +75,14 @@ export default AuTree = Vue.extend({
     },
     checks: function (){
       this.$emit('check', this.checks)
+    },
+    defaultCurrentNodeKey: function (){
+      this.currentNodeKey = this.defaultCurrentNodeKey
+    },
+    data: function (){
+      this.$nextTick(_=>{
+        this.setExpands()
+      })
     }
   },
   methods: {
@@ -113,6 +129,10 @@ export default AuTree = Vue.extend({
 
     isInDefaultCheckedKeys: function (data){
       return this.defaultCheckedKeys.indexOf(data[this.nodeKey]) != -1
+    },
+
+    isCurrentNode: function (data){
+      return this.currentNodeKey && (data[this.nodeKey] === this.currentNodeKey)
     },
 
     setExpands: function (){
@@ -201,7 +221,7 @@ export default AuTree = Vue.extend({
       var isExpand = false
 
       function searchData(data){
-        if (me.expands.indexOf(data) !== -1){
+        if ( (me.expands.indexOf(data) !== -1) || (me.expandKeys.indexOf(data[me.nodeKey]) !== -1) ){
           isExpand = true
           return
         }
@@ -294,7 +314,7 @@ export default AuTree = Vue.extend({
     }
   },
   render: function (h){
-    console.log('tree render')
+    // console.log('tree render')
     return h('div', {
       'class': {
         'au-tree': true

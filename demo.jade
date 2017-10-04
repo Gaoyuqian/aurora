@@ -22,23 +22,23 @@ html
         div#app(v-cloak)
             div(style="padding: 10px; width: 600px;")
 
-                au-test()
+                //- au-test()
 
-                au-transfer(v-model="checkeds", :data="transferData", :left-default-checkeds="leftCheckeds", :right-default-checkeds="rightCheckeds",
-                data-key="id",
-                :render-func="renderFunc",
-                :button-texts="buttonTexts",
-                @change="onchange",
-                filterable,
-                :filter-func="filterFunc",
-                filter-placeholder="搜索一下"
-                ref="demo")
-                div| -----------
-                {{JSON.stringify(checkeds)}}
-                //- {{JSON.stringify(transferData)}}
+                //- au-transfer(v-model="checkeds", :data="transferData", :left-default-checkeds="leftCheckeds", :right-default-checkeds="rightCheckeds",
+                //- data-key="id",
+                //- :render-func="renderFunc",
+                //- :button-texts="buttonTexts",
+                //- @change="onchange",
+                //- filterable,
+                //- :filter-func="filterFunc",
+                //- filter-placeholder="搜索一下"
+                //- ref="demo")
+                //- div| -----------
+                //- {{JSON.stringify(checkeds)}}
+                //- //- {{JSON.stringify(transferData)}}
 
             div(style="padding:10px; width:600px")
-                au-tree(:data="treeData", @node-click="nodeClick", ref="myTree", :expands="expands")
+                au-tree(:data="treeData", @node-click="nodeClick", ref="myTree", :expands="expands", :default-current-node-key="currNodeKey", :expand-keys="[1]")
         
         script.
             const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
@@ -46,15 +46,16 @@ html
             var treeData = [
                         {
                             'label': '北京', 
-                            id: '1',
+                            id: 1,
                             children: [
                                 {
-                                    'label': '北京村1'
+                                    'label': '北京村1',
+                                    id: 11
                                 }
                             ]
                         },
-                        {'label': '北京2'},
-                        {'label': '北京3'},
+                        {'label': '北京2', id:12},
+                        {'label': '北京3', id:13},
                     ]
 
             var datas = []
@@ -79,6 +80,8 @@ html
 
                     treeData: [],
                     expands: [],
+
+                    currNodeKey: '',
                 },
                 methods: {
                     renderFunc: function (data){
@@ -96,3 +99,7 @@ html
                     }
                 }
             })
+
+            setTimeout(_=>{
+                vm.treeData = treeData
+            }, 100)

@@ -97,7 +97,7 @@ export default AuTreeNode = Vue.extend({
     }
   },
   render: function (h){
-    console.log('tree node render')
+    // console.log('tree node render')
     var me = this
     var treeSS = this.tree.$scopedSlots.default
 
@@ -105,7 +105,12 @@ export default AuTreeNode = Vue.extend({
         treeSS ? treeSS({data:this.data}) : this.data.label
       ]
     )
-    var $treeItemContent = h('div', {'class':{'au-tree-item-content':true}}, [$treeItemContentInner])
+    var $treeItemContent = h('div', {
+      'class':{
+        'au-tree-item-content': true,
+        'au-tree-item-current': me.tree.isCurrentNode(me.data) ? true : false,
+      }
+    }, [$treeItemContentInner])
 
     //if checkable
     var $checkbox = null
@@ -179,11 +184,12 @@ export default AuTreeNode = Vue.extend({
             return
           }
 
+          me.tree.currentNodeKey = me.data[me.tree.nodeKey]
           me.tree.$emit('node-click', me)
 
-          if (me.tree.clickRowExpand){
-            me.clickExpand()
-          }
+          // if (me.tree.clickRowExpand){
+          //   me.clickExpand()
+          // }
         }
       }
     }, [
