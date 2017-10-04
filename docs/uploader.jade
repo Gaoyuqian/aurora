@@ -9,17 +9,18 @@ html
         script(src="../src/aurora.js")
     body
         div#app(v-cloak)
-            div(style="padding: 50px; width: 500px; border:1px solid #000")
-              au-uploader(
-                ref="uploader",
-                :file-list="fileList",
-                :accept="accept",
-                action="https://jsonplaceholder.typicode.com/posts/",
-                :multiple="true",
-                :on-preview="onPreview",
-                :on-error="onError",
-                :limit="3"
-              )
+            //- div(style="padding: 50px; width: 500px; border:1px solid #000")
+            //-   au-uploader(
+            //-     ref="uploader",
+            //-     :file-list="fileList",
+            //-     :accept="accept",
+            //-     action="https://jsonplaceholder.typicode.com/posts/",
+            //-     :multiple="true",
+            //-     :on-preview="onPreview",
+            //-     :on-error="onError",
+            //-     :limit="3",
+            //-     :readonly="true"
+            //-   )
             
             div(style="padding: 50px; width: 800px; border:1px solid #000; margin-top: 10px;")
               au-uploader(
@@ -31,7 +32,22 @@ html
                 list-type="picture-card",
                 :on-preview="onPreview",
                 :on-error="onError",
-                :limit="3"
+                :limit="3",
+                :readonly="true"
+              )
+
+            div(style="padding: 50px; width: 800px; border:1px solid #000; margin-top: 10px;")
+              au-uploader(
+                ref="uploader3",
+                :file-list="fileList",
+                :accept="accept",
+                action="https://jsonplaceholder.typicode.com/posts/",
+                :multiple="true",
+                list-type="avatar",
+                :on-preview="onPreview",
+                :on-error="onError",
+                :limit="3",
+                :readonly="false"
               )
             
             au-modal(v-model="imgShow")

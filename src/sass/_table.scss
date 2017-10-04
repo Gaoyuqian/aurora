@@ -49,7 +49,9 @@
       border-bottom: none;
     }
   }
+}
 
+.au-table-hover{
   tr{
     &:hover{
       th, td{

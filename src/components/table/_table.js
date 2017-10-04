@@ -50,8 +50,11 @@ var AuTable = Vue.extend({
         return []
       }
     },
+    
     maxHeight: Number,
     bordered: Boolean,
+    hover: Boolean,
+
     showHeader: {
       type: Boolean,
       default: true
@@ -71,7 +74,7 @@ var AuTable = Vue.extend({
         order: '',                // asc, desc, ''
         sortMethod: null,
       },
-      renderTime: 0,           // 用来触发render
+      renderTime: 0,              // 用来触发render
       mouseCurrIdx: -1,           // 鼠标hover索引  
     }
   },
@@ -148,7 +151,7 @@ var AuTable = Vue.extend({
 
     },
 
-    // 得到所有col宽度综合
+    // 得到所有col宽度总和
     _getColWidthCount: function (){
       var colWidthCount = 0
       this.columnsConf.forEach(colConf=>{
@@ -612,7 +615,7 @@ var AuTable = Vue.extend({
         var hasFixed = (me._getFixedLeftWidth() !== 0) || (me._getFixedRightWidth() !== 0)
         var trObj = {}
 
-        if (hasFixed){
+        if (me.hover && hasFixed){
           trObj = {
             'class': {
               'au-table-row-hover':  me.mouseCurrIdx === index
@@ -660,7 +663,7 @@ var AuTable = Vue.extend({
       if (!this.showHeader){
         return false
       }
-      
+
       var $$scroll = this._getEle('.au-table-scroll')
       var $$headInner = this._getEle('.au-table-head-inner')
 
@@ -784,7 +787,8 @@ var AuTable = Vue.extend({
 
     var $table = hx('div.au-table', {
       'class': {
-        'au-table-bordered': this.bordered ? true : false
+        'au-table-bordered': this.bordered ? true : false,
+        'au-table-hover': this.hover ? true : false,
       }
     })
     // au-table-head

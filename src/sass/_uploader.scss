@@ -94,6 +94,10 @@
     vertical-align: bottom;
     text-align: center;
 
+    input{
+      display: none;
+    }
+
     .au-uploader-list__item-loading{
       position: relative;
       top: 30px;

@@ -14,7 +14,7 @@ export default AuUploaderPictureCard = Vue.extend({
     var $uploader = this.uploader
 
     var $files = $uploader.files.map(file=>{
-      return hx('li.au-uploader-pc-list__item', {
+      var $item = hx('li.au-uploader-pc-list__item', {
         'class': {
           'au-uploader-pc-list__item-isposting':  file.isPosting,
         },
@@ -34,37 +34,42 @@ export default AuUploaderPictureCard = Vue.extend({
           }
         }) : hx('span.au-uploader-list__item-loading', {}, ['上传中...'])
       )
-      .push(
-        hx('label.au-uploader-pc-list__item-status-label', {
-          on: {
-            click: function (e){
-              $uploader.removeFile(file)
-              e.stopPropagation()
+
+      if (!$uploader.readonly){
+        $item.push(
+          hx('label.au-uploader-pc-list__item-status-label', {
+            on: {
+              click: function (e){
+                $uploader.removeFile(file)
+                e.stopPropagation()
+              }
             }
-          }
-        })
+          })
+          .push(
+            (!file.isPosting && file.isSuccess) ? hx('au-icon', {
+              props: {
+                icon: 'check'
+              }
+            }) : null
+          )
+          .push(
+            hx('au-icon', {
+              props: {
+                icon: 'close'
+              }
+            })
+          )
+        )
         .push(
-          (!file.isPosting && file.isSuccess) ? hx('au-icon', {
-            props: {
-              icon: 'check'
+          file.isPosting ? hx('div.au-uploader-pc-list__item--percent', {
+            style: {
+              width: parseInt(file.percent) + '%'
             }
           }) : null
         )
-        .push(
-          hx('au-icon', {
-            props: {
-              icon: 'close'
-            }
-          })
-        )
-      )
-      .push(
-        file.isPosting ? hx('div.au-uploader-pc-list__item--percent', {
-          style: {
-            width: parseInt(file.percent) + '%'
-          }
-        }) : null
-      )
+      }
+
+      return $item
     })
 
     var $render = hx('div.au-uploader-pc')
@@ -73,42 +78,46 @@ export default AuUploaderPictureCard = Vue.extend({
       .push($files)
     )
 
-    var $uploaderBtn = hx('div.au-uploader-pc-btn', {
-      style: {
-        display: $uploader.isShowAddBtn ? 'inline-block' : 'none'
-      },
-      on: {
-        click: function (){
-          me.$refs.fileInput.value = null
-          me.$refs.fileInput.click()
-        }
-      }
-    })
-    .push(
-      hx('au-icon', {
-        props: {
-          icon: 'plus'
-        }
-      })
-    )
-    .push(
-      hx('input', {
-        domProps: {
-          type: 'file',
-          accept: $uploader.accept || '',
-          multiple: $uploader.multiple || false
+    if (!$uploader.readonly){
+      var $uploaderBtn = hx('div.au-uploader-pc-btn', {
+        style: {
+          display: $uploader.isShowAddBtn ? 'inline-block' : 'none'
         },
         on: {
-          change: function ($event){
-            var files = $event.target.files
-            $uploader.uploadFiles(files)
+          click: function (){
+            me.$refs.fileInput.value = null
+            me.$refs.fileInput.click()
           }
-        },
-        ref: 'fileInput'
+        }
       })
-    )
+      .push(
+        hx('au-icon', {
+          props: {
+            icon: 'plus'
+          }
+        })
+      )
+      .push(
+        hx('input', {
+          domProps: {
+            type: 'file',
+            accept: $uploader.accept || '',
+            multiple: $uploader.multiple || false
+          },
+          on: {
+            change: function ($event){
+              var files = $event.target.files
+              $uploader.uploadFiles(files)
+            }
+          },
+          ref: 'fileInput'
+        })
+      )
 
-    return $render.push($uploaderBtn).resolve(h)
+      $render.push($uploaderBtn)
+    }
+
+    return $render.resolve(h)
   }
 })
 

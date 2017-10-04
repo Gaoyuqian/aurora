@@ -42,7 +42,7 @@ export default AuUploaderText = Vue.extend({
         .push(
           hx('au-item', {props:{span:1}})
           .push(
-            hx('label.au-uploader-list__item-status-label', {
+            $uploader.readonly ? null : hx('label.au-uploader-list__item-status-label', {
               on: {
                 click: function (e){
                     $uploader.removeFile(file)
@@ -51,14 +51,14 @@ export default AuUploaderText = Vue.extend({
               }
             })
             .push(
-              (!file.isPosting && file.isSuccess) ? hx('au-icon', {
+              (!$uploader.readonly) && (!file.isPosting && file.isSuccess) ? hx('au-icon', {
                 props: {
                   icon: 'check'
                 }
               }) : null
             )
             .push(
-              hx('au-icon', {
+              $uploader.readonly ? null : hx('au-icon', {
                 props: {
                   icon: 'close'
                 }
@@ -78,15 +78,13 @@ export default AuUploaderText = Vue.extend({
 
     return hx('div.au-uploader')
     .push(
-      hx('div.au-uploader-btn')
+      $uploader.readonly ? null : hx('div.au-uploader-btn')
       .push(
         hx('au-button', {
-          style: {
-            display: $uploader.isShowAddBtn ? 'inline-block' : 'none'
-          },
           props: {
-            type:'primay', 
-            size:'small'
+            type: $uploader.isShowAddBtn ? 'primay' : 'default', 
+            size:'small',
+            disabled: $uploader.isShowAddBtn ? false : true,
           },
           on: {
             click: function (e){
@@ -114,7 +112,7 @@ export default AuUploaderText = Vue.extend({
       )
     )
     .push(
-      hx('div.au-uploader-tip', {}, ['只能上传jpg/png'])
+      $uploader.readonly ? null : hx('div.au-uploader-tip', {}, ['只能上传jpg/png'])
     )
     .push(
       hx('ul.au-uploader-list')

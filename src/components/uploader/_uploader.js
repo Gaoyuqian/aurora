@@ -3,6 +3,7 @@ import ajax from './_ajax.js'
 
 import './_uploaderText.js'
 import './_uploaderPictureCard.js'
+import './_uploaderAvatar.js'
 
 export default AuUploader = Vue.extend({
   props: {
@@ -22,8 +23,6 @@ export default AuUploader = Vue.extend({
     },
     withCredentials:{
       type: Boolean,
-
-
       default: false
     },
     accept: String,
@@ -65,6 +64,7 @@ export default AuUploader = Vue.extend({
       type: Number,
       default: -1
     },                         // 最大上传数量，-1表示无限
+    readonly: Boolean,         // 是否只读
   },
   data: function (){
     return {
@@ -180,6 +180,9 @@ export default AuUploader = Vue.extend({
 
     if (this.listType === 'picture-card'){
       componentName = 'au-uploader-picture-card'
+    }
+    else if (this.listType === 'avatar'){
+      componentName = 'au-uploader-avatar'
     }
 
     return hx(componentName).resolve(h)
