@@ -37,7 +37,7 @@ html
               au-table(:data="data", ref="tt", bordered, @sort-change="sortChange", :show-header="false", :loading="false", :max-height="400")
 
                 au-table-column(type="radio", v-model="checkeds", highlight)
-                au-table-column(type="expand", fixed, :expand-rows="rows")
+                au-table-column(type="expand", fixed, :default-expand-all="true")
                   template(scope="scope")
                     div
                       | 展开内容为：{{scope.data.id}}-{{scope.data.name}}-{{scope.data.age}}
@@ -77,7 +77,7 @@ html
             vm = new Vue({
                 el: "#app",
                 data: {
-                    data: data,
+                    data: [],
                     checkeds: [
                       data[0],
                       data[1]
@@ -100,4 +100,8 @@ html
                     }
                   }
                 }
+            })
+
+            setTimeout(_=>{
+              vm.data = data
             })

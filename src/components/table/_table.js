@@ -68,6 +68,7 @@ var AuTable = Vue.extend({
     return {
       columnsConf: [],            // 列信息汇总
       checkeds: [],               // 选中的数据
+      defaultExpandAll: false,    // 是否默认全部展开
       expandRows: [],             // 展开的数据
       sortCol: {                  // 当前排序的字段
         prop: '',
@@ -76,6 +77,11 @@ var AuTable = Vue.extend({
       },
       renderTime: 0,              // 用来触发render
       mouseCurrIdx: -1,           // 鼠标hover索引  
+    }
+  },
+  watch: {
+    data: function (){
+      this._checkDefaultAllExpand()
     }
   },
   methods: {
@@ -116,12 +122,8 @@ var AuTable = Vue.extend({
           if (componentOptions.propsData.type === 'expand'){
             colConf.width = colConf.width || SMALL_WIDTH
             me.expandRows = componentOptions.propsData.expandRows || []
-
-            if ($instance.defaultExpandAll === true){
-              me.data.forEach(data=>{
-                me.expandRows.push(data)
-              })
-            }
+            me.defaultExpandAll = $instance.defaultExpandAll
+            me._checkDefaultAllExpand()
           }
         }
       })
@@ -149,6 +151,17 @@ var AuTable = Vue.extend({
         colConf.width = colConf.width || perWidth
       })
 
+    },
+
+    // 检测defaultAllExpand
+    _checkDefaultAllExpand: function (){
+      var me = this
+
+      if (me.defaultExpandAll === true){
+        me.data.forEach(data=>{
+          me.expandRows.push(data)
+        })
+      }
     },
 
     // 得到所有col宽度总和
