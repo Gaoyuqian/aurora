@@ -76,6 +76,13 @@ export default AuUploader = Vue.extend({
       return this.mergeObj(file)
     })
   },
+  watch: {
+    fileList: function (){
+      this.files = this.fileList.map(file=>{
+        return this.mergeObj(file)
+      })
+    }
+  },
   computed: {
     isShowAddBtn: function (){
       return (this.limit === -1) || (this.limit > this.files.length)
@@ -163,6 +170,7 @@ export default AuUploader = Vue.extend({
     removeFile: function (file){
       var idx = this.files.indexOf(file)
       this.files.splice(idx, 1)
+      this.onRemove(file)
     },
     getFiles: function (){
       var files = []
