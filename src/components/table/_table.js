@@ -148,7 +148,7 @@ var AuTable = Vue.extend({
       perWidth = parseInt(perWidth)
 
       this.columnsConf.forEach(colConf=>{
-        colConf.width = colConf.width || perWidth
+        colConf.width = colConf.width || MIN_WIDTH
       })
 
     },
