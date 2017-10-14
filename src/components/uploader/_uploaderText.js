@@ -111,9 +111,9 @@ export default AuUploaderText = Vue.extend({
         })
       )
     )
-    .push(
-      $uploader.readonly ? null : hx('div.au-uploader-tip', {}, ['只能上传jpg/png'])
-    )
+    // .push(
+    //   $uploader.readonly ? null : hx('div.au-uploader-tip', {}, ['只能上传jpg/png'])
+    // )
     .push(
       hx('ul.au-uploader-list')
       .push($files)
