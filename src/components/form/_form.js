@@ -29,6 +29,10 @@ const AuForm = Vue.extend({
   },
   created () {
     this.$on('register.form.item', (item) => {
+      // 防止嵌套form
+      if (item.form){
+        return
+      }
       item.form = this
       this.items.push(item)
     })
