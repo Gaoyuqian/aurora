@@ -5,7 +5,7 @@ div.au-select(
   .au-select-content
     //- .au-select-text(v-if="text && !filter")
     //-   |{{ text }}
-    .au-select-text(v-if="!filter")
+    .au-select-text(v-if="!filter && !multiple")
       |{{ text || this.placeholder }}
 
     div.au-select-item(
