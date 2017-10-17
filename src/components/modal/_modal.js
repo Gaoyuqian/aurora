@@ -53,7 +53,7 @@ const AuModal = Vue.extend({
   },
   beforeDestroy () {
     this.hide()
-    this.$el.parentElement.removeChild(this.$el)
+    this.$el.parentElement && this.$el.parentElement.removeChild(this.$el)
     window.removeEventListener('keyup', this.onKeyup)
   },
   methods: {
