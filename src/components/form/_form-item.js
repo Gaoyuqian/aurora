@@ -159,6 +159,10 @@ const AuFormItem = Vue.extend({
         this.message = ''
       }
     },
+    resetValidate () {
+      this.validateStatus = ''
+      this.message = ''
+    },
     getRules () {
       const form = this.form
       const rules = this.rules ? Array.isArray(this.rules) ? this.rules : [this.rules] : []

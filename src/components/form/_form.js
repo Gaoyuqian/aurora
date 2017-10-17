@@ -75,6 +75,11 @@ const AuForm = Vue.extend({
       this.items.forEach((item) => {
         item.reset()
       })
+    },
+    resetValidate: function (){
+      this.items.forEach(item=>{
+        item.resetValidate()
+      })
     }
   }
 })
