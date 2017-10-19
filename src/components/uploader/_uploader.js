@@ -1,11 +1,13 @@
 import {hx, inArray, idxArray} from '../../utils/_tools.js'
 import ajax from './_ajax.js'
+import dispatch from '../../mixins/_dispatch'
 
 import './_uploaderText.js'
 import './_uploaderPictureCard.js'
 import './_uploaderAvatar.js'
 
 export default AuUploader = Vue.extend({
+  mixins: [dispatch],
   props: {
     fileList: {
       type: Array,
@@ -154,6 +156,7 @@ export default AuUploader = Vue.extend({
           }
 
           me.onSuccess(res, file)
+          me.dispatch('change.form')
         },
         
         onError: function (err){
@@ -171,6 +174,7 @@ export default AuUploader = Vue.extend({
       var idx = this.files.indexOf(file)
       this.files.splice(idx, 1)
       this.onRemove(file)
+      this.dispatch('change.form')
     },
     getFiles: function (){
       var files = []

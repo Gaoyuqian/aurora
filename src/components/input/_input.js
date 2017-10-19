@@ -92,9 +92,9 @@ const AuInput = Vue.extend({
     }
   },
   watch: {
-    value () {
-      this.dispatch('change.form', this.value)
-    }
+    // value () {
+    //   this.dispatch('change.form', this.value)
+    // }
   }
 })
 
