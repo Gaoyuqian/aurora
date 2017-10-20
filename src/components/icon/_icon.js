@@ -1,5 +1,5 @@
 Vue.component('au-icon', {
-  template: '<i class="au-icon fa" :class="iconObj"></i>',
+  template: '<i class="au-icon fa fa-fw" :class="iconObj"></i>',
   props: {
     type: String,
     icon: {
