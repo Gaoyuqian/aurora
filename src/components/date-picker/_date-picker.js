@@ -90,6 +90,7 @@ const AuDatePicker = Vue.extend({
         }
         this.$emit('input', value)
         this.$emit('change', value)
+        this.dispatch('blur.form')
       }
     },
     datetime () {
