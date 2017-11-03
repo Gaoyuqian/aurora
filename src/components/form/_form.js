@@ -38,6 +38,10 @@ const AuForm = Vue.extend({
     })
 
     this.$on('unregister.form.item', (item) => {
+      if (!item.form || (item.form != this)){
+        return 
+      }
+      
       item.form = null
       this.items.splice(this.items.indexOf(item), 1)
     })
